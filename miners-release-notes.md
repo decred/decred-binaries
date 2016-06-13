@@ -1,4 +1,4 @@
-# [v0.1.0_miners](https://github.com/decred/decred-release/releases/tag/v0.1.0_miners)
+# [v0.1.0_miners](https://github.com/decred/decred-binaries/releases/tag/v0.1.0_miners)
 
 ## 2016-04-27
 
@@ -39,7 +39,7 @@ This release was built from:
 | cgminer | 2616e256b99924de072bfde177abe3c470cd1b32 |
 | ccminer | 45aaecfcdf5ae23ab1e9090cb3140d758a287bd4 |
 
-# [v0.0.5_cgminer](https://github.com/decred/decred-release/releases/tag/v0.0.5_cgminer)
+# [v0.0.5_cgminer](https://github.com/decred/decred-binaries/releases/tag/v0.0.5_cgminer)
 
 ## 2016-02-10
 
@@ -51,7 +51,7 @@ download.
 See https://wiki.decred.org/Verifying_Binaries for more info on
 verifying the files.
 
-# [v0.0.4_cgminer](https://github.com/decred/decred-release/releases/tag/v0.0.4_cgminer)
+# [v0.0.4_cgminer](https://github.com/decred/decred-binaries/releases/tag/v0.0.4_cgminer)
 
 ## 2016-02-08
 
@@ -63,7 +63,7 @@ manifest-cgminer-20160208.txt.asc to confirm those shas.
 See https://wiki.decred.org/Verifying_Binaries for more info on
 verifying the files.
 
-# [v0.0.3_cgminer](https://github.com/decred/decred-release/releases/tag/v0.0.3_cgminer)
+# [v0.0.3_cgminer](https://github.com/decred/decred-binaries/releases/tag/v0.0.3_cgminer)
 
 ## 2016-02-04
 
@@ -78,7 +78,7 @@ manifest-cgminer-20160204-2.txt.asc to confirm those shas.
 See https://wiki.decred.org/Verifying_Binaries for more info on
 verifying the files.
 
-# [v0.0.2_cgminer](https://github.com/decred/decred-release/releases/tag/v0.0.2_cgminer)
+# [v0.0.2_cgminer](https://github.com/decred/decred-binaries/releases/tag/v0.0.2_cgminer)
 
 ## 2016-02-04
 
@@ -95,7 +95,7 @@ manifest-cgminer-20160204.txt.asc to confirm those shas.
 See https://wiki.decred.org/Verifying_Binaries for more info on
 verifying the files.
 
-# [v0.0.1_cgminer](https://github.com/decred/decred-release/releases/tag/v0.0.1_cgminer)
+# [v0.0.1_cgminer](https://github.com/decred/decred-binaries/releases/tag/v0.0.1_cgminer)
 
 ## 2016-01-28
 
@@ -112,7 +112,7 @@ manifest-cgminer-20160128.txt.asc to confirm those shas.
 See https://wiki.decred.org/Verifying_Binaries for more info on
 verifying the files.
 
-# [v0.0_cgminer](https://github.com/decred/decred-release/releases/tag/v0.0.0_cgminer)
+# [v0.0_cgminer](https://github.com/decred/decred-binaries/releases/tag/v0.0.0_cgminer)
 
 ## 2016-01-27
 

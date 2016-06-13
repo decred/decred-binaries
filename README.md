@@ -1,4 +1,4 @@
-# decred-release
+# decred-binaries
 Decred Binary Releases
 
 This repository contains release notes and binaries released for
