@@ -1,9 +1,9 @@
 {
   "decred": {
-    "version": "0.1.5",
+    "version": "0.1.6",
     "build": "01",
-    "date": "2016-06-07",
-    "url": "https://github.com/decred/decred-binaries/releases/tag/v0.1.5"
+    "date": "2016-06-21",
+    "url": "https://github.com/decred/decred-binaries/releases/tag/v0.1.6"
   },
   "Paymetheus": {
     "version": "0.0.8",

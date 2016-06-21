@@ -1,3 +1,54 @@
+# [v0.1.6](https://github.com/decred/decred-binaries/releases/tag/v0.1.6)
+
+## 2016-06-21
+
+This release is primarily for compatibility with dcrinstaller.  For
+more information and usage instructions, please see
+[dcrinstaller](https://github.com/decred/decred-release).
+
+See manifest-20160607-01.txt for sha256sums of the packages and
+manifest-201600607-01.txt.asc to confirm those shas.
+
+See https://wiki.decred.org/Verifying_Binaries for more info on
+verifying the files.
+
+This release contains various fixes and improvements.
+
+Changes include:
+
+| Description | Pull Request |
+| --- | ---- |
+| fix memory allignment for 32-bit architectures (#668) | [decred/dcrd#269](https://github.com/decred/dcrd/pull/269) |
+| stake: New package for fast access to live tickets. | [decred/dcrd#266](https://github.com/decred/dcrd/pull/266) |
+| Don't create .dcrd willy-nilly. | [decred/dcrd#270](https://github.com/decred/dcrd/pull/270) |
+| Bump for v0.1.6 | [decred/dcrd#271](https://github.com/decred/dcrd/pull/271) |
+| add simnet to config file | [decred/dcrd#272](https://github.com/decred/dcrd/pull/272) |
+| Move prompting of passphrases and seed to prompt pkg. | [decred/dcrwallet#268](https://github.com/decred/dcrwallet/pull/268) |
+| Import bdb driver from wallet package. | [decred/dcrwllet#269](https://github.com/decred/dcrwallet/pull/269) |
+| Bump for v0.1.6 | [decred/dcrwallet#271](https://github.com/decred/dcrwallet/pull/271) |
+| Add non-internal prompt package. | [decred/dcrwallet#273](https://github.com/decred/dcrwallet/pull/273) |
+| Fix build err for rpcserver_test.go | [decred/dcrwallet#274](https://github.com/decred/dcrwallet/pull/274) |
+| Update help docs so dcrctl --wallet help <command> works correclty | [decred/dcrwallet#275](https://github.com/decred/dcrwallet/pull/275) |
+| Fix default directory. | [decred/dcrticketbuyer#10](https://github.com/decred/dcrticketbuyer/pull/10) |
+| Use the same version code as the rest of dcr* | [decred/dcrticketbuyer#12](https://github.com/decred/dcrticketbuyer/pull/12) |
+| .gitignore emacs ~ files | [decred/dcrticketbuyer#13](https://github.com/decred/dcrticketbuyer/pull/13) |
+| update ticketbuyer-example.conf | [decred/dcrticketbuyer#14](https://github.com/decred/dcrticketbuyer/pull/14) |
+| Update example format and readme | [decred/dcrticketbuyer#15](https://github.com/decred/dcrticketbuyer/pull/15) |
+
+## Notes
+
+## Commits
+
+This release was built from:
+
+| Repository | Commit Hash |
+| --- | ---- |
+| decred/dcrd | e6beeb689b5ba725424e1b8a36be5cce80d4b692 |
+| decred/dcrwallet | 7bdd976566814310ae3a06c256e3a2c42cac75f5 |
+| decred/dcrrpcclient | f3c620d63cb02aec0c1152a72d3c8669b92a2fb5 |
+| decred/dcrutil | 4a3bdb1cb08b49811674750998363b8b8ccfd66e |
+| decred/dcrticketbuyer | 7c3b826d2db4ff09941718a76be8e42cc382698c |
+
 # [v0.1.5](https://github.com/decred/decred-binaries/releases/tag/v0.1.5)
 
 ## 2016-06-07
