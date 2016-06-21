@@ -30,8 +30,8 @@ GPATH=$(echo $GOPATH | cut -f1 -d:)
 for i in $SYS; do
     OS=$(echo $i | cut -f1 -d-)
     ARCH=$(echo $i | cut -f2 -d-)
-    mkdir $PACKAGE-$i
-    cd $PACKAGE-$i
+    mkdir $PACKAGE-$i-$TAG
+    cd $PACKAGE-$i-$TAG
     echo "Building:" $OS $ARCH
     env GOOS=$OS GOARCH=$ARCH go build github.com/decred/dcrd
     env GOOS=$OS GOARCH=$ARCH go build github.com/decred/dcrd/cmd/dcrctl
@@ -45,12 +45,12 @@ for i in $SYS; do
     cp -rp $GPATH/src/github.com/decred/dcrticketbuyer/webui .
     cd ..
     if [[ $OS = "windows" ]]; then
-	zip -r $PACKAGE-$i-$TAG.zip $PACKAGE-$i
-	tar -cvzf $PACKAGE-$i-$TAG.tar.gz $PACKAGE-$i
+	zip -r $PACKAGE-$i-$TAG.zip $PACKAGE-$i-$TAG
+	tar -cvzf $PACKAGE-$i-$TAG.tar.gz $PACKAGE-$i-$TAG
     else
-	tar -cvzf $PACKAGE-$i-$TAG.tar.gz $PACKAGE-$i
+	tar -cvzf $PACKAGE-$i-$TAG.tar.gz $PACKAGE-$i-$TAG
     fi
-    rm -r $PACKAGE-$i
+    rm -r $PACKAGE-$i-$TAG
 done
 
 sha256sum * > manifest-$TAG.txt
