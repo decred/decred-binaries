@@ -4,7 +4,7 @@
 
 This release is primarily for compatibility with dcrinstaller.  For
 more information and usage instructions, please see
-[dcrinstaller](https://github.com/decred/decred-release).
+[dcrinstaller](https://github.com/decred/decred-release/tree/master/cmd/dcrinstall).
 
 See manifest-20160607-01.txt for sha256sums of the packages and
 manifest-201600607-01.txt.asc to confirm those shas.
