@@ -1,3 +1,78 @@
+# [v0.2.0](https://github.com/decred/decred-binaries/releases/tag/v0.2.0)
+
+## 2016-07-22
+
+This release contains the initial release of Paymetheus, the Decred
+Windows GUI.  To install download and run either
+[Paymetheus 64bit](https://github.com/decred/decred-binaries/releases/download/v0.2.0/decred_0.2.0-alpha_x64.msi) or
+[Paymetheus 32bit](https://github.com/decred/decred-binaries/releases/download/v0.2.0/decred_0.2.0-alpha_x86.msi)
+depending on your version of Windows.
+
+To install the command line tools, please see
+[dcrinstaller](https://github.com/decred/decred-release/tree/master/cmd/dcrinstall).
+
+This release contains various fixes and improvements, many of which
+are required for the new Windows installer and GUI.
+
+See manifest-v0.2.0.txt, manifest-dcrinstall-v0.2.0.txt, and
+manifest-paymetheus-v0.2.0.txt for sha256sums of the packages and
+manifest-v0.2.0.txt.asc, manifest-dcrinstall-v0.2.0.txt.asc, and
+manifest-paymetheus-v0.2.0.txt.asc to confirm those shas.
+
+See https://wiki.decred.org/Verifying_Binaries for more info on
+verifying the files.
+
+Changes include:
+
+| Description | Pull Request |
+| --- | ---- |
+| Paymetheus Initial Release | [f307753](https://github.com/decred/Paymetheus/commit/f3077531ad3a8751caa2043e6b2f91e6a91c8776) |
+| Quit when the specified configuration is file not found. | [decred/dcrd#273](https://github.com/decred/dcrd/pull/273) |
+| Add BlockHeight field to getstakeinfo | [decred/dcrd#274](https://github.com/decred/dcrd/pull/274) |
+| dcrctl: Remove help fallthrough so help will get passed to RPC | [decred/dcrd#275](https://github.com/decred/dcrd/pull/275) |
+| dcrctl: Clear terminal history | [decred/dcrd#276](https://github.com/decred/dcrd/pull/276) |
+| docs: Add/update doc.go in a few spots | [decred/dcrd#277](https://github.com/decred/dcrd/pull/277) |
+| Add automatic RPC configuration. | [decred/dcrd#287](https://github.com/decred/dcrd/pull/287) |
+| glide man | [decred/dcrd#288](https://github.com/decred/dcrd/pull/288) |
+| Attempt to fix the broken paths in config autogen | [decred/dcrd#290](https://github.com/decred/dcrd/pull/290) |
+| Bump version to v0.2.0 | [decred/dcrd#292](https://github.com/decred/dcrd/pull/292) |
+| Replace chainec.Sign with secp256k1.SignCompact in SignMessge RPC | [decred/dcrwallet#258](https://github.com/decred/dcrwallet/pull/258) |
+| Skip zero value outputs when making transactions | [decred/dcrwallet#278](https://github.com/decred/dcrwallet/pull/278) |
+| Add back in strErrType for other possible chainClient.Notification types | [decred/dcrwallet#257](https://github.com/decred/dcrwallet/pull/257) |
+| Check that nextToUseIdx is > 0, otherwise throw err since account is unused | [decred/dcrwallet#283](https://github.com/decred/dcrwallet/pull/283) |
+| Remove unused const for ticket purchasing | [decred/dcrwallet#281](https://github.com/decred/dcrwallet/pull/281) |
+| Change n in RangeTransactions to more closely track count param | [decred/dcrwallet#280](https://github.com/decred/dcrwallet/pull/280) |
+| Prevent a hang in wallet.Loader.OpenExistingWallet. | [decred/dcrwallet#289](https://github.com/decred/dcrwallet/pull/289) |
+| Add Tree to WalletService.FundTransaction RPC. | [decred/dcrwallet#290](https://github.com/decred/dcrwallet/pull/290) |
+| Fix an unlikely panic if the bitset returned is empty | [decred/dcrwallet#291](https://github.com/decred/dcrwallet/pull/291) |
+| watch-only: Delete created wallet.db if the WoW wasn't created | [decred/dcrwallet#286](https://github.com/decred/dcrwallet/pull/286) |
+| Refer to correct version of the gRPC Go plugin. | [decred/dcrwallet#294](https://github.com/decred/dcrwallet/pull/294) |
+| Fix balance bug in AccountBalances | [decred/dcrwallet#296](https://github.com/decred/dcrwallet/pull/296) |
+| Add new stake-related RPCs to the gRPC interface | [decred/dcrwallet#293](https://github.com/decred/dcrwallet/pull/293) |
+| glide: Update glide.lock to use current dcrd master version | [decred/dcrwallet#297](https://github.com/decred/dcrwallet/pull/297) |
+| Fix gRPC account address index responses | [decred/dcrwallet#298](https://github.com/decred/dcrwallet/pull/298) |
+| Add account notifications to the address pool | [decred/dcrwallet#300](https://github.com/decred/dcrwallet/pull/300) |
+| Bump for v0.2.0 | [decred/dcrwallet#301](https://github.com/decred/dcrwallet/pull/301) |
+| update description and example for highpricepenalty | [decred/dcrticketbuyer#19](https://github.com/decred/dcrticketbuyer/pull/19) |
+| Bump for v0.2.0 | [decred/dcrticketbuyer#29](https://github.com/decred/dcrticketbuyer/pull/29) |
+
+## Notes
+
+As of this release, glide is required when building dcrd from source.
+See the README in that repository for more details.
+
+## Commits
+
+This release was built from:
+
+| Repository | Commit Hash |
+| --- | ---- |
+| decred/dcrd | 7716a500fd211a8549a886eab4721a860a2c2a35 |
+| decred/dcrwallet | a6f2e09b32bce054124b7e4714eaa52d5b450940 |
+| decred/dcrticketbuyer | c6802acaabc0afc82a3801b91d885f28870b8b71 |
+| decred/paymetheus | f3077531ad3a8751caa2043e6b2f91e6a91c8776 |
+| decred/decred-windows-installer | c04134d1ad26ee9041e5defdf169faa7fa33f8c3 |
+
 # [v0.1.6](https://github.com/decred/decred-binaries/releases/tag/v0.1.6)
 
 ## 2016-06-21
@@ -7,7 +82,7 @@ more information and usage instructions, please see
 [dcrinstaller](https://github.com/decred/decred-release/tree/master/cmd/dcrinstall).
 
 See manifest-20160607-01.txt for sha256sums of the packages and
-manifest-201600607-01.txt.asc to confirm those shas.
+manifest-20160607-01.txt.asc to confirm those shas.
 
 See https://wiki.decred.org/Verifying_Binaries for more info on
 verifying the files.
