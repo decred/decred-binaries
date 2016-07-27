@@ -1,0 +1,1 @@
+71b688e8132372109e242b9fa82d7784f041144e36bd3367d7ba14d343efaed8  gominer-linux-amd64-v0.2.0.tar.gz
