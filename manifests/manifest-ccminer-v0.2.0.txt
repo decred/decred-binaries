@@ -1,0 +1,2 @@
+abd22b46ba192d97bdb92db6f6929d2ae79fea18a6c8e177b97c942b5585fa1c  ccminer-decred-linux-x86_64-v0.2.0.tar.gz
+d00cd47a413e24cb77db573276d90e508bef944e27cd54a8e13ddc61ec111986  ccminer-decred-win64-v0.2.0.zip

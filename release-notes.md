@@ -1,6 +1,6 @@
 # [v0.2.0](https://github.com/decred/decred-binaries/releases/tag/v0.2.0)
 
-## 2016-07-27
+## 2016-07-28
 
 This release contains the initial release of Paymetheus, the Decred
 Windows GUI.  To install download and run either
@@ -15,16 +15,18 @@ This release contains various fixes and improvements, many of which
 are required for the new Windows installer and
 [GUI](https://github.com/decred/Paymetheus/).  It also includes the
 first release of [gominer](https://github.com/decred/gominer/), the
-Decred GPU miner with support for stratum pools.
+Decred GPU miner with support for stratum pools.  Updated
+[ccminer](https://github.com/decred/ccminer) binaries are also
+provided.
 
 See manifest-v0.2.0.txt, manifest-dcrinstall-v0.2.0.txt,
-manifest-paymetheus-v0.2.0.txt, and manifest-gominer-v0.2.0.txt for
-sha256sums of the packages and manifest-v0.2.0.txt.asc,
-manifest-dcrinstall-v0.2.0.txt.asc,
-manifest-paymetheus-v0.2.0.txt.asc, and
-manifest-gominer-v0.2.0.txt.asc to confirm those shas.
+manifest-paymetheus-v0.2.0.txt, manifest-gominer-v0.2.0.txt, and
+manifest-ccminer-v0.2.0.txt for sha256sums of the packages and
+manifest-v0.2.0.txt.asc, manifest-dcrinstall-v0.2.0.txt.asc,
+manifest-paymetheus-v0.2.0.txt.asc, manifest-gominer-v0.2.0.txt.asc,
+and manifest-ccminer-v0.2.0.txt.asc to confirm those shas.
 
-See https://wiki.decred.org/Verifying_Binaries for more info on
+See [README.md](./README.md) for more info on
 verifying the files.
 
 Changes include:
@@ -33,6 +35,8 @@ Changes include:
 | --- | ---- |
 | Paymetheus Initial Release | [f307753](https://github.com/decred/Paymetheus/commit/f3077531ad3a8751caa2043e6b2f91e6a91c8776) |
 | gominer Initial Release | [5b45938](https://github.com/decred/gominer/commit/5b459387914223e0dfe8d5f5cc032fe9e898fd4a) |
+| sync with upstream (tpruvot/ccminer/windows) through 20160705 |[decred/ccminer#6](https://github.com/decred/ccminer/pull/6) |
+| add a build workaround for arch and bump to 0.2.0 | [decred/ccminer#7](https://github.com/decred/ccminer/pull/7) |
 | Quit when the specified configuration is file not found. | [decred/dcrd#273](https://github.com/decred/dcrd/pull/273) |
 | Add BlockHeight field to getstakeinfo | [decred/dcrd#274](https://github.com/decred/dcrd/pull/274) |
 | dcrctl: Remove help fallthrough so help will get passed to RPC | [decred/dcrd#275](https://github.com/decred/dcrd/pull/275) |
