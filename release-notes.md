@@ -83,6 +83,7 @@ This release was built from:
 | decred/paymetheus | f3077531ad3a8751caa2043e6b2f91e6a91c8776 |
 | decred/decred-windows-installer | c04134d1ad26ee9041e5defdf169faa7fa33f8c3 |
 | gominer | 5b459387914223e0dfe8d5f5cc032fe9e898fd4a |
+| ccminer | 340a069488a52941f65ef7a99c02328ceb3bc70e |
 
 # [v0.1.6](https://github.com/decred/decred-binaries/releases/tag/v0.1.6)
 
