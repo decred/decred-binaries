@@ -1,0 +1,2 @@
+f7ca32ae5b988542a75c928642f65626d444c0eac020e58e9187b3f4c2cfef0d  gominer-linux-amd64-v0.3.0.tar.gz
+ed5b49c312cf49904c6c9f7497612939ff01c97f7cf1cbe70ea06e90ddf47b4a  gominer-windows-amd64-v0.3.0.zip

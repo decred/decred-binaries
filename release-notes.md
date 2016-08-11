@@ -1,3 +1,110 @@
+# [v0.3.0](https://github.com/decred/decred-binaries/releases/tag/v0.3.0)
+
+## 2016-08-15
+
+This release is primarily to add voting/stake views to Paymetheus and
+improvements to gominer.  Various bugfixes and improvements have also
+been add to all the command line tools.
+
+To install the command line tools, please see
+[dcrinstaller](https://github.com/decred/decred-release/tree/master/cmd/dcrinstall).
+
+See manifest-v0.2.0.txt, manifest-gominer-v0.2.0.txt,
+manifest-paymetheus-v0.2.0.txt, and manifest--dcrinstaller-v0.2.0.txt
+for sha256 sums and the associated .asc files to confirm those shas.
+
+See [README.md](./README.md) for more info on
+verifying the files.
+
+Changes include:
+
+| Description | Pull Request |
+| --- | ---- |
+| Use glide to manage dependancies. | [decred/gominer#38](https://github.com/decred/gominer/pull/38) |
+| Add all options to sample config. | [decred/gominer#39](https://github.com/decred/gominer/pull/39) |
+| correct workdata comment | [decred/gominer#40](https://github.com/decred/gominer/pull/40) |
+| Reconnect to pool if no usable target is provided. | [decred/gominer#42](https://github.com/decred/gominer/pull/42) |
+| Create stratum and work packages. | [decred/gominer#43](https://github.com/decred/gominer/pull/43) |
+| Add locks to racy data structures. | [decred/gominer#46](https://github.com/decred/gominer/pull/46) |
+| Fix benchmark mode. | [decred/gominer#47](https://github.com/decred/gominer/pull/47) |
+| Fix check for userSetWorkSize | [decred/gominer#51](https://github.com/decred/gominer/pull/51) |
+| Clean up logging. | [decred/gominer#53](https://github.com/decred/gominer/pull/53) |
+| add device selection/restriction | [decred/gominer#54](https://github.com/decred/gominer/pull/54) |
+| Reorganize some functions/packages. | [decred/gominer#56](https://github.com/decred/gominer/pull/56) |
+| Add import that wasn't seen after last rebase. | [decred/gominer#57](https://github.com/decred/gominer/pull/57) |
+| Bump for v0.3.0 | [decred/gominer#58](https://github.com/decred/gominer/pull/58) |
+| fix mining when no device is specified | [decred/gominer#59](https://github.com/decred/gominer/pull/59) |
+| Make "add account" button nonexecutable when running. | [decred/Paymetheus#125](https://github.com/decred/Paymetheus/pull/125) |
+| Point to correct repo for the binary release. | [decred/Paymetheus#134](https://github.com/decred/Paymetheus/pull/134) |
+| Better error message for failed dcrd RPC connections. | [decred/Paymetheus#138](https://github.com/decred/Paymetheus/pull/138) |
+| Run dcrwallet RPC server on non-standard ports. | [decred/Paymetheus#139](https://github.com/decred/Paymetheus/pull/139) |
+| Kill any leftover wallet processes using the nonstandard port. | [decred/Paymetheus#140](https://github.com/decred/Paymetheus/pull/140) |
+| Show "published" message directly in create tx view. | [decred/Paymetheus#141](https://github.com/decred/Paymetheus/pull/141) |
+| Sync dcrwallet grpc protospec. | [decred/Paymetheus#143](https://github.com/decred/Paymetheus/pull/143) |
+| Explain how fees are calculated since this isn't really obvious. | [decred/Paymetheus#144](https://github.com/decred/Paymetheus/pull/144) |
+| Hide last generated address when opening request view. | [decred/Paymetheus#145](https://github.com/decred/Paymetheus/pull/145) |
+| Protect access to the shared Wallet structure. | [decred/Paymetheus#146](https://github.com/decred/Paymetheus/pull/146) |
+| Update to latest gRPC. | [decred/Paymetheus#147](https://github.com/decred/Paymetheus/pull/147) |
+| Clean up shell view styles | [decred/Paymetheus#148](https://github.com/decred/Paymetheus/pull/148) |
+| Fix the synchronization task to wait on the next tx/block event. | [decred/Paymetheus#149](https://github.com/decred/Paymetheus/pull/149) |
+| Add new stake related views | [decred/Paymetheus#151](https://github.com/decred/Paymetheus/pull/151) |
+| Bump for v0.3.0 | [decred/Paymetheus#152](https://github.com/decred/Paymetheus/pull/152) |
+| Make it explicit that Paymetheus does not vote. | [decred/Paymetheus#153](https://github.com/decred/Paymetheus/pull/153) |
+| Display pubkeys of generated addresses. | [decred/Paymetheus#155](https://github.com/decred/Paymetheus/pull/155) |
+| Avoid crash after importing a script. | [decred/Paymetheus#156](https://github.com/decred/Paymetheus/pull/156) |
+| Bump for v0.3.0 | [decred/dcrticketbuyer#33](https://github.com/decred/dcrticketbuyer/pull/33) |
+| docs: Major update to home README | [decred/dcrd#278](https://github.com/decred/dcrd/pull/278) |
+| dcrctl: fix reading from stdin in terminal mode | [decred/dcrd#294](https://github.com/decred/dcrd/pull/294) |
+| rpcserver: Account for block votes in coin supply | [decred/dcrd#296](https://github.com/decred/dcrd/pull/296) |
+| rpcserver: searchrawtx - update coinbase output | [decred/dcrd#299](https://github.com/decred/dcrd/pull/299) |
+| blockmanager: current() for testnet should check blockchain timesource. | [decred/dcrd#302](https://github.com/decred/dcrd/pull/302) |
+| Remove --addrindex option. | [decred/dcrd#305](https://github.com/decred/dcrd/pull/305) |
+| add another mainnet checkpoint, add initial testnet checkpoints | [decred/dcrd#307](https://github.com/decred/dcrd/pull/307) |
+| Fix the coin supply calculation | [decred/dcrd#309](https://github.com/decred/dcrd/pull/309) |
+| Return from syncMiningStateAfterSync if peer disconnected. | [decred/dcrd#310](https://github.com/decred/dcrd/pull/310) |
+| Bump for v0.3.0 | [decred/dcrd#312](https://github.com/decred/dcrd/pull/312) |
+| Create appdata directory before writing config. | [decred/dcrd#313](https://github.com/decred/dcrd/pull/313) |
+| rpc: Add blockheight to getstakeinfo results | [decred/dcrwallet#282](https://github.com/decred/dcrwallet/pull/282) |
+| config: Add txfee and ticketfee to available config settings | [decred/dcrwallet#285](https://github.com/decred/dcrwallet/pull/285) |
+| rpc: fixes high reported missed counts when sstrx are first issued | [decred/dcrwallet#287](https://github.com/decred/dcrwallet/pull/287) |
+| Fix panic when getting StakeDifficulty if dcrd disconnected | [decred/dcrwallet#302](https://github.com/decred/dcrwallet/pull/302) |
+| Add transaction hash to PublishTransactionResponse. | [decred/dcrwallet#304](https://github.com/decred/dcrwallet/pull/304) |
+| Switch doco links to point to the Decred repo. | [decred/dcrwallet#306](https://github.com/decred/dcrwallet/pull/306) |
+| Update to latest gRPC. | [decred/dcrwallet#308](https://github.com/decred/dcrwallet/pull/308) |
+| Recommend the latest glide releases over the dev version. | [decred/dcrwallet#309](https://github.com/decred/dcrwallet/pull/309) |
+| Save logs to the specified appdata directory. | [decred/dcrwallet#310](https://github.com/decred/dcrwallet/pull/310) |
+| waddrmgr: check extended pubkey network when creating a WoW. | [decred/dcrwallet#312](https://github.com/decred/dcrwallet/pull/312) |
+| rpctest - Fix wallet RPC port, and lots of docs and formatting. | [decred/dcrwallet#313](https://github.com/decred/dcrwallet/pull/313) |
+| Bump for v0.3.0 | [decred/dcrwallet#316](https://github.com/decred/dcrwallet/pull/316) |
+| Add public key address to next address response | [decred/dcrwallet#317](https://github.com/decred/dcrwallet/pull/317) |
+| If tx fee increment is unset, it should be the default | [decred/dcrwallet#318](https://github.com/decred/dcrwallet/pull/318) |
+| Fix lockup by breaking UTXO notifications | [decred/dcrwallet#319](https://github.com/decred/dcrwallet/pull/319) |
+
+## Notes
+
+## Commits
+
+This release was built from:
+
+| Repository | Commit Hash |
+| --- | ---- |
+| decred/dcrd | 145065c87ff614f81e1d221693c0cf601f4423a7 |
+| decred/dcrwallet | c2b4227947edaa2233f9bbe292aa2ba41b3e3bd6 |
+| decred/dcrticketbuyer | a3d5464aae392f4878094cc720e0dc0443fd6dd6 |
+| decred/paymetheus | ebc7a950dacd36c8987aa01c8439b2908f61bc5c |
+| decred/decred-windows-installer | 5d0fad99eee1eb3afdd2ba9f1fe54f8a29fb8547 |
+| gominer | 093470d6b738a290dff1e32905b1b82b6fd99b32 |
+
+## Known Issues
+
+### Paymetheus
+
+* Spendable balance is incorrect and may even go negative after purchasing tickets. This is only a temporary accounting issue and will resolve itself after the tickets have been mined into a block.
+
+### dcrwallet
+
+* The [WalletService.SpentnessNotifications](https://github.com/decred/dcrwallet/blob/master/rpc/documentation/api.md#spentnessnotifications) gRPC API has been intentionally broken to avoid a deadlock situation. The RPC will appear to be working  but no responses will be streamed to the client.
+
 # [v0.2.0](https://github.com/decred/decred-binaries/releases/tag/v0.2.0)
 
 ## 2016-07-28
