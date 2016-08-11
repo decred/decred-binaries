@@ -40,5 +40,4 @@ cd ..
 cp ccminer-decred-linux-x86_64$TAG-$DATE.tar.gz decred-release/$MAINDIR
 cp ccminer-decred-win64$TAG-$DATE.zip decred-release/$MAINDIR
 sha256sum * > manifest-miners-$DATE.txt
-cd ..
-tar -cvzf $MAINDIR.tar.gz $MAINDIR
+

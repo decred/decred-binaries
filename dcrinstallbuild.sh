@@ -40,5 +40,4 @@ for i in $SYS; do
 done
 
 sha256sum * > manifest-dcrinstall-$TAG.txt
-cd ..
-tar -cvzf $MAINDIR.tar.gz $MAINDIR
+
