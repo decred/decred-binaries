@@ -53,4 +53,14 @@ for i in $SYS; do
     rm -r $PACKAGE-$i-$TAG
 done
 
+if [ -e ../decred-copay-darwin-$TAG.dmg ]; then
+    mv ../decred-copay-darwin-$TAG.dmg .
+fi
+if [ -e ../decred-copay-linux-$TAG.zip ]; then
+    mv ../decred-copay-linux-$TAG.zip .
+fi
+if [ -e ../decred-copay-windows-$TAG.exe ]; then
+    mv ../decred-copay-windows-$TAG.exe .
+fi
+
 sha256sum * > manifest-$TAG.txt
