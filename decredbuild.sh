@@ -42,7 +42,6 @@ for i in $SYS; do
     # dcrticketbuyer stuff
     env GOOS=$OS GOARCH=$ARCH go build github.com/decred/dcrticketbuyer
     cp $GPATH/src/github.com/decred/dcrticketbuyer/ticketbuyer-example.conf .
-    cp -rp $GPATH/src/github.com/decred/dcrticketbuyer/webui .
     cd ..
     if [[ $OS = "windows" ]]; then
 	zip -r $PACKAGE-$i-$TAG.zip $PACKAGE-$i-$TAG
