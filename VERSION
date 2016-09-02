@@ -1,20 +1,20 @@
 {
   "decred": {
-    "version": "0.2.0",
+    "version": "0.4.0",
     "build": "01",
-    "date": "2016-07-22",
-    "url": "https://github.com/decred/decred-binaries/releases/tag/v0.2.0"
+    "date": "2016-09-06",
+    "url": "https://github.com/decred/decred-binaries/releases/tag/v0.4.0"
   },
   "Paymetheus": {
-    "version": "0.2.0",
+    "version": "0.4.0",
     "build": "",
-    "date": "2016-07-22",
+    "date": "2016-09-06",
     "url": "https://github.com/decred/decred-binaries/releases/tag/v0.2.0"
   },
   "miners": {
-    "version": "0.2.0",
+    "version": "0.4.0",
     "build": "",
-    "date": "2016-07-28",
-    "url": "https://github.com/decred/decred-binaries/releases/tag/v0.2.0"
+    "date": "2016-09-06",
+    "url": "https://github.com/decred/decred-binaries/releases/tag/v0.4.0"
   }
 }

@@ -1,3 +1,104 @@
+# [v0.4.0](https://github.com/decred/decred-binaries/releases/tag/v0.4.0)
+
+## 2016-09-06
+
+This release contains a variety of bugfixes and improvements to all of
+the decred tools (dcrd, dcrwallet, gominer, and Paymetheus).  Desktop
+binaries for Copay for OSX, Linux, and Windows are included for the
+first time (although Windows users will have more features if they use
+Paymetheus instead).  Paymetheus is now able to launch dcrd in the
+background when it runs.  This is also the first release built with
+the version 1.7 of the go compiler.  This produces smaller and faster
+binaries than previous versions of go.
+
+To install the command line tools, please see
+[dcrinstaller](https://github.com/decred/decred-release/tree/master/cmd/dcrinstall).
+
+To install Paymetheus download and run either
+[Paymetheus 64bit](https://github.com/decred/decred-binaries/releases/download/v0.4.0/decred_0.4.0-beta_x64.msi) or
+[Paymetheus 32bit](https://github.com/decred/decred-binaries/releases/download/v0.4.0/decred_0.4.0-beta_x86.msi)
+depending on your version of Windows.
+
+See manifest-v0.4.0.txt, manifest-gominer-v0.4.0.txt,
+manifest-paymetheus-v0.4.0.txt, and manifest--dcrinstaller-v0.4.0.txt
+for sha256 sums and the associated .asc files to confirm those shas.
+
+See [README.md](./README.md) for more info on
+verifying the files.
+
+Changes include:
+
+| Description | Pull Request |
+| --- | ---- |
+| partial fix for proper invalid share accounting | [decred/gominer#60](https://github.com/decred/gominer/pull/60) |
+| add license for OpenCL bindings | [decred/gominer#65](https://github.com/decred/gominer/pull/65) |
+| make the autocalibration/device/intensity/worksize flags consistent | [decred/gominer#88](https://github.com/decred/gominer/pull/68) |
+| some cleanups to appease go clean/go vet | [decred/gominer#69](https://github.com/decred/gominer/pull/69) |
+| fix build on 32-bit platforms and properly error on too small worksizes | [decred/gominer#70](https://github.com/decred/gominer/pull/70) |
+| properly account for multiple OpenCL platforms | [decred/gominer#71](https://github.com/decred/gominer/pull/71) |
+| Cleanup atomic usage. | [decred/gominer#74](https://github.com/decred/gominer/pull/74) |
+| Remove erroneous waitgroup Done in Stop | [decred/gominer#76](https://github.com/decred/gominer/pull/76) |
+| Bump for v0.4.0 | [decred/gominer#77](https://github.com/decred/gominer/pull/77) |
+| Make seed copyable, Fixes #154 | [decred/Paymetheus#160](https://github.com/decred/Paymetheus/pull/160) |
+| Add Launcher project to start dcrd and open PM when finished. | [decred/Paymetheus#163](https://github.com/decred/Paymetheus/pull/163) |
+| Remove help link since it links nowhere. | [decred/Paymetheus#164](https://github.com/decred/Paymetheus/pull/164) |
+| Bump for v0.4.0 | [decred/Paymetheus#166](https://github.com/decred/Paymetheus/pull/166) |
+| Update assembly info for Launcher. | [decred/Paymetheus#167](https://github.com/decred/Paymetheus/pull/167) |
+| Fix arches for release builds | [decred/Paymetheus#168](https://github.com/decred/Paymetheus/pull/168) |
+| Iconmania | [decred/Paymetheus#169](https://github.com/decred/Paymetheus/pull/169) |
+| hack for finding correct paths for both wallet and dcrd. | [decred/Paymetheus#170](https://github.com/decred/Paymetheus/pull/170) |
+| Fix typos | [decred/dcrticketbuyer#36](https://github.com/decred/dcrticketbuyer/pull/36) |
+| Fix misses first buying opportunity | [decred/dcrticketbuyer#40](https://github.com/decred/dcrticketbuyer/pull/40) |
+| make consistent with other dcr tools and repair web UI | [decred/dcrticketbuyer#41](https://github.com/decred/dcrticketbuyer/pull/41) |
+| Update glide.yaml | [decred/dcrticketbuyer#43](https://github.com/decred/dcrticketbuyer/pull/43) |
+| Add heightCheck to make sure that purchase is run once per height | [decred/dcrticketbuyer#44](https://github.com/decred/dcrticketbuyer/pull/44) |
+| Document maxinmempool is the number of your, not all, tickets. | [decred/dcrticketbuyer#45](https://github.com/decred/dcrticketbuyer/pull/45) |
+| Fix price mode issues | [decred/dcrticketbuyer#46](https://github.com/decred/dcrticketbuyer/pull/46) |
+| Update MaxPerBlock check to match comment above | [decred/dcrticketbuyer#47](https://github.com/decred/dcrticketbuyer/pull/47) |
+| Update couldBuy to reflect number of possible tickets left in window | [decred/dcrticketbuyer#48](https://github.com/decred/dcrticketbuyer/pull/48) |
+| Load previously used toBuyDiffPeriod from purchased.csv | [decred/dcrticketbuyer#49](https://github.com/decred/dcrticketbuyer/pull/49) |
+| Bump for v0.4.0 | [decred/dcrticketbuyer#50](https://github.com/decred/dcrticketbuyer/pull/50) |
+| revert config file name change and add back in httpuipath for compat | [decred/dcrticketbuyer#51](https://github.com/decred/dcrticketbuyer/pull/51) |
+| dcrd: Do not send a wakeup if not sleeping | [decred/dcrd#314](https://github.com/decred/dcrd/pull/314) |
+| travis: Add go 1.7 and drop go 1.5 support. | [decred/dcrd#318](https://github.com/decred/dcrd/pull/318) |
+| Add pipes for parent process IPC. | [decred/dcrd#311](https://github.com/decred/dcrd/pull/311) |
+| Backport #333 (Use correct r.err in dcrdLog.Errorf msg) | [decred/dcrd#334](https://github.com/decred/dcrd/pull/334) |
+| Bump for v0.4.0 | [decred/dcrd#335](https://github.com/decred/dcrd/pull/335) |
+| add more checkpoints for upcoming release (#329) | [decred/dcrd#338](https://github.com/decred/dcrd/pull/338) |
+| Add address argument to consolidate | [decred/dcrwallet#323](https://github.com/decred/dcrwallet/pull/323) |
+| Add golang 1.7 and drop golang 1.5 support. | [decred/dcrwallet#324](https://github.com/decred/dcrwallet/pull/324) |
+| RFP-10 Milestone 1 | [decred/dcrwallet#326](https://github.com/decred/dcrwallet/pull/326) |
+| wallet: limit the tx size with compressWallet/consolidate. | [decred/dcrwallet#327](https://github.com/decred/dcrwallet/pull/327) |
+| Update project dependencies. | [decred/dcrwallet#329](https://github.com/decred/dcrwallet/pull/329) |
+| Update dcrd dependency. | [decred/dcrwallet#330](https://github.com/decred/dcrwallet/pull/330) |
+| Fixes #146: added RWMutex on addrPools map | [decred/dcrwallet#331](https://github.com/decred/dcrwallet/pull/331) |
+| Bump for v0.4.0 | [decred/dcrwallet#332](https://github.com/decred/dcrwallet/pull/332) |
+| Update travis to test against golang 1.7 | [decred/dcrutil#14](https://github.com/decred/dcrutil/pull/14) |
+| last last second pickups | [decred/decred-windows-installer#10](https://github.com/decred/decred-windows-installer/pull/10) |
+| 040 | [decred/decred-windows-installer#11](https://github.com/decred/decred-windows-installer/pull/11) |
+| 040 | [decred/decred-windows-installer#12](https://github.com/decred/decred-windows-installer/pull/12) |
+| missed checkpoints | [decred/decred-windows-installer#14](https://github.com/decred/decred-windwos-installer/pull/14) |
+| Comment out ionspinner and ion infinite scroll due to CPU/mem usage | [decred/copay#27](https://github.com/decred/copay/pull/27) |
+| Update package.json and github release api URL | [decred/copay#30](https://github.com/decred/copay/pull/30) |
+| Update icon and allow window resizing | [decred/copay#32](https://github.com/decred/copay/pull/32) |
+
+## Notes
+
+## Commits
+
+This release was built from:
+
+| Repository | Commit Hash |
+| --- | ---- |
+| decred/dcrd | ef83145805dcbb898a2bcc419f114679cd004f18 |
+| decred/dcrwallet | f626fdf123d1d2163cf70df48c9b20bd1d29e7bd |
+| decred/dcrticketbuyer | 736f3fbd3c26ada655f37d6d42b307798d345186 |
+| decred/paymetheus | fe5f4c771439aed231ba8cfb22ac2cabb2a083cd |
+| decred/decred-windows-installer | d6bac0bc7092e0eae6921cabda1af5e93a2b64dd |
+| gominer | a2dec145590621b849c66e9445cb7713db99825a |
+
+## Known Issues
+
 # [v0.3.0](https://github.com/decred/decred-binaries/releases/tag/v0.3.0)
 
 ## 2016-08-15
