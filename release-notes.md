@@ -4,20 +4,23 @@
 
 This release contains a variety of bugfixes and improvements to all of
 the decred tools (dcrd, dcrwallet, gominer, and Paymetheus).  Desktop
-binaries for Copay for OSX, Linux, and Windows are included for the
-first time (although Windows users will have more features if they use
-Paymetheus instead).  Paymetheus is now able to launch dcrd in the
-background when it runs.  This is also the first release built with
-the version 1.7 of the go compiler.  This produces smaller and faster
-binaries than previous versions of go.
-
-To install the command line tools, please see
-[dcrinstaller](https://github.com/decred/decred-release/tree/master/cmd/dcrinstall).
+binaries for Copay for OSX and Linux.  Paymetheus is now able to
+launch dcrd in the background when it runs.  This is also the first
+release built with the version 1.7 of the go compiler.  This produces
+smaller and faster binaries than previous versions of go.
 
 To install Paymetheus download and run either
 [Paymetheus 64bit](https://github.com/decred/decred-binaries/releases/download/v0.4.0/decred_0.4.0-beta_x64.msi) or
 [Paymetheus 32bit](https://github.com/decred/decred-binaries/releases/download/v0.4.0/decred_0.4.0-beta_x86.msi)
 depending on your version of Windows.
+
+To install a the local Copay GUI download and run
+[Copay OSX](https://github.com/decred/decred-binaries/releases/download/v0.4.0/decred-copay-darwin-v0.4.0.dmg)
+or
+[Copay Linux](https://github.com/decred/decred-binaries/releases/download/v0.4.0/decred-copay-linux-v0.4.0.zip).
+
+To install the command line tools, please see
+[dcrinstaller](https://github.com/decred/decred-release/tree/master/cmd/dcrinstall).
 
 See manifest-v0.4.0.txt, manifest-gominer-v0.4.0.txt,
 manifest-paymetheus-v0.4.0.txt, and manifest--dcrinstaller-v0.4.0.txt
