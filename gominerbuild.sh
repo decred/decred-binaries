@@ -27,19 +27,33 @@ cd $MAINDIR
 
 GPATH=$(echo $GOPATH | cut -f1 -d:)
 
-i=linux-amd64
-mkdir $PACKAGE-$i-$TAG
-# If there is a windows build present, include it.
-if [ -e ../$PACKAGE-windows-amd64-$TAG.zip ]; then
-    mv ../$PACKAGE-windows-amd64-$TAG.zip .
-fi
-cd $PACKAGE-$i-$TAG
-go build github.com/decred/gominer
+OS=linux-amd64
+TYPE=opencl
+echo Building $OS-$TYPE
+mkdir $PACKAGE-$OS-$TYPE-$TAG
+cd $PACKAGE-$OS-$TYPE-$TAG
+go build -tags "$TYPE" github.com/decred/gominer
 cp $GPATH/src/github.com/decred/gominer/sample-gominer.conf .
 cp $GPATH/src/github.com/decred/gominer/README.md .
 cp $GPATH/src/github.com/decred/gominer/LICENSE .
 cp $GPATH/src/github.com/decred/gominer/blake256.cl .
 cd ..
-tar -cvzf $PACKAGE-$i-$TAG.tar.gz $PACKAGE-$i-$TAG
-rm -r $PACKAGE-$i-$TAG
+tar -czf $PACKAGE-$OS-$TYPE-$TAG.tar.gz $PACKAGE-$OS-$TYPE-$TAG
+rm -r $PACKAGE-$OS-$TYPE-$TAG
+
+SYS="windows-amd64_opencl_zip windows-amd64_cuda_zip linux-amd64_cuda_tar.gz windows-amd64_opencladl_zip linux-amd64_opencladl_tar.gz"
+
+for i in $SYS; do
+    OS=$(echo $i | cut -f1 -d_)
+    TYPE=$(echo $i | cut -f2 -d_)
+    EXT=$(echo $i | cut -f3 -d_)
+    CPACKAGE=$PACKAGE-$OS-$TYPE-$TAG.$EXT
+    if [ -e ../$CPACKAGE ]; then
+	mv ../$CPACKAGE .
+	echo Found $CPACKAGE
+    else
+	echo Missing $CPACKAGE
+    fi
+done
+
 sha256sum * > manifest-gominer-$TAG.txt
