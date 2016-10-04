@@ -1,3 +1,164 @@
+# [v0.5.0](https://github.com/decred/decred-binaries/releases/tag/v0.5.0)
+
+All users are strongly encouraged to upgrade to this release.
+
+This release contains bugfixes and improvements to all of the decred
+tools (dcrd, dcrwallet, gominer, Copay, and Paymetheus).  A new
+unified database for tickets and blocks has been added to dcrd.  This
+provides significant performance and reliability improvements.
+gominer now supports NVIDIA GPUs using CUDA.  gominer can now monitor
+temperatures and fan speeds on supported AMD or NVIDIA GPUs.  The dcrd
+codebase has been modified to track the upstream btcd project more
+closely, allowing for easier copying of code between the two projects.
+Additional rpc tests have been added to dcrwallet (RFP-10).  All
+changes since the last release are listed below.
+
+To install Paymetheus download and run either
+[Paymetheus 64bit](https://github.com/decred/decred-binaries/releases/download/v0.5.0/decred_0.5.0-beta_x64.msi) or
+[Paymetheus 32bit](https://github.com/decred/decred-binaries/releases/download/v0.5.0/decred_0.5.0-beta_x86.msi)
+depending on your version of Windows.
+
+To install a the local Copay GUI download and run
+[Copay OSX](https://github.com/decred/decred-binaries/releases/download/v0.5.0/decred-copay-darwin-v0.5.0.dmg)
+or
+[Copay Linux](https://github.com/decred/decred-binaries/releases/download/v0.5.0/decred-copay-linux-v0.5.0.zip).
+
+To install the command line tools, please see
+[dcrinstaller](https://github.com/decred/decred-release/tree/master/cmd/dcrinstall).
+
+See manifest-v0.5.0.txt, manifest-gominer-v0.5.0.txt,
+manifest-paymetheus-v0.5.0.txt, and manifest-copay-0.5.0.txt,
+manifest--dcrinstaller-v0.5.0.txt for sha256 sums and the associated
+.asc files to confirm those shas.
+
+See [README.md](./README.md) for more info on
+verifying the files.
+
+## 2016-10-10
+
+| Description | Pull Request |
+| --- | ---- |
+| Hook up travis | [decred/gominer#75](https://github.com/decred/gominer/pull/75) |
+| Print leading zeros in target difficulty. | [decred/gominer#79](https://github.com/decred/gominer/pull/79) |
+| Initial support for cuda mining. | [decred/gominer#81](https://github.com/decred/gominer/pull/81) |
+| Bump for v0.4.1 | [decred/gominer#85](https://github.com/decred/gominer/pull/85) |
+| Small optimization for CUDA. | [decred/gominer#88](https://github.com/decred/gominer/pull/88) |
+| adjust various headers so windows builds | [decred/gominer#89](https://github.com/decred/gominer/pull/89) |
+| add result field so errors are unmarshaled properly | [decred/gominer#90](https://github.com/decred/gominer/pull/90) |
+| gofmt | [decred/gominer#91](https://github.com/decred/gominer/pull/91) |
+| fix cgo Go pointers issue  | [decred/gominer#92](https://github.com/decred/gominer/pull/92) |
+| move deviceListIndex increment back to the right spot | [decred/gominer#93](https://github.com/decred/gominer/pull/93) |
+| Clean up some old or incorrect comments. | [decred/gominer#95](https://github.com/decred/gominer/pull/95) |
+| use nvml to fetch fan and temperature information | [decred/gominer#96](https://github.com/decred/gominer/pull/96) |
+| Fix the size of data copied from device. | [decred/gominer#99](https://github.com/decred/gominer/pull/99) |
+| implement amdgpu sysfs support to fetch fan and temperature information | [decred/gominer#100](https://github.com/decred/gominer/pull/100) |
+| fix using a device on the second OpenCL platform | [decred/gominer#102](https://github.com/decred/gominer/pull/102) |
+| use a slice of submitIDs instead of a single submitID | [decred/gominer#103](https://github.com/decred/gominer/pull/103) |
+| Jcv split | [decred/gominer#105](https://github.com/decred/gominer/pull/105) |
+| implement ADL support to fetch fan/temperature information | [decred/gominer#106](https://github.com/decred/gominer/pull/106) |
+| Implement CUDA on windows, Fixes #108 | [decred/gominer#109](https://github.com/decred/gominer/pull/109) |
+| Remove some unused and unneeded code | [decred/gominer#112](https://github.com/decred/gominer/pull/112) |
+| Remove unneeded word in INFO log line | [decred/gominer#114](https://github.com/decred/gominer/pull/114) |
+| add automatic fan control to maintain a target temperature | [decred/gominer#115](https://github.com/decred/gominer/pull/115) |
+| Improve cpu usage with CUDA. | [decred/gominer#116](https://github.com/decred/gominer/pull/116) |
+| add some default Windows CFLAGS/LDFLAGS and remove unixy code | [decred/gominer#117](https://github.com/decred/gominer/pull/117) |
+| Update sample config with all new options. | [decred/gominer#119](https://github.com/decred/gominer/pull/119) |
+| add more Windows details and some general improvements | [decred/gominer#120](https://github.com/decred/gominer/pull/120) |
+| Bump for v0.5.0 | [decred/gominer#126](https://github.com/decred/gominer/pull/126) |
+| Add additional code to fix ticket left in window check | [decred/dcrticketbuyer#53](https://github.com/decred/dcrticketbuyer/pull/53) |
+| purchase: handle updated balance in purchase window | [decred/dcrticketbuyer#55](https://github.com/decred/dcrticketbuyer/pull/55) |
+| Bump for v0.5.0 | [decred/dcrticketbuyer#61](https://github.com/decred/dcrticketbuyer/pull/61) |
+| Update dcr* deps for 0.5.0 | [decred/dcrticketbuyer#65](https://github.com/decred/dcrticketbuyer/pull/65) |
+| Fix quickstart for v0.4.0 | [decred/Paymetheus#172](https://github.com/decred/Paymetheus/pull/172) |
+| Revert path hack to support https://github.com/decred/decred-windows-installer/issues/13 | [decred/Paymetheus#173](https://github.com/decred/Paymetheus/pull/173) |
+| Do not ignore errors when starting dcrd. | [decred/Paymetheus#174](https://github.com/decred/Paymetheus/pull/174) |
+| fix path, fixes #176 | [decred/Paymetheus#177](https://github.com/decred/Paymetheus/pull/177) |
+| Bump for v0.5.0 | [decred/Paymetheus#183](https://github.com/decred/Paymetheus/pull/183) |
+| ListUnspent docs: default maxconf missing a 9 digit. | [decred/dcrrpcclient#32](https://github.com/decred/dcrrpcclient/pull/32) |
+| Add setticketmaxprice RPC, a few doc fixes. | [decred/dcrrpcclient#34](https://github.com/decred/dcrrpcclient/pull/34) |
+| Update all logos and icons | [decred/copay#42](https://github.com/decred/copay/pull/42) |
+| Update so backup confirmation sorts properly and shows uppercased words | [decred/copay#44](https://github.com/decred/copay/pull/44) |
+| Fix several places where the desktop version conflicts with upstream. | [decred/copay#45](https://github.com/decred/copay/pull/45) |
+| make dcrd not optional, fixes #13 and fixes #15 | [decred/decred-windows-installer#16](https://github.com/decred/decred-windows-installer/pull/16) |
+| bring back conf file for now | [decred/decred-windows-installer#19](https://github.com/decred/decred-windows-installer/pull/19) |
+| prep for 0.5.0 release | [decred/decred-windows-installer#20](https://github.com/decred/decred-windows-installer/pull/20) |
+| catch pu | [decred/decred-windows-installer#21](https://github.com/decred/decred-windows-installer/pull/21) |
+| new digests | [decred/decred-windows-installer#22](https://github.com/decred/decred-windows-installer/pull/22) |
+| more stragglers | [decred/decred-windows-installer#23](https://github.com/decred/decred-windows-installer/pull/23) |
+| Update one dep. | [decred/decred-windows-installer#24](https://github.com/decred/decred-windows-installer/pull/24) |
+| update for real | [decred/decred-windows-installer#25](https://github.com/decred/decred-windows-installer/pull/25) |
+| RFP-10 Milestone 2 | [decred/dcrwallet#336](https://github.com/decred/dcrwallet/pull/336) |
+| Improve wallet atomicity. | [decred/dcrwallet#339](https://github.com/decred/dcrwallet/pull/339) |
+| rpctest: fix appdata vs datadir issue | [decred/dcrwallet#342](https://github.com/decred/dcrwallet/pull/342) |
+| Return previously-ignored errors in waddrmgr. | [decred/dcrwallet#346](https://github.com/decred/dcrwallet/pull/346) |
+| Bump for v0.5.0 | [decred/dcrwallet#347](https://github.com/decred/dcrwallet/pull/347) |
+| Fix namespace passed to wstakemgr API. | [decred/dcrwallet#348](https://github.com/decred/dcrwallet/pull/348) |
+| Can't range over a slice being modified. | [decred/dcrwallet#349](https://github.com/decred/dcrwallet/pull/349) |
+| Normalize addresses in all waddrmgr APIs. | [decred/dcrwallet#352](https://github.com/decred/dcrwallet/pull/352) |
+| Update dcr* deps glide.lock for 0.5.0 | [decred/dcrwallet#356](https://github.com/decred/dcrwallet/pull/356) |
+| Do not error if dcrctl can't find dcrd.conf. | [decred/dcrd#339](https://github.com/decred/dcrd/pull/339) |
+| Reconcile btcd and dcrd auto generated config file semantics | [decred/dcrd#341](https://github.com/decred/dcrd/pull/341) |
+| Fix a bug with invalidating blocks in new DB and add more sanity checks | [decred/dcrd#343](https://github.com/decred/dcrd/pull/343) |
+| dcrd: Fix another upgrade issue. | [decred/dcrd#346](https://github.com/decred/dcrd/pull/346) |
+| add another checkpoint for mainnet and testnet | [decred/dcrd#348](https://github.com/decred/dcrd/pull/348) |
+| Replace the ticket database with an efficient, atomic implementation | [decred/dcrd#349](https://github.com/decred/dcrd/pull/349) |
+| Fix a bug indexing addrindex when blocks are invalidated | [decred/dcrd#353](https://github.com/decred/dcrd/pull/353) |
+| Synchronize to the merging of btcd PR 666 | [decred/dcrd#358](https://github.com/decred/dcrd/pull/358) |
+| Sync to btcd commit '5a1e77bd2dd6f5302a82d3d27b4e3a60526918b1' | [decred/dcrd#359](https://github.com/decred/dcrd/pull/359) |
+| Merge in btcd commit 3b39edcaa1e867efc4223d95ca1496aaadf8eca3 | [decred/dcrd#360](https://github.com/decred/dcrd/pull/360) |
+| travis: goclean | [decred/dcrd#361](https://github.com/decred/dcrd/pull/361) |
+| deps: Update to latest commits. | [decred/dcrd#362](https://github.com/decred/dcrd/pull/362) |
+| Merge in btcd commit e15d3008cfd59756db9570da9e47da6831313196 | [decred/dcrd#364](https://github.com/decred/dcrd/pull/364) |
+| Merge in btcd commit b87723cd94ea11c29e22c4372ba4fe96886e7c83 | [decred/dcrd#366](https://github.com/decred/dcrd/pull/366) |
+| Merge in btcd commit 644570487f379e9856ae4025181ecc6293d86711 | [decred/dcrd#367](https://github.com/decred/dcrd/pull/367) |
+| Merge in btcd commit de4fb243899fc988cb3f320bbec9bee95966691b | [decred/dcrd#368](https://github.com/decred/dcrd/pull/368) |
+| Merge in btcd commit 27c0f9f8d1af6a44423b03a2e4f03d4a87a1ac40 | [decred/dcrd#369](https://github.com/decred/dcrd/pull/369) |
+| Merge in btcd commit e7ddaa468e5a699a9c21136e3d453ce38034b98a | [decred/dcrd#370](https://github.com/decred/dcrd/pull/370) |
+| Merge in btcd commit b14032487f67ac140606e7b5f4cd4781243c62c7 | [decred/dcrd#371](https://github.com/decred/dcrd/pull/371) |
+| Merge in btcd commit 1b234102147901738bb79b2edf2d803225a36d57 | [decred/dcrd#372](https://github.com/decred/dcrd/pull/372) |
+| Merge in btcd commit 0d7f52660096c5a22f2cb95c102e0693f773a593 | [decred/dcrd#373](https://github.com/decred/dcrd/pull/373) |
+| Merge in btcd commit f893558d782396f10c2fe49a8bc73deff4a36d14 | [decred/dcrd#374](https://github.com/decred/dcrd/pull/374) |
+| Merge in btcd 7f07fb1093dd80105d36d61c8fb8a16f6e9d9b29 | [decred/dcrd#375](https://github.com/decred/dcrd/pull/375) |
+| Merge in btcd commit dc83f4ee6a127038dc0238600bdc745d239cf8b1 | [decred/dcrd#376](https://github.com/decred/dcrd/pull/376) |
+| Merge in btcd commit f68cd7422dd5d0e0d6002647305c1fd663aee77d | [decred/dcrd#377](https://github.com/decred/dcrd/pull/377) |
+| Merge in btcd commit 5de5b7354ca458d6e7677d6b4629214d3f871b59 | [decred/dcrd#379](https://github.com/decred/dcrd/pull/379) |
+| Merge in btcd commit 2adfb3b56acd280e84451e94dd0c06203eef9832 | [decred/dcrd#380](https://github.com/decred/dcrd/pull/380) |
+| Merge in btcd commit 6229e3583505a82d4514b1efa86f910b78693825 | [decred/dcrd#381](https://github.com/decred/dcrd/pull/381) |
+| Remove unused ErrBIP0030 | [decred/dcrd#385](https://github.com/decred/dcrd/pull/385) |
+| Bump for v0.5.0 | [decred/dcrd#390](https://github.com/decred/dcrd/pull/390) |
+| add more checkpoints for release | [decred/dcrd#396](https://github.com/decred/dcrd/pull/396) |
+| Fix a bug for forced reorganizations | [decred/dcrd#392](https://github.com/decred/dcrd/pull/392) |
+| blockchain: remove unnecessary check. | [decred/dcrd#400](https://github.com/decred/dcrd/pull/400) |
+| Update dcr* deps for 0.5.0 | [decred/dcrd#401](https://github.com/decred/dcrd/pull/401) |
+| Fix a bug reloading the blockchain | [decred/dcrd#402](https://github.com/decred/dcrd/pull/402) |
+| Version the JSON-RPC API with semantic versioning. | [decred/dcrd#387](https://github.com/decred/dcrd/pull/387) |
+| stake: Correct prng uint32 rollover. | [decred/dcrd#403](https://github.com/decred/dcrd/pull/403) |
+| Improve the order of the context free tests | [decred/dcrd#404](https://github.com/decred/dcrd/pull/404) |
+| Optimize coinbase output tax check. | [decred/dcrd#409](https://github.com/decred/dcrd/pull/409) |
+
+## Notes
+
+The new database will require a full download of the blockchain.  Due
+to the speed improvements it will be much quicker than previous
+downloads but it is important to be aware that your dcrd will be
+unavailable for other operations while this happens.
+
+## Commits
+
+This release was built from:
+
+| Repository | Commit Hash |
+| --- | ---- |
+| decred/gominer | 8c540b325636b7e225e0a39ffcf99a64ec01c70b |
+| decred/dcrticketbuyer | 1c7b048d11fdb7e0791529c4134bf040de765364 |
+| decred/Paymetheus | c3cbd3956347c6082200239aaa3ffdc13a0c0409 |
+| decred/copay | 9b12e42e22374811d0f602bd54c85f3f203e2f77 |
+| decred/decred-windows-installer | fcb29292c838edbfc6d5714a10b1b6d5d1262c0a |
+| decred/dcrwallet | 46739e16df88c7145be3a73500b8b2652472c32e |
+| decred/dcrd | e4d2295fb2c56a0b6f5c0f99b6d6260581dcbfd6 |
+
+## Known Issues
+
 # [v0.4.0](https://github.com/decred/decred-binaries/releases/tag/v0.4.0)
 
 ## 2016-09-06
@@ -98,7 +259,7 @@ This release was built from:
 | decred/dcrticketbuyer | 736f3fbd3c26ada655f37d6d42b307798d345186 |
 | decred/paymetheus | fe5f4c771439aed231ba8cfb22ac2cabb2a083cd |
 | decred/decred-windows-installer | d6bac0bc7092e0eae6921cabda1af5e93a2b64dd |
-| gominer | a2dec145590621b849c66e9445cb7713db99825a |
+| decred/gominer | a2dec145590621b849c66e9445cb7713db99825a |
 
 ## Known Issues
 

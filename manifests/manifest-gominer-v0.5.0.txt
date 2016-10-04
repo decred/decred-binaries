@@ -1,0 +1,6 @@
+852007fe076ec1524c766b87b3050eed4d969728ada6c4de850f80633e63c508  gominer-linux-amd64-cuda-v0.5.0.tar.gz
+89e7d51689cb9b4b9805b2a38bc653b3d8606e2934e20a463a8446484bbd0826  gominer-linux-amd64-opencladl-v0.5.0.tar.gz
+8efbe7a0b41e1f6d376635be6730f09c341b34e30db48afcc8a4de8687ecddce  gominer-linux-amd64-opencl-v0.5.0.tar.gz
+f90e3117db8c14f79fd6aee05fe484a2cb374c2f60c78c3affda05c46f766dc2  gominer-windows-amd64-cuda-v0.5.0.zip
+49fda0b2ecffb2d70f61cf59e70d38fa5706c0e6ea4603c3938c723e614227b3  gominer-windows-amd64-opencladl-v0.5.0.zip
+12e6b6692ed254227468ae26a59beb571799d85c650584d097866883540774dc  gominer-windows-amd64-opencl-v0.5.0.zip
