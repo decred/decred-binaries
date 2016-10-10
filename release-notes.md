@@ -1,4 +1,23 @@
+# [v0.5.1](https://github.com/decred/decred-binaries/releases/tag/v0.5.1)
+
+## 2016-10-10
+
+This release addresses a bug when upgrading very old wallets with
+dcrwallet.  All other tools are unchanged.
+
+## Commits
+
+This release was built from:
+
+| Repository | Commit Hash |
+| --- | ---- |
+| decred/dcrticketbuyer | 33a2b0cfffe67d81e16abb78ae806be20326aac8 |
+| decred/dcrwallet | 726012471ceb6ed61025395d43d624b37a0417c0 |
+| decred/dcrd | 3527346c43ed4f904d559763daab0f7f53b19069 |
+
 # [v0.5.0](https://github.com/decred/decred-binaries/releases/tag/v0.5.0)
+
+## 2016-10-10
 
 All users are strongly encouraged to upgrade to this release.
 
@@ -33,8 +52,6 @@ manifest--dcrinstaller-v0.5.0.txt for sha256 sums and the associated
 
 See [README.md](./README.md) for more info on
 verifying the files.
-
-## 2016-10-10
 
 | Description | Pull Request |
 | --- | ---- |
