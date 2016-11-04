@@ -1,0 +1,2 @@
+1ec6540e4a11fcacd9ce5afda85c07e5f7bf477da007cb6a71408cf10e255b10 *decred_0.6.0-beta_x86.msi
+cb19db95990f75d5d60fa83b6631e21c9582b4bcc068a486dd39b368ed2b4f31 *decred_0.6.0-beta_x64.msi

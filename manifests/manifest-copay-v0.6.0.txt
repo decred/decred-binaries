@@ -1,0 +1,2 @@
+762bd69cc88c81f51865abb1bf73803c74a30c24f9fca834378f27c5a197410f  decred-copay-darwin-v0.6.0.dmg
+b0e5517ed6e093a415777a94b2d43f3a5fa93acc0bd5001c4b5902894001b651  decred-copay-linux-v0.6.0.zip

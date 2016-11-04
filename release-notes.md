@@ -1,3 +1,112 @@
+# [v0.6.0](https://github.com/decred/decred-binaries/releases/tag/v0.6.0)
+
+## 2016-11-09
+
+This release contains bug fixes and improvements for dcrd and
+dcrwallet.
+
+A new block test framework has been added to simplify adding new
+tests.  380 new block tests have been added with it.
+
+Several RPC improvements have been made.  A number of voting related
+fixed and improvements have been made to support future voting
+changes.
+
+dcrwallet now processes transactions atomically.
+
+gominer and copay are unchanged.  Paymetheus is unchanged but should
+be updated for the updated dcrd and dcrwallet dependancies.
+
+To install Paymetheus download and run either
+[Paymetheus 64bit](https://github.com/decred/decred-binaries/releases/download/v0.6.0/decred_0.6.0-beta_x64.msi) or
+[Paymetheus 32bit](https://github.com/decred/decred-binaries/releases/download/v0.6.0/decred_0.6.0-beta_x86.msi)
+depending on your version of Windows.
+
+To install a the local Copay GUI download and run
+[Copay OSX](https://github.com/decred/decred-binaries/releases/download/v0.6.0/decred-copay-darwin-v0.6.0.dmg)
+or
+[Copay Linux](https://github.com/decred/decred-binaries/releases/download/v0.6.0/decred-copay-linux-v0.6.0.zip).
+
+To install the command line tools, please see
+[dcrinstaller](https://github.com/decred/decred-release/tree/master/cmd/dcrinstall).
+
+See manifest-v0.6.0.txt, manifest-gominer-v0.6.0.txt,
+manifest-paymetheus-v0.6.0.txt, and manifest-copay-0.6.0.txt,
+manifest--dcrinstaller-v0.6.0.txt for sha256 sums and the associated
+.asc files to confirm those shas.
+
+See [README.md](./README.md) for more info on
+verifying the files.
+
+| Description | Pull Request |
+| --- | ---- |
+| Bump for v0.6.0 | [decred/gominer#127](https://github.com/decred/gominer/pull/127) |
+| Bump for v0.6.0 | [decred/dcrticketbuyer#72](https://github.com/decred/dcrticketbuyer/pull/72) |
+| Update onBlockConnected to match upcoming change in dcrd | [decred/dcrticketbuyer#73](https://github.com/decred/dcrticketbuyer/pull/73) |
+| Bump for v0.6.0 | [decred/Paymetheus#187](https://github.com/decred/Paymetheus/pull/187) |
+| Add SetBalanceToMaintain | [decred/dcrrpcclient#35](https://github.com/decred/dcrrpcclient/pull/35) |
+| Add ExistsExpiredTickets to dcrrpcclient | [decred/dcrrpcclient#36](https://github.com/decred/dcrrpcclient/pull/36) |
+| Add methods to use the new version and getheaders RPCs.  | [decred/dcrrpcclient#37](https://github.com/decred/dcrrpcclient/pull/37) |
+| Setticketsvotebits | [decred/dcrrpcclient#39](https://github.com/decred/dcrrpcclient/pull/39) |
+| Updates for dcrd JSON-RPC websocket API changes. | [decred/dcrrpcclient#40](https://github.com/decred/dcrrpcclient/pull/40) |
+| bump version and settings for v0.6.0 | [decred/decred-release#73](https://github.com/decred/decred-release/pull/73) |
+| bring dcrctl.exe back, fixes #26 | [decred/decred-windows-installer#27](https://github.com/decred/decred-windows-installer/pull/27) |
+| bump for 0.6.0 | [decred/decred-windows-installer#28](https://github.com/decred/decred-windows-installer/pull/28) |
+| straglers | [decred/decred-windows-installer#29](https://github.com/decred/decred-windows-installer/pull/29) |
+| Add expired to getstakeinfo command | [decred/dcrwallet#360](https://github.com/decred/dcrwallet/pull/360) |
+| Update dependencies, including 3rd party ones. | [decred/dcrwallet#361](https://github.com/decred/dcrwallet/pull/361) |
+| Update the wallet to begin allowing extended votebits setting | [decred/dcrwallet#362](https://github.com/decred/dcrwallet/pull/362) |
+| Fully update PoolTickets when using AddTicket rpc | [decred/dcrwallet#365](https://github.com/decred/dcrwallet/pull/365) |
+| RFP-10 milestone 3 | [decred/dcrwallet#369](https://github.com/decred/dcrwallet/pull/369) |
+| Bump for v0.6.0 | [decred/dcrwallet#373](https://github.com/decred/dcrwallet/pull/373) |
+| Correctly handle both p2sh and p2pkh addrs in wstakemgr. | [decred/dcrwallet#376](https://github.com/decred/dcrwallet/pull/376) |
+| Process transactions atomically with connected blocks. | [decred/dcrwallet#372](https://github.com/decred/dcrwallet/pull/372) |
+| Remove Wallet.ChainSynced/SetChainSynced APIs. | [decred/dcrwallet#378](https://github.com/decred/dcrwallet/pull/378) |
+| Output of --help/-h should go to os.Stdout rather than os.Stderr | [decred/dcrd#386](https://github.com/decred/dcrd/pull/386) |
+| Fix the dumpblockchain function | [decred/dcrd#405](https://github.com/decred/dcrd/pull/405) |
+| Use correct function to fetch blocks from the blockchain for RPC | [decred/dcrd#407](https://github.com/decred/dcrd/pull/407) |
+| Remove unused files | [decred/dcrd#408](https://github.com/decred/dcrd/pull/408) |
+| Prevent high memory usage when turning txindex on first time | [decred/dcrd#412](https://github.com/decred/dcrd/pull/412) |
+| Add a block pruner that only prunes occassionally | [decred/dcrd#415](https://github.com/decred/dcrd/pull/415) |
+| dcrctl: fix output in --terminal mode | [decred/dcrd#416](https://github.com/decred/dcrd/pull/416) |
+| Add existsexpiredtickets to rpcserver | [decred/dcrd#418](https://github.com/decred/dcrd/pull/418) |
+| Replace some unnecessary dcrutil.Tx usage with wire.MsgTx. | [decred/dcrd#419](https://github.com/decred/dcrd/pull/419) |
+| Add voting version parsing function | [decred/dcrd#420](https://github.com/decred/dcrd/pull/420) |
+| Add dcrjson decode func for concatenated hex hashes. | [decred/dcrd#421](https://github.com/decred/dcrd/pull/421) |
+| Add new setticketsvotebits command | [decred/dcrd#422](https://github.com/decred/dcrd/pull/422) |
+| Add func to decode string hashes to a passed destination. | [decred/dcrd#425](https://github.com/decred/dcrd/pull/425) |
+| Add getheaders JSON-RPC extension command. | [decred/dcrd#426](https://github.com/decred/dcrd/pull/426) |
+| Add EncodeConcatenatedHashes with test. | [decred/dcrd#432](https://github.com/decred/dcrd/pull/432) |
+| dcrctl: Set width to max in --terminal | [decred/dcrd#436](https://github.com/decred/dcrd/pull/436) |
+| blockchain: Add block validation infrastructure | [decred/dcrd#437](https://github.com/decred/dcrd/pull/437) |
+| Bump for v0.6.0 | [decred/dcrd#438](https://github.com/decred/dcrd/pull/438) |
+| Update 3rd party deps in glide | [decred/dcrd#439](https://github.com/decred/dcrd/pull/439) |
+| Add StakeVersion to header. | [decred/dcrd#441](https://github.com/decred/dcrd/pull/441) |
+| Use same notification for mined transactions and blocks. | [decred/dcrd#434](https://github.com/decred/dcrd/pull/434) |
+| Update dcrrpcclient for dcrctl. | [decred/dcrd#445](https://github.com/decred/dcrd/pull/445) |
+| update checkpoints | [decred/dcrd#446](https://github.com/decred/dcrd/pull/446) |
+| Notify only relevant stake txs, not all. | [decred/dcrd#447](https://github.com/decred/dcrd/pull/447) |
+
+## Notes
+
+## Commits
+
+This release was built from:
+
+| Repository | Commit Hash |
+| --- | ---- |
+| decred/gominer | 13cecddb128cd67f6d4249205122eda255f3c221 |
+| decred/dcrticketbuyer | b8ca91acb1aad13b1a6455d91fe75e61fd245a9f |
+| decred/Paymetheus | dd2b9b148b4831a06b08ef54edcfe8f724fc4e3a |
+| decred/copay | 9b12e42e22374811d0f602bd54c85f3f203e2f77 |
+| decred/decred-windows-installer | c74725ac52249a97663676e4aaccdb7b6b051b1e |
+| decred/dcrwallet | ec52a05d17334bc6954eefd9cd77ab30c827dabe |
+| decred/dcrd | d7c2adadc6995b614ab97d1955b5486690a7b2ed |
+
+## Known Issues
+
+---
+
 # [v0.5.1](https://github.com/decred/decred-binaries/releases/tag/v0.5.1)
 
 ## 2016-10-10
@@ -14,6 +123,8 @@ This release was built from:
 | decred/dcrticketbuyer | 33a2b0cfffe67d81e16abb78ae806be20326aac8 |
 | decred/dcrwallet | 726012471ceb6ed61025395d43d624b37a0417c0 |
 | decred/dcrd | 3527346c43ed4f904d559763daab0f7f53b19069 |
+
+---
 
 # [v0.5.0](https://github.com/decred/decred-binaries/releases/tag/v0.5.0)
 
@@ -176,6 +287,8 @@ This release was built from:
 
 ## Known Issues
 
+---
+
 # [v0.4.0](https://github.com/decred/decred-binaries/releases/tag/v0.4.0)
 
 ## 2016-09-06
@@ -279,6 +392,8 @@ This release was built from:
 | decred/gominer | a2dec145590621b849c66e9445cb7713db99825a |
 
 ## Known Issues
+
+---
 
 # [v0.3.0](https://github.com/decred/decred-binaries/releases/tag/v0.3.0)
 
@@ -387,6 +502,8 @@ This release was built from:
 
 * The [WalletService.SpentnessNotifications](https://github.com/decred/dcrwallet/blob/master/rpc/documentation/api.md#spentnessnotifications) gRPC API has been intentionally broken to avoid a deadlock situation. The RPC will appear to be working  but no responses will be streamed to the client.
 
+---
+
 # [v0.2.0](https://github.com/decred/decred-binaries/releases/tag/v0.2.0)
 
 ## 2016-07-28
@@ -474,6 +591,8 @@ This release was built from:
 | gominer | 5b459387914223e0dfe8d5f5cc032fe9e898fd4a |
 | ccminer | 340a069488a52941f65ef7a99c02328ceb3bc70e |
 
+---
+
 # [v0.1.6](https://github.com/decred/decred-binaries/releases/tag/v0.1.6)
 
 ## 2016-06-21
@@ -524,6 +643,8 @@ This release was built from:
 | decred/dcrrpcclient | f3c620d63cb02aec0c1152a72d3c8669b92a2fb5 |
 | decred/dcrutil | 4a3bdb1cb08b49811674750998363b8b8ccfd66e |
 | decred/dcrticketbuyer | 7c3b826d2db4ff09941718a76be8e42cc382698c |
+
+---
 
 # [v0.1.5](https://github.com/decred/decred-binaries/releases/tag/v0.1.5)
 
@@ -616,6 +737,8 @@ This release was built from:
 | decred/dcrrpcclient | f3c620d63cb02aec0c1152a72d3c8669b92a2fb5 |
 | decred/dcrutil | 4a3bdb1cb08b49811674750998363b8b8ccfd66e |
 | decred/dcrticketbuyer | 65641c4458624f5a9c76116b791d48e68fe98897 |
+
+---
 
 # [v0.1.4](https://github.com/decred/decred-binaries/releases/tag/v0.1.4)
 
@@ -720,6 +843,8 @@ This release was built from:
 | decred/dcrutil | 85fac3a15425f15408f1dcec28bfd4b18ea2f882 |
 | decred/dcrticketbuyer | 471c747f656e30e951463bbca3bafbf5ecfd572f |
 
+---
+
 # [v0.1.3](https://github.com/decred/decred-binaries/releases/tag/v0.1.3)
 
 ## 2016-05-10
@@ -772,6 +897,8 @@ This release was built from:
 | decred/dcrwallet | 4215ccccceee037a7835721ca59a8c6327556f62 |
 | decred/dcrrpcclient | e625cc131dc06129f56e0d472061c3e378ada396 |
 | decred/dcrutil | 74563ea520b1215b9c10f96507b7a9984894c0b5 |
+
+---
 
 # [v0.1.2](https://github.com/decred/decred-binaries/releases/tag/v0.1.2)
 
@@ -985,6 +1112,8 @@ This release was built from:
 | decred/dcrutil | 74563ea520b1215b9c10f96507b7a9984894c0b5 |
 | google.golang.org/grpc | b062a3c003c22bfef58fa99d689e6a892b408f9d |
 
+---
+
 # [v0.1.1](https://github.com/decred/decred-binaries/releases/tag/v0.1.1)
 
 ## 2016-04-25
@@ -1035,6 +1164,8 @@ This release was built from:
 | decred/dcrrpcclient | c69fe513f9d6beeef0cad10412e3aa804ba3fe28 |
 | decred/dcrutil | 74563ea520b1215b9c10f96507b7a9984894c0b5 |
 | google.golang.org/grpc | 262ed2bd6d1c8cbaa14b43c3815d2e01e4f65ca8 |
+
+---
 
 # [v0.1.0](https://github.com/decred/decred-binaries/releases/tag/v0.1.0)
 
@@ -1095,6 +1226,8 @@ This release was built from:
 | decred/dcrutil | 74563ea520b1215b9c10f96507b7a9984894c0b5 |
 | google.golang.org/grpc | 326d66361a4e305b03da4497d2c52d470f7fb584 |
 
+---
+
 # [v0.0.10](https://github.com/decred/decred-binaries/releases/tag/v0.0.10)
 
 ## 2016-04-06
@@ -1136,6 +1269,8 @@ This release was built from:
 | decred/dcrwallet | f1d9bd630188da91f7e817c49830c29d365c615d |
 | decred/dcrrpcclient | b3f48780a0d68e24ef6e915e930a1c1e58b69810 |
 | decred/dcrutil | 9bb7f64962cee52bb46ce588aa91ef0e6e7bb1a9 |
+
+---
 
 # [v0.0.9](https://github.com/decred/decred-binaries/releases/tag/v0.0.9)
 
@@ -1189,6 +1324,8 @@ This release was built from:
 | decred/dcrrpcclient | b3f48780a0d68e24ef6e915e930a1c1e58b69810 |
 | decred/dcrutil | 9bb7f64962cee52bb46ce588aa91ef0e6e7bb1a9 |
 
+---
+
 # [v0.0.8](https://github.com/decred/decred-binaries/releases/tag/v0.0.8)
 
 ## 2016-03-18
@@ -1236,6 +1373,8 @@ This release was built from:
 | decred/dcrrpcclient | b3f48780a0d68e24ef6e915e930a1c1e58b69810 |
 | decred/dcrutil | ae0e66b98e49e836618c01cfa4d1b3d6077e5ae7 |
 
+---
+
 # [v0.0.7](https://github.com/decred/decred-binaries/releases/tag/v0.0.7)
 
 ## 2016-03-09
@@ -1272,6 +1411,8 @@ This release was built from:
 | decred/dcrwallet | d776d972f2f0c7b440dfbea5a10ba7ac4627cfbe |
 | decred/dcrrpcclient | 4691756e416483e497d41f8883e5f432167983a2 |
 | decred/dcrutil | ae0e66b98e49e836618c01cfa4d1b3d6077e5ae7 |
+
+---
 
 # [v0.0.6](https://github.com/decred/decred-binaries/releases/tag/v0.0.6)
 
@@ -1333,6 +1474,8 @@ This release was built from:
 | decred/dcrrpcclient | 7181e59ba727f8e6cb2f3919bc490549f81e4d54 |
 | decred/dcrutil | 025b0fb50cfb446491a6988fab4cef333830e35c |
 
+---
+
 # [v0.0.5](https://github.com/decred/decred-binaries/releases/tag/v0.0.5)
 
 ## 2016-02-26
@@ -1367,6 +1510,8 @@ This release was built from:
 | decred/dcrrpcclient | 680d8ff9cd81c017c28fd867494e20deea08e48c |
 | decred/dcrutil | 025b0fb50cfb446491a6988fab4cef333830e35c |
 
+---
+
 # [v0.0.4](https://github.com/decred/decred-binaries/releases/tag/v0.0.4)
 
 ## 2016-02-24
@@ -1392,6 +1537,8 @@ This includes (but is not limited to):
 * Allow wallet to accept hex or words as seed
 * Other bug fixes and cleanups
 
+---
+
 # [v0.0.3](https://github.com/decred/decred-binaries/releases/tag/v0.0.3)
 
 ## 2016-02-09
@@ -1406,6 +1553,8 @@ manifest-20160209-01.txt.asc to confirm those shas.
 
 See https://wiki.decred.org/Verifying_Binaries for more info on
 verifying the files.
+
+---
 
 # [v0.0.2](https://github.com/decred/decred-binaries/releases/tag/v0.0.2)
 
@@ -1422,6 +1571,8 @@ manifest-20160208-01.txt.asc to confirm those shas.
 
 See https://wiki.decred.org/Verifying_Binaries for more info on
 verifying the files.
+
+---
 
 # [v0.0.1](https://github.com/decred/decred-binaries/releases/tag/v0.0.1)
 
@@ -1450,6 +1601,8 @@ To unencrypt on the command line you can do:
 then provide the password when asked.
 
 Mainnet binary decryption key (password): yqJgFJUmQODUOWP2jJez5gt1
+
+---
 
 # [v0.0](https://github.com/decred/decred-binaries/releases/tag/v0.0)
 
