@@ -1,6 +1,6 @@
 # [v0.6.1](https://github.com/decred/decred-binaries/releases/tag/v0.6.1)
 
-## 2016-11-09
+## 2016-11-25
 
 This release contains bug fixes and improvements for dcrd and
 dcrwallet.
