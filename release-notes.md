@@ -1,6 +1,6 @@
-# [v0.6.0](https://github.com/decred/decred-binaries/releases/tag/v0.6.0)
+# [v0.6.1](https://github.com/decred/decred-binaries/releases/tag/v0.6.1)
 
-## 2016-11-09
+## 2016-11-25
 
 This release contains bug fixes and improvements for dcrd and
 dcrwallet.
@@ -18,8 +18,8 @@ gominer and copay are unchanged.  Paymetheus is unchanged but should
 be updated for the updated dcrd and dcrwallet dependancies.
 
 To install Paymetheus download and run either
-[Paymetheus 64bit](https://github.com/decred/decred-binaries/releases/download/v0.6.0/decred_0.6.0-beta_x64.msi) or
-[Paymetheus 32bit](https://github.com/decred/decred-binaries/releases/download/v0.6.0/decred_0.6.0-beta_x86.msi)
+[Paymetheus 64bit](https://github.com/decred/decred-binaries/releases/download/v0.6.0/decred_0.6.1-beta_x64.msi) or
+[Paymetheus 32bit](https://github.com/decred/decred-binaries/releases/download/v0.6.0/decred_0.6.1-beta_x86.msi)
 depending on your version of Windows.
 
 To install a the local Copay GUI download and run
@@ -30,9 +30,9 @@ or
 To install the command line tools, please see
 [dcrinstaller](https://github.com/decred/decred-release/tree/master/cmd/dcrinstall).
 
-See manifest-v0.6.0.txt, manifest-gominer-v0.6.0.txt,
-manifest-paymetheus-v0.6.0.txt, and manifest-copay-0.6.0.txt,
-manifest--dcrinstaller-v0.6.0.txt for sha256 sums and the associated
+See manifest-v0.6.1.txt, manifest-gominer-v0.6.0.txt,
+manifest-paymetheus-v0.6.1.txt, and manifest-copay-0.6.0.txt,
+manifest--dcrinstaller-v0.6.1.txt for sha256 sums and the associated
 .asc files to confirm those shas.
 
 See [README.md](./README.md) for more info on
@@ -86,6 +86,7 @@ verifying the files.
 | Update dcrrpcclient for dcrctl. | [decred/dcrd#445](https://github.com/decred/dcrd/pull/445) |
 | update checkpoints | [decred/dcrd#446](https://github.com/decred/dcrd/pull/446) |
 | Notify only relevant stake txs, not all. | [decred/dcrd#447](https://github.com/decred/dcrd/pull/447) |
+| multi: Restore correct upstream majority version code. | [decred/dcrd#490](https://github.com/decred/dcrd/pull/490) |
 
 ## Notes
 
@@ -96,12 +97,12 @@ This release was built from:
 | Repository | Commit Hash |
 | --- | ---- |
 | decred/gominer | 13cecddb128cd67f6d4249205122eda255f3c221 |
-| decred/dcrticketbuyer | b8ca91acb1aad13b1a6455d91fe75e61fd245a9f |
-| decred/Paymetheus | dd2b9b148b4831a06b08ef54edcfe8f724fc4e3a |
+| decred/dcrticketbuyer | e5f16a5cf1a8f765bd34800225adff902dfe0fdf |
+| decred/Paymetheus | 9d54c93f304dc0bd42dba9327917ecddd834b237 |
+| decred/decred-windows-installer | bf17ab16b6957d835f57eebcbe20980c479a4590 |
+| decred/dcrwallet | f694721186b96bd2a26d1282eae94c14c672c123 |
+| decred/dcrd | 4ce2279c4ad1c8b0ef3d8e914701ebcbdeb243da |
 | decred/copay | 9b12e42e22374811d0f602bd54c85f3f203e2f77 |
-| decred/decred-windows-installer | c74725ac52249a97663676e4aaccdb7b6b051b1e |
-| decred/dcrwallet | ec52a05d17334bc6954eefd9cd77ab30c827dabe |
-| decred/dcrd | d7c2adadc6995b614ab97d1955b5486690a7b2ed |
 
 ## Known Issues
 
