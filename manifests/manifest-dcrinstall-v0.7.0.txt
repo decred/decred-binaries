@@ -1,0 +1,15 @@
+8e72f6d2530a9d6610102f647dc1eb6f4e146c2e0f0cd22f70f76e05db75a6fd  dcrinstall-darwin-386-v0.7.0
+1e9e9a06ec10a643a0cde5cc4769f58aaec9860f403f24fc34ecb75cf3e47991  dcrinstall-darwin-amd64-v0.7.0
+0b185df7f68be3fb93f23ccb9df25426ba32d382049fdfec45a9a4a38fefede5  dcrinstall-freebsd-386-v0.7.0
+5aca2b747d6c4a395fd1498216451ae98493c1d06ed57a264a199c73f9a39db1  dcrinstall-freebsd-amd64-v0.7.0
+43fcc96d20f7821bfc80fb42bb8471c4b84b513ec0cf2194d0e448ecc2de8bac  dcrinstall-freebsd-arm-v0.7.0
+ef9829b74cdd2977e4e3eab270475c1ee5790646a696a9b80e775278eaf84832  dcrinstall-linux-386-v0.7.0
+359993ecc297532d7843cb28833a53a56ad9c9d54b85a5d817ec61ef45e4c73f  dcrinstall-linux-amd64-v0.7.0
+29f9281291ba5229e3374fab09069bc66e9aef4cc91f1deddcdef8ec58d72016  dcrinstall-linux-arm64-v0.7.0
+c9f04f96bb11a702ec4aedf47f4f1a210c8f8d54a1c49aa5b20add7187cae627  dcrinstall-linux-arm-v0.7.0
+c72eda3b32e5b78474f69c3acd0d8a93cefaaf12b309e156b3c6ad82c2ab77ae  dcrinstall-netbsd-386-v0.7.0
+3548dad4b6e0e9dc30268cfe466b1b47d68fe8bf47556b66100f51ab4cbc49f8  dcrinstall-netbsd-amd64-v0.7.0
+281b4105d1cde67c8c5dc7e6558f1248a68517238eae71d74805cde8ee34aae3  dcrinstall-openbsd-386-v0.7.0
+f19cb007cf4bd49f091b9dbd432f36bb6144979b8adb8f9b69091a18cdcfa73c  dcrinstall-openbsd-amd64-v0.7.0
+951e63b2471ec61a0c51c925b83b4b28177fb157fb04c71ff8f30b802dcd7882  dcrinstall-windows-386-v0.7.0.exe
+7a418e34387d140712be769ec72512675df3e9c47b69926b64bb1802b989e10d  dcrinstall-windows-amd64-v0.7.0.exe

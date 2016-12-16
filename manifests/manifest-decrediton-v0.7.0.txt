@@ -1,0 +1,2 @@
+b7e640cd0608bec272c729769b2b5db5277d043449d020fc9aefdae1553a21cb  decrediton-0.7.0.dmg
+5ab8ed34c859af8e3645ebbf67cbd560f2e1945a6ecf78063a8349ab86614945  decrediton-0.7.0-linux-amd64.tar.gz
