@@ -38,9 +38,9 @@ To install the command line tools, please see
 [dcrinstaller](https://github.com/decred/decred-release/tree/master/cmd/dcrinstall).
 
 To install decrediton download, uncompress, and run
-[decrediton Linux](https://github.com/decred/decred-binaries/releases/download/v0.7.0/decrediton_0.7.0.tar.gz)
+[decrediton Linux](https://github.com/decred/decred-binaries/releases/download/v0.7.0/decrediton-0.7.0-linux-amd64.tar.gz)
 or
-[decrediton OSX](https://github.com/decred/decred-binaries/releases/download/v0.7.0/decrediton_0.7.0.dmg)
+[decrediton OSX](https://github.com/decred/decred-binaries/releases/download/v0.7.0/decrediton-0.7.0.dmg)
 
 See manifest-v0.7.0.txt, manifest-paymetheus-v0.7.0.txt,
 manifest-decrediton-0.7.0.txt, and manifest-dcrinstaller-v0.7.0.txt
