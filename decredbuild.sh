@@ -3,7 +3,7 @@
 # Simple bash script to build basic Decred tools for all the platforms
 # we support with the golang cross-compiler.
 #
-# Copyright (c) 2016 The Decred developers
+# Copyright (c) 2016-2017 The Decred developers
 # Use of this source code is governed by the ISC
 # license.
 
@@ -39,9 +39,6 @@ for i in $SYS; do
     cp $GPATH/src/github.com/decred/dcrd/sample-dcrd.conf .
     cp $GPATH/src/github.com/decred/dcrd/cmd/dcrctl/sample-dcrctl.conf .
     cp $GPATH/src/github.com/decred/dcrwallet/sample-dcrwallet.conf .
-    # dcrticketbuyer stuff
-    env GOOS=$OS GOARCH=$ARCH go build github.com/decred/dcrticketbuyer
-    cp $GPATH/src/github.com/decred/dcrticketbuyer/ticketbuyer-example.conf .
     cd ..
     if [[ $OS = "windows" ]]; then
 	zip -r $PACKAGE-$i-$TAG.zip $PACKAGE-$i-$TAG

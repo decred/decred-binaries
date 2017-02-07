@@ -37,6 +37,7 @@ cp $GPATH/src/github.com/decred/gominer/sample-gominer.conf .
 cp $GPATH/src/github.com/decred/gominer/README.md .
 cp $GPATH/src/github.com/decred/gominer/LICENSE .
 cp $GPATH/src/github.com/decred/gominer/blake256.cl .
+cp $GPATH/src/github.com/decred/gominer/blake256-old.cl .
 cd ..
 tar -czf $PACKAGE-$OS-$TYPE-$TAG.tar.gz $PACKAGE-$OS-$TYPE-$TAG
 rm -r $PACKAGE-$OS-$TYPE-$TAG

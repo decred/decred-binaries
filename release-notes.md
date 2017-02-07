@@ -1,3 +1,201 @@
+# [v0.8.0](https://github.com/decred/decred-binaries/releases/tag/v0.8.0)
+
+## 2017-02-13
+
+This release contains updates and bugfixes to all componenets of Decred.  Some noteable changes include:
+
+1. dcrd contains a demo of hardfork voting for use on testnet.
+
+1. dcrwallet has improvements to the builtin ticketbuyer.  It also has an improved getbalance command.
+
+1. Paymetheus contains the intial stakepool integration.
+
+1. decrediton now works as a self-contained app which does not require a separate download of the command line tools.  It has been updated with an entirely new visual style.  All pages have been updated or revamped so decrediton should now properly handle all basic wallet functions.
+
+To install Paymetheus download and run either
+[Paymetheus 64bit](https://github.com/decred/decred-binaries/releases/download/v0.8.0/decred_0.8.0-beta_x64.msi) or
+[Paymetheus 32bit](https://github.com/decred/decred-binaries/releases/download/v0.8.0/decred_0.8.0-beta_x86.msi)
+depending on your version of Windows.
+
+To install the command line tools, please see
+[dcrinstaller](https://github.com/decred/decred-release/tree/master/cmd/dcrinstall).
+
+To install decrediton download, uncompress, and run
+[decrediton Linux](https://github.com/decred/decred-binaries/releases/download/v0.8.0/decrediton-0.8.0.tar.gz) or
+[decrediton OSX](https://github.com/decred/decred-binaries/releases/download/v0.8.0/decrediton-0.8.0.dmg).
+
+See manifest-v0.8.0.txt, manifest-paymetheus-v0.8.0.txt,
+manifest-decrediton-0.8.0.txt, and manifest-dcrinstaller-v0.8.0.txt
+for sha256 sums and the associated .asc files to confirm those shas.
+
+See [README.md](./README.md) for more info on
+verifying the files.
+
+## Notes
+
+As of this release, dcrticketbuyer is no long included.  dcrwallet contains all the automatic ticketbuyer features that the standalone program used to have and should be used instead.
+
+## Changes
+
+| Description | Pull Request |
+| --- | ---- |
+| only initialize device libraries once | [decred/gominer#132](https://github.com/decred/gominer/pull/132) |
+| give an example for both path types | [decred/gominer#136](https://github.com/decred/gominer/pull/136) |
+| Switch to standalone upstream CUDA libs. | [decred/gominer#137](https://github.com/decred/gominer/pull/137) |
+| Bump for v0.8.0 | [decred/gominer#139](https://github.com/decred/gominer/pull/139) |
+| Bump required wallet API version. | [decred/Paymetheus#218](https://github.com/decred/Paymetheus/pull/218) |
+| Integrate stakepools through the HTTP API | [decred/Paymetheus#216](https://github.com/decred/Paymetheus/pull/216) |
+| Bump for v0.8.0 | [decred/Paymetheus#217](https://github.com/decred/Paymetheus/pull/217) |
+| The getbalance family now returns dcrjson.GetBalanceResult | [decred/dcrrpcclient#45](https://github.com/decred/dcrrpcclient/pull/45) |
+| Log Client connection errors. | [decred/dcrrpcclient#47](https://github.com/decred/dcrrpcclient/pull/47) |
+| Add GetStakeVersions | [decred/dcrrpcclient#48](https://github.com/decred/dcrrpcclient/pull/48) |
+| Add GetVoteInfo dcrd call | [decred/dcrrpcclient#50](https://github.com/decred/dcrrpcclient/pull/50) |
+| Display DCR instead of Coin in Amount stringer. | [decred/dcrutil#31](https://github.com/decred/dcrutil/pull/31) |
+| Do not install standalone ticketbuyer. | [decred/decred-release#81](https://github.com/decred/decred-release/pull/81) |
+| Bump for v0.8.0 | [decred/decred-release#82](https://github.com/decred/decred-release/pull/82) |
+| ticketbuyer: Fix panic on shutdown | [decred/dcrwallet#483](https://github.com/decred/dcrwallet/pull/483) |
+| Slightly improve logging formatting. | [decred/dcrwallet#484](https://github.com/decred/dcrwallet/pull/484) |
+| Update 3rd party glide deps (and some internal ones) for 0.8.0 | [decred/dcrwallet#493](https://github.com/decred/dcrwallet/pull/493) |
+| Remove spew install from Travis-CI script. | [decred/dcrwallet#495](https://github.com/decred/dcrwallet/pull/495) |
+| Use latest Go patch releases on Travis-CI. | [decred/dcrwallet#498](https://github.com/decred/dcrwallet/pull/498) |
+| travis: switch to gometalinter | [decred/dcrwallet#499](https://github.com/decred/dcrwallet/pull/499) |
+| travis: enable gosimple | [decred/dcrwallet#500](https://github.com/decred/dcrwallet/pull/500) |
+| add dynamic max price default, remove highpricepenalty queue | [decred/dcrwallet#501](https://github.com/decred/dcrwallet/pull/501) |
+| spread buys evenly throughout window, new default behavior | [decred/dcrwallet#502](https://github.com/decred/dcrwallet/pull/502) |
+| ticketbuyer: better log levels for purchase result | [decred/dcrwallet#503](https://github.com/decred/dcrwallet/pull/503) |
+| travis: enable unconvert | [decred/dcrwallet#504](https://github.com/decred/dcrwallet/pull/504) |
+| Prevent panic caused by nil output destinations. | [decred/dcrwallet#506](https://github.com/decred/dcrwallet/pull/506) |
+| Remove duplicated and unused ticketbuyer config options. | [decred/dcrwallet#507](https://github.com/decred/dcrwallet/pull/507) |
+| config: cleanup | [decred/dcrwallet#508](https://github.com/decred/dcrwallet/pull/508) |
+| fix wallet creation due to new votebitsextended limits. | [decred/dcrwallet#514](https://github.com/decred/dcrwallet/pull/514) |
+| config: set pricetarget to 0 (disabled) by default. | [decred/dcrwallet#515](https://github.com/decred/dcrwallet/pull/515) |
+| config: deprecate ticketbuyfreq. use ticketbuyer.maxperblock instead. | [decred/dcrwallet#517](https://github.com/decred/dcrwallet/pull/517) |
+| make maxfee behavior sane | [decred/dcrwallet#518](https://github.com/decred/dcrwallet/pull/518) |
+| config: deprecate --ticketmaxprice | [decred/dcrwallet#520](https://github.com/decred/dcrwallet/pull/520) |
+| Write --help output to stdout | [decred/dcrwallet#522](https://github.com/decred/dcrwallet/pull/522) |
+| config: initialize var to avoid panic | [decred/dcrwallet#523](https://github.com/decred/dcrwallet/pull/523) |
+| Add main chain return values to FetchHeaders | [decred/dcrwallet#524](https://github.com/decred/dcrwallet/pull/524) |
+| Change 'getbalance <account>' to output the new format. | [decred/dcrwallet#527](https://github.com/decred/dcrwallet/pull/527) |
+| Add output script, amount and address to TransactionSummaryOutput | [decred/dcrwallet#528](https://github.com/decred/dcrwallet/pull/528) |
+| Continued getbalance cleanup. | [decred/dcrwallet#530](https://github.com/decred/dcrwallet/pull/530) |
+| Ignore unspent stake tree outputs in WalletService.FundTransaction. | [decred/dcrwallet#531](https://github.com/decred/dcrwallet/pull/531) |
+| Remove unused funcs | [decred/dcrwallet#534](https://github.com/decred/dcrwallet/pull/534) |
+| make balance to maintain absolute and relative | [decred/dcrwallet#536](https://github.com/decred/dcrwallet/pull/536) |
+| remove defunct minpricescale | [decred/dcrwallet#538](https://github.com/decred/dcrwallet/pull/538) |
+| wallet: resend any unmined txs after rescan. | [decred/dcrwallet#542](https://github.com/decred/dcrwallet/pull/542) |
+| Update dcrrpcclient to pull in logging improvement | [decred/dcrwallet#546](https://github.com/decred/dcrwallet/pull/546) |
+| Override version JSON-RPC to include wallet's API version. | [decred/dcrwallet#551](https://github.com/decred/dcrwallet/pull/551) |
+| Set version in extended vote bits per network. | [decred/dcrwallet#552](https://github.com/decred/dcrwallet/pull/552) |
+| Set extended vote bits version before branching for --create. | [decred/dcrwallet#554](https://github.com/decred/dcrwallet/pull/554) |
+| Ignore dcrwallet binary in .gitignore. | [decred/dcrwallet#559](https://github.com/decred/dcrwallet/pull/559) |
+| Bump for v0.8.0 | [decred/dcrwallet#548](https://github.com/decred/dcrwallet/pull/548) |
+| Update internal glide repos for v0.8.0 | [decred/dcrwallet#561](https://github.com/decred/dcrwallet/pull/561) |
+| dcrjson: Add negative DecodeConcatenatedHashes tests | [decred/dcrd#423](https://github.com/decred/dcrd/pull/423) |
+| Typo correction | [decred/dcrd#501](https://github.com/decred/dcrd/pull/501) |
+| Change maxShift from var to const | [decred/dcrd#502](https://github.com/decred/dcrd/pull/502) |
+| Add one more consensus test | [decred/dcrd#520](https://github.com/decred/dcrd/pull/520) |
+| Update 3rd party deps at the start of 0.8.0 dev | [decred/dcrd#536](https://github.com/decred/dcrd/pull/536) |
+| stake: Add SSGenVoteBitsExtendedMaxSize const | [decred/dcrd#541](https://github.com/decred/dcrd/pull/541) |
+| blocklogger: fix singular case for stake transactions | [decred/dcrd#545](https://github.com/decred/dcrd/pull/545) |
+| dcrjson: Add GetAccountBalanceResult and GetBalanceResult | [decred/dcrd#547](https://github.com/decred/dcrd/pull/547) |
+| dcrjson: Remove balance type from getbalance API | [decred/dcrd#548](https://github.com/decred/dcrd/pull/548) |
+| glide: sync with latest dcrrpcclient | [decred/dcrd#549](https://github.com/decred/dcrd/pull/549) |
+| add checkpoints for 0.8.0 release | [decred/dcrd#550](https://github.com/decred/dcrd/pull/550) |
+| Add block version to getstakeversions | [decred/dcrd#556](https://github.com/decred/dcrd/pull/556) |
+| blockchain: Remove impossible condition checks. | [decred/dcrd#557](https://github.com/decred/dcrd/pull/557) |
+| chaingen: Add package for generating test chains. | [decred/dcrd#560](https://github.com/decred/dcrd/pull/560) |
+| blockchain: Implement configurable voting on top of PoS. | [decred/dcrd#542](https://github.com/decred/dcrd/pull/542) |
+| blockchain: Add fullblock tests for voting. | [decred/dcrd#562](https://github.com/decred/dcrd/pull/562) |
+| multi: Implement block size hard fork demo voting. | [decred/dcrd#558](https://github.com/decred/dcrd/pull/558) |
+| Bump for v0.8.0 | [decred/dcrd#554](https://github.com/decred/dcrd/pull/554) |
+| Update internal glide repos for v0.8.0 | [decred/dcrd#563](https://github.com/decred/dcrd/pull/563) |
+| grpc: Switch to pregenerated javascript bindings instead of dynamic loading of api.proto | [decred/decrediton#118](https://github.com/decred/decrediton/pull/118) |
+| Generate tarball for linux builds. | [decred/decrediton#126](https://github.com/decred/decrediton/pull/126) |
+| Include dcr* binaries when packaging. | [decred/decrediton#127](https://github.com/decred/decrediton/pull/127) |
+| Close when all windows are closed on OSX. | [decred/decrediton#129](https://github.com/decred/decrediton/pull/129) |
+| Fix history page loading | [decred/decrediton#130](https://github.com/decred/decrediton/pull/130) |
+| don't assume the certificate exists and print error if it doesn't | [decred/decrediton#132](https://github.com/decred/decrediton/pull/132) |
+| css/html: Clean Receive page and add css provided by designers | [decred/decrediton#139](https://github.com/decred/decrediton/pull/139) |
+| add missing radium dep | [decred/decrediton#145](https://github.com/decred/decrediton/pull/145) |
+| More css\layout from designers | [decred/decrediton#146](https://github.com/decred/decrediton/pull/146) |
+| Link transaction subscription and updating client information | [decred/decrediton#147](https://github.com/decred/decrediton/pull/147) |
+| Fix lots more lint issues | [decred/decrediton#149](https://github.com/decred/decrediton/pull/149) |
+| Update the send form to allow for multiple outputs/recipients | [decred/decrediton#150](https://github.com/decred/decrediton/pull/150) |
+| Fix display when balance is zero. | [decred/decrediton#153](https://github.com/decred/decrediton/pull/153) |
+| Cleanup to make lint happy | [decred/decrediton#154](https://github.com/decred/decrediton/pull/154) |
+| Fix typo so correct prop is checked | [decred/decrediton#155](https://github.com/decred/decrediton/pull/155) |
+| Add debug mode to production. | [decred/decrediton#156](https://github.com/decred/decrediton/pull/156) |
+| Give user some feedback for daemon syncing | [decred/decrediton#157](https://github.com/decred/decrediton/pull/157) |
+| Make sure dcrd and dcrwallet shutdown when app closes. | [decred/decrediton#158](https://github.com/decred/decrediton/pull/158) |
+| Improve packaging instructions. | [decred/decrediton#160](https://github.com/decred/decrediton/pull/160) |
+| Use single directory for saved items. | [decred/decrediton#161](https://github.com/decred/decrediton/pull/161) |
+| display RPC errors | [decred/decrediton#163](https://github.com/decred/decrediton/pull/163) |
+| Improve the documentation. | [decred/decrediton#164](https://github.com/decred/decrediton/pull/164) |
+| print config path in error | [decred/decrediton#167](https://github.com/decred/decrediton/pull/167) |
+| Fix a few lint issues that got in. | [decred/decrediton#169](https://github.com/decred/decrediton/pull/169) |
+| Simplify grpc build instructions. | [decred/decrediton#171](https://github.com/decred/decrediton/pull/171) |
+| Sidebar/Header revamp, plus error page on wallet ping error | [decred/decrediton#172](https://github.com/decred/decrediton/pull/172) |
+| Fixed for Windows. | [decred/decrediton#173](https://github.com/decred/decrediton/pull/173) |
+| Add bin/ to gitignore | [decred/decrediton#174](https://github.com/decred/decrediton/pull/174) |
+| Update grpc bindings for updated FetchHeaders response | [decred/decrediton#175](https://github.com/decred/decrediton/pull/175) |
+| Update to use fetchHeadersResponse instead of curBlocks | [decred/decrediton#176](https://github.com/decred/decrediton/pull/176) |
+| Force all wallet created from existing seeds to rescan from 0 | [decred/decrediton#177](https://github.com/decred/decrediton/pull/177) |
+| implement proper semver check | [decred/decrediton#178](https://github.com/decred/decrediton/pull/178) |
+| use password type on passwords | [decred/decrediton#180](https://github.com/decred/decrediton/pull/180) |
+| Handle dcrd or dcrwallet startup errors. | [decred/decrediton#181](https://github.com/decred/decrediton/pull/181) |
+| Style tx history and add first few Icon svg components | [decred/decrediton#184](https://github.com/decred/decrediton/pull/184) |
+| Update icons for macOS and Windows to match new logo. | [decred/decrediton#186](https://github.com/decred/decrediton/pull/186) |
+| Update grpc bindings for new fields in Credits | [decred/decrediton#187](https://github.com/decred/decrediton/pull/187) |
+| Basic match of upcoming design docs | [decred/decrediton#191](https://github.com/decred/decrediton/pull/191) |
+| Add logic for mined and unmined transactions | [decred/decrediton#192](https://github.com/decred/decrediton/pull/192) |
+| Add qr code to receive page. | [decred/decrediton#193](https://github.com/decred/decrediton/pull/193) |
+| Use DCR as units on Send page instead of atoms. | [decred/decrediton#194](https://github.com/decred/decrediton/pull/194) |
+| Add Pagination to transaction history | [decred/decrediton#196](https://github.com/decred/decrediton/pull/196) |
+| Add help links to sidebar | [decred/decrediton#200](https://github.com/decred/decrediton/pull/200) |
+| First pass new overview and sidebar design | [decred/decrediton#201](https://github.com/decred/decrediton/pull/201) |
+| Load custom fonts from local files | [decred/decrediton#202](https://github.com/decred/decrediton/pull/202) |
+| Add settings page and other styling improvements | [decred/decrediton#203](https://github.com/decred/decrediton/pull/203) |
+| Add designer requested account balance hover on sidebar | [decred/decrediton#205](https://github.com/decred/decrediton/pull/205) |
+| Show time since last block connected | [decred/decrediton#206](https://github.com/decred/decrediton/pull/206) |
+| Implement Transaction Details and fix various stylings | [decred/decrediton#207](https://github.com/decred/decrediton/pull/207) |
+| Fix up help links styling | [decred/decrediton#210](https://github.com/decred/decrediton/pull/210) |
+| Improvements in Send Page. | [decred/decrediton#212](https://github.com/decred/decrediton/pull/212) |
+| use formsy material ui for form validation | [decred/decrediton#214](https://github.com/decred/decrediton/pull/214) |
+| Open help links in Default Browser. | [decred/decrediton#216](https://github.com/decred/decrediton/pull/216) |
+| Add links to insight testnet/mainnet in tx details | [decred/decrediton#217](https://github.com/decred/decrediton/pull/217) |
+| Rig to remove public password on wallet creation for now | [decred/decrediton#219](https://github.com/decred/decrediton/pull/219) |
+| Move to componentDidMount | [decred/decrediton#221](https://github.com/decred/decrediton/pull/221) |
+| Major refinement to match designers' views | [decred/decrediton#222](https://github.com/decred/decrediton/pull/222) |
+| Add testnet to sidebar | [decred/decrediton#224](https://github.com/decred/decrediton/pull/224) |
+| Make Send page honor units setting. | [decred/decrediton#225](https://github.com/decred/decrediton/pull/225) |
+| Match designer spec for getstarted views | [decred/decrediton#227](https://github.com/decred/decrediton/pull/227) |
+| Update node version required. | [decred/decrediton#229](https://github.com/decred/decrediton/pull/229) |
+| Fix minor typo for running on OSX | [decred/decrediton#231](https://github.com/decred/decrediton/pull/231) |
+| Fix sidebar account balances | [decred/decrediton#242](https://github.com/decred/decrediton/pull/242) |
+| Change to use mainnet as default | [decred/decrediton#244](https://github.com/decred/decrediton/pull/244) |
+| Bump for v0.8.0 | [decred/decrediton#239](https://github.com/decred/decrediton/pull/239) |
+| Do not use pipe for dcrd. | [decred/decrediton#246](https://github.com/decred/decrediton/pull/246) |
+| Add testnet shortcuts. | [decred/decred-windows-installer#35](https://github.com/decred/decred-windows-installer/pull/35) |
+| bye bye ticketbuyer | [decred/decred-windows-installer#37](https://github.com/decred/decred-windows-installer/pull/37) |
+| Update digests and versions for v0.8.0 | [decred/decred-windows-installer#36](https://github.com/decred/decred-windows-installer/pull/36) |
+
+## Commits
+
+This release was built from:
+
+| Repository | Commit Hash |
+| --- | ---- |
+| decred/gominer | e967abd8ecae4b05f5fa45b8fce602008cc94a0b |
+| decred/Paymetheus | 446117e8e6bc9a8d22b5db61b47f7f4439798276 |
+| decred/decred-windows-installer | eb511d81574b7511277c98328d64054d80916c41 |
+| decred/dcrwallet | 786f15a11b82c53a8023ca8f81def5307cb36051 |
+| decred/dcrd | 1196130cbce1872788f572e252379c8c90ef528e |
+| decred/decrediton | cbea4062a1967d20121a8cba4bf273b13c26ef07 |
+
+## Known Issues
+
+---
+
 # [v0.7.0](https://github.com/decred/decred-binaries/releases/tag/v0.7.0)
 
 ## 2016-12-26

@@ -8,9 +8,14 @@ Decred.
 
 This repository contains releases for the following software:
 
-* [dcrd/dcrwallet](./release-notes.md)
-* [Paymetheus](./paymetheus-release-notes.md)
-* [miners](./miners-release-notes.md)
+* [dcrd](https://github.com/decred/dcrd)/[dcrwallet](https://github.com/decred/dcrwallet)
+* [Paymetheus](https://github.com/decred/Paymetheus)
+* [gominer](https://github.com/decred/gominer)
+* [decrediton](https://github.com/decred/decrediton)
+
+## Release notes
+
+Notes for the current and previous releases can be found in the [Release Notes](./release-notes.md) document.
 
 ## Verifying Binaries
 
