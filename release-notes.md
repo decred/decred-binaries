@@ -1,4 +1,49 @@
-# [v0.8.0](https://github.com/decred/decred-binaries/releases/tag/v0.8.0)
+# [v0.8.1](https://github.com/decred/decred-binaries/releases/tag/v0.8.1)
+
+## 2017-02-14
+
+# [v0.8.1](https://github.com/decred/decred-binaries/releases/tag/v0.8.1)
+
+This is a patch release to fix bugs related to stakepool usage in Paymetheus:
+
+1. Purchasing tickets for stakepools with the API integration resulted in too low pool fees and this would cause correctly-configured stakepools to never vote with the ticket.
+1. Manual stakepool configuration was unusable due to an input validation error that always reset the pool fees value back to zero.
+
+To install Paymetheus download and run either
+[Paymetheus 64bit](https://github.com/decred/decred-binaries/releases/download/v0.8.1/decred_0.8.1-beta_x64.msi) or
+[Paymetheus 32bit](https://github.com/decred/decred-binaries/releases/download/v0.8.1/decred_0.8.1-beta_x86.msi)
+depending on your version of Windows.
+
+See manifest-paymetheus-v0.8.1.txt for sha256 sums and the associated .asc files to confirm those shas.
+
+See [README.md](./README.md) for more info on verifying the files.
+
+## Notes
+
+## Changes
+
+| Description | Pull Request |
+| --- | ---- |
+| Fix units on stake pool fees. | [decred/Paymetheus#221](https://github.com/decred/Paymetheus/pull/221) |
+| Fix pool fee entry box for manual stakepool entry. | [decred/Paymetheus#222](https://github.com/decred/Paymetheus/pull/222) |
+| Bump for v0.8.1 | [decred/Paymetheus#223](https://github.com/decred/Paymetheus/pull/223) |
+| Update for new PM build | [decred/decred-windows-installer#38](https://github.com/decred/decred-windows-installer/pull/38) |
+| bump version in one more place | [decred/decred-windows-installer#39](https://github.com/decred/decred-windows-installer/pull/39) |
+
+## Commits
+
+This release was built from:
+
+| Repository | Commit Hash |
+| --- | ---- |
+| decred/Paymetheus | 10a74c8467a541fee972aa1b1735b61c9b26e8b2 |
+| decred/decred-windows-installer | a8a60f4f9b935cac6e43372650a7c79961099a6c |
+| decred/dcrwallet | 786f15a11b82c53a8023ca8f81def5307cb36051 |
+| decred/dcrd | 1196130cbce1872788f572e252379c8c90ef528e |
+
+## Known Issues
+
+---
 
 ## 2017-02-13
 
