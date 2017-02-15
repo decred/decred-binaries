@@ -1,8 +1,62 @@
+# [v0.8.2](https://github.com/decred/decred-binaries/releases/tag/v0.8.2)
+
+## 2017-02-16
+
+This is a patch release to fix bugs related to HF voting demo on testnet.  It is only needed if you are running on testnet and want to participate in the demo.  This release should not impact mainnet.
+
+To install Paymetheus download and run either
+[Paymetheus 64bit](https://github.com/decred/decred-binaries/releases/download/v0.8.2/decred_0.8.2-beta_x64.msi) or
+[Paymetheus 32bit](https://github.com/decred/decred-binaries/releases/download/v0.8.2/decred_0.8.2-beta_x86.msi)
+depending on your version of Windows.
+
+To install the command line tools, please see
+[dcrinstaller](https://github.com/decred/decred-release/tree/master/cmd/dcrinstall).
+
+To install decrediton download, uncompress, and run
+[decrediton Linux](https://github.com/decred/decred-binaries/releases/download/v0.8.2/decrediton-0.8.2.tar.gz) or
+[decrediton OSX](https://github.com/decred/decred-binaries/releases/download/v0.8.2/decrediton-0.8.2.dmg).
+
+See manifest-v0.8.2.txt, manifest-paymetheus-v0.8.2.txt, manifest-decrediton-0.8.2.txt, and manifest-dcrinstaller-v0.8.2.txt for sha256 sums and the associated .asc files to confirm those shas.
+
+
+See [README.md](./README.md) for more info on verifying the files.
+
+## Notes
+
+## Changes
+
+| Description | Pull Request |
+| --- | ---- |
+| Bump for v0.8.2 | [decred/Paymetheus#224](https://github.com/decred/Paymetheus/pull/224) |
+| Update for v0.8.2 | [decred/decred-windows-installer#40](https://github.com/decred/decred-windows-installer/pull/40) |
+| Bump for v0.8.2 | [decred/decred-release#86](https://github.com/decred/decred-release/pull/86) |
+| Bump for v0.8.2 | [decred/dcrwallet#556](https://github.com/decred/dcrwallet/pull/556) |
+| Strictly enforce version check when tallying votes. | [decred/dcrd#565](https://github.com/decred/dcrd/pull/565) |
+| Correct the units on the testnet HF description. | [decred/dcrd#566](https://github.com/decred/dcrd/pull/566) |
+| blockchain: Add more fullblock voting tests. | [decred/dcrd#569](https://github.com/decred/dcrd/pull/569) |
+| Bump for v0.8.2 | [decred/dcrd#570](https://github.com/decred/dcrd/pull/570) |
+| Improve cmd line parsing. | [decred/decrediton#254](https://github.com/decred/decrediton/pull/254) |
+| Bump for v0.8.2 | [decred/decrediton#256](https://github.com/decred/decrediton/pull/256) |
+
+## Commits
+
+This release was built from:
+
+| Repository | Commit Hash |
+| --- | ---- |
+| decred/Paymetheus | 5d8793148313f9fc41f6fb03dc7bc6f0ae1f0b50 |
+| decred/decred-windows-installer | 0d4e58d13f9de3f241a1218c89f37b53815a9cfe |
+| decred/dcrwallet | 44096d10f92af2923030967d118a8555fcae35f9 |
+| decred/dcrd | 4af97d2d705bba9df963cf147979deb1b06d85f6 |
+| decred/decrediton | 256e1b4e0460e1468db531953ad0fb88d76359ac |
+
+## Known Issues
+
+---
+
 # [v0.8.1](https://github.com/decred/decred-binaries/releases/tag/v0.8.1)
 
 ## 2017-02-14
-
-# [v0.8.1](https://github.com/decred/decred-binaries/releases/tag/v0.8.1)
 
 This is a patch release to fix bugs related to stakepool usage in Paymetheus:
 
