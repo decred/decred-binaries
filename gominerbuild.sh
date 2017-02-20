@@ -17,6 +17,7 @@ if [[ $1x = x ]]; then
     TAG=$DATE-$VERSION
 else
     TAG=$1
+    REL=(-ldflags "-X main.appBuild=release")
 fi
 
 PACKAGE=gominer
@@ -32,7 +33,7 @@ TYPE=opencl
 echo Building $OS-$TYPE
 mkdir $PACKAGE-$OS-$TYPE-$TAG
 cd $PACKAGE-$OS-$TYPE-$TAG
-go build -tags "$TYPE" github.com/decred/gominer
+go build -tags "$TYPE" "${REL[@]}" github.com/decred/gominer
 cp $GPATH/src/github.com/decred/gominer/sample-gominer.conf .
 cp $GPATH/src/github.com/decred/gominer/README.md .
 cp $GPATH/src/github.com/decred/gominer/LICENSE .

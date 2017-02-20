@@ -14,6 +14,7 @@ if [[ $1x = x ]]; then
     TAG=$DATE-$VERSION
 else
     TAG=$1
+    REL=(-ldflags "-X main.appBuild=release")
 fi
 
 PACKAGE=decred
@@ -33,9 +34,9 @@ for i in $SYS; do
     mkdir $PACKAGE-$i-$TAG
     cd $PACKAGE-$i-$TAG
     echo "Building:" $OS $ARCH
-    env GOOS=$OS GOARCH=$ARCH go build github.com/decred/dcrd
-    env GOOS=$OS GOARCH=$ARCH go build github.com/decred/dcrd/cmd/dcrctl
-    env GOOS=$OS GOARCH=$ARCH go build github.com/decred/dcrwallet
+    env GOOS=$OS GOARCH=$ARCH go build "${REL[@]}" github.com/decred/dcrd
+    env GOOS=$OS GOARCH=$ARCH go build "${REL[@]}" github.com/decred/dcrd/cmd/dcrctl
+    env GOOS=$OS GOARCH=$ARCH go build "${REL[@]}" github.com/decred/dcrwallet
     cp $GPATH/src/github.com/decred/dcrd/sample-dcrd.conf .
     cp $GPATH/src/github.com/decred/dcrd/cmd/dcrctl/sample-dcrctl.conf .
     cp $GPATH/src/github.com/decred/dcrwallet/sample-dcrwallet.conf .

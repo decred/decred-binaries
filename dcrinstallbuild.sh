@@ -14,6 +14,7 @@ if [[ $1x = x ]]; then
     TAG=$DATE-$VERSION
 else
     TAG=$1
+    REL=(-ldflags "-X main.appBuild=release")
 fi
 
 PACKAGE=dcrinstall
@@ -32,7 +33,7 @@ for i in $SYS; do
     OS=$(echo $i | cut -f1 -d-)
     ARCH=$(echo $i | cut -f2 -d-)
     echo "Building:" $OS $ARCH
-    env GOOS=$OS GOARCH=$ARCH go build github.com/decred/decred-release/cmd/dcrinstall
+    env GOOS=$OS GOARCH=$ARCH go build "${REL[@]}" github.com/decred/decred-release/cmd/dcrinstall
     if [[ $OS = "windows" ]]; then
 	mv dcrinstall.exe dcrinstall-$i-$TAG.exe
     else
