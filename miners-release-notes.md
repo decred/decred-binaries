@@ -8,7 +8,7 @@ for 64bit Linux and Windows are provided.
 The attached manifest file can be used to confirm the sha of the
 download.
 
-See [README.md](./README.md) for more info on verifying the files.
+See [README.md](./README.md#verifying-binaries) for more info on verifying the files.
 
 Changes include:
 
@@ -48,8 +48,7 @@ This is a build of cgminer for 32bit windows (with no TLS support).
 The attached manifest file can be used to confirm the sha of the
 download.
 
-See https://wiki.decred.org/Verifying_Binaries for more info on
-verifying the files.
+See [README.md](./README.md#verifying-binaries) for more info on verifying the files.
 
 # [v0.0.4_cgminer](https://github.com/decred/decred-binaries/releases/tag/v0.0.4_cgminer)
 
@@ -60,8 +59,7 @@ Bugfix for incorrectly displaying difficulty.
 See manifest-cgminer-20160208.txt for sha256sums of the packages and
 manifest-cgminer-20160208.txt.asc to confirm those shas.
 
-See https://wiki.decred.org/Verifying_Binaries for more info on
-verifying the files.
+See [README.md](./README.md#verifying-binaries) for more info on verifying the files.
 
 # [v0.0.3_cgminer](https://github.com/decred/decred-binaries/releases/tag/v0.0.3_cgminer)
 
@@ -75,8 +73,7 @@ libraries in the previous release. There are no code changes.
 See manifest-cgminer-20160204-2.txt for sha256sums of the packages and
 manifest-cgminer-20160204-2.txt.asc to confirm those shas.
 
-See https://wiki.decred.org/Verifying_Binaries for more info on
-verifying the files.
+See [README.md](./README.md#verifying-binaries) for more info on verifying the files.
 
 # [v0.0.2_cgminer](https://github.com/decred/decred-binaries/releases/tag/v0.0.2_cgminer)
 
@@ -92,8 +89,7 @@ signed certificates can now be specified with --cert
 See manifest-cgminer-20160204.txt for sha256sums of the packages and
 manifest-cgminer-20160204.txt.asc to confirm those shas.
 
-See https://wiki.decred.org/Verifying_Binaries for more info on
-verifying the files.
+See [README.md](./README.md#verifying-binaries) for more info on verifying the files.
 
 # [v0.0.1_cgminer](https://github.com/decred/decred-binaries/releases/tag/v0.0.1_cgminer)
 
@@ -109,7 +105,7 @@ linux package has been updated.
 See manifest-cgminer-20160128.txt for sha256sums of the packages and
 manifest-cgminer-20160128.txt.asc to confirm those shas.
 
-See https://wiki.decred.org/Verifying_Binaries for more info on
+See [README.md](./README.md#verifying-binaries) for more info on
 verifying the files.
 
 # [v0.0_cgminer](https://github.com/decred/decred-binaries/releases/tag/v0.0.0_cgminer)
@@ -123,6 +119,5 @@ The packages below contain platform specific copies of cgminer.
 See manifest-cgminer-20160127.txt for sha256sums of the packages and
 manifest-cgminer-20160127.txt.asc to confirm those shas.
 
-See https://wiki.decred.org/Verifying_Binaries for more info on
-verifying the files
+See [README.md](./README.md#verifying-binaries) for more info on verifying the files
 

@@ -7,8 +7,7 @@ This is a testnet pre-release build of the Paymetheus Decred port for Windows.
 See manifest-paymetheus-20160325-01.txt for sha256sums of the packages and
 manifest-paymetheus-20160325-01.txt.asc to confirm those shas.
 
-See https://wiki.decred.org/Verifying_Binaries for more info on
-verifying the files.
+See [README.md](./README.md#verifying-binaries) for more info on verifying the files.
 
 ## Commits
 

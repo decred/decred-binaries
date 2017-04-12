@@ -19,7 +19,7 @@ To install decrediton download, uncompress, and run
 See manifest-v0.8.2.txt, manifest-paymetheus-v0.8.2.txt, manifest-decrediton-0.8.2.txt, and manifest-dcrinstaller-v0.8.2.txt for sha256 sums and the associated .asc files to confirm those shas.
 
 
-See [README.md](./README.md) for more info on verifying the files.
+See [README.md](./README.md#verifying-binaries) for more info on verifying the files.
 
 ## Notes
 
@@ -70,7 +70,7 @@ depending on your version of Windows.
 
 See manifest-paymetheus-v0.8.1.txt for sha256 sums and the associated .asc files to confirm those shas.
 
-See [README.md](./README.md) for more info on verifying the files.
+See [README.md](./README.md#verifying-binaries) for more info on verifying the files.
 
 ## Notes
 
@@ -127,8 +127,7 @@ See manifest-v0.8.0.txt, manifest-paymetheus-v0.8.0.txt,
 manifest-decrediton-0.8.0.txt, and manifest-dcrinstaller-v0.8.0.txt
 for sha256 sums and the associated .asc files to confirm those shas.
 
-See [README.md](./README.md) for more info on
-verifying the files.
+See [README.md](./README.md#verifying-binaries) for more info on verifying the files.
 
 ## Notes
 
@@ -343,8 +342,7 @@ See manifest-v0.7.0.txt, manifest-paymetheus-v0.7.0.txt,
 manifest-decrediton-0.7.0.txt, and manifest-dcrinstaller-v0.7.0.txt
 for sha256 sums and the associated .asc files to confirm those shas.
 
-See [README.md](./README.md) for more info on
-verifying the files.
+See [README.md](./README.md#verifying-binaries) for more info on verifying the files.
 
 | Description | Pull Request |
 | --- | ---- |
@@ -593,8 +591,7 @@ manifest-paymetheus-v0.6.1.txt, and manifest-copay-0.6.0.txt,
 manifest--dcrinstaller-v0.6.1.txt for sha256 sums and the associated
 .asc files to confirm those shas.
 
-See [README.md](./README.md) for more info on
-verifying the files.
+See [README.md](./README.md#verifying-binaries) for more info on verifying the files.
 
 | Description | Pull Request |
 | --- | ---- |
@@ -720,8 +717,7 @@ manifest-paymetheus-v0.5.0.txt, and manifest-copay-0.5.0.txt,
 manifest--dcrinstaller-v0.5.0.txt for sha256 sums and the associated
 .asc files to confirm those shas.
 
-See [README.md](./README.md) for more info on
-verifying the files.
+See [README.md](./README.md#verifying-binaries) for more info on verifying the files.
 
 | Description | Pull Request |
 | --- | ---- |
@@ -876,8 +872,7 @@ See manifest-v0.4.0.txt, manifest-gominer-v0.4.0.txt,
 manifest-paymetheus-v0.4.0.txt, and manifest--dcrinstaller-v0.4.0.txt
 for sha256 sums and the associated .asc files to confirm those shas.
 
-See [README.md](./README.md) for more info on
-verifying the files.
+See [README.md](./README.md#verifying-binaries) for more info on verifying the files.
 
 Changes include:
 
@@ -969,8 +964,7 @@ See manifest-v0.2.0.txt, manifest-gominer-v0.2.0.txt,
 manifest-paymetheus-v0.2.0.txt, and manifest--dcrinstaller-v0.2.0.txt
 for sha256 sums and the associated .asc files to confirm those shas.
 
-See [README.md](./README.md) for more info on
-verifying the files.
+See [README.md](./README.md#verifying-binaries) for more info on verifying the files.
 
 Changes include:
 
@@ -1091,8 +1085,7 @@ manifest-v0.2.0.txt.asc, manifest-dcrinstall-v0.2.0.txt.asc,
 manifest-paymetheus-v0.2.0.txt.asc, manifest-gominer-v0.2.0.txt.asc,
 and manifest-ccminer-v0.2.0.txt.asc to confirm those shas.
 
-See [README.md](./README.md) for more info on
-verifying the files.
+See [README.md](./README.md#verifying-binaries) for more info on verifying the files.
 
 Changes include:
 
@@ -1163,8 +1156,7 @@ more information and usage instructions, please see
 See manifest-20160607-01.txt for sha256sums of the packages and
 manifest-20160607-01.txt.asc to confirm those shas.
 
-See https://wiki.decred.org/Verifying_Binaries for more info on
-verifying the files.
+See [README.md](./README.md#verifying-binaries) for more info on verifying the files.
 
 This release contains various fixes and improvements.
 
@@ -1215,8 +1207,7 @@ and dcrticketbuyer) for various platforms.
 See manifest-20160607-01.txt for sha256sums of the packages and
 manifest-201600607-01.txt.asc to confirm those shas.
 
-See https://wiki.decred.org/Verifying_Binaries for more info on
-verifying the files.
+See [README.md](./README.md#verifying-binaries) for more info on verifying the files.
 
 This release contains various fixes and improvements.
 
@@ -1309,8 +1300,7 @@ and dcrticketbuyer) for various platforms.
 See manifest-20160526-01.txt for sha256sums of the packages and
 manifest-201600526-01.txt.asc to confirm those shas.
 
-See https://wiki.decred.org/Verifying_Binaries for more info on
-verifying the files.
+See [README.md](./README.md#verifying-binaries) for more info on verifying the files.
 
 This release contains various fixes and improvements.
 
@@ -1414,8 +1404,7 @@ for various platforms and is primarily a bugfix for dcrwallet.
 See manifest-20160510-01.txt for sha256sums of the packages and
 manifest-201600510-01.txt.asc to confirm those shas.
 
-See https://wiki.decred.org/Verifying_Binaries for more info on
-verifying the files.
+See [README.md](./README.md#verifying-binaries) for more info on verifying the files.
 
 This release contains various fixes and improvements.
 
@@ -1469,8 +1458,7 @@ for various platforms and is primarily a bugfix for dcrwallet.
 See manifest-20160503-01.txt for sha256sums of the packages and
 manifest-201600503-01.txt.asc to confirm those shas.
 
-See https://wiki.decred.org/Verifying_Binaries for more info on
-verifying the files.
+See [README.md](./README.md#verifying-binaries) for more info on verifying the files.
 
 This release contains various fixes and improvements.
 
@@ -1683,8 +1671,7 @@ for various platforms and is primarily a bugfix for dcrwallet.
 See manifest-20160425-01.txt for sha256sums of the packages and
 manifest-201600425-01.txt.asc to confirm those shas.
 
-See https://wiki.decred.org/Verifying_Binaries for more info on
-verifying the files.
+See [README.md](./README.md#verifying-binaries) for more info on verifying the files.
 
 This release contains various fixes and improvements.
 
@@ -1736,8 +1723,7 @@ for various platforms and is primarily a bugfix for dcrwallet.
 See manifest-20160418-01.txt for sha256sums of the packages and
 manifest-201600418-01.txt.asc to confirm those shas.
 
-See https://wiki.decred.org/Verifying_Binaries for more info on
-verifying the files.
+See [README.md](./README.md#verifying-binaries) for more info on verifying the files.
 
 This release contains various fixes and improvements.
 
@@ -1797,8 +1783,7 @@ for various platforms and is primarily a bugfix for dcrwallet.
 See manifest-20160406-01.txt for sha256sums of the packages and
 manifest-201600406-01.txt.asc to confirm those shas.
 
-See https://wiki.decred.org/Verifying_Binaries for more info on
-verifying the files.
+See [README.md](./README.md#verifying-binaries) for more info on verifying the files.
 
 This release contains various fixes and improvements.
 
@@ -1841,8 +1826,7 @@ for various platforms.
 See manifest-20160401-01.txt for sha256sums of the packages and
 manifest-201600401-01.txt.asc to confirm those shas.
 
-See https://wiki.decred.org/Verifying_Binaries for more info on
-verifying the files.
+See [README.md](./README.md#verifying-binaries) for more info on verifying the files.
 
 This release contains various fixes and improvements.
 
@@ -1895,8 +1879,7 @@ for various platforms.
 See manifest-20160318-01.txt for sha256sums of the packages and
 manifest-20160318-01.txt.asc to confirm those shas.
 
-See https://wiki.decred.org/Verifying_Binaries for more info on
-verifying the files.
+See [README.md](./README.md#verifying-binaries) for more info on verifying the files.
 
 This release contains various fixes and improvements.
 
@@ -1983,8 +1966,7 @@ for various platforms.
 See manifest-20160304-01.txt for sha256sums of the packages and
 manifest-20160304-01.txt.asc to confirm those shas.
 
-See https://wiki.decred.org/Verifying_Binaries for more info on
-verifying the files.
+See [README.md](./README.md#verifying-binaries) for more info on verifying the files.
 
 This release contains various fixes and improvements.
 
@@ -2045,8 +2027,7 @@ for various platforms.
 See manifest-20160226-01.txt for sha256sums of the packages and
 manifest-20160226-01.txt.asc to confirm those shas.
 
-See https://wiki.decred.org/Verifying_Binaries for more info on
-verifying the files.
+See [README.md](./README.md#verifying-binaries) for more info on verifying the files.
 
 This release is primarily to add the ability for wallet to
 automatically remove old tickets and expired transactions.
@@ -2081,8 +2062,7 @@ for various platforms.
 See manifest-20160224-01.txt for sha256sums of the packages and
 manifest-20160224-01.txt.asc to confirm those shas.
 
-See https://wiki.decred.org/Verifying_Binaries for more info on
-verifying the files.
+See [README.md](./README.md#verifying-binaries) for more info on verifying the files.
 
 This release includes a number of fixes for both wallet and daemon as
 well as several new rpc calls.
@@ -2110,8 +2090,7 @@ Platform specific files are attached.
 See manifest-20160209-01.txt for sha256sums of the packages and
 manifest-20160209-01.txt.asc to confirm those shas.
 
-See https://wiki.decred.org/Verifying_Binaries for more info on
-verifying the files.
+See [README.md](./README.md#verifying-binaries) for more info on verifying the files.
 
 ---
 
@@ -2128,8 +2107,7 @@ dcrwallet, and dcrctl.
 See manifest-20160208-01.txt for sha256sums of the packages and
 manifest-20160208-01.txt.asc to confirm those shas.
 
-See https://wiki.decred.org/Verifying_Binaries for more info on
-verifying the files.
+See [README.md](./README.md#verifying-binaries) for more info on verifying the files.
 
 ---
 
@@ -2145,8 +2123,7 @@ dcrwallet, and dcrctl.
 See manifest-20160207-01.txt for sha256sums of the packages and
 manifest-20160207-01.txt.asc to confirm those shas.
 
-See https://wiki.decred.org/Verifying_Binaries for more info on
-verifying the files.
+See [README.md](./README.md#verifying-binaries) for more info on verifying the files.
 
 The platform specific archives have been encrypted with 7zip. The key
 will be made available when mainnet is launched.
@@ -2175,5 +2152,4 @@ dcrwallet, and dcrctl.
 See manifest-20160127-02.txt for sha256sums of the packages and
 manifest-20160127-02.txt.asc to confirm those shas.
 
-See https://wiki.decred.org/Verifying_Binaries for more info on
-verifying the files.
+See [README.md](./README.md#verifying-binaries) for more info on verifying the files.
