@@ -1,3 +1,286 @@
+# [v1.0.0](https://github.com/decred/decred-binaries/releases/tag/v1.0.0)
+
+## 2017-04-26
+
+This release contains improvements, additions, and bugfixes for all of the decred software components.  All users are strongly encouraged to upgrade.  New features include the initial voting on mainnet (for new sdiff algorithm and for work on lightning network), voting additions to Paymetheus, ticket purchasing and voting (with pool integration) for decrediton, and the replacement of the old test network with a new test network.
+
+To install Paymetheus download and run either
+[Paymetheus 64bit](https://github.com/decred/decred-binaries/releases/download/v1.0.0/decred_1.0.0-beta_x64.msi) or
+[Paymetheus 32bit](https://github.com/decred/decred-binaries/releases/download/v1.0.0/decred_1.0.0-beta_x86.msi)
+depending on your version of Windows.
+
+To install the command line tools, please see
+[dcrinstaller](https://github.com/decred/decred-release/tree/master/cmd/dcrinstall).
+
+To install decrediton download, uncompress, and run
+[decrediton Linux](https://github.com/decred/decred-binaries/releases/download/v1.0.0/decrediton-1.0.0.tar.gz) or
+[decrediton OSX](https://github.com/decred/decred-binaries/releases/download/v1.0.0/decrediton-1.0.0.dmg).
+
+See manifest-v1.0.0.txt, and the package specific manifest files for sha256 sums and the associated .asc files to confirm those shas.
+
+See [README.md](./README.md#verifying-binaries) for more info on verifying the files.
+
+## Notes
+
+## Changes
+
+| Description | Pull Request |
+| --- | ---- |
+| Update to use testnet2 | [decred/Paymetheus#231](https://github.com/decred/Paymetheus/pull/231) |
+| Add vote preference stakepool integration. | [decred/Paymetheus#241](https://github.com/decred/Paymetheus/pull/241) |
+| Refresh ticket price and retarget without refresh button.  | [decred/Paymetheus#244](https://github.com/decred/Paymetheus/pull/244) |
+| Lower default fees to 0.001 DCR/kB. | [decred/Paymetheus#243](https://github.com/decred/Paymetheus/pull/243) |
+| Use the term "ticket price" instead of difficulty. | [decred/Paymetheus#245](https://github.com/decred/Paymetheus/pull/245) |
+| Bump for v1.0.0 | [decred/Paymetheus#242](https://github.com/decred/Paymetheus/pull/242) |
+| Fix copyright date. | [decred/decred-windows-installer#42](https://github.com/decred/decred-windows-installer/pull/42) |
+| Update for v1.0.0 | [decred/decred-windows-installer#44](https://github.com/decred/decred-windows-installer/pull/44) |
+| Handle non-int pool difficulties better. | [decred/gominer#141](https://github.com/decred/gominer/pull/141) |
+| Add check on json to prevent panic. | [decred/gominer#142](https://github.com/decred/gominer/pull/142) |
+| Differentiate dev and release in -V | [decred/gominer#144](https://github.com/decred/gominer/pull/144) |
+| Add go version to version info | [decred/gominer#146](https://github.com/decred/gominer/pull/146) |
+| Some file location updates for linux. | [decred/gominer#147](https://github.com/decred/gominer/pull/147) |
+| Update README.md | [decred/gominer#150](https://github.com/decred/gominer/pull/150) |
+| stratum: include stake version | [decred/gominer#153](https://github.com/decred/gominer/pull/153) |
+| Bump for v1.0.0 | [decred/gominer#152](https://github.com/decred/gominer/pull/152) |
+| Update create.html | [decred/copay#48](https://github.com/decred/copay/pull/48) |
+| Another try to fix copay in FF48+ | [decred/copay#51](https://github.com/decred/copay/pull/51) |
+| Use the main network by default. | [decred/copay#53](https://github.com/decred/copay/pull/53) |
+| Differentiate dev and release in -V | [decred/decred-release#89](https://github.com/decred/decred-release/pull/89) |
+| Install promptsecret tool | [decred/decred-release#92](https://github.com/decred/decred-release/pull/92) |
+| Make links to old wiki point to local resources | [decred/decred-release#94](https://github.com/decred/decred-release/pull/94) |
+| Bump for v1.0.0 | [decred/decred-release#97](https://github.com/decred/decred-release/pull/97) |
+| Remove glide lockfile. | [decred/dcrrpcclient#51](https://github.com/decred/dcrrpcclient/pull/51) |
+| Add GetStakeVersionInfo | [decred/dcrrpcclient#52](https://github.com/decred/dcrrpcclient/pull/52) |
+| Add Go 1.8 support, remove Go 1.6. | [decred/dcrrpcclient#53](https://github.com/decred/dcrrpcclient/pull/53) |
+| add missing state copies | [decred/dcrrpcclient#55](https://github.com/decred/dcrrpcclient/pull/55) |
+| travis: enable unconvert | [decred/dcrrpcclient#56](https://github.com/decred/dcrrpcclient/pull/56) |
+| add generatevote and remove some unused pieces | [decred/dcrrpcclient#57](https://github.com/decred/dcrrpcclient/pull/57) |
+| Add getvotechoices/setvotechoice support. | [decred/dcrrpcclient#58](https://github.com/decred/dcrrpcclient/pull/58) |
+| Use sha256 instead of fastsha256 | [decred/dcrutil#32](https://github.com/decred/dcrutil/pull/32) |
+| travis: test against golang 1.7.x and 1.8.x | [decred/dcrutil#33](https://github.com/decred/dcrutil/pull/33) |
+| Switch to upstream golang.org/x/crypto | [decred/dcrutil#35](https://github.com/decred/dcrutil/pull/35) |
+| Switch dcrutil to testnet2. | [decred/dcrutil#37](https://github.com/decred/dcrutil/pull/37) |
+| Preallocate the exact number of bytes if known. | [decred/dcrutil#38](https://github.com/decred/dcrutil/pull/38) |
+| loader: Move Loader to new pkg loader | [decred/dcrwallet#532](https://github.com/decred/dcrwallet/pull/532) |
+| refined spreadtickets calculations | [decred/dcrwallet#537](https://github.com/decred/dcrwallet/pull/537) |
+| wtxmgr: fix getbalance calculations | [decred/dcrwallet#544](https://github.com/decred/dcrwallet/pull/544) |
+| Add --promptpublicpass command parameter (#545) | [decred/dcrwallet#553](https://github.com/decred/dcrwallet/pull/553) |
+| Add illumos support. | [decred/dcrwallet#557](https://github.com/decred/dcrwallet/pull/557) |
+| getbalance: additional balance fixes | [decred/dcrwallet#565](https://github.com/decred/dcrwallet/pull/565) |
+| Add stakePoolEnabled check | [decred/dcrwallet#567](https://github.com/decred/dcrwallet/pull/567) |
+| Update dependencies to latest versions. | [decred/dcrwallet#571](https://github.com/decred/dcrwallet/pull/571) |
+| Add Go 1.8 support, remove 1.6. | [decred/dcrwallet#573](https://github.com/decred/dcrwallet/pull/573) |
+| use minfee if purchase slots are not full | [decred/dcrwallet#575](https://github.com/decred/dcrwallet/pull/575) |
+| depreciate maxpricescale | [decred/dcrwallet#576](https://github.com/decred/dcrwallet/pull/576) |
+| Differentiate dev and release in -V | [decred/dcrwallet#578](https://github.com/decred/dcrwallet/pull/578) |
+| Fix extended vote bit setting for stakepool wallets | [decred/dcrwallet#583](https://github.com/decred/dcrwallet/pull/583) |
+| Remove sync bucket with waddrmgr db upgrade. | [decred/dcrwallet#586](https://github.com/decred/dcrwallet/pull/586) |
+| rpc: add Start/Stop ticket buyer RPCs | [decred/dcrwallet#587](https://github.com/decred/dcrwallet/pull/587) |
+| Unify the database management code into a single package. | [decred/dcrwallet#591](https://github.com/decred/dcrwallet/pull/591) |
+| Switch to upstream golang.org/x/crypto package. | [decred/dcrwallet#596](https://github.com/decred/dcrwallet/pull/596) |
+| Update Decred dependencies. | [decred/dcrwallet#597](https://github.com/decred/dcrwallet/pull/597) |
+| ticketbuyer: Add RPC calls to get/set config | [decred/dcrwallet#598](https://github.com/decred/dcrwallet/pull/598) |
+| add more status fields to walletinfo | [decred/dcrwallet#599](https://github.com/decred/dcrwallet/pull/599) |
+| Add method to retrieve an account branch xpub. | [decred/dcrwallet#604](https://github.com/decred/dcrwallet/pull/604) |
+| Add method to return the account's actual xpub as well. | [decred/dcrwallet#605](https://github.com/decred/dcrwallet/pull/605) |
+| remove deprecated enablestakemining ticket buyer and related RPCs | [decred/dcrwallet#606](https://github.com/decred/dcrwallet/pull/606) |
+| Display Go version next to application versions.  | [decred/dcrwallet#607](https://github.com/decred/dcrwallet/pull/607) |
+| Testnet reset | [decred/dcrwallet#610](https://github.com/decred/dcrwallet/pull/610) |
+| Fix RPC ping/pong deadlock and timeout issue. | [decred/dcrwallet#612](https://github.com/decred/dcrwallet/pull/612) |
+| Use newer ubuntu release for travis | [decred/dcrwallet#614](https://github.com/decred/dcrwallet/pull/614) |
+| ensure calculated avg ticket price is at least MinimumStakeDiff | [decred/dcrwallet#616](https://github.com/decred/dcrwallet/pull/616) |
+| Always commit database transaction when buying tickets. | [decred/dcrwallet#618](https://github.com/decred/dcrwallet/pull/618) |
+| Update dcrd to pull in stakebase sigscript fix for testnet2. | [decred/dcrwallet#621](https://github.com/decred/dcrwallet/pull/621) |
+| Remove old testnet v1 variables. | [decred/dcrwallet#622](https://github.com/decred/dcrwallet/pull/622) |
+| Preallocate the exact number of bytes if known. | [decred/dcrwallet#623](https://github.com/decred/dcrwallet/pull/623) |
+| gometallinter: gosimple fixes | [decred/dcrwallet#624](https://github.com/decred/dcrwallet/pull/624) |
+| gometalinter: use --vendor to skip ./vendor/ | [decred/dcrwallet#625](https://github.com/decred/dcrwallet/pull/625) |
+| Add warning on startup about old testnet data. | [decred/dcrwallet#629](https://github.com/decred/dcrwallet/pull/629) |
+| Move log setup to before first use of logger | [decred/dcrwallet#631](https://github.com/decred/dcrwallet/pull/631) |
+| Drop fastsha256 usage in favor of crypto/sha256 | [decred/dcrwallet#632](https://github.com/decred/dcrwallet/pull/632) |
+| Fix an obvious nil pointer check error. | [decred/dcrwallet#634](https://github.com/decred/dcrwallet/pull/634) |
+| Reimplement address pools. | [decred/dcrwallet#636](https://github.com/decred/dcrwallet/pull/636) |
+| wallet: Change PurchaseTickets to return []*chainhash.Hash | [decred/dcrwallet#637](https://github.com/decred/dcrwallet/pull/637) |
+| udb: fetchAccountInfo only returns *dbBIP0044AccountRow (or nil) | [decred/dcrwallet#638](https://github.com/decred/dcrwallet/pull/638) |
+| Return default SimulationPassphrase when SimNet | [decred/dcrwallet#639](https://github.com/decred/dcrwallet/pull/639) |
+| rpc: StartConsesusRpc - set loader chain client | [decred/dcrwallet#640](https://github.com/decred/dcrwallet/pull/640) |
+| ticketbuyer: Fix shadowed feeToUse | [decred/dcrwallet#641](https://github.com/decred/dcrwallet/pull/641) |
+| Fix derivation of discovered accounts. | [decred/dcrwallet#643](https://github.com/decred/dcrwallet/pull/643) |
+| Flush loggers before running wallet creation. | [decred/dcrwallet#644](https://github.com/decred/dcrwallet/pull/644) |
+| Revert to old wraparound behavior. | [decred/dcrwallet#645](https://github.com/decred/dcrwallet/pull/645) |
+| add generatevote | [decred/dcrwallet#647](https://github.com/decred/dcrwallet/pull/647) |
+| ticketbuyer: Use the adjustable options. | [decred/dcrwallet#648](https://github.com/decred/dcrwallet/pull/648) |
+| Define vote bits through agenda choices. | [decred/dcrwallet#649](https://github.com/decred/dcrwallet/pull/649) |
+| Prevent panic in JSON-RPC server. | [decred/dcrwallet#652](https://github.com/decred/dcrwallet/pull/652) |
+| derive stake pool payment addresses properly | [decred/dcrwallet#655](https://github.com/decred/dcrwallet/pull/655) |
+| Log RPC method invocations. | [decred/dcrwallet#656](https://github.com/decred/dcrwallet/pull/656) |
+| Prevent OOM when syncing to addresess already watched. | [decred/dcrwallet#657](https://github.com/decred/dcrwallet/pull/657) |
+| Add transaction type to TransactionSummary and TransactionDetails | [decred/dcrwallet#659](https://github.com/decred/dcrwallet/pull/659) |
+| Bump API version in documentation. | [decred/dcrwallet#660](https://github.com/decred/dcrwallet/pull/660) |
+| Fix comment. | [decred/dcrwallet#661](https://github.com/decred/dcrwallet/pull/661) |
+| Dereference the correct RPC client variable. | [decred/dcrwallet#662](https://github.com/decred/dcrwallet/pull/662) |
+| Fix an off by one in the address buffer. | [decred/dcrwallet#663](https://github.com/decred/dcrwallet/pull/663) |
+| Require walletlock for persistent unlocks. | [decred/dcrwallet#665](https://github.com/decred/dcrwallet/pull/665) |
+| Add the actual votebits to the gRPC APIs. | [decred/dcrwallet#666](https://github.com/decred/dcrwallet/pull/666) |
+| Remove a silly error from accountsyncaddressindex. | [decred/dcrwallet#667](https://github.com/decred/dcrwallet/pull/667) |
+| ticketbuyer: Fix deadlock in TicketBuyer Config() | [decred/dcrwallet#668](https://github.com/decred/dcrwallet/pull/668) |
+| Watch addresses of newly created accounts. | [decred/dcrwallet#669](https://github.com/decred/dcrwallet/pull/669) |
+| handle missed tickets even when not voting | [decred/dcrwallet#671](https://github.com/decred/dcrwallet/pull/671) |
+| Update TicketBuyer to no longer use float64 for Amounts | [decred/dcrwallet#672](https://github.com/decred/dcrwallet/pull/672) |
+| Remove an unnecessary mutex grab in stakepooluserinfo. | [decred/dcrwallet#673](https://github.com/decred/dcrwallet/pull/673) |
+| Fix panic in getaddressesbyaccount. | [decred/dcrwallet#678](https://github.com/decred/dcrwallet/pull/678) |
+| Fix ticket buyer log messages after int64 changes | [decred/dcrwallet#679](https://github.com/decred/dcrwallet/pull/679) |
+| ticketbuyer: use dcrutil.Amount more | [decred/dcrwallet#680](https://github.com/decred/dcrwallet/pull/680) |
+| Lower default fees to 0.001 DCR/kB. | [decred/dcrwallet#681](https://github.com/decred/dcrwallet/pull/681) |
+| Bump required dcrd JSON-RPC API version. | [decred/dcrwallet#682](https://github.com/decred/dcrwallet/pull/682) |
+| Remove DB updates from generatevote JSON-RPC. | [decred/dcrwallet#683](https://github.com/decred/dcrwallet/pull/683) |
+| Update to latest dcrd. | [decred/dcrwallet#686](https://github.com/decred/dcrwallet/pull/686) |
+| Bump stake versions for 1.0.0 release agendas | [decred/dcrwallet#685](https://github.com/decred/dcrwallet/pull/685) |
+| Bump for v1.0.0 | [decred/dcrwallet#676](https://github.com/decred/dcrwallet/pull/676) |
+| Add new getstakeversioninfo command | [decred/dcrd#568](https://github.com/decred/dcrd/pull/568) |
+| Update dependencies to latest versions. | [decred/dcrd#571](https://github.com/decred/dcrd/pull/571) |
+| Test with latest Go patch releases on Travis-CI. | [decred/dcrd#574](https://github.com/decred/dcrd/pull/574) |
+| Don't keep double vote information in blockNode | [decred/dcrd#568](https://github.com/decred/dcrd/pull/575) |
+| Fix nits on getstakeversioninfo | [decred/dcrd#577](https://github.com/decred/dcrd/pull/577) |
+| dcrctl: Remove --terminal feature | [decred/dcrd#580](https://github.com/decred/dcrd/pull/580) |
+| Add Go 1.8 support, remove 1.6. | [decred/dcrd#581](https://github.com/decred/dcrd/pull/581) |
+| rpcserver: No progress info from getvoteinfo when not started. | [decred/dcrd#582](https://github.com/decred/dcrd/pull/582) |
+| Differentian dev and release in -V | [decred/dcrd#583](https://github.com/decred/dcrd/pull/583) |
+| Tupleize version:bits | [decred/dcrd#586](https://github.com/decred/dcrd/pull/586) |
+| chaingen: Significantly optimize test generation. | [decred/dcrd#587](https://github.com/decred/dcrd/pull/587) |
+| blockchain: Always run fullblock tests. | [decred/dcrd#588](https://github.com/decred/dcrd/pull/588) |
+| TravisCI: Only run tests once. | [decred/dcrd#589](https://github.com/decred/dcrd/pull/589) |
+| blockchain: Make node creation in tests consistent. | [decred/dcrd#590](https://github.com/decred/dcrd/pull/590) |
+| blockchain: Optimize stake and vote lookups. | [decred/dcrd#591](https://github.com/decred/dcrd/pull/591) |
+| blockchain: use next block stake version. | [decred/dcrd#599](https://github.com/decred/dcrd/pull/599) |
+| blockchain: add expiration test during voting. | [decred/dcrd#602](https://github.com/decred/dcrd/pull/602) |
+| travis: enable gometalinter | [decred/dcrd#603](https://github.com/decred/dcrd/pull/603) |
+| chaingen: Allow 32-bit compile. | [decred/dcrd#605](https://github.com/decred/dcrd/pull/605) |
+| Switch to upstream golang.org/x/crypto | [decred/dcrd#608](https://github.com/decred/dcrd/pull/608) |
+| chaincfg: strictly enforce agenda assumptions. | [decred/dcrd#609](https://github.com/decred/dcrd/pull/609) |
+| add more walletinfo fields | [decred/dcrd#610](https://github.com/decred/dcrd/pull/610) |
+| remove walletinfo fields related to stakemining purchaser | [decred/dcrd#612](https://github.com/decred/dcrd/pull/612) |
+| server: send some vote hashes | [decred/dcrd#613](https://github.com/decred/dcrd/pull/613) |
+| rpcserver: Confirmations -1 when a block is orphan | [decred/dcrd#615](https://github.com/decred/dcrd/pull/615) |
+| Display Go version next to application versions. | [decred/dcrd#616](https://github.com/decred/dcrd/pull/616) |
+| Testnet reset | [decred/dcrd#617](https://github.com/decred/dcrd/pull/617) |
+| rpcserver: always reply with an RPC error. | [decred/dcrd#623](https://github.com/decred/dcrd/pull/623) |
+| fix StakeBaseSigScript and a comment | [decred/dcrd#625](https://github.com/decred/dcrd/pull/625) |
+| chaincfg: Allow non-std transactions on testnet2. | [decred/dcrd#627](https://github.com/decred/dcrd/pull/627) |
+| TravisCI: Remove a couple of linters. | [decred/dcrd#628](https://github.com/decred/dcrd/pull/628) |
+| Remove variables for testnet v1. | [decred/dcrd#629](https://github.com/decred/dcrd/pull/629) |
+| Preallocate the exact number of bytes if known. | [decred/dcrd#630](https://github.com/decred/dcrd/pull/630) |
+| connmgr: Refactor connection management into pkg | [decred/dcrd#631](https://github.com/decred/dcrd/pull/631) |
+| txscript: Update signing tests to use params var. | [decred/dcrd#632](https://github.com/decred/dcrd/pull/632) |
+| wire: Lower MaxUserAgentLen to 256. | [decred/dcrd#633](https://github.com/decred/dcrd/pull/633) |
+| gometalinter: use --vendor to skip ./vendor/ | [decred/dcrd#634](https://github.com/decred/dcrd/pull/634) |
+| rpcserver/chain: Bounds check getstakeversions. | [decred/dcrd#636](https://github.com/decred/dcrd/pull/636) |
+| rpcserver: Make function definitions consistent. | [decred/dcrd#637](https://github.com/decred/dcrd/pull/637) |
+| dcrctl: Be smarter about automatic configuration. | [decred/dcrd#640](https://github.com/decred/dcrd/pull/640) |
+| Add example service files. | [decred/dcrd#642](https://github.com/decred/dcrd/pull/642) |
+| Add warning on startup about old testnet data. | [decred/dcrd#643](https://github.com/decred/dcrd/pull/643) |
+| dcrd: Remove unused old chainindexer file. | [decred/dcrd#644](https://github.com/decred/dcrd/pull/644) |
+| dcrd: Remove unnecessary upstream deps.txt. | [decred/dcrd#645](https://github.com/decred/dcrd/pull/645) |
+| blockchain: various code cleanups | [decred/dcrd#647](https://github.com/decred/dcrd/pull/647) |
+| addrmgr/wire: various fixes from btcd | [decred/dcrd#648](https://github.com/decred/dcrd/pull/648) |
+| Add new tool, promptsecret | [decred/dcrd#649](https://github.com/decred/dcrd/pull/649) |
+| glide: sync | [decred/dcrd#650](https://github.com/decred/dcrd/pull/650) |
+| dcrjson: add generatevote and remove some unused pieces | [decred/dcrd#652](https://github.com/decred/dcrd/pull/652) |
+| Remove a bunch of dead code. | [decred/dcrd#653](https://github.com/decred/dcrd/pull/653) |
+| dcrjson: Add getvotechoices/setvotechoice types. | [decred/dcrd#657](https://github.com/decred/dcrd/pull/6057) |
+| chaincfg: update checkpoints for 1.0.0 release | [decred/dcrd#661](https://github.com/decred/dcrd/pull/661) |
+| policy: Lower default relay fee to 0.001/kB. | [decred/dcrd#659](https://github.com/decred/dcrd/pull/659) |
+| Increase the high fee multiplier to keep same threshold. | [decred/dcrd#662](https://github.com/decred/dcrd/pull/662) |
+| multi: Rename vote choice IsIgnore to IsAbstain. | [decred/dcrd#656](https://github.com/decred/dcrd/pull/656) |
+| blockchain: Remove dead code from diff tests | [decred/dcrd#664](https://github.com/decred/dcrd/pull/664) |
+| mempool: Remove the hardcoded minimum ticket fee. | [decred/dcrd#663](https://github.com/decred/dcrd/pull/663) |
+| rpcserver: Use a real value for fee estimates. | [decred/dcrd#665](https://github.com/decred/dcrd/pull/665) |
+| multi: Implement stake difficulty change and vote | [decred/dcrd#666](https://github.com/decred/dcrd/pull/666) |
+| chaincfg: Add agenda for LN support vote. | [decred/dcrd#668](https://github.com/decred/dcrd/pull/668) |
+| Bump for v1.0.0 | [decred/dcrd#660](https://github.com/decred/dcrd/pull/660) |
+| Start to clean up old components and reorganize | [decred/decredutib#258](https://github.com/decred/decrediton/pull/258) |
+| Fix up some of the logging | [decred/decrediton#259](https://github.com/decred/decrediton/pull/259) |
+| Fix bug in logging code. | [decred/decrediton#261](https://github.com/decred/decrediton/pull/261) |
+| Add --extrawalletargs option. | [decred/decrediton#263](https://github.com/decred/decrediton/pull/263) |
+| Clean up/remove useless grpc functions | [decred/decrediton#264](https://github.com/decred/decrediton/pull/264) |
+| Fix startup of procedures | [decred/decrediton#272](https://github.com/decred/decrediton/pull/272) |
+| Use same cfg path in dev and production. | [decred/decrediton#275](https://github.com/decred/decrediton/pull/275) |
+| Carry over settings from past instances | [decred/decrediton#276](https://github.com/decred/decrediton/pull/276) |
+| Remove unnecessary ping state updates | [decred/decrediton#277](https://github.com/decred/decrediton/pull/277) |
+| Add network to settings page. | [decred/decrediton#279](https://github.com/decred/decrediton/pull/279) |
+| Integrate Stakepools' API | [decred/decrediton#280](https://github.com/decred/decrediton/pull/280) |
+| Update grpc for new version (4.5.0) | [decred/decrediton#281](https://github.com/decred/decrediton/pull/281) |
+| Fixes to send page | [decred/decrediton#282](https://github.com/decred/decrediton/pull/282) |
+| Add all possible errors to header in GetStarted | [decred/decrediton#283](https://github.com/decred/decrediton/pull/283) |
+| Clarify where to download Decretion in the README | [decred/decrediton#285](https://github.com/decred/decrediton/pull/285) |
+| Fix various nits with SideBar | [decred/decrediton#286](https://github.com/decred/decrediton/pull/286) |
+| Update pagination buttons to be more clear | [decred/decrediton#287](https://github.com/decred/decrediton/pull/287) |
+| Update testnet network magic number. Formatting cleanup | [decred/decrediton#289](https://github.com/decred/decrediton/pull/289) |
+| Fix timeSince in lower sidebar | [decred/decrediton#291](https://github.com/decred/decrediton/pull/291) |
+| Another fix for timeSince in sideBar | [decred/decrediton#294](https://github.com/decred/decrediton/pull/294) |
+| Add account management page | [decred/decrediton#295](https://github.com/decred/decrediton/pull/295) |
+| Add functionality to clear account error/success messages | [decred/decrediton#299](https://github.com/decred/decrediton/pull/299) |
+| Apply similiar changes to other clearing success/error messages | [decred/decrediton#300](https://github.com/decred/decrediton/pull/300) |
+| Purchase View. | [decred/decrediton#301](https://github.com/decred/decrediton/pull/301) |
+| Transaction history and notification fixes | [decred/decrediton#302](https://github.com/decred/decrediton/pull/302) |
+| Combine ticket purchasing and stake pool configuration | [decred/decrediton#304](https://github.com/decred/decrediton/pull/304) |
+| Fixes/improvements for config loading | [decred/decrediton#307](https://github.com/decred/decrediton/pull/307) |
+| Add --testnet and --mainnet flags | [decred/decrediton#309](https://github.com/decred/decrediton/pull/309) |
+| Final audit/fixing of currently transaction history/pagination | [decred/decrediton#310](https://github.com/decred/decrediton/pull/310) |
+| Rig in importScriptRequest to purchaseTicketsAttempt | [decred/decrediton#311](https://github.com/decred/decrediton/pull/311) |
+| Add seperate help page | [decred/decrediton#312](https://github.com/decred/decrediton/pull/312) |
+| Add ticket price to purchase ticket page | [decred/decrediton#313](https://github.com/decred/decrediton/pull/313) |
+| Write config files for cmd line tools | [decred/decrediton#314](https://github.com/decred/decrediton/pull/314) |
+| Check StakePool purchaseInformation on app load | [decred/decrediton#315](https://github.com/decred/decrediton/pull/315) |
+| Add stakeinfo area at the top of Purchase Tickets page | [decred/decrediton#316](https://github.com/decred/decrediton/pull/316) |
+| First style consolidation | [decred/decrediton#318](https://github.com/decred/decrediton/pull/318) |
+| Update to the latest wallet grpc api | [decred/decrediton#320](https://github.com/decred/decrediton/pull/320) |
+| Layout update to match Paymetheus design | [decred/decrediton#321](https://github.com/decred/decrediton/pull/321) |
+| Add show/hide advanced options on purchase ticket view | [decred/decrediton#322](https://github.com/decred/decrediton/pull/322) |
+| Add new copy and advanced fields to purchase tickets | [decred/decrediton#324](https://github.com/decred/decrediton/pull/324) |
+| Add basic autobuyer start/stop | [decred/decrediton#325](https://github.com/decred/decrediton/pull/325) |
+| Input validation for purchase tickets form | [decred/decrediton#326](https://github.com/decred/decrediton/pull/326) |
+| Update validation for the Account page | [decred/decrediton#327](https://github.com/decred/decrediton/pull/327) |
+| Add input validation to send/sign tx  | [decred/decrediton#328](https://github.com/decred/decrediton/pull/328) |
+| Only ask for private passphrase on startup for newly created wallets | [decred/decrediton#329](https://github.com/decred/decrediton/pull/329) |
+| Finish basic input validation for remaining views | [decred/decrediton#330](https://github.com/decred/decrediton/pull/330) |
+| Update to recent grpc changes | [decred/decrediton#332](https://github.com/decred/decrediton/pull/332) |
+| Add voting gui to purchase tickets page | [decred/decrediton#333](https://github.com/decred/decrediton/pull/333) |
+| Update to grpc bindings to get transaction type | [decred/decrediton#334](https://github.com/decred/decrediton/pull/334) |
+| Tranasction type selection on History | [decred/decrediton#335](https://github.com/decred/decrediton/pull/335) |
+| Styling update to Purchase Tickets view | [decred/decrediton#336](https://github.com/decred/decrediton/pull/336) |
+| Update to recent api.proto changes for votebits | [decred/decrediton#337](https://github.com/decred/decrediton/pull/337) |
+| Shutdown fixes | [decred/decrediton#338](https://github.com/decred/decrediton/pull/338) |
+| Ignore .DS_store files | [decred/decrediton#340](https://github.com/decred/decrediton/pull/340) |
+| Add Ticketbuyer GUI and reusble passphrase modal | [decred/decrediton#342](https://github.com/decred/decrediton/pull/342) |
+| Show different tx types in TxHistory | [decred/decrediton#343](https://github.com/decred/decrediton/pull/343) |
+| Switch version from alpha to beta | [decred/decrediton#344](https://github.com/decred/decrediton/pull/344) |
+| Force specific version of electron | [decred/decrediton#346](https://github.com/decred/decrediton/pull/346) |
+| Don't break if no StakePool is defined yet | [decred/decrediton#348](https://github.com/decred/decrediton/pull/348) |
+| Added grpc commits to dev instructions | [decred/decrediton#350](https://github.com/decred/decrediton/pull/350) |
+| Confirm working votebits setting to stakepool api | [decred/decrediton#352](https://github.com/decred/decrediton/pull/352) |
+| Check for undefined in tx rows | [decred/decrediton#354](https://github.com/decred/decrediton/pull/354) |
+| Small css tweak so Snackbar is fully shown | [decred/decrediton#355](https://github.com/decred/decrediton/pull/355) |
+| Update stakepool config to load APIVersionSupported and only show v2 | [decred/decrediton#356](https://github.com/decred/decrediton/pull/356) |
+| Bump for v1.0.0 | [decred/decrediton#351](https://github.com/decred/decrediton/pull/351) |
+
+## Commits
+
+This release was built from:
+
+| Repository | Commit Hash |
+| --- | ---- |
+| decred/gominer | d2503a9d0d3533cbceac970414f6f7f457faceb3 |
+| decred/Paymetheus | 6e49fb22b4e3c4d769e2dbc446d87f311aa4437d |
+| decred/decred-windows-installer | 253f343e736eb377a6cba29e16aead0162f82e51 |
+| decred/dcrwallet | a642114a124c6174130d528d9d33fe69128d2688 |
+| decred/dcrd | 5c3e0d6454001c8d14fcf06be94381d93991aaea |
+| decred/decrediton | 0272bf894c3c89b573034dd7a18f47e697194cbf |
+
+## Known Issues
+
+---
+
 # [v1.0.0_gominer](https://github.com/decred/decred-binaries/releases/tag/v1.0.0)
 
 ## 2017-04-24
