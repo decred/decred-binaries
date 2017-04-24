@@ -1,3 +1,36 @@
+# [v1.0.0_gominer](https://github.com/decred/decred-binaries/releases/tag/v1.0.0)
+
+## 2017-04-24
+
+This is an early release of gominer v1.0.0 to address an issue with pool mining software.  ALL users should upgrade.
+
+See [README.md](./README.md#verifying-binaries) for more info on verifying the files.
+
+## Notes
+
+## Changes
+
+| Description | Pull Request |
+| --- | ---- |
+| Handle non-int pool difficulties better. | [decred/gominer#141](https://github.com/decred/gominer/pull/141) |
+| Add check on json to prevent panic. | [decred/gominer#142](https://github.com/decred/gominer/pull/142) |
+| Differentiate dev and release in -V | [decred/gominer#144](https://github.com/decred/gominer/pull/144) |
+| Add go version to version info | [decred/gominer#146](https://github.com/decred/gominer/pull/146) |
+| Some file location updates for linux. | [decred/gominer#147](https://github.com/decred/gominer/pull/147) |
+| Update README.md | [decred/gominer#150](https://github.com/decred/gominer/pull/150) |
+| stratum: include stake version | [decred/gominer#153](https://github.com/decred/gominer/pull/153) |
+| Bump for v1.0.0 | [decred/gominer#152](https://github.com/decred/gominer/pull/152) |
+
+## Commits
+
+This release was built from:
+
+| Repository | Commit Hash |
+| --- | ---- |
+| decred/gominer | d2503a9d0d3533cbceac970414f6f7f457faceb3 |
+
+---
+
 # [v0.8.2](https://github.com/decred/decred-binaries/releases/tag/v0.8.2)
 
 ## 2017-02-16
@@ -17,7 +50,6 @@ To install decrediton download, uncompress, and run
 [decrediton OSX](https://github.com/decred/decred-binaries/releases/download/v0.8.2/decrediton-0.8.2.dmg).
 
 See manifest-v0.8.2.txt, manifest-paymetheus-v0.8.2.txt, manifest-decrediton-0.8.2.txt, and manifest-dcrinstaller-v0.8.2.txt for sha256 sums and the associated .asc files to confirm those shas.
-
 
 See [README.md](./README.md#verifying-binaries) for more info on verifying the files.
 
