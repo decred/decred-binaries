@@ -1,3 +1,68 @@
+# [v1.0.1](https://github.com/decred/decred-binaries/releases/tag/v1.0.1)
+
+## 2017-04-28
+
+This is a patch release.  All users are encourages to update.  A bug in the installer has been addressed which prevented upgrades from 0.8.2 or earlier.  Paymetheus and decrediton have been updated to work with both v1 and v2 stakepools and there were branding updates for Paymetheus.  Default fees were returned to the previous values.  See Changes for list of all bugs fixed.
+
+To install Paymetheus download and run either
+[Paymetheus 64bit](https://github.com/decred/decred-binaries/releases/download/v1.0.1/decred_1.0.1-release_x64.msi) or
+[Paymetheus 32bit](https://github.com/decred/decred-binaries/releases/download/v1.0.1/decred_1.0.1-release_x86.msi)
+depending on your version of Windows.
+
+To install the command line tools, please see
+[dcrinstaller](https://github.com/decred/decred-release/tree/master/cmd/dcrinstall).
+
+To install decrediton download, uncompress, and run
+[decrediton Linux](https://github.com/decred/decred-binaries/releases/download/v1.0.1/decrediton-1.0.1.tar.gz) or
+[decrediton OSX](https://github.com/decred/decred-binaries/releases/download/v1.0.1/decrediton-1.0.1.dmg).
+
+See manifest-v1.0.0.txt, and the package specific manifest files for sha256 sums and the associated .asc files to confirm those shas.
+
+See [README.md](./README.md#verifying-binaries) for more info on verifying the files.
+
+## Notes
+
+## Changes
+
+| Description | Pull Request |
+| --- | ---- |
+| Make startup more async friendly | [decred/decrediton#359](https://github.com/decred/decrediton/pull/359) |
+| Fix various bugs and allow v1 pools to be used | [decred/decrediton#362](https://github.com/decred/decrediton/pull/362) |
+| Bump for v1.0.1 | [decred/decrediton#363](https://github.com/decred/decrediton/pull/363) |
+| Add some extra text for user clarity | [decred/decrediton#364](https://github.com/decred/decrediton/pull/364) |
+| Be backwards compatible with v1 API pools | [decred/Paymetheus#248](https://github.com/decred/Paymetheus/pull/248) |
+| Use the correct sdiff retarget value on mainnet. | [decred/Paymetheus#250](https://github.com/decred/Paymetheus/pull/250) |
+| Switch to the new icon. | [decred/Paymetheus#252](https://github.com/decred/Paymetheus/pull/252) |
+| Prepare for release 1.0.1. | [decred/Paymetheus#253](https://github.com/decred/Paymetheus/pull/253) |
+| Raise default fees back to 0.01/kB. | [decred/Paymetheus#256](https://github.com/decred/Paymetheus/pull/256) |
+| Log fee as an amount, not atoms. | [decred/dcrwallet#689](https://github.com/decred/dcrwallet/pull/689) |
+| Allow reading passphases from piped input. | [decred/dcrwallet#691](https://github.com/decred/dcrwallet/pull/691) |
+| Raise default fees back to 0.01/kB. | [decred/dcrwallet#693](https://github.com/decred/dcrwallet/pull/693) |
+| Prepare for release 1.0.1. | [decred/dcrwallet#692](https://github.com/decred/dcrwallet/pull/692) |
+| Bump Protocol Version | [decred/dcrd#673](https://github.com/decred/dcrd/pull/673) |
+| wire: Cleanup blockheader.go. | [decred/dcrd#669](https://github.com/decred/dcrd/pull/669) |
+| rpcserver: Return handler errors to RPC client. | [decred/dcrd#671](https://github.com/decred/dcrd/pull/671) |
+| rpcserver: Disable getblocktemplate. | [decred/dcrd#672](https://github.com/decred/dcrd/pull/672) |
+| Bump for v1.0.1 | [decred/dcrd#674](https://github.com/decred/dcrd/pull/674) |
+| Updates for v1.0.1 | [decred/decred-windows-installer#45](https://github.com/decred/decred-windows-installer/pull/45) |
+| new logo, fix copyright and move resource into decred | [decred/decred-windows-installer#47](https://github.com/decred/decred-windows-installer/pull/47) |
+
+## Commits
+
+This release was built from:
+
+| Repository | Commit Hash |
+| --- | ---- |
+| decred/Paymetheus | d69be0fec0a069acf7baf370ac77c28fe6c07300 |
+| decred/decred-windows-installer | 9e931b81d866ff114b128009bf0bea8895502da7 |
+| decred/dcrwallet | b4cd1304d3c1273cafea6b584e98f69217bfbdce |
+| decred/dcrd | 5bed758f85159b2ee76240207ba775c40000a4c1 |
+| decred/decrediton | f0f21e216e9b9935a600bc53ca17b4f4afe2ad3b |
+
+## Known Issues
+
+---
+
 # [v1.0.0](https://github.com/decred/decred-binaries/releases/tag/v1.0.0)
 
 ## 2017-04-26
@@ -5,8 +70,8 @@
 This release contains improvements, additions, and bugfixes for all of the decred software components.  All users are strongly encouraged to upgrade.  New features include the initial voting on mainnet (for new sdiff algorithm and for work on lightning network), voting additions to Paymetheus, ticket purchasing and voting (with pool integration) for decrediton, and the replacement of the old test network with a new test network.
 
 To install Paymetheus download and run either
-[Paymetheus 64bit](https://github.com/decred/decred-binaries/releases/download/v1.0.0/decred_1.0.0-beta_x64.msi) or
-[Paymetheus 32bit](https://github.com/decred/decred-binaries/releases/download/v1.0.0/decred_1.0.0-beta_x86.msi)
+[Paymetheus 64bit](https://github.com/decred/decred-binaries/releases/download/v1.0.0/decred_1.0.0-release_x64.msi) or
+[Paymetheus 32bit](https://github.com/decred/decred-binaries/releases/download/v1.0.0/decred_1.0.0-release_x86.msi)
 depending on your version of Windows.
 
 To install the command line tools, please see
@@ -198,7 +263,7 @@ See [README.md](./README.md#verifying-binaries) for more info on verifying the f
 | multi: Implement stake difficulty change and vote | [decred/dcrd#666](https://github.com/decred/dcrd/pull/666) |
 | chaincfg: Add agenda for LN support vote. | [decred/dcrd#668](https://github.com/decred/dcrd/pull/668) |
 | Bump for v1.0.0 | [decred/dcrd#660](https://github.com/decred/dcrd/pull/660) |
-| Start to clean up old components and reorganize | [decred/decredutib#258](https://github.com/decred/decrediton/pull/258) |
+| Start to clean up old components and reorganize | [decred/decrediton#258](https://github.com/decred/decrediton/pull/258) |
 | Fix up some of the logging | [decred/decrediton#259](https://github.com/decred/decrediton/pull/259) |
 | Fix bug in logging code. | [decred/decrediton#261](https://github.com/decred/decrediton/pull/261) |
 | Add --extrawalletargs option. | [decred/decrediton#263](https://github.com/decred/decrediton/pull/263) |

@@ -1,0 +1,2 @@
+e8cfbc260be0b7a5d1242e3fa1d7b506b089023dec106c69d2d1353c4ce1e4c9 *decred_1.0.1-release_x86.msi
+41a0bca94a57d126d1a039c26b769c864a23d2b50c9c89c41c53124a12f95d36 *decred_1.0.1-release_x64.msi
