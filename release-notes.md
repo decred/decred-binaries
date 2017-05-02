@@ -1,3 +1,45 @@
+# [v1.0.2](https://github.com/decred/decred-binaries/releases/tag/v1.0.2_decrediton)
+
+## 2017-05-02
+
+This is a patch release for decrediton only.  All users are encouraged to upgrade.  This release addresses several startup issues as well as adding the ability to rescan the chain.
+
+To install decrediton download, uncompress, and run
+[decrediton Linux](https://github.com/decred/decred-binaries/releases/download/v1.0.2_decrediton/decrediton-1.0.2.tar.gz) or
+[decrediton OSX](https://github.com/decred/decred-binaries/releases/download/v1.0.2_decrediton/decrediton-1.0.2.dmg).
+
+See manifest-v1.0.2.txt, and the package specific manifest files for sha256 sums and the associated .asc files to confirm those shas.
+
+See [README.md](./README.md#verifying-binaries) for more info on verifying the files.
+
+## Notes
+
+## Changes
+
+| Description | Pull Request |
+| --- | ---- |
+| Add some extra text for user clarity | [decred/decrediton#364](https://github.com/decred/decrediton/pull/364) |
+| Transaction history address length with no box overflow and help page links | [decred/decrediton#367](https://github.com/decred/decrediton/pull/367) |
+| Add a retry start rpc connection button | [decred/decrediton#369](https://github.com/decred/decrediton/pull/369) |
+| Add rescan button and remove old RescanForm | [decred/decrediton#370](https://github.com/decred/decrediton/pull/370) |
+| Handle output of dcrd/wallet better | [decred/decrediton#372](https://github.com/decred/decrediton/pull/372) |
+| Fix rescan header div area | [decred/decrediton#373](https://github.com/decred/decrediton/pull/373) |
+| Bump for v1.0.2 | [decred/decrediton#374](https://github.com/decred/decrediton/pull/374) |
+
+## Commits
+
+This release was built from:
+
+| Repository | Commit Hash |
+| --- | ---- |
+| decred/dcrwallet | b4cd1304d3c1273cafea6b584e98f69217bfbdce |
+| decred/dcrd | 5bed758f85159b2ee76240207ba775c40000a4c1 |
+| decred/decrediton | 93277e6c435276f106f03667ad8e83d643e63041 |
+
+## Known Issues
+
+---
+
 # [v1.0.1](https://github.com/decred/decred-binaries/releases/tag/v1.0.1)
 
 ## 2017-04-28
@@ -16,7 +58,7 @@ To install decrediton download, uncompress, and run
 [decrediton Linux](https://github.com/decred/decred-binaries/releases/download/v1.0.1/decrediton-1.0.1.tar.gz) or
 [decrediton OSX](https://github.com/decred/decred-binaries/releases/download/v1.0.1/decrediton-1.0.1.dmg).
 
-See manifest-v1.0.0.txt, and the package specific manifest files for sha256 sums and the associated .asc files to confirm those shas.
+See manifest-v1.0.1.txt, and the package specific manifest files for sha256 sums and the associated .asc files to confirm those shas.
 
 See [README.md](./README.md#verifying-binaries) for more info on verifying the files.
 
@@ -346,7 +388,7 @@ This release was built from:
 
 ---
 
-# [v1.0.0_gominer](https://github.com/decred/decred-binaries/releases/tag/v1.0.0)
+# [v1.0.0_gominer](https://github.com/decred/decred-binaries/releases/tag/v1.0.0_gominer)
 
 ## 2017-04-24
 
