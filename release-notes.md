@@ -1,6 +1,53 @@
+# [v1.0.4](https://github.com/decred/decred-binaries/releases/tag/v1.0.4)
+
+## 2017-06-09
+
+This release contains a fix for an error that caused Paymetheus to be unable to talk to the
+dcrwallet process.  Occasionally, HTTP/2 parsing error messages would be displayed and Paymetheus
+would need to be closed.  Under certain instances it was possible that the wallet would begin to work
+after restarting, but some users continued to hit the issue even after restarting.  The bug was caused
+by an integer overflow in the grpc-go version imported by dcrwallet 1.0.3 and was fixed by upgrading
+the grpc-go dependency to the latest 1.4.0 release.
+
+To install Paymetheus download and run either
+[Paymetheus 64bit](https://github.com/decred/decred-binaries/releases/download/v1.0.4/decred_1.0.4-release_x64.msi) or
+[Paymetheus 32bit](https://github.com/decred/decred-binaries/releases/download/v1.0.4/decred_1.0.4-release_x86.msi)
+depending on your version of Windows.
+
+See manifest-v1.0.4.txt, and the package specific manifest files for sha256 sums and the associated .asc files to confirm those shas.
+
+See [README.md](./README.md#verifying-binaries) for more info on verifying the files.
+
+## Notes
+
+## Changes
+
+| Description | Pull Request |
+| --- | ---- |
+| Bump for v1.0.4 | [decred/Paymetheus#296](https://github.com/decred/Paymetheus/pull/296) |
+| Updates for v1.0.4 | [decred/decred-windows-installer#52](https://github.com/decred/decred-windows-installer/pull/52) |
+| Add other balance fields to BalanceResponse to match json/rpc | [decred/dcrwallet#801](https://github.com/decred/dcrwallet/pull/801) |
+| Change to use immature_stake_generation instead | [decred/dcrwallet#802](https://github.com/decred/dcrwallet/pull/802) |
+| Update all dependencies. | [decred/dcrwallet#803](https://github.com/decred/dcrwallet/pull/803) |
+| Bump for v1.0.4 | [decred/dcrwallet#805](https://github.com/decred/dcrwallet/pull/805) |
+
+## Commits
+
+This release was built from:
+
+| Repository | Commit Hash |
+| --- | ---- |
+| decred/Paymetheus | dfb2cc73eb20464a0775e3771b287cd2d54939b7 |
+| decred/decred-windows-installer | db7d5b814954bcdbf2bffde7db075011a0710a25 |
+| decred/dcrwallet | 277226313c5b69d713e954673f12db1514e3a69a |
+
+## Known Issues
+
+---
+
 # [v1.0.3](https://github.com/decred/decred-binaries/releases/tag/v1.0.3)
 
-## 2017-06-07
+## 2017-06-08
 
 This patch release mainly addresses wallet issues (both in the command line and GUI wallets).  For full list of changes and fixes, see below.
 
