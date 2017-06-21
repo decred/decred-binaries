@@ -1,3 +1,118 @@
+# [v1.0.5](https://github.com/decred/decred-binaries/releases/tag/v1.0.5)
+
+## 2017-06-21
+
+This is a patch release primarily focusing on wallet issues and usability.  All users of the GUI wallets and command line tools are encouraged to update.  Mining software is not impacted.
+
+### dcrwallet
+
+This release focuses on fixing an issue that could result in address reuse after restarting the application.  If a previously created address was not publically used, it could be returned again after restarting.  This issue has been corrected by always deriving the next address based on the last created one.
+
+A database upgrade has been added to record the additional info needed to fix the above issue.  Due to the database being forwards-compatible only, wallet software can not be reverted to older versions after running a new version.  If a wallet must be reverted back to old software, a seed restore should be performed.
+
+Two new RPCs have been added to this release.  The first is a revoketickets RPC for the JSON-RPC server.  This RPC models the WalletService.RevokeTickets RPC from the gRPC server and its usage is preferable to using rebroadcastmissed, which may be removed at a later time.  The second is a WalletService.GetTransaction RPC for the gRPC server.  This RPC queries the wallet for details regarding a particular transaction using the transaction hash as a lookup key.  Previously, transaction details were only available in the gRPC server by watching block notifications or querying for all transactions in a range of blocks.
+
+### Paymetheus
+
+This release focuses on fixing an issue that could result in address reuse after restarting the application.  If a previously created address was not publically used, it could be returned again after restarting.  This issue has been corrected by always deriving the next address based on the last created one.
+
+A database upgrade has been added to record the additional info needed to fix the above issue.  Due to the database being forwards-compatible only, wallet software can not be reverted to older versions after running a new version.  If a wallet must be reverted back to old software, a seed restore should be performed.
+
+### decrediton
+
+This patch release includes quite a few bug fixes as well as revealing more information to the user to avoid situations where the lack of information can lead to confusion.
+
+The Accounts, Send and Receive pages have all received a large revamp to attempt to approach the designers' vision.  There are still some remaining nits to fix, but the far majority of the work has been completed.
+
+The Accounts page now includes a balance overview for each account and that account's properties.  The Send page received the largest change, in that, it no longer has a seperate transaction confirmation view.  Instead, whenever a user completes a output or amount field they are checked for validity and then sent to dcrwallet for tx construction.  With this set up the user can now see the estimated size, fee and total amount in the lower right instead of having to wait until the next page.  Also upon clicking the Send button, the user is shown a passphrase confirmation modal.
+
+Various other small bug fixes and visual tweaks were included in this release as well.
+- Revamp Accounts page to be more like the designers' wireframes. Show balances and properties below each.
+- Revamp Send functionality to avoid having to show a seperate confirmation page, instead immediately request the transaction to be constructed upon field update then the send button simple shows a passphrase modal to confirm.
+- Revamp Receive page to be more like the designers' wireframes.
+- Various other visual tweaks as pointed out by the designers.
+
+### dcrd
+
+dcrd changes were primarily infrastructure related (logs) or test related.
+
+## Install
+
+To install Paymetheus download and run either
+[Paymetheus 64bit](https://github.com/decred/decred-binaries/releases/download/v1.0.5/decred_1.0.5-release_x64.msi) or
+[Paymetheus 32bit](https://github.com/decred/decred-binaries/releases/download/v1.0.5/decred_1.0.5-release_x86.msi)
+depending on your version of Windows.
+
+To install the command line tools, please see
+[dcrinstaller](https://github.com/decred/decred-release/tree/master/cmd/dcrinstall).
+
+To install decrediton download, uncompress, and run
+[decrediton Linux](https://github.com/decred/decred-binaries/releases/download/v1.0.5/decrediton-1.0.5.tar.gz) or
+[decrediton OSX](https://github.com/decred/decred-binaries/releases/download/v1.0.5/decrediton-1.0.5.dmg).
+
+See manifest-v1.0.5.txt, and the package specific manifest files for sha256 sums and the associated .asc files to confirm those shas.
+
+See [README.md](./README.md#verifying-binaries) for more info on verifying the files.
+
+## Notes
+
+## Changes
+
+| Description | Pull Request |
+| --- | ---- |
+| Bump for v1.0.5 | [decred/Paymetheus#300](https://github.com/decred/Paymetheus/pull/300) |
+| Label go builds with release | [decred/decred-windows-installer#51](https://github.com/decred/decred-windows-installer/pull/51) |
+| Updates for v1.0.5 | [decred/decred-windows-installer#53](https://github.com/decred/decred-windows-installer/pull/53) |
+| Add RevokeTickets handlers | [decred/dcrrpcclient#81](https://github.com/decred/dcrrpcclient/pull/81) |
+| Track btclog API updates. | [decred/dcrrpcclient#82](https://github.com/decred/dcrrpcclient/pull/82) |
+| Avoid address reuse after restarting. | [decred/dcrwallet#804](https://github.com/decred/dcrwallet/pull/804) |
+| Fixes #806 Prompt accepts "ok" | [decred/dcrwallet#807](https://github.com/decred/dcrwallet/pull/807) |
+| json-rpc: Add revoketickets | [decred/dcrwallet#811](https://github.com/decred/dcrwallet/pull/811) |
+| Log the correct next child index. | [decred/dcrwallet#812](https://github.com/decred/dcrwallet/pull/812) |
+| Fix calculations of whether to write updated child indexes. | [decred/dcrwallet#814](https://github.com/decred/dcrwallet/pull/814) |
+| Update port in clientusage.md | [decred/dcrwallet#816](https://github.com/decred/dcrwallet/pull/816) |
+| Add WalletService.GetTransaction RPC. | [decred/dcrwallet#817](https://github.com/decred/dcrwallet/pull/817) |
+| Update project dependencies. | [decred/dcrwallet#818](https://github.com/decred/dcrwallet/pull/818) |
+| Bump for v1.0.5 | [decred/dcrwallet#819](https://github.com/decred/dcrwallet/pull/819) |
+| secp256k1: Consolidate tests into the main package. | [decred/dcrd#722](https://github.com/decred/dcrd/pull/722) |
+| secp256k1: Unexport idents that do not need to be. | [decred/dcrd#723](https://github.com/decred/dcrd/pull/723) |
+| secp256k1: Optimize normalize and NAF, correct normalize, and add tests. | [decred/dcrd#724](https://github.com/decred/dcrd/pull/724) |
+| dcrjson: add RevokeTicketsCmd | [decred/dcrd#726](https://github.com/decred/dcrd/pull/726) |
+| Add -j/json option to dcrctl. | [decred/dcrd#728](https://github.com/decred/dcrd/pull/728) |
+| all: Remove seelog logger. | [decred/dcrd#730](https://github.com/decred/dcrd/pull/730) |
+| Bump for v1.0.5 | [decred/dcrd#731](https://github.com/decred/dcrd/pull/731) |
+| chaincfg: update checkpoints for 1.0.5 release | [decred/dcrd#732](https://github.com/decred/dcrd/pull/732) |
+| Make docker script use latest dcrd release | [decred/decrediton#429](https://github.com/decred/decrediton/pull/429) |
+| Add balance overview page | [decred/decrediton#438](https://github.com/decred/decrediton/pull/438) |
+| Correctly update spendlimit on ticket purchasing | [decred/decrediton#439](https://github.com/decred/decrediton/pull/439) |
+| Add balance checks to send page | [decred/decrediton#441](https://github.com/decred/decrediton/pull/441) |
+| Fix incorrect get for Spendable balance | [decred/decrediton#442](https://github.com/decred/decrediton/pull/442) |
+| Set the seedError check to be !== null | [decred/decrediton#443](https://github.com/decred/decrediton/pull/443) |
+| Make sure cursor is a pointer on buttons | [decred/decrediton#444](https://github.com/decred/decrediton/pull/444) |
+| Add different styling for overview transactions | [decred/decrediton#445](https://github.com/decred/decrediton/pull/445) |
+| Fix expiry not getting set properly | [decred/decrediton#451](https://github.com/decred/decrediton/pull/451) |
+| Implement some of the requested changes from designer | [decred/decrediton#452](https://github.com/decred/decrediton/pull/452) |
+| Bump for v1.0.5 | [decred/decrediton#454](https://github.com/decred/decrediton/pull/454) |
+| Fix bugs found during patch release testing | [decred/decrediton#457](https://github.com/decred/decrediton/pull/457) |
+| Correctly set the expiry for purchase tickets | [decred/decrediton#458](https://github.com/decred/decrediton/pull/458) |
+
+## Commits
+
+This release was built from:
+
+| Repository | Commit Hash |
+| --- | ---- |
+| decred/Paymetheus | 11240d1354c7328b8e875cd0ce965901d9d2b9f8 |
+| decred/decred-windows-installer | f8a1cd7b838ab899076075a890709640a0238f27 |
+| decred/dcrwallet | 6a50ff0b9188af4b2dec68e42add0028c97fb11c |
+| decred/dcrd | 0d406ffde87da224466ba5c83548941e15179872 |
+| decred/decrediton | 8c2a2fdda2847d590fd2c9e2426defb1eb6865a1 |
+
+## Known Issues
+
+---
+
+
 # [v1.0.4](https://github.com/decred/decred-binaries/releases/tag/v1.0.4)
 
 ## 2017-06-09
