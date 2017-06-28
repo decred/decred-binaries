@@ -1,3 +1,60 @@
+# [v1.0.6](https://github.com/decred/decred-binaries/releases/tag/v1.0.6)
+
+## 2017-06-29
+
+This is a patch release of decrediton only.  Decrediton users are encouraged to upgrade.
+
+### decrediton
+
+Updates to decredtiton v1.0.6:
+- Fix issue with send amounts validation that was causing decimals to fail entry.
+- Add show/hide non-zero Account functionality.  If an account has a zero balance it can be hidden from being seen in dropdowns, etc.
+- Add Immature tickets to StakeInfo on Tickets page.
+- Add currency switching in various dropdowns.
+- Make sure to request updated StakeInfo upon successful PurchaseTicket request so correct current values are shown to the user.
+- More design tweaks as requested by @linnutee.
+
+## Install
+
+To install decrediton download, uncompress, and run
+[decrediton Linux](https://github.com/decred/decred-binaries/releases/download/v1.0.6/decrediton-1.0.6.tar.gz) or
+[decrediton OSX](https://github.com/decred/decred-binaries/releases/download/v1.0.6/decrediton-1.0.6.dmg).
+
+See manifest-v1.0.6.txt, and the package specific manifest files for sha256 sums and the associated .asc files to confirm those shas.
+
+See [README.md](./README.md#verifying-binaries) for more info on verifying the files.
+
+## Notes
+
+## Changes
+
+| Description | Pull Request |
+| --- | ---- |
+| Don't try to set permissions with rsync in build script. | [decred/decrediton#461](https://github.com/decred/decrediton/pull/461) |
+| Update cli tools to v1.0.5 | [decred/decrediton#463](https://github.com/decred/decrediton/pull/463) |
+| Update to please PropTypes movement | [decred/decrediton#464](https://github.com/decred/decrediton/pull/464) |
+| Fix various bugs that have been found in 1.0.5 | [decred/decrediton#466](https://github.com/decred/decrediton/pull/466) |
+| Add show/hide account functionality | [decred/decrediton#468](https://github.com/decred/decrediton/pull/468) |
+| Add Immature tickets to stake info | [decred/decrediton#469](https://github.com/decred/decrediton/pull/469) |
+| Add currency type switching to dropdowns | [decred/decrediton#470](https://github.com/decred/decrediton/pull/470) |
+| Add getStakeInfoAttempt on successful purchase tickets attempt | [decred/decrediton#471](https://github.com/decred/decrediton/pull/471) |
+| A few remaining design fixes for v1.0.6 release | [decred/decrediton#473](https://github.com/decred/decrediton/pull/473) |
+| Bump for v1.0.6 | [decred/decrediton#472](https://github.com/decred/decrediton/pull/472) |
+| Fix function references | [decred/decrediton#475](https://github.com/decred/decrediton/pull/475) |
+
+## Commits
+
+This release was built from:
+
+| Repository | Commit Hash |
+| --- | ---- |
+| decred/decrediton | 6eb4c2bcaba7217c7d370d342babee423565d6ca |
+
+## Known Issues
+
+---
+
+
 # [v1.0.5](https://github.com/decred/decred-binaries/releases/tag/v1.0.5)
 
 ## 2017-06-21
