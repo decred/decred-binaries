@@ -1,3 +1,492 @@
+# [v1.0.7](https://github.com/decred/decred-binaries/releases/tag/v1.0.7)
+
+## 2017-08-17
+
+
+## Install
+
+To install Paymetheus download and run either
+[Paymetheus 64bit](https://github.com/decred/decred-binaries/releases/download/v1.0.7/decred_1.0.7-release_x64.msi) or
+[Paymetheus 32bit](https://github.com/decred/decred-binaries/releases/download/v1.0.7/decred_1.0.7-release_x86.msi)
+depending on your version of Windows.
+
+To install the command line tools, please see
+[dcrinstaller](https://github.com/decred/decred-release/tree/master/cmd/dcrinstall).
+
+To install decrediton download, uncompress, and run
+[decrediton Linux](https://github.com/decred/decred-binaries/releases/download/v1.0.7/decrediton-1.0.7.tar.gz) or
+[decrediton OSX](https://github.com/decred/decred-binaries/releases/download/v1.0.7/decrediton-1.0.7.dmg).
+
+See manifest-v1.0.7.txt, and the package specific manifest files for sha256 sums and the associated .asc files to confirm those shas.
+
+See [README.md](./README.md#verifying-binaries) for more info on verifying the files.
+
+
+## Contents
+
+* [dcrd](#dcrd-v107)
+* [dcrwallet](#dcrwallet-v107)
+* [Paymetheus](#paymetheus-v107)
+* [decrediton](#decrediton-v107)
+
+
+## dcrd v1.0.7
+
+This release of dcrd primarily contains improvements to the infrastructure and other quality assurance changes
+that are bringing us closer to providing full support for Lightning Network.
+
+A lot of work required for Lightning Network support went into getting the required code merged into the upstream
+project, btcd, which now fully supports it.  These changes also must be synced and integrated with dcrd as well and
+therefore many of the changes in this release are related to that process.
+
+
+## Notable Changes
+
+### Dust check removed from stake transactions
+
+The standard policy for regular transactions is to reject any transactions that have outputs so small that
+they cost more to the network than their value.  This behavior is desirable for regular transactions, however
+it was also being applied to vote and revocation transactions which could lead to a situation where stake pools
+with low fees could result in votes and revocations having difficulty being mined.
+
+This check has been changed to only apply to regular transactions now in order to prevent any issues.  Stake
+transactions have several other checks that make this one unnecessary for them.
+
+### New `feefilter` peer-to-peer message
+
+A new optional peer-to-peer message named `feefilter` has been added that allows peers to inform others about the
+minimum transaction fee rate they are willing to accept.  This will enable peers to avoid notifying others about
+transactions they will not accept anyways and therefore can result in a significant bandwith savings.
+
+### Bloom filter service bit enforcement
+
+Peers that are configured to disable bloom filter support will now disconnect remote peers that send bloom
+filter related commands rather than simply ignoring them.  This allows any light clients that do not observe
+the service bit to potentially find another peer that provides the service.  Additionally, remote peers that
+have negotiated a high enough protocol version to observe the service bit and still send bloom filter
+related commands anyways will now be banned.
+
+
+## Changelog
+
+All commits since the last release may be viewed on GitHub
+[here](https://github.com/decred/dcrd/compare/v1.0.5...v1.0.7).
+
+### Protocol and network:
+- Allow reorg of block one [decred/dcrd#745](https://github.com/decred/dcrd/pull/745)
+- blockchain: use the time source [decred/dcrd#747](https://github.com/decred/dcrd/pull/747)
+- peer: Strictly enforce bloom filter service bit [decred/dcrd#768](https://github.com/decred/dcrd/pull/768)
+- wire/peer: Implement feefilter p2p message [decred/dcrd#779](https://github.com/decred/dcrd/pull/779)
+- chaincfg: update checkpoints for 1.0.7 release  [decred/dcrd#816](https://github.com/decred/dcrd/pull/816)
+
+### Transaction relay (memory pool):
+- mempool: Break dependency on chain instance [decred/dcrd#754](https://github.com/decred/dcrd/pull/754)
+- mempool: unexport the mutex [decred/dcrd#755](https://github.com/decred/dcrd/pull/755)
+- mempool: Add basic test harness infrastructure [decred/dcrd#756](https://github.com/decred/dcrd/pull/756)
+- mempool: Improve tx input standard checks [decred/dcrd#758](https://github.com/decred/dcrd/pull/758)
+- mempool: Update comments for dust calcs [decred/dcrd#764](https://github.com/decred/dcrd/pull/764)
+- mempool: Only perform standard dust checks on regular transactions  [decred/dcrd#806](https://github.com/decred/dcrd/pull/806)
+
+### RPC:
+- Fix gettxout includemempool handling [decred/dcrd#738](https://github.com/decred/dcrd/pull/738)
+- Improve help text for getmininginfo [decred/dcrd#748](https://github.com/decred/dcrd/pull/748)
+- rpcserverhelp: update TicketFeeInfo help [decred/dcrd#801](https://github.com/decred/dcrd/pull/801)
+- blockchain: Improve getstakeversions efficiency [decred/dcrd#81](https://github.com/decred/dcrd/pull/813)
+
+### dcrd command-line flags:
+- config: introduce new flags to accept/reject non-std transactions [decred/dcrd#757](https://github.com/decred/dcrd/pull/757)
+- config: Add --whitelist option [decred/dcrd#352](https://github.com/decred/dcrd/pull/352)
+- config: Improve config file handling [decred/dcrd#802](https://github.com/decred/dcrd/pull/802)
+- config: Improve blockmaxsize check [decred/dcrd#810](https://github.com/decred/dcrd/pull/810)
+
+### dcrctl:
+- Add --walletrpcserver option [decred/dcrd#736](https://github.com/decred/dcrd/pull/736)
+
+### Documentation
+- docs: add commit prefix notes  [decred/dcrd#788](https://github.com/decred/dcrd/pull/788)
+
+### Developer-related package changes:
+- blockchain: check errors and remove ineffectual assignments [decred/dcrd#689](https://github.com/decred/dcrd/pull/689)
+- stake: less casting [decred/dcrd#705](https://github.com/decred/dcrd/pull/705)
+- blockchain: chainstate only needs prev block hash [decred/dcrd#706](https://github.com/decred/dcrd/pull/706)
+- remove dead code [decred/dcrd#715](https://github.com/decred/dcrd/pull/715)
+- Use btclog for determining valid log levels [decred/dcrd#738](https://github.com/decred/dcrd/pull/738)
+- indexers: Minimize differences with upstream code [decred/dcrd#742](https://github.com/decred/dcrd/pull/742)
+- blockchain: Add median time to state snapshot [decred/dcrd#753](https://github.com/decred/dcrd/pull/753)
+- blockmanager: remove unused GetBlockFromHash function [decred/dcrd#761](https://github.com/decred/dcrd/pull/761)
+- mining: call CheckConnectBlock directly [decred/dcrd#762](https://github.com/decred/dcrd/pull/762)
+- blockchain: add missing error code entries [decred/dcrd#763](https://github.com/decred/dcrd/pull/763)
+- blockchain: Sync main chain flag on ProcessBlock [decred/dcrd#767](https://github.com/decred/dcrd/pull/767)
+- blockchain: Remove exported CalcPastTimeMedian func [decred/dcrd#770](https://github.com/decred/dcrd/pull/770)
+- blockchain: check for error [decred/dcrd#772](https://github.com/decred/dcrd/pull/772)
+- multi: Optimize by removing defers [decred/dcrd#782](https://github.com/decred/dcrd/pull/782)
+- blockmanager: remove unused logBlockHeight [decred/dcrd#787](https://github.com/decred/dcrd/pull/787)
+- dcrutil: Replace DecodeNetworkAddress with DecodeAddress [decred/dcrd#746](https://github.com/decred/dcrd/pull/746)
+- txscript: Force extracted addrs to compressed [decred/dcrd#775](https://github.com/decred/dcrd/pull/775)
+- wire: Remove legacy transaction decoding [decred/dcrd#794](https://github.com/decred/dcrd/pull/794)
+- wire: Remove dead legacy tx decoding code [decred/dcrd#796](https://github.com/decred/dcrd/pull/796)
+- mempool/wire: Don't make policy decisions in wire [decred/dcrd#797](https://github.com/decred/dcrd/pull/797)
+- dcrjson: Remove unused cmds & types [decred/dcrd#795](https://github.com/decred/dcrd/pull/795)
+- dcrjson: move cmd types [decred/dcrd#799](https://github.com/decred/dcrd/pull/799)
+- multi: Separate tx serialization type from version [decred/dcrd#798](https://github.com/decred/dcrd/pull/798)
+- dcrjson: add Unconfirmed field to dcrjson.GetAccountBalanceResult [decred/dcrd#812](https://github.com/decred/dcrd/pull/812)
+- multi: Error descriptions should be lowercase [decred/dcrd#771](https://github.com/decred/dcrd/pull/771)
+- blockchain: cast to int64  [decred/dcrd#817](https://github.com/decred/dcrd/pull/817)
+
+### Testing and Quality Assurance:
+- rpcserver: Upstream sync to add basic RPC tests [decred/dcrd#750](https://github.com/decred/dcrd/pull/750)
+- rpctest: Correct several issues tests and joins [decred/dcrd#751](https://github.com/decred/dcrd/pull/751)
+- rpctest: prevent process leak due to panics [decred/dcrd#752](https://github.com/decred/dcrd/pull/752)
+- rpctest: Cleanup resources on failed setup [decred/dcrd#759](https://github.com/decred/dcrd/pull/759)
+- rpctest: Use ports based on the process id [decred/dcrd#760](https://github.com/decred/dcrd/pull/760)
+- rpctest/deps: Update dependencies and API [decred/dcrd#765](https://github.com/decred/dcrd/pull/765)
+- rpctest: Gate rpctest-based behind a build tag [decred/dcrd#766](https://github.com/decred/dcrd/pull/766)
+- mempool: Add test for max orphan entry eviction [decred/dcrd#769](https://github.com/decred/dcrd/pull/769)
+- fullblocktests: Add more consensus tests [decred/dcrd#77](https://github.com/decred/dcrd/pull/773)
+- fullblocktests: Sync upstream block validation [decred/dcrd#774](https://github.com/decred/dcrd/pull/774)
+- rpctest: fix a harness range bug in syncMempools [decred/dcrd#778](https://github.com/decred/dcrd/pull/778)
+- secp256k1: Add regression tests for field.go [decred/dcrd#781](https://github.com/decred/dcrd/pull/781)
+- secp256k1: Sync upstream test consolidation [decred/dcrd#783](https://github.com/decred/dcrd/pull/783)
+- txscript: Correct p2sh hashes in json test data  [decred/dcrd#785](https://github.com/decred/dcrd/pull/785)
+- txscript: Replace CODESEPARATOR json test data [decred/dcrd#786](https://github.com/decred/dcrd/pull/786)
+- txscript: Remove multisigdummy from json test data [decred/dcrd#789](https://github.com/decred/dcrd/pull/789)
+- txscript: Remove max money from json test data [decred/dcrd#790](https://github.com/decred/dcrd/pull/790)
+- txscript: Update signatures in json test data [decred/dcrd#791](https://github.com/decred/dcrd/pull/791)
+- txscript: Use native encoding in json test data [decred/dcrd#792](https://github.com/decred/dcrd/pull/792)
+- rpctest: Store logs and data in same path [decred/dcrd#780](https://github.com/decred/dcrd/pull/780)
+- txscript: Cleanup reference test code  [decred/dcrd#793](https://github.com/decred/dcrd/pull/793)
+
+### Misc:
+- Update deps to pull in additional logging changes [decred/dcrd#734](https://github.com/decred/dcrd/pull/734)
+- Update markdown files for GFM changes [decred/dcrd#744](https://github.com/decred/dcrd/pull/744)
+- blocklogger: Show votes, tickets, & revocations [decred/dcrd#784](https://github.com/decred/dcrd/pull/784)
+- blocklogger: Remove STransactions from transactions calculation [decred/dcrd#811](https://github.com/decred/dcrd/pull/811)
+
+### Contributors (alphabetical order):
+
+- Alex Yocomm-Piatt
+- Atri Viss
+- Chris Martin
+- Dave Collins
+- David Hill
+- Donald Adu-Poku
+- Jimmy Song
+- John C. Vernaleo
+- Jolan Luff
+- Josh Rickmar
+- Olaoluwa Osuntokun
+- Marco Peereboom
+
+
+## dcrwallet v1.0.7
+
+This release focused on fixing several issues related to corrupted spend
+tracking that would cause double spend errors when sending transactions.  All
+users are recommended to upgrade.
+
+This release also lays the groundwork for more staking features to be
+implemented in future releases.  The wallet now tracks more details about all
+tickets and the votes or revocations that spend them.  In future releases, this
+can be used to implement highly requested features such as detailed listings of
+all tickets, votes, and revocations and subsidy calculations.
+
+### Database upgrade notice
+
+This release contains a wallet database upgrade.  Once upgraded, the database
+can not be used on older releases and downgrading will require restoring from
+seed or backup.  The Decred project recommends ensuring you have access to your
+wallet seed before upgrading in case a downgrade is necessary.
+
+### Bug fixes
+
+* Gaps are no longer created between watched addresses.  This in turn fixes
+  issues where incoming transactions were not received by the wallet and
+  subsequently fixes various double spending and orphan transaction errors when
+  sending transactions or purchasing tickets.  Users affected by these issues
+  are asked to rescan or restore from seed after upgrading.
+
+* Adding multiple double spending unconfirmed transactions to the wallet no
+  longer corrupts spend tracking.
+ 
+* Database usage has been altered to avoid known data corruption issues caused
+  by Bolt cursors.
+ 
+* Wrapped address child indexes now continue to stay wrapped across wallet
+  restarts instead of returning to the highest returned child index.  This may
+  avoid unintended address reuse issues.
+ 
+* The first address of newly-created accounts is no longer skipped over when
+  generating addresses.
+ 
+* Handling of stake transactions has been rewritten to keep data consistent with
+  missed votes and blockchain reorganizations.
+ 
+* Balance reporting has been corrected for the voting authority and locked by
+  tickets balances by taking the ticket purchase's transaction fee into account.
+ 
+* The `sendtoaddress`, `sendfrom`, and `sendmany` JSON-RPC methods now verify
+  that the intended network of addresses in the request match the active
+  network.
+ 
+* Missing an explicitly specified config file now errors instead of only logging
+  a warning.
+ 
+### New features
+ 
+* The `signrawtransaction` JSON-RPC and `WalletService.SignTransaction` gRPC
+  methods are now capable of being used on offline wallets.
+ 
+* The `WalletService.SignMessage` and `MessageVerificationService.VerifyMessage`
+  gRPC methods have been introduced to add message signing and verification
+  features to the gRPC API.  These methods operate similarly to the
+  `signmessage` and `verifymessage` JSON-RPC methods.
+ 
+* The `getbalance` JSON-RPC method now includes fields for unconfirmed balances
+  of each account.  These balances are calculated as the spendable (by
+  consensus) balance which is not already included under the `spendable` field,
+  which is the spendable balance by both consensus rules and the minimum number
+  of required confirmations.  The addition of both fields equals the total
+  spendable-by-consensus balance.
+ 
+* Private passphrases can now be specified on the command line or in a config
+  file with the `--pass` option.  When used, the passphrase prompt at startup is
+  avoided when the auto ticket buyer is enabled.
+ 
+### Other improvements
+ 
+* The auto ticket buyer takes better advantage of the improved ticket price
+  algorithm by reducing the default maximum ticket purchase fee from 0.1/kB to
+  0.01/kB and reducing the maximum number of tickets purchased per block from 5
+  to 1.
+ 
+* Ticket purchases are now removed from the wallet once the ticket price
+  changes. As a result, the `--prunetickets` config option is no longer required
+  or useful and has been deprecated.
+ 
+* Performance enhancements have been made for the `getstakeinfo` JSON-RPC and
+  `WalletService.StakeInfo` gRPC methods.
+ 
+* The logger has been rewritten for improved performance.  Rolled log files are
+  now gzipped.
+ 
+* Error logs for duplicate script imports when the wallet is locked have been
+  removed.
+ 
+* Code quality has improved over several areas.
+ 
+### Changelog
+ 
+All commits since the last release may be viewed on GitHub
+[here](https://github.com/decred/dcrwallet/compare/v1.0.5...v1.0.7).
+ 
+ 
+## Paymetheus v1.0.7
+ 
+This release focused on under-the-hood improvements to the backend (dcrwallet)
+instead of new features or UI changes.  Users should no longer encounter double
+spend or orphan transaction errors sending transactions due to fixes for wallet
+spend tracking corruption, but a seed restore is necessary to fix
+already-corrupted wallets.
+
+### Database upgrade notice
+ 
+This release contains a wallet database upgrade.  Once upgraded, the database
+can not be used on older releases and downgrading will require restoring from
+seed or backup.  The Decred project recommends ensuring you have access to your
+wallet seed before upgrading in case a downgrade is necessary.
+ 
+### Bug fixes
+ 
+* Gaps are no longer created between watched addresses.  This in turn fixes
+  issues where incoming transactions were not received by the wallet and
+  subsequently fixes various double spending and orphan transaction errors when
+  sending transactions or purchasing tickets.  Users affected by these issues
+  are asked to restore from seed after upgrading.
+ 
+* Adding multiple double spending unconfirmed transactions to the wallet no
+  longer corrupts spend tracking.
+ 
+* Database usage has been altered to avoid known data corruption issues caused
+  by Bolt cursors.
+ 
+* Wrapped address child indexes now continue to stay wrapped across wallet
+  restarts instead of returning to the highest returned child index.  This may
+  avoid unintended address reuse issues.
+ 
+* The first address of newly-created accounts is no longer skipped over when
+  generating addresses.
+ 
+* Handling of stake transactions has been rewritten to keep data consistent with
+  missed votes and blockchain reorganizations.
+ 
+### Other improvements
+ 
+* Performance enhancements have been made for querying stake statistics in the
+  "Stake mining" view.
+ 
+### Changelog
+ 
+All commits since the last release may be viewed on GitHub
+[here](https://github.com/decred/Paymetheus/compare/v1.0.5...v1.0.7).  Also see
+all changes to dcrwallet
+[here](https://github.com/decred/dcrwallet/compare/v1.0.5...v1.0.7).
+ 
+
+## decrediton v1.0.7
+ 
+This release of decrediton aims to smooth out various issues that users have
+consistently reported since the release of v1.0.6.  Extra care has been taken
+to ensure that users get as much information as possible to understand some
+of the innerworks of Decred.  But at the same time, ticket purchasing and other
+features are actively being simplified and refined.  We have also added
+some basic animations instead of the default loading screens.  We hope to
+integrate several pieces of art and animations from our amazing community of 
+artists.
+
+In the coming releases we are expecting the following: Windows releases and
+a completely revamped onboarding procedure.  This release is a step toward
+realizng those goals.
+
+We have also begun a complete refactor and reorganization of the React 
+components.  This [issue](https://github.com/decred/decrediton/issues/528) describes the end goal of this project.
+Ideally, we will be able to make the UX/UI development open to all designers,
+which will allow for a true collborative effort.
+
+### Database upgrade notice
+ 
+This release contains a wallet database upgrade.  Once upgraded, the database
+can not be used on older releases and downgrading will require restoring from
+seed or backup.  The Decred project recommends ensuring you have access to your
+wallet seed before upgrading in case a downgrade is necessary.
+ 
+### Bug fixes
+ 
+* Gaps are no longer created between watched addresses.  This in turn fixes
+  issues where incoming transactions were not received by the wallet and
+  subsequently fixes various double spending and orphan transaction errors when
+  sending transactions or purchasing tickets.  Users affected by these issues
+  are asked to restore from seed after upgrading.
+ 
+* Adding multiple double spending unconfirmed transactions to the wallet no
+  longer corrupts spend tracking.
+ 
+* Database usage has been altered to avoid known data corruption issues caused
+  by Bolt cursors.
+ 
+* Wrapped address child indexes now continue to stay wrapped across wallet
+  restarts instead of returning to the highest returned child index.  This may
+  avoid unintended address reuse issues.
+ 
+* The first address of newly-created accounts is no longer skipped over when
+  generating addresses.
+ 
+* Handling of stake transactions has been rewritten to keep data consistent with
+  missed votes and blockchain reorganizations.
+ 
+* Ticket autobuyer was not properly starting and stopping. Now user is
+  properly notified when the ticket buyer has started. In the coming releases,
+  we will be adding even more feedback from ticket buyer so the the user
+  is able to see some of the decision making happening each block.
+
+* Autobuyer settings are now properly set on config updates and have confirmed
+  that dcrwallet receives all settings as expected configuration changes.
+
+* Under strange circumstances, users with multiple stakepools reported that
+  settings were being overwritten. Now, only the pool fees field is updated if
+  necessary.
+
+* Revocations are now shown in the transaction History page.
+
+* Small display fixes now allow clear rendering on Windows.  We are in the
+  process of fully releasing on Windows in the next release.
+ 
+* Font files were previously configured incorrectly due to not have the
+  corresponding font files for request font weight.  It made all fonts look
+  fuzzy and unclear.
+ 
+* Some fields have been fixed to allow expected double-click-to-select
+  functionality. We are auditting and trying to fix all of them soon.
+ 
+* Testnet2 Wallets weren't properly being located.
+ 
+* Update to use current network minfees by default (0.001 DCR/kB).
+ 
+* New account creation and account renaming are now shown immediately after
+  successful response from wallet.  Previously it would take an extra render
+  for them to be updated in the accounts list.
+ 
+### New features:
+ 
+* Transaction details page has been revamped to provide the used inputs and new
+  outputs that each transaction creates. We will be adding more to this page
+  as new information is added to be received from dcrwallet.
+ 
+* Transaction notifications have been moved to the bottom of the screen and
+  now contain a much clearer idea of each new transaction received.  We will
+  be adding the ability to click on these notifications to show the full
+  transaction details page.
+ 
+* Implement new seed entry system (react-select).  Now users can use the
+  bubble entry system to ensure they have proper spellings and length when
+  entering existing seed or confirming new ones.
+ 
+* We have started to add tooltips to various fields with the react-tooltip
+  package.  We are trying to avoid putting tooltips on everything.  We mostly
+  try to follow feedback we're getting from users as to where tooltips might
+  clear up confusion in terms of the UX.
+ 
+* Add copy-to-clipboard functionality to address generation on the Receive page.
+  We're currently auditing other places that it would make sense to add these
+  buttons (or some other trigger to copy).  Most likely, tx and block hashes,
+  scripts and other long strings that are annoying to highlight to copy.
+ 
+* Add logging with winston package.  This is the first step at revamping the
+  startup procedure for decrediton.  The more instances where users are can
+  see where something wrong, the better we can fix/diagnose further issues.
+ 
+* Introduce custrom animations for loading times.  Currently we have a simple
+  rotating DCR logo and a sprite animated Stakey.  We are planning on adding
+  a few more from various artists to showcase some of the great art being
+  created by our community.
+ 
+### Other improvements:
+ 
+* Add working wallet/account buttons to go to Accounts page for better UX.
+ 
+* Move stakeinfo to an expandable div on tickets page.
+ 
+* Overhaul of various styling according to designer input.
+ 
+* Refactor redux actions for cleaner reading.
+ 
+* Add better instructions for stakepool apikey entry.
+ 
+* Begin complete react component/container refactor.  This is the first step
+  towards fixing component structure and reuse.
+ 
+* Begin removing inline styles and Radium, replaced with Less styling.
+ 
+* Add config option to use a remote daemon set up.
+ 
+* Update README.md to include quirk about installing decrediton for the first
+  time for development.
+ 
+* Add core-decorators library and utilize @autobind annotation.
+ 
+* Update to use webpack 3.
+ 
+* Add rpm and deb linux builds.
+ 
+* Fixes to DockerFile support.
+ 
+### Changelog
+ 
+All commits since the last release may be viewed on GitHub
+[here](https://github.com/decred/decrediton/compare/v1.0.6...v1.0.7).  Also see
+all changes to dcrwallet
+[here](https://github.com/decred/dcrwallet/compare/v1.0.5...v1.0.7).
+
+
 # [v1.0.6](https://github.com/decred/decred-binaries/releases/tag/v1.0.6)
 
 ## 2017-06-29
