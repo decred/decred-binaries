@@ -1,3 +1,108 @@
+# [v1.0.8](https://github.com/decred/decred-binaries/releases/tag/v1.0.8)
+
+## 2017-08-25
+
+
+## Install
+
+To install Paymetheus download and run either
+[Paymetheus 64bit](https://github.com/decred/decred-binaries/releases/download/v1.0.8/decred_1.0.8-release_x64.msi) or
+[Paymetheus 32bit](https://github.com/decred/decred-binaries/releases/download/v1.0.8/decred_1.0.8-release_x86.msi)
+depending on your version of Windows.
+
+To install the command line tools, please see
+[dcrinstaller](https://github.com/decred/decred-release/tree/master/cmd/dcrinstall).
+
+To install decrediton download, uncompress, and run
+[decrediton Linux](https://github.com/decred/decred-binaries/releases/download/v1.0.8/decrediton-1.0.8.tar.gz) or
+[decrediton OSX](https://github.com/decred/decred-binaries/releases/download/v1.0.8/decrediton-1.0.8.dmg).
+
+See manifest-v1.0.8.txt, and the package specific manifest files for sha256 sums and the associated .asc files to confirm those shas.
+
+See [README.md](./README.md#verifying-binaries) for more info on verifying the files.
+
+
+## Contents
+
+* [dcrwallet](#dcrwallet-v108)
+* [Paymetheus](#paymetheus-v108)
+* [decrediton](#decrediton-v108)
+
+
+# dcrwallet v1.0.8
+
+This release focused on minor bug fixes.  No new features have been added.
+
+## Bug fixes
+
+* Tickets that are not owned by the wallet but are still recorded for spend
+  tracking purposes are skipped when generating the stake information and acting
+  on selected ticket notifications.  This prevents misreporting a high missed
+  count in the stake information and avoids trying to create and send unsigned
+  votes or revocations for tickets that can't be spent by the wallet.
+
+* gRPC transaction notifications for mined transactions now use the earliest of
+  the seen time and block time as their timestamp.  This prevents seed-restored
+  wallets from using the time of restore as the transaction time as well as
+  using the block time for any transactions received while the wallet was
+  offline.
+
+* gRPC services are no longer registered with the server after it has begun
+  serving and listening for clients.  This is a correctness fix for a data race
+  and a misuse of the gRPC package.  Delayed services such as the WalletService
+  still require a loaded wallet to be used and users of the API shouldn't notice
+  any difference.
+
+## Changelog
+
+All commits since the last release may be viewed on GitHub
+[here](https://github.com/decred/dcrwallet/compare/v1.0.7...v1.0.8).
+
+
+## Paymetheus v1.0.8
+
+This release focused on under-the-hood improvements to the backend (dcrwallet)
+instead of new features or UI changes.
+
+## Bug fixes
+
+* Mined transactions now use the earliest of the seen time and the block time
+  for a timestamp.  This avoids simply showing every transaction arriving at the
+  time of restore when a wallet is seed restored, and also corrects the
+  timestamp for transactions received while the wallet was not running.
+
+## Changelog
+
+All commits since the last release may be viewed on GitHub
+[here](https://github.com/decred/Paymetheus/compare/v1.0.7...v1.0.8).  Also see
+all changes to dcrwallet
+[here](https://github.com/decred/dcrwallet/compare/v1.0.7...v1.0.8).
+
+
+## decrediton v1.0.8
+
+This patch release fixes a critical bug that effected users that had multiple
+stakepools configured at the same time.  Periodically some stakepool settings
+would get overwritten onto others which would cause pool fees to be incorrectly
+set for a given ticket.  If the pool fees were too low according to the stakepool,
+they would be considered invalid.  If you believe you could have been effected
+by this issue, please check on your stakepool tickets page to see if you have
+any invalid tickets.  Then please contact your stakepool operator about getting
+the tickets added and ready to be voted on.
+
+Upon upgrading to 1.0.8 it is recommended to delete your existing config.json
+located in your decrediton application directory.  Then restart your decrediton
+and re-enter your apikeys.  You may need to restart decrediton an extra time
+for your stakepool list to populate.
+
+## Changelog
+
+All commits since the last release may be viewed on GitHub
+[here](https://github.com/decred/decrediton/compare/v1.0.7...v1.0.8).  Also see
+all changes to dcrwallet
+[here](https://github.com/decred/dcrwallet/compare/v1.0.7...v1.0.8).
+
+
 # [v1.0.7](https://github.com/decred/decred-binaries/releases/tag/v1.0.7)
 
 ## 2017-08-17
