@@ -1,3 +1,55 @@
+# [v1.1.1](https://github.com/decred/decred-binaries/releases/tag/v1.1.1)
+
+## 2017-09-29
+
+
+## Install
+
+To install decrediton download, uncompress, and run
+[decrediton Linux](https://github.com/decred/decred-binaries/releases/download/v1.1.1/decrediton-1.1.1.tar.gz) or
+[decrediton OSX](https://github.com/decred/decred-binaries/releases/download/v1.1.1/decrediton-1.1.1.dmg) or
+[decrediton Windows](https://github.com/decred/decred-binaries/releases/download/v1.1.1/decrediton-1.1.1.exe).
+
+See  manifest-decrediton-v1.1.1.txt, and the package specific manifest files for sha256 sums and the associated .asc files to confirm those shas.
+
+See [README.md](./README.md#verifying-binaries) for more info on verifying the files.
+
+
+# decrediton v1.1.1
+
+This patch release primarily fixes Windows version from not allowing dcrd and
+dcrwallet to be shutdown gracefully.  Upon decrediton close, shutdown requests
+are given to the 2 child-processes to cleanly shutdown now.
+
+This commit also marks the first unit test of the React components we are
+including.   In the upcoming releases we plan on expanding test coverage to
+hopefully ensure that each release is as bug free as possible.
+
+We can now get transaction details for pending transactions and the
+transaction notifactions are clickable to see that details page.
+
+App versions are now pulled directly from the binaries themselves instead
+of any hardcoding so users can be assured they are running specific versions
+of dcrd and dcrwallet underneath.
+
+## Bug Fixes
+
+- Disable rescan, add ApiKey and Import Script buttons if there is an
+  outstanding rescan request processing.  Otherwise you can issue multiple
+  requests at the same time and it will lead to unsightly UX.
+
+- Fix Stakepools Overview link that was resulting in a 404 previously.
+
+- Add total subsidy to the tickets page.
+
+- Fix Add Stakepool Button in Stakepool Config page.
+
+## Changelog
+
+All commits since the last release may be viewed on GitHub
+[here](https://github.com/decred/decrediton/compare/v1.1.0...v1.1.1).
+
+
 # [v1.1.0](https://github.com/decred/decred-binaries/releases/tag/v1.1.0)
 
 ## 2017-09-22
