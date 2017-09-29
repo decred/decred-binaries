@@ -18,9 +18,9 @@
     "url": "https://github.com/decred/decred-binaries/releases/tag/v1.0.1"
   },
     "decrediton": {
-    "version": "1.1.0",
+    "version": "1.1.1",
     "build": "",
-    "date": "2017-09-22",
-    "url": "https://github.com/decred/decred-binaries/releases/tag/v1.1.0"
+    "date": "2017-09-29",
+    "url": "https://github.com/decred/decred-binaries/releases/tag/v1.1.1"
   }
 }
