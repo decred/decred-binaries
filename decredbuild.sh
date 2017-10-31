@@ -15,6 +15,7 @@ if [[ $1x = x ]]; then
 else
     TAG=$1
     REL=(-ldflags "-X main.appBuild=release")
+    DCRWALLET_REL=(-ldflags "-X github.com/decred/dcrwallet/version.BuildMetadata=release")
 fi
 
 PACKAGE=decred
@@ -37,7 +38,7 @@ for i in $SYS; do
     env GOOS=$OS GOARCH=$ARCH go build "${REL[@]}" github.com/decred/dcrd
     env GOOS=$OS GOARCH=$ARCH go build "${REL[@]}" github.com/decred/dcrd/cmd/dcrctl
     env GOOS=$OS GOARCH=$ARCH go build "${REL[@]}" github.com/decred/dcrd/cmd/promptsecret
-    env GOOS=$OS GOARCH=$ARCH go build "${REL[@]}" github.com/decred/dcrwallet
+    env GOOS=$OS GOARCH=$ARCH go build "${DCRWALLET_REL[@]}" github.com/decred/dcrwallet
     cp $GPATH/src/github.com/decred/dcrd/cmd/dcrctl/sample-dcrctl.conf .
     cp $GPATH/src/github.com/decred/dcrwallet/sample-dcrwallet.conf .
     cd ..
