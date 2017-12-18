@@ -1,3 +1,328 @@
+# 2017-12-14
+
+
+## Install
+
+To install the command line tools, please see
+[dcrinstaller](https://github.com/decred/decred-release/tree/master/cmd/dcrinstall).
+
+To install decrediton download, uncompress, and run
+[decrediton Linux](https://github.com/decred/decred-binaries/releases/download/v1.1.2/decrediton-v1.1.2.tar.gz) or
+[decrediton OSX](https://github.com/decred/decred-binaries/releases/download/v1.1.2/decrediton-v1.1.2.dmg) or
+[decrediton Windows](https://github.com/decred/decred-binaries/releases/download/v1.1.2/decrediton-v1.1.2.exe).
+
+See manifest-v1.1.2.txt, and the package specific manifest files for sha256 sums and the associated .asc files to confirm those shas.
+
+See [README.md](./README.md#verifying-binaries) for more info on verifying the files.
+
+
+## Contents
+
+* [dcrd](#dcrd-v112)
+* [dcrwallet](#dcrwallet-v112)
+* [decrediton](#decrediton-v112)
+
+
+# dcrd v1.1.2
+
+This release of dcrd primarily contains performance enhancements, infrastructure
+improvements, and other quality assurance changes.
+
+While it is not visible in this release, significant infrastructure work has
+also been done this release cycle towards porting the Lightning Network (LN)
+daemon which will ultimately allow LN payments to be backed by Decred.
+
+## Notable Changes
+
+### Faster Block Validation
+
+A significant portion of block validation involves handling the stake tickets
+which form an integral part of Decred's hybrid proof-of-work and proof-of-stake
+system.  The code which handles this portion of validation has been
+significantly optimized in this release such that overall block validation is
+up to approximately 3 times faster depending on the specific underlying hardware
+configuration.  This also has a noticeable impact on the speed of the initial
+block download process as well as how quickly votes for winning tickets are
+submitted to the network.
+
+### Data Carrier Transaction Standardness Policy
+
+The standard policy for transaction relay of data carrier transaction outputs
+has been modified to support canonically-encoded small data pushes.  These
+outputs are also known as `OP_RETURN` or `nulldata` outputs.  In particular,
+single byte small integers data pushes (0-16) are now supported.
+
+## Changelog
+
+All commits since the last release may be viewed on GitHub [here](https://github.com/decred/dcrd/compare/v1.1.0...v1.1.2).
+
+### Protocol and network:
+- chaincfg: update checkpoints for 1.1.2 release [decred/dcrd#946](https://github.com/decred/dcrd/pull/946)
+- chaincfg: Rename one of the testnet seeders [decred/dcrd#873](https://github.com/decred/dcrd/pull/873)
+- stake: treap index perf improvement [decred/dcrd#853](https://github.com/decred/dcrd/pull/853)
+- stake: ticket expiry perf improvement [decred/dcrd#853](https://github.com/decred/dcrd/pull/853)
+
+### Transaction relay (memory pool):
+
+- txscript: Correct nulldata standardness check [decred/dcrd#935](https://github.com/decred/dcrd/pull/935)
+
+### RPC:
+
+- rpcserver: searchrawtransactions skip first input for vote tx [decred/dcrd#859](https://github.com/decred/dcrd/pull/859)
+- multi: update stakebase tx vin[0] structure [decred/dcrd#859](https://github.com/decred/dcrd/pull/859)
+- rpcserver: Fix empty ssgen verbose results [decred/dcrd#871](https://github.com/decred/dcrd/pull/871)
+- rpcserver: check for error in getwork request [decred/dcrd#898](https://github.com/decred/dcrd/pull/898)
+- multi: Add NoSplitTransaction to purchaseticket [decred/dcrd#904](https://github.com/decred/dcrd/pull/904)
+- rpcserver: avoid nested decodescript p2sh addrs [decred/dcrd#929](https://github.com/decred/dcrd/pull/929)
+- rpcserver: skip generating certs when nolisten set [decred/dcrd#932](https://github.com/decred/dcrd/pull/932)
+- rpc: Add localaddr and relaytxes to getpeerinfo [decred/dcrd#933](https://github.com/decred/dcrd/pull/933)
+- rpcserver: update handleSendRawTransaction error handling [decred/dcrd#939](https://github.com/decred/dcrd/pull/939)
+
+### dcrd command-line flags:
+
+- config: add --nofilelogging option [decred/dcrd#872](https://github.com/decred/dcrd/pull/872)
+
+### Documentation
+
+- rpcclient: Remove docker info from README.md [decred/dcrd#886](https://github.com/decred/dcrd/pull/886)
+- bloom: Fix link in README [decred/dcrd#922](https://github.com/decred/dcrd/pull/922)
+- doc: tiny fix url [decred/dcrd#928](https://github.com/decred/dcrd/pull/928)
+- doc: update go version for example test run in readme [decred/dcrd#936](https://github.com/decred/dcrd/pull/936)
+
+### Developer-related package changes:
+
+- multi: Drop glide, use dep [decred/dcrd#818](https://github.com/decred/dcrd/pull/818)
+- txsort: Implement stable tx sorting package  [decred/dcrd#940](https://github.com/decred/dcrd/pull/940)
+- coinset: Remove package [decred/dcrd#888](https://github.com/decred/dcrd/pull/888)
+- base58: Use new github.com/decred/base58 package [decred/dcrd#888](https://github.com/decred/dcrd/pull/888)
+- certgen: Move self signed certificate code into package [decred/dcrd#879](https://github.com/decred/dcrd/pull/879)
+- certgen: Add doc.go and README.md [decred/dcrd#883](https://github.com/decred/dcrd/pull/883)
+- rpcclient: Allow request-scoped cancellation during Connect [decred/dcrd#880](https://github.com/decred/dcrd/pull/880)
+- rpcclient: Import dcrrpcclient repo into rpcclient directory [decred/dcrd#880](https://github.com/decred/dcrd/pull/880)
+- rpcclient: json unmarshal into unexported embedded pointer  [decred/dcrd#941](https://github.com/decred/dcrd/pull/941)
+- bloom: Copy github.com/decred/dcrutil/bloom to bloom package [decred/dcrd#881](https://github.com/decred/dcrd/pull/881)
+- Improve gitignore [decred/dcrd#887](https://github.com/decred/dcrd/pull/887)
+- dcrutil: Import dcrutil repo under dcrutil directory [decred/dcrd#888](https://github.com/decred/dcrd/pull/888)
+- hdkeychain: Move to github.com/decred/dcrd/hdkeychain [decred/dcrd#892](https://github.com/decred/dcrd/pull/892)
+- stake: Add IsStakeSubmission [decred/dcrd#907](https://github.com/decred/dcrd/pull/907)
+- txscript: Require SHA256 secret hashes for atomic swaps [decred/dcrd#930](https://github.com/decred/dcrd/pull/930)
+
+### Testing and Quality Assurance:
+
+- gometalinter: run on subpkgs too [decred/dcrd#878](https://github.com/decred/dcrd/pull/878)
+- travis: test Gopkg.lock [decred/dcrd#889](https://github.com/decred/dcrd/pull/889)
+- hdkeychain: Work around go vet issue with examples [decred/dcrd#890](https://github.com/decred/dcrd/pull/890)
+- bloom: Add missing import to examples [decred/dcrd#891](https://github.com/decred/dcrd/pull/891)
+- bloom: workaround go vet issue in example [decred/dcrd#895](https://github.com/decred/dcrd/pull/895)
+- tests: make lockfile test work locally [decred/dcrd#894](https://github.com/decred/dcrd/pull/894)
+- peer: Avoid goroutine leaking during handshake timeout [decred/dcrd#909](https://github.com/decred/dcrd/pull/909)
+- travis: add gosimple linter [decred/dcrd#897](https://github.com/decred/dcrd/pull/897)
+- multi: Handle detected data race conditions [decred/dcrd#920](https://github.com/decred/dcrd/pull/920)
+- travis: add ineffassign linter [decred/dcrd#896](https://github.com/decred/dcrd/pull/896)
+- rpctest: Choose flags based on provided params [decred/dcrd#937](https://github.com/decred/dcrd/pull/937)
+
+### Misc:
+
+- gofmt [decred/dcrd#876](https://github.com/decred/dcrd/pull/876)
+- dep: sync third-party deps [decred/dcrd#877](https://github.com/decred/dcrd/pull/877)
+- Bump for v1.1.2 [decred/dcrd#916](https://github.com/decred/dcrd/pull/916)
+- dep: Use upstream jrick/bitset [decred/dcrd#899](https://github.com/decred/dcrd/pull/899)
+- blockchain: removed unused funcs and vars [decred/dcrd#900](https://github.com/decred/dcrd/pull/900)
+- blockchain: remove unused file [decred/dcrd#900](https://github.com/decred/dcrd/pull/900)
+- rpcserver: nil pointer dereference when submit orphan block [decred/dcrd#906](https://github.com/decred/dcrd/pull/906)
+- multi: remove unused funcs and vars [decred/dcrd#901](https://github.com/decred/dcrd/pull/901)
+
+### Code Contributors (alphabetical order):
+
+- Alex Yocom-Piatt
+- Dave Collins
+- David Hill
+- detailyang
+- Donald Adu-Poku
+- Federico Gimenez
+- Jason Zavaglia
+- John C. Vernaleo
+- Jonathan Chappelow
+- Jolan Luff
+- Josh Rickmar
+- Maninder Lall
+- Matheus Degiovani
+- Nicola Larosa
+- Samarth Hattangady
+- Ugwueze Onyekachi Michael
+
+
+# dcrwallet v1.1.2
+
+This release focuses on internal improvements to the wallet to increase code
+quality, thereby making it easier to add optional support for SPV syncing in a
+future release.  As always, it also comes with bug fixes, new features and other
+improvements, which are detailed below.
+
+### Bug fixes
+
+* Vote transactions that become invalid when the main chain tip block changes
+  are now removed from the wallet.  This allows the invalid vote to be double
+  spent by another vote later if the ticket is picked again on a different
+  chain.
+
+* Ticket buyer now attempts to avoid purchasing tickets for old blocks if it is
+  enabled while the wallet is catching up to the network.
+
+* The application now exits cleanly if an interrupt signal (e.g. ^C or SIGINT)
+  is received while at a prompt (such as during wallet creation, or with
+  `--promptpass`) instead of hanging at the prompt.
+
+* The application no longer refuses to start when duplicate RPC listener
+  addresses which bind to port 0 are specified in the config.
+
+* The `listtransactions` JSON-RPC has been fixed so that the order and amount
+  values of all results match the results returned by Bitcoin Core.
+
+* The `gettransaction` JSON-RPC has been fixed to return fees as negative
+  numbers instead of positive, which matches the behavior of Bitcoin Core.
+
+### New features
+
+* A new gRPC method `WalletService.GetTickets` has been introduced to return all
+  wallet ticket purchases between a block range.  The results are streamed to
+  the client.
+
+* A new gRPC method `WalletService.ValidateAddress` has been added with similar
+  semantics and usage to the `validateaddress` JSON-RPC method.  It can be used
+  to decode an address string, ensuring that it is a valid address, as well as
+  returning whether the address is owned by the wallet.
+
+* A new gRPC service `DecodeMessageService` has been introduced to make it
+  easier for clients not able to decode raw Decred wire messages themselves to
+  decode a message into a gRPC message.  Currently, one method exists in the
+  service, `DecodeRawTransaction`, which decodes a Decred transaction.
+
+* Pagination support has been added to the `WalletService.GetTransactions`
+  method through the introduction of a new `target_transaction_count` parameter
+  in the request.  Responses are immediately streamed to the client when the
+  target is reached.
+
+* The TX IPC pipe has been added (enabled with the `pipetx` option) to receive
+  messages from the application by a parent process.  When combined with the
+  `rpclistenerevents` option, this allows the application to inform the parent
+  process of the listener addresses used by the gRPC and JSON-RPC servers.  This
+  is especially useful when binding listeners to port 0 as the application is
+  able to report the actual port chosen by the operating system to the parent
+  process.
+
+### Other improvements
+
+* Vendoring management of dependency source code has been switched from `glide`
+  to `dep`.  See the README.md for new build instructions.
+
+* The BIP0044 coin type has been seamlessly upgraded from the old Decred value
+  of 20 to 42.  The new coin type is the coin type reserved for Decred in
+  [SLIP0044](https://github.com/satoshilabs/slips/blob/master/slip-0044.md) and
+  will allow greater compatibility with third party wallets.  New wallets are
+  always created with the new coin type, but for legacy compatibility old
+  wallets and seed restores which have address usage with the old coin type will
+  not be upgraded.
+
+* The address discovery algorithm has been made more concurrent and should see
+  performance improvements, especially on CPUs with high core counts.
+
+* Performance improvements were made to the `WalletService.GetTransactions` gRPC
+  method by avoiding unnecessary JSON-RPC calls to dcrd.
+
+* The `ticketaddress` option has been deprecated and replaced by the
+  `ticketbuyer.votingaddress` option.
+
+* Publishing duplicate vote transactions in a redundant voting wallet setup no
+  longer logs an error for a rejected duplicate transaction.
+
+## Changelog
+
+All commits since the last release may be viewed on GitHub
+[here](https://github.com/decred/dcrwallet/compare/v1.1.0...v1.1.2).
+
+
+# decrediton v1.1.2
+
+This release marks a major turning point in our overall look and feel of
+Decrediton. We have introduced consistent header areas with a new subpage/tab
+interface.  React-motion has been added to give a better feel for transitions
+from page to page and expanded area reveals.  All information modals and
+passphrase modals have been consolidated to have a consistent feel whenever they
+are used.
+
+As part of the design overhaul, the Tickets page has begun its transformation
+to provide a much better user experience.  My Tickets subpage is the first step
+into giving users a clearer picture into their current staking situation.  In
+the upcoming release, we will be adding extensive statistics and graphing to
+further help visualize a given users' balance and staking history.  Overall,
+we aim to continue to add more tools that will help users' staking experience
+be much more enjoyable and carefree.
+
+We have also added advanced daemon setup abilities for users that want to use
+remote daemons or use a different location for their blockchain data.  In the
+next release, we plan on also adding the ability to handle advanced back-end
+wallet setups: easily switch between different wallet files on the same machine,
+connecting to a remote wallet and other possible situations.  But these advanced
+options will also be completely transparent for users that choose to run with
+the default settings.
+
+We have added a Security Center page that will be a catch-all place to
+store tools that we feel have utility, but aren't needed for everyday normal
+wallet operation.  The first 2 tools that have been added are for Signing and
+Verifying messages using addresses and private keys to prove ownership of a
+given address.  Here is a typical use case:  User A wants to prove to User B
+that they control a given address.  With the Sign Message tool, User A enters
+the address, a message and their wallet's private passphrase.  The tool produces
+a hash that was created based on that address' private key and the given
+message.  With the Verify Message tool, User B can use the address in question,
+the hash and the message from User A to verify that it was signed using that
+address' private key.
+
+We are also happy to announce the introduction of internationalization.
+Brazilian Portuguese has been added for the first pass and we will be slowly
+adding more languages on every new release.
+
+Things to expect in the next release:
+
+- New overview page design
+- Rich historical Statistics/Graphs
+- New staking account user experience
+- Advanced wallet settings
+- More languages translated
+
+## Bug fixes
+
+* Fix issue on Windows caused by using "Aux" as a filename.  Aux is a restricted
+  filename with Windows and a simple filename change fixed it.
+
+* Fix shutdown issue with macOS.  When cmd-Q or quitting Decrediton from the
+  dock caused dcrd and dcrwallet to not be shutdown in the background.  By
+  adding a final closeClis() in app.on("before-quit",...) it ensures that
+  everything is closed on any shutdown.
+
+* Removed Skip Sync button due to the new slip44 change in dcrwallet.  With the
+  new coin type change, dcrwallet needs to check if there has been any address
+  usage up to that point in the chain for a given wallet.
+
+* Shorten account names in various areas to avoid obnoxious overflow.
+
+* Fix issue that was occuring when clearing out stakepool configurations.  This
+  would cause users to possibly have incorrect stakepool setups.
+
+* Change functionality of the space key during seed entry.  Previously, when the
+  user would enter the space key they would end up not "selecting" a word and
+  then just type the whole seed.  Now the space "selects" the word just as
+  pressing tab does.
+
+## Changelog
+
+All commits since the last release may be viewed on GitHub
+[here](https://github.com/decred/decrediton/compare/v1.1.1...v1.1.2).  Also see
+all changes to dcrwallet
+[here](https://github.com/decred/dcrwallet/compare/v1.1.0...v1.1.2).
+
+
 # [v1.1.1](https://github.com/decred/decred-binaries/releases/tag/v1.1.1)
 
 ## 2017-09-29

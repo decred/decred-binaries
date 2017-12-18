@@ -1,0 +1,3 @@
+b251fdb8f8db0a54866f2c41275cc7daa4a0fdc08e02e252b257cfc41b2b3221 decrediton-v1.1.2.dmg
+873b895b3357f8b83effc75a7c9380ed45d1aeeacf5ab62d315fff40e2103e33 decrediton-v1.1.2.exe
+426a228b1da05f63ffef25919df698fcb3d55b5efa7571a5d8112b698c757b6b decrediton-v1.1.2.tar.gz
