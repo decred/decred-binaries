@@ -1,3 +1,51 @@
+## 2017-12-21
+
+
+## Install
+
+To install decrediton download, uncompress, and run
+[decrediton Linux](https://github.com/decred/decred-binaries/releases/download/v1.1.3/decrediton-1.1.3.tar.gz) or
+[decrediton OSX](https://github.com/decred/decred-binaries/releases/download/v1.1.3/decrediton-1.1.3.dmg) or
+[decrediton Windows](https://github.com/decred/decred-binaries/releases/download/v1.1.3/decrediton-1.1.3.exe).
+
+See  manifest-decrediton-v1.1.3.txt, and the package specific manifest files for sha256 sums and the associated .asc files to confirm those shas.
+
+See [README.md](./README.md#verifying-binaries) for more info on verifying the files.
+
+
+# decrediton v1.1.3
+
+This decrediton patch release covers a few commonly reported issues shortly
+after v1.1.2 was released.  Most importantly this fixes a random issue on
+the Windows version that was causing an unavoidable crash on startup.
+
+## Bug Fixes
+
+* Rollback electron-store/conf version to avoid asar/json Windows issue.
+
+* Remove "Revoke tickets..." alert from Overview.  Due to a deeper issue in
+  dcrwallet the notification whether there are tickets to revoke is being
+  incorrectly announced.  Until that fix is available, it seems better to avoid
+  showing the alert which confuses the user.
+
+* Fix errors on adding Stakepool API.  On failed Stakepool API requests, the
+  Stakey bounce animation would remain and the user would be unable to proceed.
+
+* Fix sorting of voted/revoked tickets in My Tickets.
+
+* Fix Account Key display
+
+* Fix issue with using "Enter" to complete any Get Started form.  Doing so
+  would previously make Decrediton shut down instead of submitting the action.
+
+* Hide Paginator when <= 1 page
+
+## Changelog
+
+All commits since the last release may be viewed on GitHub
+[here](https://github.com/decred/decrediton/compare/v1.1.2...v1.1.3).
+
+
 # 2017-12-14
 
 
