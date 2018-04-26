@@ -1,4 +1,4 @@
-# 2017-04-02
+# 2017-04-26
 
 
 ## Install
@@ -23,7 +23,7 @@ See [README.md](./README.md#verifying-binaries) for more info on verifying the f
 * [decrediton](#decrediton-v120)
 
 
-# dcrd v1.2.0-rc1
+# dcrd v1.2.0
 
 This release of dcrd contains significant performance enhancements,
 infrastructure improvements, improved access to chain-related information for
@@ -101,7 +101,7 @@ future releases.
 
 ## Changelog
 
-All commits since the last release may be viewed on GitHub [here](https://github.com/decred/dcrd/compare/v1.1.2...v1.2.0-rc1).
+All commits since the last release may be viewed on GitHub [here](https://github.com/decred/dcrd/compare/v1.1.2...v1.2.0).
 
 ### Protocol and network:
 
@@ -345,7 +345,7 @@ All commits since the last release may be viewed on GitHub [here](https://github
 - Ryan Vacek
 
 
-# dcrwallet 1.2.0-rc1
+# dcrwallet 1.2.0
 
 This release provides bug fixes for issues reported by users as well as new RPC
 features and additions which are required for Decrediton and Politeia.  SPV work
@@ -445,10 +445,10 @@ the old version.
 ## Changelog
 
 All commits since the last release may be viewed on GitHub
-[here](https://github.com/decred/dcrwallet/compare/v1.1.2...v1.2.0-rc1).
+[here](https://github.com/decred/dcrwallet/compare/v1.1.2...v1.2.0).
 
 
-# decrediton 1.2.0-rc1
+# decrediton 1.2.0
 
 This release of decrediton adds some major changes to the wallet startup,
 overview page and adds the first round of statistics for better user
