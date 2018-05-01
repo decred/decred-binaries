@@ -33,7 +33,7 @@ balances to show 0 after new blocks connect.
 
 * Due to dcrd v1.2.0 database upgrade, users would be shown "Waiting for RPC..." 
   for a very long time with no other information.  Now the first lines of both
-  dcrd and dcrwallet logs are show to hopefully give the user more information
+  dcrd and dcrwallet logs are shown to hopefully give the user more information
   about the current state of the daemon upgrade.
 
 ## Changelog
