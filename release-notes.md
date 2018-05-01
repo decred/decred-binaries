@@ -39,7 +39,7 @@ balances to show 0 after new blocks connect.
 ## Changelog
 
 All commits since the last release may be viewed on GitHub
-[here](https://github.com/decred/decrediton/compare/v1.2.0...v1.2.1).
+[here](https://github.com/decred/decrediton/compare/v1.2.0...release-v1.2.1).
 
 
 # 2018-04-26
