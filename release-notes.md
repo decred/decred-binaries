@@ -16,7 +16,7 @@ See [README.md](./README.md#verifying-binaries) for more info on verifying the f
 # decrediton v1.2.1
 
 This decrediton patch release covers a few commonly reported issues shortly
-after v1.2.1 was released.  Most importantly this fixes an issue causing 
+after v1.2.0 was released.  Most importantly this fixes an issue causing 
 balances to show 0 after new blocks connect.
 
 ## Bug Fixes
