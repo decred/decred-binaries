@@ -42,5 +42,7 @@ for i in $PROJECTS; do
         fi
     fi
 
+    echo "Running dep for $PROJECT..."
     dep ensure
+    echo "...done."
 done
