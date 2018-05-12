@@ -17,15 +17,15 @@ else
 fi
 
 if [[ $PROD = 1 ]]; then
-	  echo "********************"
+    echo "********************"
     echo "* Production build *"
-	  echo "********************"
+    echo "********************"
     REL=(-ldflags "-X main.appBuild=release")
     DCRWALLET_REL=(-ldflags "-X github.com/decred/dcrwallet/version.BuildMetadata=release")
 else
-	  echo "*********************"
+    echo "*********************"
     echo "* Development build *"
-	  echo "*********************"
+    echo "*********************"
 fi
 
 PACKAGE=decred
@@ -53,10 +53,10 @@ for i in $SYS; do
     cp $GPATH/src/github.com/decred/dcrwallet/sample-dcrwallet.conf .
     cd ..
     if [[ $OS = "windows" ]]; then
-	zip -r $PACKAGE-$i-$TAG.zip $PACKAGE-$i-$TAG
-	tar -cvzf $PACKAGE-$i-$TAG.tar.gz $PACKAGE-$i-$TAG
+      zip -r $PACKAGE-$i-$TAG.zip $PACKAGE-$i-$TAG
+      tar -cvzf $PACKAGE-$i-$TAG.tar.gz $PACKAGE-$i-$TAG
     else
-	tar -cvzf $PACKAGE-$i-$TAG.tar.gz $PACKAGE-$i-$TAG
+      tar -cvzf $PACKAGE-$i-$TAG.tar.gz $PACKAGE-$i-$TAG
     fi
     rm -r $PACKAGE-$i-$TAG
 done
