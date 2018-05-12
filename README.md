@@ -84,7 +84,9 @@ If you have local folders cloned that you want to build, instead of fetching, th
 
 ```docker run --rm -ti -e TAG="v1.2.0" -e PROD=1 -v $GOPATH/src:/go/src -v $(pwd)/build:/build decred/decred-binaries```
 
+Leave TAG unset if you wish to build the version you have already cloned without verifying it matches the specified tag.
+
 ### Environment Variables
 
-* TAG: Specify the git tag to have it fetch these packages automatically
+* TAG: Specify the git tag to have it fetch these packages automatically.  Leave unset to use latest commit (if repo's do not exist locally) or local version (if already cloned)
 * PROD: Set to 1 if you want to create a production build
