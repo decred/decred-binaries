@@ -29,7 +29,7 @@ else
 fi
 
 PACKAGE=decred
-MAINDIR=/build
+MAINDIR=/build/$PACKAGE-$TAG
 mkdir -p $MAINDIR
 cd $MAINDIR
 
