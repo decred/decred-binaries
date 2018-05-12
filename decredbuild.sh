@@ -14,12 +14,22 @@ if [[ $1x = x ]]; then
     TAG=$DATE-$VERSION
 else
     TAG=$1
+fi
+
+if [[ $PROD = 1 ]]; then
+	  echo "********************"
+    echo "* Production build *"
+	  echo "********************"
     REL=(-ldflags "-X main.appBuild=release")
     DCRWALLET_REL=(-ldflags "-X github.com/decred/dcrwallet/version.BuildMetadata=release")
+else
+	  echo "*********************"
+    echo "* Development build *"
+	  echo "*********************"
 fi
 
 PACKAGE=decred
-MAINDIR=$PACKAGE-$TAG
+MAINDIR=/build
 mkdir -p $MAINDIR
 cd $MAINDIR
 

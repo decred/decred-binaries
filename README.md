@@ -70,3 +70,21 @@ This repo only contains build archives, build scripts, and similar
 content.  For the source code, please see the individual repositories
 at: https://github.com/decred/
 
+## Building Binaries
+
+To build the binaries, use the provided Docker image.  First, ensure it is built on your system:
+
+```docker build -t decred/decred-binaries .```
+
+With this image, you can build the production binaries by specifying the required tag.  This will automatically fetch the specified tag from Github, build it inside the docker container, and place those packages in a directory of your choosing.  Replace the TAG environment variable with the required tag, and specify the local folder you wish those packages to be placed in.  The below example builds version 1.2.0, and places it into ./build on your local machine:
+
+```docker run --rm -ti -e TAG="v1.2.0" -e PROD=1 -v $(pwd)/build:/build decred/decred-binaries```
+
+If you have local folders cloned that you want to build, instead of fetching, then mount those as well.  E.g.:
+
+```docker run --rm -ti -e TAG="v1.2.0" -e PROD=1 -v $GOPATH/src:/go/src -v $(pwd)/build:/build decred/decred-binaries```
+
+### Environment Variables
+
+* TAG: Specify the git tag to have it fetch these packages automatically
+* PROD: Set to 1 if you want to create a production build
