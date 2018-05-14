@@ -54,10 +54,9 @@ for i in $SYS; do
     cd ..
     if [[ $OS = "windows" ]]; then
         zip -r $PACKAGE-$i-$TAG.zip $PACKAGE-$i-$TAG
-        tar -cvzf $PACKAGE-$i-$TAG.tar.gz $PACKAGE-$i-$TAG
-    else
-        tar -cvzf $PACKAGE-$i-$TAG.tar.gz $PACKAGE-$i-$TAG
     fi
+    # Strip out name and timestamp data so that builds can be reproducible
+    tar -c --mtime='1970-01-01' $PACKAGE-$i-$TAG | gzip -9 -n > $PACKAGE-$i-$TAG.tar.gz
     rm -r $PACKAGE-$i-$TAG
 done
 

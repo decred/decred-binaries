@@ -24,14 +24,13 @@ for i in $PROJECTS; do
     if [ ! -d "$PROJECT" ]; then
         echo "No repo found, so fetching $PROJECT"
         git clone --depth 1 $BRANCH https://github.com/decred/$PROJECT
-        #git clone --depth 1 --branch $TAG https://github.com/decred/$PROJECT
     fi
 
     cd $PROJECT
 
     CURRENT_TAG=$(git describe --tags 2> /dev/null)
-    # Check that the tag of this branch matches the provided tag:
     if [ -n "$TAG" ]; then
+        # Tag provided, so check that the tag of this branch matches the provided tag:
         echo "Verifying $PROJECT repo tag matches $TAG..."
         if [[ "$CURRENT_TAG" != "$TAG" ]]; then
             # Don't continue if tag of repo does not match
