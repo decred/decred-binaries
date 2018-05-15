@@ -16,6 +16,16 @@ else
     TAG=$1
 fi
 
+PARENT=$(pwd)
+
+# Set the unix timestamp to match that of dcrd git commit, to have a stable anchor for setting file timestamps for reproducible builds
+cd $GOPATH/src/github.com/decred/dcrd
+# TZ is used by date command
+TZ='UTC'
+UNIXTIME=$(git log -1 --format=%ct)
+TOUCHTIME=$(date --date='@'$UNIXTIME +%Y%m%d%H%M.%S)
+TARTIME=$(date --date='@'$UNIXTIME "+%Y%m%d %H:%M:%S")
+
 if [[ $PROD = 1 ]]; then
     echo "********************"
     echo "* Production build *"
@@ -28,6 +38,7 @@ else
     echo "*********************"
 fi
 
+cd $PARENT
 PACKAGE=decred
 MAINDIR=/build/$PACKAGE-$TAG
 mkdir -p $MAINDIR
@@ -53,10 +64,12 @@ for i in $SYS; do
     cp $GPATH/src/github.com/decred/dcrwallet/sample-dcrwallet.conf .
     cd ..
     if [[ $OS = "windows" ]]; then
-        zip -r $PACKAGE-$i-$TAG.zip $PACKAGE-$i-$TAG
+        # To enable reproducible builds, we need to change the timestamp of the files, pass those files in in a fixed order, and don't pass in extra file attributes
+        find $PACKAGE-$i-$TAG -exec touch -t $TOUCHTIME {} \;
+        find $PACKAGE-$i-$TAG | sort | zip -X $PACKAGE-$i-$TAG.zip -@
     fi
     # Strip out name and timestamp data so that builds can be reproducible
-    tar -c --mtime='1970-01-01' --sort=name --owner=0 --group=0 --numeric-owner $PACKAGE-$i-$TAG | gzip -9 -n > $PACKAGE-$i-$TAG.tar.gz
+    tar -c --mtime="$TARTIME" --sort=name --owner=0 --group=0 --numeric-owner $PACKAGE-$i-$TAG | gzip -9 -n > $PACKAGE-$i-$TAG.tar.gz
     rm -r $PACKAGE-$i-$TAG
 done
 
