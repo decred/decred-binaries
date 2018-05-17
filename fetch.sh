@@ -4,6 +4,8 @@
 # Use of this source code is governed by the ISC
 # license.
 
+# Script to fetch either specified TAG for dcrd and dcrwallet, or else latest comment
+
 PROJECTS="dcrd dcrwallet"
 
 if [ -z "$TAG" ]; then
