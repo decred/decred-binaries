@@ -8,14 +8,16 @@ Decred.
 
 This repository contains releases for the following software:
 
-* [dcrd](https://github.com/decred/dcrd)/[dcrwallet](https://github.com/decred/dcrwallet)
+* [dcrd](https://github.com/decred/dcrd)/[dcrwallet](
+  https://github.com/decred/dcrwallet)
 * [Paymetheus](https://github.com/decred/Paymetheus)
 * [gominer](https://github.com/decred/gominer)
 * [decrediton](https://github.com/decred/decrediton)
 
 ## Release notes
 
-Notes for the current and previous releases can be found in the [Release Notes](./release-notes.md) document.
+Notes for the current and previous releases can be found in the
+[Release Notes](./release-notes.md) document.
 
 ## Verifying Binaries
 
@@ -30,8 +32,10 @@ binaries in that release.  To verify these, you will need:
 
 The steps to verify the binaries are as follows:
 
-1. Download the file manifest, the signature for the file manifest, and the zip/tarball for your OS from here.
-2. Obtain the SHA256 value for the zip/tarball for your OS and check that it matches the value in the file manifest, e.g. for 64-bit Linux
+1. Download the file manifest, the signature for the file manifest, and 
+the zip/tarball for your OS from here.
+2. Obtain the SHA256 value for the zip/tarball for your OS and check that 
+it matches the value in the file manifest, e.g. for 64-bit Linux
 
    ```
    $ sha256sum linux-amd64-20160127-02.tar.gz
@@ -72,21 +76,40 @@ at: https://github.com/decred/
 
 ## Building Binaries
 
-To build the binaries, use the provided Docker image.  First, ensure it is built on your system:
+To build the binaries, use the provided Docker image.  First, ensure it
+is built on your system:
 
-```docker build -t decred/decred-binaries .```
+```
+docker build -t decred/decred-binaries .
+```
 
-With this image, you can build the production binaries by specifying the required tag.  This will automatically fetch the specified tag from Github, build it inside the docker container, and place those packages in a directory of your choosing.  Replace the TAG environment variable with the required tag, and specify the local folder you wish those packages to be placed in.  The below example builds version 1.2.0, and places it into ./build on your local machine:
+With this image, you can build the production binaries by specifying the
+required tag.  This will automatically fetch the specified tag from
+Github, build it inside the docker container, and place those packages in
+a directory of your choosing.  Replace the TAG environment variable with
+the required tag, and specify the local folder you wish those packages to
+be placed in.  The below example builds version 1.2.0, and places it into
+./build on your local machine:
 
-```docker run --rm -ti -e TAG="v1.2.0" -e PROD=1 -v $(pwd)/build:/build decred/decred-binaries```
+```
+docker run --rm -ti -e TAG="v1.2.0" -e PROD=1 -v $(pwd)/build:/build \
+    decred/decred-binaries
+```
 
-If you have local folders cloned that you want to build, instead of fetching, then mount those as well.  E.g.:
+If you have local folders cloned that you want to build, instead of
+fetching, then mount those as well.  E.g.:
 
-```docker run --rm -ti -e TAG="v1.2.0" -e PROD=1 -v $GOPATH/src:/go/src -v $(pwd)/build:/build decred/decred-binaries```
+```
+docker run --rm -ti -e TAG="v1.2.0" -e PROD=1 -v $GOPATH/src:/go/src \
+    -v $(pwd)/build:/build decred/decred-binaries
+```
 
-Leave TAG unset if you wish to build the version you have already cloned without verifying it matches the specified tag.
+Leave TAG unset if you wish to build the version you have already cloned
+without verifying it matches the specified tag.
 
 ### Environment Variables
 
-* TAG: Specify the git tag to have it fetch these packages automatically.  Leave unset to use latest commit (if repo's do not exist locally) or local version (if already cloned)
+* TAG: Specify the git tag to have it fetch these packages automatically.
+  Leave unset to use latest commit (if repo's do not exist locally) or
+  local version (if already cloned)
 * PROD: Set to 1 if you want to create a production build

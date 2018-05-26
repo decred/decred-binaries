@@ -18,7 +18,8 @@ fi
 
 PARENT=$(pwd)
 
-# Set the unix timestamp to match that of dcrd git commit, to have a stable anchor for setting file timestamps for reproducible builds
+# Set the unix timestamp to match that of dcrd git commit, to have a 
+# stable anchor for setting file timestamps for reproducible builds
 cd $GOPATH/src/github.com/decred/dcrd
 # TZ is used by date command
 TZ='UTC'
@@ -31,7 +32,8 @@ if [[ $PROD = 1 ]]; then
     echo "* Production build *"
     echo "********************"
     REL=(-ldflags "-X main.appBuild=release")
-    DCRWALLET_REL=(-ldflags "-X github.com/decred/dcrwallet/version.BuildMetadata=release")
+    DCRWALLET_REL=(-ldflags \
+      "-X github.com/decred/dcrwallet/version.BuildMetadata=release")
 else
     echo "*********************"
     echo "* Development build *"
@@ -44,7 +46,10 @@ MAINDIR=/build/$PACKAGE-$TAG
 mkdir -p $MAINDIR
 cd $MAINDIR
 
-SYS="windows-386 windows-amd64 openbsd-386 openbsd-amd64 linux-386 linux-amd64 linux-arm linux-arm64 darwin-amd64 dragonfly-amd64 freebsd-386 freebsd-amd64 freebsd-arm netbsd-386 netbsd-amd64 solaris-amd64"
+SYS="windows-386 windows-amd64 openbsd-386 openbsd-amd64 linux-386 \
+linux-amd64 linux-arm linux-arm64 darwin-amd64 dragonfly-amd64 \
+freebsd-386 freebsd-amd64 freebsd-arm netbsd-386 netbsd-amd64 \
+solaris-amd64"
 
 # Use the first element of $GOPATH in the case where GOPATH is a list
 # (something that is totally allowed).
@@ -56,20 +61,28 @@ for i in $SYS; do
     mkdir $PACKAGE-$i-$TAG
     cd $PACKAGE-$i-$TAG
     echo "Building:" $OS $ARCH
-    env GOOS=$OS GOARCH=$ARCH go build "${REL[@]}" github.com/decred/dcrd
-    env GOOS=$OS GOARCH=$ARCH go build "${REL[@]}" github.com/decred/dcrd/cmd/dcrctl
-    env GOOS=$OS GOARCH=$ARCH go build "${REL[@]}" github.com/decred/dcrd/cmd/promptsecret
-    env GOOS=$OS GOARCH=$ARCH go build "${DCRWALLET_REL[@]}" github.com/decred/dcrwallet
+    env GOOS=$OS GOARCH=$ARCH go build "${REL[@]}" \
+      github.com/decred/dcrd
+    env GOOS=$OS GOARCH=$ARCH go build "${REL[@]}" \
+      github.com/decred/dcrd/cmd/dcrctl
+    env GOOS=$OS GOARCH=$ARCH go build "${REL[@]}" \
+      github.com/decred/dcrd/cmd/promptsecret
+    env GOOS=$OS GOARCH=$ARCH go build "${DCRWALLET_REL[@]}"\
+      github.com/decred/dcrwallet
     cp $GPATH/src/github.com/decred/dcrd/cmd/dcrctl/sample-dcrctl.conf .
     cp $GPATH/src/github.com/decred/dcrwallet/sample-dcrwallet.conf .
     cd ..
     if [[ $OS = "windows" ]]; then
-        # To enable reproducible builds, we need to change the timestamp of the files, pass those files in in a fixed order, and don't pass in extra file attributes
+        # To enable reproducible builds, we need to change the timestamp 
+        # of the files, pass those files in in a fixed order, and don't 
+        # pass in extra file attributes
         find $PACKAGE-$i-$TAG -exec touch -t $TOUCHTIME {} \;
         find $PACKAGE-$i-$TAG | sort | zip -X $PACKAGE-$i-$TAG.zip -@
     fi
     # Strip out name and timestamp data so that builds can be reproducible
-    tar -c --mtime="$TARTIME" --sort=name --owner=0 --group=0 --numeric-owner $PACKAGE-$i-$TAG | gzip -9 -n > $PACKAGE-$i-$TAG.tar.gz
+    tar -c --mtime="$TARTIME" --sort=name --owner=0 --group=0 \
+      --numeric-owner $PACKAGE-$i-$TAG | gzip -9 -n > \
+      $PACKAGE-$i-$TAG.tar.gz
     rm -r $PACKAGE-$i-$TAG
 done
 

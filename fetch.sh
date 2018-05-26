@@ -4,7 +4,8 @@
 # Use of this source code is governed by the ISC
 # license.
 
-# Script to fetch either specified TAG for dcrd and dcrwallet, or else latest comment
+# Script to fetch either specified TAG for dcrd and dcrwallet, or else 
+# latest comment
 
 PROJECTS="dcrd dcrwallet"
 
@@ -30,13 +31,18 @@ for i in $PROJECTS; do
 
     cd $PROJECT
 
-    CURRENT_TAG=$(git describe --tags 2> /dev/null)
     if [ -n "$TAG" ]; then
-        # Tag provided, so check that the tag of this branch matches the provided tag:
+        # Check if specified tag is attached to current commit
+        CURRENT_TAG=$(git tag -l --points-at HEAD | grep "^$TAG$")
+
+        # Tag provided, so check that the tag of this branch matches the 
+        # provided tag:
         echo "Verifying $PROJECT repo tag matches $TAG..."
+
         if [[ "$CURRENT_TAG" != "$TAG" ]]; then
             # Don't continue if tag of repo does not match
-            echo "Repo tag of '$CURRENT_TAG' does not match specified tag of '$TAG'"
+            echo "Repo tag of '$CURRENT_TAG' does not match specified " \
+             "tag of '$TAG'"
             exit 1
         else
             echo "...good."
