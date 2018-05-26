@@ -4,6 +4,6 @@ services:
 
 script:
   - docker build -t decred/decred-binaries .
-  - docker run --rm -ti -e TAG="v1.2.0" -e PROD=1 -v $(pwd)/build:/build \
-                                       decred/decred-binaries
+  - docker run --rm -ti -e TAG="v1.2.0" -e PROD=1 -v $(pwd)/build:/build
+      decred/decred-binaries
   - diff test-manifest-v1.2.0.txt ./build/decred-v1.2.0/manifest-v1.2.0.txt
