@@ -14,7 +14,7 @@ if [[ $1x = x ]]; then
     TAG=$DATE-$VERSION
 else
     TAG=$1
-    REL=(-ldflags "-X main.appBuild=release")
+    REL=(-ldflags "-X main.appBuild=")
 fi
 
 PACKAGE=dcrinstall
@@ -22,8 +22,7 @@ MAINDIR=$PACKAGE-$TAG
 mkdir -p $MAINDIR
 cd $MAINDIR
 
-SYS="windows-386 windows-amd64 openbsd-386 openbsd-amd64 linux-386 linux-amd64 linux-arm linux-arm64 darwin-amd64 freebsd-386 freebsd-amd64 freebsd-arm netbsd-386 netbsd-amd64"
-#BROKEN dragonfly-amd64 solaris-amd64
+SYS="windows-386 windows-amd64 linux-386 linux-amd64 linux-arm linux-arm64 darwin-amd64"
 
 # Use the first element of $GOPATH in the case where GOPATH is a list
 # (something that is totally allowed).
