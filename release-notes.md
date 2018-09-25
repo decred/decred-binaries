@@ -1,3 +1,47 @@
+## 2018-05-01
+
+
+## Install
+
+To install decrediton download, uncompress, and run
+[decrediton Linux](https://github.com/decred/decred-binaries/releases/download/v1.2.1/decrediton-1.2.1.tar.gz) or
+[decrediton OSX](https://github.com/decred/decred-binaries/releases/download/v1.2.1/decrediton-1.2.1.dmg) or
+[decrediton Windows](https://github.com/decred/decred-binaries/releases/download/v1.2.1/decrediton-1.2.1.exe).
+
+See  manifest-decrediton-v1.2.1.txt, and the package specific manifest files for sha256 sums and the associated .asc files to confirm those shas.
+
+See [README.md](./README.md#verifying-binaries) for more info on verifying the files.
+
+
+# decrediton v1.2.1
+
+This decrediton patch release covers a few commonly reported issues shortly
+after v1.2.0 was released.  Most importantly this fixes an issue causing 
+balances to show 0 after new blocks connect.
+
+## Bug Fixes
+
+* Fix an issue that was causing non-dirs to be discovered as valid legacy wallets.
+  This would cause "config.json" incompletely setup wallet on first load of v1.2.0
+
+* Fix balance showing 0 after ticket/votes calculated for maturity.  
+
+* Seed pasting was not showing errors and would just blank out the words.  Now
+  an error is shown when that occurs.
+
+* Fix various PT-Br translation errors.
+
+* Due to dcrd v1.2.0 database upgrade, users would be shown "Waiting for RPC..." 
+  for a very long time with no other information.  Now the first lines of both
+  dcrd and dcrwallet logs are shown to hopefully give the user more information
+  about the current state of the daemon upgrade.
+
+## Changelog
+
+All commits since the last release may be viewed on GitHub
+[here](https://github.com/decred/decrediton/compare/v1.2.0...release-v1.2.1).
+
+
 # 2018-04-26
 
 
