@@ -1,0 +1,9 @@
+f739002c731e11af287a987e9f997c25b9764995f7090f607a9ad73fe5294bb3  politeiavoter-darwin-amd64-v1.3.1.tar.gz
+008e7dac4eacd0e308bdd1d2f5bf07369da665bd62f65328f1ce993ebca5e99b  politeiavoter-linux-386-v1.3.1.tar.gz
+f679bf7bd4dea37f78f1fbc4e992bb2b25c11a6d42615cbedb48daa6b7c078fa  politeiavoter-linux-amd64-v1.3.1.tar.gz
+f1b79cfd136d874d9c036200be9ef61e4a1b2e5155ccc673c66a30bb241f81df  politeiavoter-linux-arm64-v1.3.1.tar.gz
+5a31f184f4b55640f75ca5b8c2770fd5d1260bc5f05b6004172baf15f2e60dab  politeiavoter-linux-arm-v1.3.1.tar.gz
+e7cc31c5426e33a8b89653e9ca80cc51726ef1466a6a1f08bd5b6298c2f4508c  politeiavoter-windows-386-v1.3.1.tar.gz
+be83ba06e3edfc5429ce17695ac5ca226f106d55bc50d9365037f4581c0448cf  politeiavoter-windows-386-v1.3.1.zip
+628e4c130a3bbd113ee445f6805ee6fc88dd0fd7f952c0dd4c64e79b2c3cf4b3  politeiavoter-windows-amd64-v1.3.1.tar.gz
+183c710a1a45790eab4e5e5f467e32a2c7c6ba64f806a340a5211468a7d2d31d  politeiavoter-windows-amd64-v1.3.1.zip
