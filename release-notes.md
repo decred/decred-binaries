@@ -28,13 +28,16 @@ enabled by going to the Settings page and updating the option (this will
 cause decrediton to reset to begin using the systems correctly).
 
 We are also proud to add our first round of translations.  We have added French,
-Spanish, German, Japanese, Chinese (simplified).  We've noticed some odd
-translation choices, if you notice any odd translations you can open an issue on
+Spanish, German, Japanese, Chinese (simplified).  If you are a long standing 
+community member and notice any incorrect translations you can open an issue on
 [github](https://www.github.com/decred/decrediton/issues) or contact the team on
-the slack/matrix chat platforms.  Our tentative next list of languages are:
-Russian, Arabic, Malay/Tagalog.  We are also trying to formalize some of the
-translation procedures so long standing community members can offer feedback
-about mistranslated words and phrases. 
+the slack/matrix chat platforms.  While we appreciate input from all users,
+the translation process demands some existing trust, so we'd prefer only users
+with existing relationships with the project submit translation issues.  We're
+attempting to formalize our translations procedures to allow input from more
+users.  Our goal is to provide the same high quality content for all users, no
+matter their preferred language. Our tentative next list of languages are:
+Russian, Arabic, Malay/Tagalog.
 
 ## Bug Fixes
 
