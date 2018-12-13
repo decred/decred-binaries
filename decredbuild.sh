@@ -37,6 +37,7 @@ for i in $SYS; do
     echo "Building:" $OS $ARCH
     env GOOS=$OS GOARCH=$ARCH go build "${REL[@]}" github.com/decred/dcrd
     env GOOS=$OS GOARCH=$ARCH go build "${REL[@]}" github.com/decred/dcrd/cmd/dcrctl
+    env GOOS=$OS GOARCH=$ARCH go build "${REL[@]}" github.com/decred/dcrd/cmd/gencerts
     env GOOS=$OS GOARCH=$ARCH go build "${REL[@]}" github.com/decred/dcrd/cmd/promptsecret
     env GOOS=$OS GOARCH=$ARCH go build "${DCRWALLET_REL[@]}" github.com/decred/dcrwallet
     cp $GPATH/src/github.com/decred/dcrd/cmd/dcrctl/sample-dcrctl.conf .
