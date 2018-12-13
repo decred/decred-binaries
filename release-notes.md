@@ -279,7 +279,7 @@ All commits since the last release may be viewed on GitHub [here](https://github
 - Sarlor
 - zhizhongzhiwai
 
-# dcrwallet v1.r.0-rc1
+# dcrwallet v1.4.0-rc1
 
 This release focuses on bug fixes and general improvements for both direct
 dcrwallet command line users and other projects building on top of dcrwallet
