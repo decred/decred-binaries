@@ -5,7 +5,7 @@
 
 To install the command line tools, please see [dcrinstaller](https://github.com/decred/decred-release/tree/master/cmd/dcrinstall).
 
-To install decrediton download, uncompress, and run [decrediton Linux](https://github.com/decred/decred-binaries/releases/download/v1.3.1/decrediton-1.3.1.tar.gz) or [decrediton OSX](https://github.com/decred/decred-binaries/releases/download/v1.3.1/decrediton-v1.3.1.dmg) or [decrediton Windows](https://github.com/decred/decred-binaries/releases/download/v1.3.1/decrediton-v1.3.1.exe).
+To install decrediton download, uncompress, and run [decrediton Linux](https://github.com/decred/decred-binaries/releases/download/v1.3.1/decrediton-1.3.1.tar.gz) or [decrediton macOS](https://github.com/decred/decred-binaries/releases/download/v1.3.1/decrediton-v1.3.1.dmg) or [decrediton Windows](https://github.com/decred/decred-binaries/releases/download/v1.3.1/decrediton-v1.3.1.exe).
 
 See manifest-v1.3.1.txt, and the package specific manifest files for sha256 sums and the associated .asc files to confirm those shas.
 
@@ -79,7 +79,7 @@ All commits since the last release may be viewed on GitHub
 
 To install the command line tools, please see [dcrinstaller](https://github.com/decred/decred-release/tree/master/cmd/dcrinstall).
 
-To install decrediton download, uncompress, and run [decrediton Linux](https://github.com/decred/decred-binaries/releases/download/v1.3.0/decrediton-1.3.0.tar.gz) or [decrediton OSX](https://github.com/decred/decred-binaries/releases/download/v1.3.0/decrediton-v1.3.0.dmg) or [decrediton Windows](https://github.com/decred/decred-binaries/releases/download/v1.3.0/decrediton-v1.3.0.exe).
+To install decrediton download, uncompress, and run [decrediton Linux](https://github.com/decred/decred-binaries/releases/download/v1.3.0/decrediton-1.3.0.tar.gz) or [decrediton macOS](https://github.com/decred/decred-binaries/releases/download/v1.3.0/decrediton-v1.3.0.dmg) or [decrediton Windows](https://github.com/decred/decred-binaries/releases/download/v1.3.0/decrediton-v1.3.0.exe).
 
 See manifest-v1.3.0.txt, and the package specific manifest files for sha256 sums and the associated .asc files to confirm those shas.
 
@@ -655,7 +655,7 @@ All commits since the last release may be viewed on GitHub
 
 To install decrediton download, uncompress, and run
 [decrediton Linux](https://github.com/decred/decred-binaries/releases/download/v1.2.1/decrediton-1.2.1.tar.gz) or
-[decrediton OSX](https://github.com/decred/decred-binaries/releases/download/v1.2.1/decrediton-1.2.1.dmg) or
+[decrediton macOS](https://github.com/decred/decred-binaries/releases/download/v1.2.1/decrediton-1.2.1.dmg) or
 [decrediton Windows](https://github.com/decred/decred-binaries/releases/download/v1.2.1/decrediton-1.2.1.exe).
 
 See  manifest-decrediton-v1.2.1.txt, and the package specific manifest files for sha256 sums and the associated .asc files to confirm those shas.
@@ -702,7 +702,7 @@ To install the command line tools, please see
 
 To install decrediton download, uncompress, and run
 [decrediton Linux](https://github.com/decred/decred-binaries/releases/download/v1.2.0/decrediton-v1.2.0.tar.gz) or
-[decrediton OSX](https://github.com/decred/decred-binaries/releases/download/v1.2.0/decrediton-v1.2.0.dmg) or
+[decrediton macOS](https://github.com/decred/decred-binaries/releases/download/v1.2.0/decrediton-v1.2.0.dmg) or
 [decrediton Windows](https://github.com/decred/decred-binaries/releases/download/v1.2.0/decrediton-v1.2.0.exe).
 
 See manifest-v1.2.0.txt, and the package specific manifest files for sha256 sums and the associated .asc files to confirm those shas.
@@ -1217,7 +1217,7 @@ All commits since the last release may be viewed on GitHub
 
 To install decrediton download, uncompress, and run
 [decrediton Linux](https://github.com/decred/decred-binaries/releases/download/v1.1.3/decrediton-1.1.3.tar.gz) or
-[decrediton OSX](https://github.com/decred/decred-binaries/releases/download/v1.1.3/decrediton-1.1.3.dmg) or
+[decrediton macOS](https://github.com/decred/decred-binaries/releases/download/v1.1.3/decrediton-1.1.3.dmg) or
 [decrediton Windows](https://github.com/decred/decred-binaries/releases/download/v1.1.3/decrediton-1.1.3.exe).
 
 See  manifest-decrediton-v1.1.3.txt, and the package specific manifest files for sha256 sums and the associated .asc files to confirm those shas.
@@ -1268,7 +1268,7 @@ To install the command line tools, please see
 
 To install decrediton download, uncompress, and run
 [decrediton Linux](https://github.com/decred/decred-binaries/releases/download/v1.1.2/decrediton-v1.1.2.tar.gz) or
-[decrediton OSX](https://github.com/decred/decred-binaries/releases/download/v1.1.2/decrediton-v1.1.2.dmg) or
+[decrediton macOS](https://github.com/decred/decred-binaries/releases/download/v1.1.2/decrediton-v1.1.2.dmg) or
 [decrediton Windows](https://github.com/decred/decred-binaries/releases/download/v1.1.2/decrediton-v1.1.2.exe).
 
 See manifest-v1.1.2.txt, and the package specific manifest files for sha256 sums and the associated .asc files to confirm those shas.
@@ -1592,7 +1592,7 @@ all changes to dcrwallet
 
 To install decrediton download, uncompress, and run
 [decrediton Linux](https://github.com/decred/decred-binaries/releases/download/v1.1.1/decrediton-1.1.1.tar.gz) or
-[decrediton OSX](https://github.com/decred/decred-binaries/releases/download/v1.1.1/decrediton-1.1.1.dmg) or
+[decrediton macOS](https://github.com/decred/decred-binaries/releases/download/v1.1.1/decrediton-1.1.1.dmg) or
 [decrediton Windows](https://github.com/decred/decred-binaries/releases/download/v1.1.1/decrediton-1.1.1.exe).
 
 See  manifest-decrediton-v1.1.1.txt, and the package specific manifest files for sha256 sums and the associated .asc files to confirm those shas.
@@ -1652,7 +1652,7 @@ To install the command line tools, please see
 
 To install decrediton download, uncompress, and run
 [decrediton Linux](https://github.com/decred/decred-binaries/releases/download/v1.1.0/decrediton-1.1.0.tar.gz) or
-[decrediton OSX](https://github.com/decred/decred-binaries/releases/download/v1.1.0/decrediton-1.1.0.dmg) or
+[decrediton macOS](https://github.com/decred/decred-binaries/releases/download/v1.1.0/decrediton-1.1.0.dmg) or
 [decrediton Windows](https://github.com/decred/decred-binaries/releases/download/v1.1.0/decrediton-1.1.0.exe).
 
 See manifest-v1.1.0.txt, and the package specific manifest files for sha256 sums and the associated .asc files to confirm those shas.
@@ -1944,7 +1944,7 @@ To install the command line tools, please see
 
 To install decrediton download, uncompress, and run
 [decrediton Linux](https://github.com/decred/decred-binaries/releases/download/v1.0.8/decrediton-1.0.8.tar.gz) or
-[decrediton OSX](https://github.com/decred/decred-binaries/releases/download/v1.0.8/decrediton-1.0.8.dmg).
+[decrediton macOS](https://github.com/decred/decred-binaries/releases/download/v1.0.8/decrediton-1.0.8.dmg).
 
 See manifest-v1.0.8.txt, and the package specific manifest files for sha256 sums and the associated .asc files to confirm those shas.
 
@@ -2049,7 +2049,7 @@ To install the command line tools, please see
 
 To install decrediton download, uncompress, and run
 [decrediton Linux](https://github.com/decred/decred-binaries/releases/download/v1.0.7/decrediton-1.0.7.tar.gz) or
-[decrediton OSX](https://github.com/decred/decred-binaries/releases/download/v1.0.7/decrediton-1.0.7.dmg).
+[decrediton macOS](https://github.com/decred/decred-binaries/releases/download/v1.0.7/decrediton-1.0.7.dmg).
 
 See manifest-v1.0.7.txt, and the package specific manifest files for sha256 sums and the associated .asc files to confirm those shas.
 
@@ -2541,7 +2541,7 @@ Updates to decredtiton v1.0.6:
 
 To install decrediton download, uncompress, and run
 [decrediton Linux](https://github.com/decred/decred-binaries/releases/download/v1.0.6/decrediton-1.0.6.tar.gz) or
-[decrediton OSX](https://github.com/decred/decred-binaries/releases/download/v1.0.6/decrediton-1.0.6.dmg).
+[decrediton macOS](https://github.com/decred/decred-binaries/releases/download/v1.0.6/decrediton-1.0.6.dmg).
 
 See manifest-v1.0.6.txt, and the package specific manifest files for sha256 sums and the associated .asc files to confirm those shas.
 
@@ -2628,7 +2628,7 @@ To install the command line tools, please see
 
 To install decrediton download, uncompress, and run
 [decrediton Linux](https://github.com/decred/decred-binaries/releases/download/v1.0.5/decrediton-1.0.5.tar.gz) or
-[decrediton OSX](https://github.com/decred/decred-binaries/releases/download/v1.0.5/decrediton-1.0.5.dmg).
+[decrediton macOS](https://github.com/decred/decred-binaries/releases/download/v1.0.5/decrediton-1.0.5.dmg).
 
 See manifest-v1.0.5.txt, and the package specific manifest files for sha256 sums and the associated .asc files to confirm those shas.
 
@@ -2756,7 +2756,7 @@ To install the command line tools, please see
 
 To install decrediton download, uncompress, and run
 [decrediton Linux](https://github.com/decred/decred-binaries/releases/download/v1.0.3/decrediton-1.0.3.tar.gz) or
-[decrediton OSX](https://github.com/decred/decred-binaries/releases/download/v1.0.3/decrediton-1.0.3.dmg).
+[decrediton macOS](https://github.com/decred/decred-binaries/releases/download/v1.0.3/decrediton-1.0.3.dmg).
 
 See manifest-v1.0.3.txt, and the package specific manifest files for sha256 sums and the associated .asc files to confirm those shas.
 
@@ -2937,7 +2937,7 @@ This is a patch release for decrediton only.  All users are encouraged to upgrad
 
 To install decrediton download, uncompress, and run
 [decrediton Linux](https://github.com/decred/decred-binaries/releases/download/v1.0.2_decrediton/decrediton-1.0.2.tar.gz) or
-[decrediton OSX](https://github.com/decred/decred-binaries/releases/download/v1.0.2_decrediton/decrediton-1.0.2.dmg).
+[decrediton macOS](https://github.com/decred/decred-binaries/releases/download/v1.0.2_decrediton/decrediton-1.0.2.dmg).
 
 See manifest-v1.0.2.txt, and the package specific manifest files for sha256 sums and the associated .asc files to confirm those shas.
 
@@ -2987,7 +2987,7 @@ To install the command line tools, please see
 
 To install decrediton download, uncompress, and run
 [decrediton Linux](https://github.com/decred/decred-binaries/releases/download/v1.0.1/decrediton-1.0.1.tar.gz) or
-[decrediton OSX](https://github.com/decred/decred-binaries/releases/download/v1.0.1/decrediton-1.0.1.dmg).
+[decrediton macOS](https://github.com/decred/decred-binaries/releases/download/v1.0.1/decrediton-1.0.1.dmg).
 
 See manifest-v1.0.1.txt, and the package specific manifest files for sha256 sums and the associated .asc files to confirm those shas.
 
@@ -3052,7 +3052,7 @@ To install the command line tools, please see
 
 To install decrediton download, uncompress, and run
 [decrediton Linux](https://github.com/decred/decred-binaries/releases/download/v1.0.0/decrediton-1.0.0.tar.gz) or
-[decrediton OSX](https://github.com/decred/decred-binaries/releases/download/v1.0.0/decrediton-1.0.0.dmg).
+[decrediton macOS](https://github.com/decred/decred-binaries/releases/download/v1.0.0/decrediton-1.0.0.dmg).
 
 See manifest-v1.0.0.txt, and the package specific manifest files for sha256 sums and the associated .asc files to confirm those shas.
 
@@ -3368,7 +3368,7 @@ To install the command line tools, please see
 
 To install decrediton download, uncompress, and run
 [decrediton Linux](https://github.com/decred/decred-binaries/releases/download/v0.8.2/decrediton-0.8.2.tar.gz) or
-[decrediton OSX](https://github.com/decred/decred-binaries/releases/download/v0.8.2/decrediton-0.8.2.dmg).
+[decrediton macOS](https://github.com/decred/decred-binaries/releases/download/v0.8.2/decrediton-0.8.2.dmg).
 
 See manifest-v0.8.2.txt, manifest-paymetheus-v0.8.2.txt, manifest-decrediton-0.8.2.txt, and manifest-dcrinstaller-v0.8.2.txt for sha256 sums and the associated .asc files to confirm those shas.
 
@@ -3474,7 +3474,7 @@ To install the command line tools, please see
 
 To install decrediton download, uncompress, and run
 [decrediton Linux](https://github.com/decred/decred-binaries/releases/download/v0.8.0/decrediton-0.8.0.tar.gz) or
-[decrediton OSX](https://github.com/decred/decred-binaries/releases/download/v0.8.0/decrediton-0.8.0.dmg).
+[decrediton macOS](https://github.com/decred/decred-binaries/releases/download/v0.8.0/decrediton-0.8.0.dmg).
 
 See manifest-v0.8.0.txt, manifest-paymetheus-v0.8.0.txt,
 manifest-decrediton-0.8.0.txt, and manifest-dcrinstaller-v0.8.0.txt
@@ -3563,7 +3563,7 @@ As of this release, dcrticketbuyer is no long included.  dcrwallet contains all 
 | grpc: Switch to pregenerated javascript bindings instead of dynamic loading of api.proto | [decred/decrediton#118](https://github.com/decred/decrediton/pull/118) |
 | Generate tarball for linux builds. | [decred/decrediton#126](https://github.com/decred/decrediton/pull/126) |
 | Include dcr* binaries when packaging. | [decred/decrediton#127](https://github.com/decred/decrediton/pull/127) |
-| Close when all windows are closed on OSX. | [decred/decrediton#129](https://github.com/decred/decrediton/pull/129) |
+| Close when all windows are closed on macOS. | [decred/decrediton#129](https://github.com/decred/decrediton/pull/129) |
 | Fix history page loading | [decred/decrediton#130](https://github.com/decred/decrediton/pull/130) |
 | don't assume the certificate exists and print error if it doesn't | [decred/decrediton#132](https://github.com/decred/decrediton/pull/132) |
 | css/html: Clean Receive page and add css provided by designers | [decred/decrediton#139](https://github.com/decred/decrediton/pull/139) |
@@ -3621,7 +3621,7 @@ As of this release, dcrticketbuyer is no long included.  dcrwallet contains all 
 | Make Send page honor units setting. | [decred/decrediton#225](https://github.com/decred/decrediton/pull/225) |
 | Match designer spec for getstarted views | [decred/decrediton#227](https://github.com/decred/decrediton/pull/227) |
 | Update node version required. | [decred/decrediton#229](https://github.com/decred/decrediton/pull/229) |
-| Fix minor typo for running on OSX | [decred/decrediton#231](https://github.com/decred/decrediton/pull/231) |
+| Fix minor typo for running on macOS | [decred/decrediton#231](https://github.com/decred/decrediton/pull/231) |
 | Fix sidebar account balances | [decred/decrediton#242](https://github.com/decred/decrediton/pull/242) |
 | Change to use mainnet as default | [decred/decrediton#244](https://github.com/decred/decrediton/pull/244) |
 | Bump for v0.8.0 | [decred/decrediton#239](https://github.com/decred/decrediton/pull/239) |
@@ -3661,7 +3661,7 @@ sending and receiving decred) are supported.  This is primarily a demo
 of decrediton rather than a production ready tool.  Please try it and
 report any issues or additional features you would like on the
 [github page](https://github.com/decred/decrediton/issues).  Currently
-binaries are only provided for 64 bit Linux and OSX.
+binaries are only provided for 64 bit Linux and macOS.
 
 Paymetheus has added seed restoration as well as the ability to show
 rescan progress.
@@ -3689,7 +3689,7 @@ To install the command line tools, please see
 To install decrediton download, uncompress, and run
 [decrediton Linux](https://github.com/decred/decred-binaries/releases/download/v0.7.0/decrediton-0.7.0-linux-amd64.tar.gz)
 or
-[decrediton OSX](https://github.com/decred/decred-binaries/releases/download/v0.7.0/decrediton-0.7.0.dmg)
+[decrediton macOS](https://github.com/decred/decred-binaries/releases/download/v0.7.0/decrediton-0.7.0.dmg)
 
 See manifest-v0.7.0.txt, manifest-paymetheus-v0.7.0.txt,
 manifest-decrediton-0.7.0.txt, and manifest-dcrinstaller-v0.7.0.txt
@@ -3932,7 +3932,7 @@ To install Paymetheus download and run either
 depending on your version of Windows.
 
 To install a the local Copay GUI download and run
-[Copay OSX](https://github.com/decred/decred-binaries/releases/download/v0.6.0/decred-copay-darwin-v0.6.0.dmg)
+[Copay macOS](https://github.com/decred/decred-binaries/releases/download/v0.6.0/decred-copay-darwin-v0.6.0.dmg)
 or
 [Copay Linux](https://github.com/decred/decred-binaries/releases/download/v0.6.0/decred-copay-linux-v0.6.0.zip).
 
@@ -4058,7 +4058,7 @@ To install Paymetheus download and run either
 depending on your version of Windows.
 
 To install a the local Copay GUI download and run
-[Copay OSX](https://github.com/decred/decred-binaries/releases/download/v0.5.0/decred-copay-darwin-v0.5.0.dmg)
+[Copay macOS](https://github.com/decred/decred-binaries/releases/download/v0.5.0/decred-copay-darwin-v0.5.0.dmg)
 or
 [Copay Linux](https://github.com/decred/decred-binaries/releases/download/v0.5.0/decred-copay-linux-v0.5.0.zip).
 
@@ -4203,7 +4203,7 @@ This release was built from:
 
 This release contains a variety of bugfixes and improvements to all of
 the decred tools (dcrd, dcrwallet, gominer, and Paymetheus).  Desktop
-binaries for Copay for OSX and Linux.  Paymetheus is now able to
+binaries for Copay for macOS and Linux.  Paymetheus is now able to
 launch dcrd in the background when it runs.  This is also the first
 release built with the version 1.7 of the go compiler.  This produces
 smaller and faster binaries than previous versions of go.
@@ -4214,7 +4214,7 @@ To install Paymetheus download and run either
 depending on your version of Windows.
 
 To install a the local Copay GUI download and run
-[Copay OSX](https://github.com/decred/decred-binaries/releases/download/v0.4.0/decred-copay-darwin-v0.4.0.dmg)
+[Copay macOS](https://github.com/decred/decred-binaries/releases/download/v0.4.0/decred-copay-darwin-v0.4.0.dmg)
 or
 [Copay Linux](https://github.com/decred/decred-binaries/releases/download/v0.4.0/decred-copay-linux-v0.4.0.zip).
 
