@@ -1,3 +1,509 @@
+## 2018-12-13
+
+
+## Install
+
+To install the command line tools, please see [dcrinstaller](https://github.com/decred/decred-release/tree/master/cmd/dcrinstall).
+
+To install decrediton download, uncompress, and run [decrediton Linux](https://github.com/decred/decred-binaries/releases/download/v1.4.0-rc1/decrediton-1.4.0-rc1.tar.gz) or [decrediton macOS](https://github.com/decred/decred-binaries/releases/download/v1.4.0-rc1/decrediton-v1.4.0-rc1.dmg) or [decrediton Windows](https://github.com/decred/decred-binaries/releases/download/v1.4.0-rc1/decrediton-v1.4.0-rc1.exe).
+
+See manifest-v1.4.0-rc1.txt, and the package specific manifest files for sha256 sums and the associated .asc files to confirm those shas.
+
+See [README.md](./README.md#verifying-binaries) for more info on verifying the files.
+
+
+## Contents
+
+* [dcrd](#dcrd-v140rc1)
+* [dcrwallet](#dcrwallet-v140rc1)
+* [decrediton](#decrediton-v140rc1)
+
+# dcrd v1.4.0-rc1
+
+This release of dcrd contains smart fee estimation, performance enhancements for
+block relay and processing, a major internal restructuring of how unspent
+transaction outputs are handled, support for whitelisting inbound peers to
+ensure service for your own SPV (Simplified Payment Verification) wallets,
+various updates to the RPC server such as a new method to query the state of the
+chain and more easily supporting external RPC connections over TLS,
+infrastructure improvements, and other quality assurance changes.
+
+**It is highly recommended that everyone upgrade to this latest release as it
+contains many important scalability improvements and smart fee estimation.**
+
+## Downgrade Warning
+
+The database format in v1.4.0 is not compatible with previous versions of the
+software.  This only affects downgrades as users upgrading from previous
+versions will see a lengthy one time database migration.
+
+Once this migration has been completed, it will no longer be possible to
+downgrade to a previous version of the software without having to delete the
+database and redownload the chain.
+
+## Notable Changes
+
+### Smart Fee Estimation (`estimatesmartfee`)
+
+A new RPC named `estimatesmartfee` is now available which returns a suitable
+fee rate for transactions to use in order to have a high probability of them
+being mined within a specified number of confirmations.  The estimation is based
+on actual network usage and thus varies according to supply and demand.
+
+This is important in the context of the Lightning Network (LN) and, more
+generally, it provides services and users with a mechanism to choose how to
+handle network congestion.  For example, payments that are high priority might
+be willing to pay a higher fee to help ensure the transaction is mined more
+quickly, while lower priority payments might be willing to wait longer in
+exchange for paying a lower fee.  This estimation capability provides a way to
+obtain a fee that will achieve the desired result with a high probability.
+
+### Support for Whitelisting Inbound Peers
+
+When peers are whitelisted via the `--whitelist` option, they will now be
+allowed to connect even when they would otherwise exceed the maximum number of
+peers.  This is highly useful in cases where users have configured their wallet
+to use SPV mode and only connect to dcrd instances that they control for
+increased privacy and guaranteed service.
+
+### Several Speed Optimizations
+
+Similar to previous releases, this release also contains several enhancements to
+improve speed for the initial sync process, validation, and network operations.
+
+In order to achieve these speedups, there is a lengthy one time database
+migration, as previously mentioned, that typically takes anywhere from 30
+minutes to an hour to complete depending on hardware.
+
+#### Faster Tip Block Relay
+
+Blocks that extend the current best chain are now relayed to the network
+immediately after they pass the initial sanity and contextual checks, most
+notably valid proof of work.  This allows blocks to propagate more quickly
+throughout the network, which in turn improves vote times.
+
+#### UTXO Set Restructuring
+
+The way the unspent transaction outputs are handled internally has been
+overhauled to significantly decrease the time it takes to validate block and
+transactions.  While this has many benefits, probably the most important one
+for most stakeholders is that votes can be cast more quickly which helps reduce
+the number of missed votes.
+
+### RPC Server Changes
+
+#### New Chain State Query RPC (`getblockchaininfo`)
+
+A new RPC named `getblockchaininfo` is now available which can be used to query
+the state of the chain including details such as its overall verification
+progress during initial sync, the maximum supported block size, and that status
+of consensus changes (deployments) which require stakeholder votes.  See the
+[JSON-RPC API Documentation](https://github.com/decred/dcrd/blob/master/docs/json_rpc_api.md#getblockchaininfo)
+for API details.
+
+#### Removal of Vote Creation RPC (`createrawssgen`)
+
+The deprecated `createrawssgen`, which was previously used to allow creating a
+vote via RPC is no longer available.  Votes are time sensitive and thus it does
+not make sense to create them offline.
+
+#### Updates to Block and Transaction RPCs
+
+The `getblock`, `getblockheader`, and `getrawtransaction`, and
+`searchrawtransactions` RPCs now contain additional information such as the
+`extradata` field in the header, the `expiry` field in transactions, and the
+`blockheight` and `blockindex` of  the block that contains a transaction if it
+has been mined.  See the [JSON-RPC API Documentation](https://github.com/decred/dcrd/blob/master/docs/json_rpc_api.md)
+for API details.
+
+#### Built-in Support for Enabling External TLS RPC Connections
+
+A new command line parameter (`--altdnsnames`) and environment variable
+(`DCRD_ALT_DNSNAMES`) can now be used before the first launch of drcd to specify
+additional external IP addresses and DNS names to add during the certificate
+creation that are permitted to connect to the RPC server via TLS.  Previously,
+a separate tool was required to accomplish this configuration.
+
+## Changelog
+
+All commits since the last release may be viewed on GitHub [here](https://github.com/decred/dcrd/compare/release-v1.3.0...release-v1.4.0-rc1).
+
+### Protocol and network:
+
+- chaincfg: Add checkpoints for 1.4.0 release ([decred/dcrd#1547](https://github.com/decred/dcrd/pull/1547))
+- peer: Add support for specifying ua comments ([decred/dcrd#1413](https://github.com/decred/dcrd/pull/1413))
+- blockmanager: Fast relay checked tip blocks ([decred/dcrd#1443](https://github.com/decred/dcrd/pull/1443))
+- multi: Latest consensus active from simnet genesis ([decred/dcrd#1482](https://github.com/decred/dcrd/pull/1482))
+- server: Always allow whitelisted inbound peers ([decred/dcrd#1516](https://github.com/decred/dcrd/pull/1516))
+
+### Transaction relay (memory pool):
+
+- blockmanager: handle txs in invalid blocks ([decred/dcrd#1430](https://github.com/decred/dcrd/pull/1430))
+- mempool: Remove potential negative locktime check ([decred/dcrd#1455](https://github.com/decred/dcrd/pull/1455))
+- mempool: Stake-related readability improvements ([decred/dcrd#1456](https://github.com/decred/dcrd/pull/1456))
+
+### RPC:
+
+- multi: Include additional fields on RPC tx results ([decred/dcrd#1441](https://github.com/decred/dcrd/pull/1441))
+- rpcserver: Allow scripthash addrs in createrawsstx ([decred/dcrd#1444](https://github.com/decred/dcrd/pull/1444))
+- rpcserver: Remove createrawssgen RPC ([decred/dcrd#1448](https://github.com/decred/dcrd/pull/1448))
+- rpcclient: support getchaintips RPC ([decred/dcrd#1469](https://github.com/decred/dcrd/pull/1469))
+- multi: Add getblockchaininfo rpc ([decred/dcrd#1479](https://github.com/decred/dcrd/pull/1479))
+- rpcserver: Adds ability to allow alternative dns names for TLS ([decred/dcrd#1476](https://github.com/decred/dcrd/pull/1476))
+- multi: Cleanup recent alt DNS names additions ([decred/dcrd#1493](https://github.com/decred/dcrd/pull/1493))
+- multi: Cleanup getblock and getblockheader RPCs ([decred/dcrd#1497](https://github.com/decred/dcrd/pull/1497))
+- multi: Return total chain work in RPC results ([decred/dcrd#1498](https://github.com/decred/dcrd/pull/1498))
+- rpcserver: Improve GenerateNBlocks error message ([decred/dcrd#1507](https://github.com/decred/dcrd/pull/1507))
+- rpcserver: Fix verify progress calculation ([decred/dcrd#1508](https://github.com/decred/dcrd/pull/1508))
+- rpcserver: Fix sendrawtransaction error code ([decred/dcrd#1512](https://github.com/decred/dcrd/pull/1512))
+- blockchain: Notify stake states after connected block ([decred/dcrd#1515](https://github.com/decred/dcrd/pull/1515))
+- rpcserver: bump version to 5.0. ([decred/dcrd#1531](https://github.com/decred/dcrd/pull/1531))
+- rpcclient: support getblockchaininfo RPC ([decred/dcrd#1539](https://github.com/decred/dcrd/pull/1539))
+
+### dcrd command-line flags and configuration:
+
+- config: add --maxsameip to limit # of conns to same IP ([decred/dcrd#1517](https://github.com/decred/dcrd/pull/1517))
+
+### Documentation:
+
+- docs: Update docs for versioned modules ([decred/dcrd#1391](https://github.com/decred/dcrd/pull/1391))
+- docs: Update for fees package ([decred/dcrd#1540](https://github.com/decred/dcrd/pull/1540))
+- docs: Revamp main README.md and update docs ([decred/dcrd#1447](https://github.com/decred/dcrd/pull/1447))
+- docs: Use relative versions in contrib checklist ([decred/dcrd#1451](https://github.com/decred/dcrd/pull/1451))
+- docs: Use the correct binary name ([decred/dcrd#1461](https://github.com/decred/dcrd/pull/1461))
+- docs: Add github pull request template ([decred/dcrd#1474](https://github.com/decred/dcrd/pull/1474))
+- docs: Use unix line ending in mod hierarchy gv ([decred/dcrd#1487](https://github.com/decred/dcrd/pull/1487))
+- docs: Add README badge and link for goreportcard ([decred/dcrd#1492](https://github.com/decred/dcrd/pull/1492))
+- sampleconfig: Fix proxy typo ([decred/dcrd#1513](https://github.com/decred/dcrd/pull/1513))
+
+### Developer-related package and module changes:
+
+- release: Bump module versions and deps ([decred/dcrd#1541](https://github.com/decred/dcrd/pull/1541))
+- build: Tidy module sums with go mod tidy ([decred/dcrd#1408](https://github.com/decred/dcrd/pull/1408))
+- blockchain: update BestState ([decred/dcrd#1416](https://github.com/decred/dcrd/pull/1416))
+- mempool: tweak trace logs ([decred/dcrd#1429](https://github.com/decred/dcrd/pull/1429))
+- blockchain: Correct best pool size on disconnect ([decred/dcrd#1431](https://github.com/decred/dcrd/pull/1431))
+- multi: Make use of new internal version package ([decred/dcrd#1435](https://github.com/decred/dcrd/pull/1435))
+- peer: Protect handlePongMsg with p.statsMtx ([decred/dcrd#1438](https://github.com/decred/dcrd/pull/1438))
+- limits: Make limits package internal ([decred/dcrd#1436](https://github.com/decred/dcrd/pull/1436))
+- indexers: Remove unneeded existsaddrindex iface ([decred/dcrd#1439](https://github.com/decred/dcrd/pull/1439))
+- blockchain: Reduce block availability assumptions ([decred/dcrd#1442](https://github.com/decred/dcrd/pull/1442))
+- peer: Provide immediate queue inventory func ([decred/dcrd#1443](https://github.com/decred/dcrd/pull/1443))
+- server: Add infrastruct for immediate inv relay ([decred/dcrd#1443](https://github.com/decred/dcrd/pull/1443))
+- blockchain: Add new tip block checked notification ([decred/dcrd#1443](https://github.com/decred/dcrd/pull/1443))
+- multi: remove chainState dependency in rpcserver ([decred/dcrd#1417](https://github.com/decred/dcrd/pull/1417))
+- mining: remove chainState dependency ([decred/dcrd#1418](https://github.com/decred/dcrd/pull/1418))
+- multi: remove chainState deps in server & cpuminer ([decred/dcrd#1419](https://github.com/decred/dcrd/pull/1419))
+- blockmanager: remove block manager chain state ([decred/dcrd#1420](https://github.com/decred/dcrd/pull/1420))
+- multi: move MinHighPriority into mining package ([decred/dcrd#1421](https://github.com/decred/dcrd/pull/1421))
+- multi: add BlkTmplGenerator ([decred/dcrd#1422](https://github.com/decred/dcrd/pull/1422))
+- multi: add cpuminerConfig ([decred/dcrd#1423](https://github.com/decred/dcrd/pull/1423))
+- multi: Move update blk time to blk templ generator ([decred/dcrd#1454](https://github.com/decred/dcrd/pull/1454))
+- multi: No stake height checks in check tx inputs ([decred/dcrd#1457](https://github.com/decred/dcrd/pull/1457))
+- blockchain: Separate tx input stake checks ([decred/dcrd#1452](https://github.com/decred/dcrd/pull/1452))
+- blockchain: Ensure no stake opcodes in tx sanity ([decred/dcrd#1453](https://github.com/decred/dcrd/pull/1453))
+- blockchain: Move finalized tx func to validation ([decred/dcrd#1465](https://github.com/decred/dcrd/pull/1465))
+- blockchain: Move unique coinbase func to validate ([decred/dcrd#1466](https://github.com/decred/dcrd/pull/1466))
+- blockchain: Store interrupt channel with state ([decred/dcrd#1467](https://github.com/decred/dcrd/pull/1467))
+- multi: Cleanup and optimize tx input check code ([decred/dcrd#1468](https://github.com/decred/dcrd/pull/1468))
+- blockmanager: Avoid duplicate header announcements ([decred/dcrd#1473](https://github.com/decred/dcrd/pull/1473))
+- dcrjson: additions for pay to contract hash ([decred/dcrd#1260](https://github.com/decred/dcrd/pull/1260))
+- multi: Break blockchain dependency on dcrjson ([decred/dcrd#1488](https://github.com/decred/dcrd/pull/1488))
+- chaincfg: Unexport internal errors ([decred/dcrd#1489](https://github.com/decred/dcrd/pull/1489))
+- multi: Cleanup the unsupported dcrwallet commands ([decred/dcrd#1478](https://github.com/decred/dcrd/pull/1478))
+- multi: Rename ThresholdState to NextThresholdState ([decred/dcrd#1494](https://github.com/decred/dcrd/pull/1494))
+- dcrjson: Add listtickets command ([decred/dcrd#1267](https://github.com/decred/dcrd/pull/1267))
+- multi: Add started and done reorg notifications ([decred/dcrd#1495](https://github.com/decred/dcrd/pull/1495))
+- blockchain: Remove unused CheckWorklessBlockSanity ([decred/dcrd#1496](https://github.com/decred/dcrd/pull/1496))
+- blockchain: Simplify block template checking ([decred/dcrd#1499](https://github.com/decred/dcrd/pull/1499))
+- blockchain: Only mark nodes modified when modified ([decred/dcrd#1503](https://github.com/decred/dcrd/pull/1503))
+- blockchain: Cleanup and optimize stake node logic ([decred/dcrd#1504](https://github.com/decred/dcrd/pull/1504))
+- blockchain: Separate full data context checks ([decred/dcrd#1509](https://github.com/decred/dcrd/pull/1509))
+- blockchain: Reverse utxo set semantics ([decred/dcrd#1471](https://github.com/decred/dcrd/pull/1471))
+- blockchain: Convert to direct single-step reorgs ([decred/dcrd#1500](https://github.com/decred/dcrd/pull/1500))
+- multi: Migration for utxo set semantics reversal ([decred/dcrd#1520](https://github.com/decred/dcrd/pull/1520))
+- blockchain: Make version 5 update atomic ([decred/dcrd#1529](https://github.com/decred/dcrd/pull/1529))
+- blockchain: Simplify force head reorgs ([decred/dcrd#1526](https://github.com/decred/dcrd/pull/1526))
+- secp256k1: Correct edge case in deterministic sign ([decred/dcrd#1533](https://github.com/decred/dcrd/pull/1533))
+- dcrjson: Add gettransaction txtype/ticketstatus ([decred/dcrd#1276](https://github.com/decred/dcrd/pull/1276))
+- txscript: Use ScriptBuilder more ([decred/dcrd#1519](https://github.com/decred/dcrd/pull/1519))
+- fees: Add estimator package ([decred/dcrd#1434](https://github.com/decred/dcrd/pull/1434))
+- multi: Integrate fee estimation ([decred/dcrd#1434](https://github.com/decred/dcrd/pull/1434))
+
+### Testing and Quality Assurance:
+
+- multi: Use temp directories for database tests ([decred/dcrd#1404](https://github.com/decred/dcrd/pull/1404))
+- multi: Only use module-scoped data in tests ([decred/dcrd#1405](https://github.com/decred/dcrd/pull/1405))
+- blockchain: Use temp dirs for fullblocks test ([decred/dcrd#1406](https://github.com/decred/dcrd/pull/1406))
+- database: Use module-scoped data in iface tests ([decred/dcrd#1407](https://github.com/decred/dcrd/pull/1407))
+- travis: Update for Go1.11 and module builds ([decred/dcrd#1415](https://github.com/decred/dcrd/pull/1415))
+- indexers: Use testable bucket for existsaddrindex ([decred/dcrd#1440](https://github.com/decred/dcrd/pull/1440))
+- txscript: group numeric encoding tests with their opcodes ([decred/dcrd#1382](https://github.com/decred/dcrd/pull/1382))
+- txscript: add p2sh opcode tests ([decred/dcrd#1381](https://github.com/decred/dcrd/pull/1381))
+- txscript: add stake opcode tests ([decred/dcrd#1383](https://github.com/decred/dcrd/pull/1383))
+- main: add address encoding magic constants test ([decred/dcrd#1458](https://github.com/decred/dcrd/pull/1458))
+- chaingen: Only revoke missed tickets once ([decred/dcrd#1484](https://github.com/decred/dcrd/pull/1484))
+- chaingen/fullblocktests: Add disapproval tests ([decred/dcrd#1485](https://github.com/decred/dcrd/pull/1485))
+- multi: Resurrect regression network ([decred/dcrd#1480](https://github.com/decred/dcrd/pull/1480))
+- multi: Use regression test network in unit tests ([decred/dcrd#1481](https://github.com/decred/dcrd/pull/1481))
+- main: move cert tests to a separated file ([decred/dcrd#1502](https://github.com/decred/dcrd/pull/1502))
+
+### Misc:
+
+- release: Bump for 1.4 release cycle ([decred/dcrd#1414](https://github.com/decred/dcrd/pull/1414))
+- multi: Make changes suggested by Go 1.11 gofmt -s ([decred/dcrd#1415](https://github.com/decred/dcrd/pull/1415))
+- build: Remove dep toml and lock file ([decred/dcrd#1460](https://github.com/decred/dcrd/pull/1460))
+- docker: Update to go 1.11 ([decred/dcrd#1463](https://github.com/decred/dcrd/pull/1463))
+- build: Support MacOS sed for obtaining module list ([decred/dcrd#1483](https://github.com/decred/dcrd/pull/1483))
+- multi: Correct a few typos found by misspell ([decred/dcrd#1490](https://github.com/decred/dcrd/pull/1490))
+- multi: Address some golint complaints ([decred/dcrd#1491](https://github.com/decred/dcrd/pull/1491))
+- multi: Remove unused code ([decred/dcrd#1505](https://github.com/decred/dcrd/pull/1505))
+- release: Bump siphash version to v1.2.1 ([decred/dcrd#1538](https://github.com/decred/dcrd/pull/1538))
+- release: Bump module versions and deps ([decred/dcrd#1541](https://github.com/decred/dcrd/pull/1541))
+- Fix required version of stake module ([decred/dcrd#1549](https://github.com/decred/dcrd/pull/1549))
+- release: Tidy module files with published versions ([decred/dcrd#1543](https://github.com/decred/dcrd/pull/1543))
+- mempool: Fix required version of mining module ([decred/dcrd#1551](https://github.com/decred/dcrd/pull/1551))
+
+### Code Contributors (alphabetical order):
+
+- Dave Collins
+- David Hill
+- Dmitry Fedorov
+- Donald Adu-Poku
+- ggoranov
+- githubsands
+- J Fixby
+- Jonathan Chappelow
+- Josh Rickmar
+- Matheus Degiovani
+- Sarlor
+- zhizhongzhiwai
+
+# dcrwallet v1.4.0-rc1
+
+This release focuses on bug fixes and general improvements for both direct
+dcrwallet command line users and other projects building on top of dcrwallet
+(such as Decrediton and upcoming mobile wallets).  A comprehensive list of
+improvements and bug fixes follows.
+
+## Bug fixes
+
+* Fixes were made to which and how many addresses and wallet UTXOs are watched
+  by the SPV and RPC syncers.  This prevents several bugs resulting from missed
+  transactions, such as avoiding double spending errors and spends of unknown
+  inputs.
+
+* Committed filter creation and validation is fixed on all ARM processors.
+  Previously, an ARM assembly optimization could produce incorrect output for
+  the siphash function.
+
+* During initial wallet creation, the database is now always cleanly closed
+  before the process exits.  Previously, this was a race and the new wallet
+  database may have been missing writes during the initialization step.
+
+* RPC connection errors to dcrd are now properly logged
+
+* A possible deadlock situation was removed by adding a missing mutex unlock to
+  the SPV peering implementation.
+
+* Error handling has been improved when querying unmined and unspent ticket
+  transactions.
+
+* The total number of logged transactions processed by the RPC syncer has been
+  fixed.
+
+* The process can be interrupted at startup if while being blocked on acquiring
+  the wallet's database lock.  Previously, the process would have needed to be
+  killed, or wait for an existing running wallet to shutdown.
+
+## New features
+
+* The gRPC method `WalletService.ValidateAddress` now returns pubkey of P2PKH
+  addresses and BIP0044 branch and child index if the address is controlled by
+  the wallet.
+
+* The gRPC method `WalletService.ImportScript` is now usable by watching-only
+  wallets.
+
+* The gRPC method `WalletService.StakeInfo` now includes counts of unspent
+  tickets.
+
+* A new gRPC method `TicketBuyerV2Service.RunTicketBuyer` has been added to run
+  the SPV-compatible ticket buyer.
+
+* A new gRPC method `WalletService.GetTicket` has been added to query the
+  details of an individual ticket by its transaction hash.
+
+* A new gRPC method `WalletService.SweepAccount` has been added to sweep all
+  UTXOs of an account to a single new output.
+
+* A new gRPC method `WalletService.RpcSync` has been added, providing a similar
+  as `SpvSync` to perform wallet synchronization with a dcrd RPC connection.
+
+* The SPV and RPC syncers now support callbacks for syncing notifications.
+  These notifications are also availble to gRPC clients who invoke the syncers.
+
+* Creating a new simnet wallet now shows an address that can be used for mining
+  rewards.
+
+* RPC syncing connections to dcrd can now be proxied using the `--proxy`,
+  `--proxyuser`, and `--proxypass` options.
+
+## Other improvements
+
+* Builds have been converted to use Go Modules.  The repository has been split
+  into various submodules, making it far easier to write applications that
+  import dcrwallet packages as libraries.
+
+* Wallet database API is exported for projects that need support for alternative
+  database drivers (such as dcrandroid).
+
+* Default transaction relay fee has been dropped to 0.0001 DCR/kB.
+
+* Transaction size and fee estimation is improved for ticket purchases and any
+  transaction that redeems a P2SH output.
+
+* DCP0001-0003 now apply to simnet from the start of the chain (note that this
+  is a hard fork for existing simnets).
+
+* Log files are never automatically deleted.  Previously, log files would be
+  rotated and old log files would be automatically removed.  This has been
+  changed to avoid the loss of potentially important logs.
+
+* Logs for unexpected database consistency issues have been improved by logging
+  the keys and values
+
+## Changelog
+
+All commits since the last release may be viewed on GitHub
+[here](https://github.com/decred/dcrwallet/compare/v1.3.0...v1.4.0).
+
+# decrediton v1.4.0-rc1
+
+This decrediton release has been mostly dedicated to fixing nagging issues
+with users and cleaning up styling and design overall.  We are also happy to
+include new features such as: alpha Trezor support, initial alternative color themes,
+enhanced Governance/Politeia integration and a prominent page to choose SPV or normal mode.
+
+We are proud to introduce initial Trezor hardware wallet support.  This includes
+the ability to create transactions in decrediton and then sign them with the
+connected device.  We will be working hard to add staking on Trezor in the near
+future.
+
+Alternative color themes have been a constantly suggested feature since the
+launch of decrediton. We have added an initial proof of concept for a dark theme
+toggle.  The colors are not yet final and design will hopefully provide a series
+of possible themes instead of simply light and dark.  
+
+This release is the first to directly ask users on startup whether or not they 
+would like to use SPV mode or not.  This will hopefully increase SPV usage and 
+provide better/faster wallet support for most users.
+
+## New features
+
+* Trezor integration has been added.  This allows users to essentially use 
+  decrediton as watch-only wallet that is able to have its transactions signed
+  directly by their Trezor device.  Staking isn't yet currently available, but
+  we'll be looking in to adding that soon.  While we have tested and verified
+  this initial Trezor integration, we will hold off on prominently advertising 
+  this until we can fully confirm it is bug free and secure.  
+
+* Decrediton has switched to using the ticketbuyer v2 service from the wallet 
+  (instead of the old v1). Given that after [DCP-0001](https://github.com/decred/dcps/blob/master/dcp-0001/dcp-0001.mediawiki) the 
+  ticket price has been stable, there's no need for that many configuration 
+  parameters anymore. Version 2 of the ticket buyer needs to be configured only 
+  with the source account, target stakepool and how much balance should be left 
+  spendable. The buyer will then purchase as many tickets as possible, while 
+  maintaining that balance.
+
+* Launcher Sync Stream.  Now both modes (SPV/RPC) both use the same notification
+  types to update during launching.  This helps with being able to allow dcrwallet
+  to handle all of the syncing and simply just update on similiar notifications.
+  Previously, there were situations that were causing issues since syncing steps
+  would be done out of order.
+
+* All users will see a new page on first load that lets them select whether or
+  not they would like to enable SPV mode.  We have also added a link to a newly
+  created document explaining everything about [SPV](https://docs.decred.org/wallets/spv).
+
+* We have added an early proof of concept for color theme toggling.  The colors
+  for the added dark theme are still being finalized by design, but the button
+  can be found on the Settings page.
+
+* Whenever a panic is detected by decrediton in dcrd or dcrwallet, users are now
+  sent to a seperate fatal error screen where they will be able to copy the logs
+  to be able to provide them to the developers and support.  This will hopefully
+  help users receive better direction to alleviate issues that are hitting.
+
+* Notifications have been completed restyled and fixed to allow for multiple
+  simultaneous notifications.  There is now a prominent closer button and timer
+  for automatic notification closing. 
+
+## Other improvements
+
+* Eeter and kylefirethought have delivered a whole new set of animated menu icons.
+  These can be seen when hovering over a given menu page tab.  
+
+* The Governance Page has received a large styling overhaul as provided by Eeter
+  LLC.  Most importantly, notification bubbles have been added to let users
+  know when there are new proposals and votes to see.
+
+* Various clean up and refinement to the launcher.  There were issues in SPV mode
+  that were causing confusion about whether it was waiting to connect to a
+  daemon to proceed or not.  Now it should always be clear to the user when they
+  need to resolve something to proceed or if they should expect to wait for
+  something to happen.
+
+* We have updated some error messages to better explain to users what the
+  problem is and how it can be resolved.
+
+* Watch-only wallets are now able to create unsigned transactions that can be
+  transferred to an unlocked wallet for signing and subsequent broadcasting.
+
+* Add an import script button to the Add Stakepool form.  There are some users
+  that wish to simply import their script without having to communicate with any
+  outside sources.
+
+* The min default relay fee was updated in dcrd a few releases ago and now the
+  network has sufficiently upgraded to allow for wallet software to use 0.0001
+  DCR/kB as the default.  Any transaction or ticket created in decrediton or 
+  dcrwallet should now use that minimum fee from now on.
+
+* Change to use the documentation subsystem to add the release notes.  This will
+  allow us to be more flexible when adding new release notes and letting users
+  review older ones.
+
+* Add decrediton logs to the Logs tab underneath the Help page.
+
+* With the addition of `getblockchaininfo` json-rpc command in dcrd, we are
+  now able to properly determine the progress of dcrd syncing.  This removes the
+  need to use outside sources to figure out know the syncing progress.
+
+* Transactions are now decoded within decrediton instead of being sent back to 
+  dcrwallet for decoding.  This should help with performance to avoid an
+  unnecessary request.
+
+* Chinese language has been extensively reviewed by long time Asian community 
+  contributor @Guang168
+
+## Bug fixes
+
+* There were various issues with the display of recent staking transactions on
+  the Overview and the My Tickets pages. 
+
+* Startup stats have been fixed to properly update and work better for large wallets 
+
+* The application About button in macOS now also opens the About modal.
+
+* CSV exporting now correctly generates timestamps in UTC or local time based 
+  on app config (thanks to @rocknet for the first contribution).
+
+## Changelog
+
+All commits since the last release may be viewed on GitHub
+[here](https://github.com/decred/dcrwallet/compare/v1.3.0...v1.4.0-rc1).
+
+
 ## 2018-10-15
 
 
@@ -69,7 +575,7 @@ Russian, Arabic, Malay/Tagalog.
 ## Changelog
 
 All commits since the last release may be viewed on GitHub
-[here](https://github.com/decred/dcrwallet/compare/release-v1.3.0...release-v1.3.1).
+[here](https://github.com/decred/decrediton/compare/release-v1.3.0...release-v1.3.1).
 
 
 ## 2018-09-21
