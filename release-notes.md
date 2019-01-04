@@ -315,6 +315,16 @@ improvements and bug fixes follows.
 * The process can be interrupted at startup if while being blocked on acquiring
   the wallet's database lock.  Previously, the process would have needed to be
   killed, or wait for an existing running wallet to shutdown.
+  
+* Fixed reorganizations failing with "missing credit value" errors.  This
+  was not a database corruption issue and a wallet restore is not necessary.
+
+* Fixed the block hash returned by gRPC `WalletService.GetTransaction`
+  responses.  This method was prevously using the transaction hash instead
+  of the hash of the block the transaction was mined in.
+
+* Fixed error handling in the RPC sync mode to ensure some synchronization
+  errors are not ignored.
 
 ## New features
 
