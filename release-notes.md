@@ -1,24 +1,24 @@
-## 2018-12-13
+## 2018-01-04
 
 
 ## Install
 
 To install the command line tools, please see [dcrinstaller](https://github.com/decred/decred-release/tree/master/cmd/dcrinstall).
 
-To install decrediton download, uncompress, and run [decrediton Linux](https://github.com/decred/decred-binaries/releases/download/v1.4.0-rc1/decrediton-1.4.0-rc1.tar.gz) or [decrediton macOS](https://github.com/decred/decred-binaries/releases/download/v1.4.0-rc1/decrediton-v1.4.0-rc1.dmg) or [decrediton Windows](https://github.com/decred/decred-binaries/releases/download/v1.4.0-rc1/decrediton-v1.4.0-rc1.exe).
+To install decrediton download, uncompress, and run [decrediton Linux](https://github.com/decred/decred-binaries/releases/download/v1.4.0-rc2/decrediton-1.4.0-rc2.tar.gz) or [decrediton macOS](https://github.com/decred/decred-binaries/releases/download/v1.4.0-rc2/decrediton-v1.4.0-rc2.dmg) or [decrediton Windows](https://github.com/decred/decred-binaries/releases/download/v1.4.0-rc2/decrediton-v1.4.0-rc2.exe).
 
-See manifest-v1.4.0-rc1.txt, and the package specific manifest files for sha256 sums and the associated .asc files to confirm those shas.
+See manifest-v1.4.0-rc2.txt, and the package specific manifest files for sha256 sums and the associated .asc files to confirm those shas.
 
 See [README.md](./README.md#verifying-binaries) for more info on verifying the files.
 
 
 ## Contents
 
-* [dcrd](#dcrd-v140rc1)
-* [dcrwallet](#dcrwallet-v140rc1)
-* [decrediton](#decrediton-v140rc1)
+* [dcrd](#dcrd-v140rc2)
+* [dcrwallet](#dcrwallet-v140rc2)
+* [decrediton](#decrediton-v140rc2)
 
-# dcrd v1.4.0-rc1
+# dcrd v1.4.0-rc2
 
 This release of dcrd contains smart fee estimation, performance enhancements for
 block relay and processing, a major internal restructuring of how unspent
@@ -126,7 +126,7 @@ a separate tool was required to accomplish this configuration.
 
 ## Changelog
 
-All commits since the last release may be viewed on GitHub [here](https://github.com/decred/dcrd/compare/release-v1.3.0...release-v1.4.0-rc1).
+All commits since the last release may be viewed on GitHub [here](https://github.com/decred/dcrd/compare/release-v1.3.0...release-v1.4.0-rc2).
 
 ### Protocol and network:
 
@@ -279,7 +279,7 @@ All commits since the last release may be viewed on GitHub [here](https://github
 - Sarlor
 - zhizhongzhiwai
 
-# dcrwallet v1.4.0-rc1
+# dcrwallet v1.4.0-rc2
 
 This release focuses on bug fixes and general improvements for both direct
 dcrwallet command line users and other projects building on top of dcrwallet
@@ -388,7 +388,7 @@ improvements and bug fixes follows.
 All commits since the last release may be viewed on GitHub
 [here](https://github.com/decred/dcrwallet/compare/v1.3.0...v1.4.0).
 
-# decrediton v1.4.0-rc1
+# decrediton v1.4.0-rc2
 
 This decrediton release has been mostly dedicated to fixing nagging issues
 with users and cleaning up styling and design overall.  We are also happy to
@@ -511,7 +511,7 @@ provide better/faster wallet support for most users.
 ## Changelog
 
 All commits since the last release may be viewed on GitHub
-[here](https://github.com/decred/dcrwallet/compare/v1.3.0...v1.4.0-rc1).
+[here](https://github.com/decred/dcrwallet/compare/v1.3.0...release-v1.4).
 
 
 ## 2018-10-15
