@@ -19,16 +19,27 @@ See [README.md](./README.md#verifying-binaries) for more info on verifying the f
 
 # dcrd v1.4.0-rc3
 
-This release of dcrd contains smart fee estimation, performance enhancements for
-block relay and processing, a major internal restructuring of how unspent
-transaction outputs are handled, support for whitelisting inbound peers to
-ensure service for your own SPV (Simplified Payment Verification) wallets,
-various updates to the RPC server such as a new method to query the state of the
-chain and more easily supporting external RPC connections over TLS,
-infrastructure improvements, and other quality assurance changes.
+This release of dcrd introduces a new consensus vote agenda which allows the
+stakeholders to decide whether or not to activate changes needed to modify the
+sequence lock handling which is required for providing full support for the
+Lightning Network.  For those unfamiliar with the voting process in Decred, this
+means that all code in order to make the necessary changes is already included
+in this release, however its enforcement will remain dormant until the
+stakeholders vote to activate it.
 
-**It is highly recommended that everyone upgrade to this latest release as it
-contains many important scalability improvements and smart fee estimation.**
+It also contains smart fee estimation, performance enhancements for block relay
+and processing, a major internal restructuring of how unspent transaction
+outputs are handled, support for whitelisting inbound peers to ensure service
+for your own SPV (Simplified Payment Verification) wallets, various updates to
+the RPC server such as a new method to query the state of the chain and more
+easily supporting external RPC connections over TLS, infrastructure
+improvements, and other quality assurance changes.
+
+The following Decred Change Proposals (DCP) describes the proposed changes in detail:
+- [DCP0004](https://github.com/decred/dcps/blob/master/dcp-0004/dcp-0004.mediawiki)
+
+**It is important for everyone to upgrade their software to this latest release
+even if you don't intend to vote in favor of the agenda.**
 
 ## Downgrade Warning
 
@@ -41,6 +52,13 @@ downgrade to a previous version of the software without having to delete the
 database and redownload the chain.
 
 ## Notable Changes
+
+### Fix Lightning Network Sequence Locks Vote
+
+In order to fully support the Lightning Network, the current sequence lock
+consensus rules need to be modified.  A new vote with the id `fixlnseqlocks` is
+now available as of this release.  After upgrading, stakeholders may set their
+preferences through their wallet or Voting Service Provider's (VSP) website.
 
 ### Smart Fee Estimation (`estimatesmartfee`)
 
@@ -130,6 +148,8 @@ All commits since the last release may be viewed on GitHub [here](https://github
 ### Protocol and network:
 
 - chaincfg: Add checkpoints for 1.4.0 release ([decred/dcrd#1547](https://github.com/decred/dcrd/pull/1547))
+- chaincfg: Introduce agenda for fixlnseqlocks vote ([decred/dcrd#1578](https://github.com/decred/dcrd/pull/1578))
+- multi: Enable vote for DCP0004 ([decred/dcrd#1579](https://github.com/decred/dcrd/pull/1579))
 - peer: Add support for specifying ua comments ([decred/dcrd#1413](https://github.com/decred/dcrd/pull/1413))
 - blockmanager: Fast relay checked tip blocks ([decred/dcrd#1443](https://github.com/decred/dcrd/pull/1443))
 - multi: Latest consensus active from simnet genesis ([decred/dcrd#1482](https://github.com/decred/dcrd/pull/1482))
@@ -158,6 +178,7 @@ All commits since the last release may be viewed on GitHub [here](https://github
 - blockchain: Notify stake states after connected block ([decred/dcrd#1515](https://github.com/decred/dcrd/pull/1515))
 - rpcserver: bump version to 5.0. ([decred/dcrd#1531](https://github.com/decred/dcrd/pull/1531))
 - rpcclient: support getblockchaininfo RPC ([decred/dcrd#1539](https://github.com/decred/dcrd/pull/1539))
+- rpcserver: update block template reconstruction ([decred/dcrd#1567](https://github.com/decred/dcrd/pull/1567))
 
 ### dcrd command-line flags and configuration:
 
@@ -246,6 +267,8 @@ All commits since the last release may be viewed on GitHub [here](https://github
 - multi: Resurrect regression network ([decred/dcrd#1480](https://github.com/decred/dcrd/pull/1480))
 - multi: Use regression test network in unit tests ([decred/dcrd#1481](https://github.com/decred/dcrd/pull/1481))
 - main: move cert tests to a separated file ([decred/dcrd#1502](https://github.com/decred/dcrd/pull/1502))
+- mempool: Accept test mungers for create signed tx ([decred/dcrd#1576](https://github.com/decred/dcrd/pull/1576))
+- mempool: Implement test harness seq lock calc ([decred/dcrd#1577](https://github.com/decred/dcrd/pull/1577))
 
 ### Misc:
 
@@ -279,114 +302,6 @@ All commits since the last release may be viewed on GitHub [here](https://github
 - Sarlor
 - zhizhongzhiwai
 
-# dcrwallet v1.4.0-rc3
-
-This release focuses on bug fixes and general improvements for both direct
-dcrwallet command line users and other projects building on top of dcrwallet
-(such as Decrediton and upcoming mobile wallets).  A comprehensive list of
-improvements and bug fixes follows.
-
-## Bug fixes
-
-* Fixes were made to which and how many addresses and wallet UTXOs are watched
-  by the SPV and RPC syncers.  This prevents several bugs resulting from missed
-  transactions, such as avoiding double spending errors and spends of unknown
-  inputs.
-
-* Committed filter creation and validation is fixed on all ARM processors.
-  Previously, an ARM assembly optimization could produce incorrect output for
-  the siphash function.
-
-* During initial wallet creation, the database is now always cleanly closed
-  before the process exits.  Previously, this was a race and the new wallet
-  database may have been missing writes during the initialization step.
-
-* RPC connection errors to dcrd are now properly logged
-
-* A possible deadlock situation was removed by adding a missing mutex unlock to
-  the SPV peering implementation.
-
-* Error handling has been improved when querying unmined and unspent ticket
-  transactions.
-
-* The total number of logged transactions processed by the RPC syncer has been
-  fixed.
-
-* The process can be interrupted at startup if while being blocked on acquiring
-  the wallet's database lock.  Previously, the process would have needed to be
-  killed, or wait for an existing running wallet to shutdown.
-  
-* Fixed reorganizations failing with "missing credit value" errors.  This
-  was not a database corruption issue and a wallet restore is not necessary.
-
-* Fixed the block hash returned by gRPC `WalletService.GetTransaction`
-  responses.  This method was prevously using the transaction hash instead
-  of the hash of the block the transaction was mined in.
-
-* Fixed error handling in the RPC sync mode to ensure some synchronization
-  errors are not ignored.
-
-## New features
-
-* The gRPC method `WalletService.ValidateAddress` now returns pubkey of P2PKH
-  addresses and BIP0044 branch and child index if the address is controlled by
-  the wallet.
-
-* The gRPC method `WalletService.ImportScript` is now usable by watching-only
-  wallets.
-
-* The gRPC method `WalletService.StakeInfo` now includes counts of unspent
-  tickets.
-
-* A new gRPC method `TicketBuyerV2Service.RunTicketBuyer` has been added to run
-  the SPV-compatible ticket buyer.
-
-* A new gRPC method `WalletService.GetTicket` has been added to query the
-  details of an individual ticket by its transaction hash.
-
-* A new gRPC method `WalletService.SweepAccount` has been added to sweep all
-  UTXOs of an account to a single new output.
-
-* A new gRPC method `WalletService.RpcSync` has been added, providing a similar
-  as `SpvSync` to perform wallet synchronization with a dcrd RPC connection.
-
-* The SPV and RPC syncers now support callbacks for syncing notifications.
-  These notifications are also availble to gRPC clients who invoke the syncers.
-
-* Creating a new simnet wallet now shows an address that can be used for mining
-  rewards.
-
-* RPC syncing connections to dcrd can now be proxied using the `--proxy`,
-  `--proxyuser`, and `--proxypass` options.
-
-## Other improvements
-
-* Builds have been converted to use Go Modules.  The repository has been split
-  into various submodules, making it far easier to write applications that
-  import dcrwallet packages as libraries.
-
-* Wallet database API is exported for projects that need support for alternative
-  database drivers (such as dcrandroid).
-
-* Default transaction relay fee has been dropped to 0.0001 DCR/kB.
-
-* Transaction size and fee estimation is improved for ticket purchases and any
-  transaction that redeems a P2SH output.
-
-* DCP0001-0003 now apply to simnet from the start of the chain (note that this
-  is a hard fork for existing simnets).
-
-* Log files are never automatically deleted.  Previously, log files would be
-  rotated and old log files would be automatically removed.  This has been
-  changed to avoid the loss of potentially important logs.
-
-* Logs for unexpected database consistency issues have been improved by logging
-  the keys and values
-
-## Changelog
-
-All commits since the last release may be viewed on GitHub
-[here](https://github.com/decred/dcrwallet/compare/v1.3.0...v1.4.0).
 
 
 # decrediton v1.4.0-rc3
