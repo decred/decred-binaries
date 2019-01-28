@@ -302,6 +302,114 @@ All commits since the last release may be viewed on GitHub [here](https://github
 - Sarlor
 - zhizhongzhiwai
 
+# dcrwallet v1.4.0-rc3
+
+This release focuses on bug fixes and general improvements for both direct
+dcrwallet command line users and other projects building on top of dcrwallet
+(such as Decrediton and upcoming mobile wallets).  A comprehensive list of
+improvements and bug fixes follows.
+
+## Bug fixes
+
+* Fixes were made to which and how many addresses and wallet UTXOs are watched
+  by the SPV and RPC syncers.  This prevents several bugs resulting from missed
+  transactions, such as avoiding double spending errors and spends of unknown
+  inputs.
+
+* Committed filter creation and validation is fixed on all ARM processors.
+  Previously, an ARM assembly optimization could produce incorrect output for
+  the siphash function.
+
+* During initial wallet creation, the database is now always cleanly closed
+  before the process exits.  Previously, this was a race and the new wallet
+  database may have been missing writes during the initialization step.
+
+* RPC connection errors to dcrd are now properly logged
+
+* A possible deadlock situation was removed by adding a missing mutex unlock to
+  the SPV peering implementation.
+
+* Error handling has been improved when querying unmined and unspent ticket
+  transactions.
+
+* The total number of logged transactions processed by the RPC syncer has been
+  fixed.
+
+* The process can be interrupted at startup if while being blocked on acquiring
+  the wallet's database lock.  Previously, the process would have needed to be
+  killed, or wait for an existing running wallet to shutdown.
+  
+* Fixed reorganizations failing with "missing credit value" errors.  This
+  was not a database corruption issue and a wallet restore is not necessary.
+
+* Fixed the block hash returned by gRPC `WalletService.GetTransaction`
+  responses.  This method was prevously using the transaction hash instead
+  of the hash of the block the transaction was mined in.
+
+* Fixed error handling in the RPC sync mode to ensure some synchronization
+  errors are not ignored.
+
+## New features
+
+* The gRPC method `WalletService.ValidateAddress` now returns pubkey of P2PKH
+  addresses and BIP0044 branch and child index if the address is controlled by
+  the wallet.
+
+* The gRPC method `WalletService.ImportScript` is now usable by watching-only
+  wallets.
+
+* The gRPC method `WalletService.StakeInfo` now includes counts of unspent
+  tickets.
+
+* A new gRPC method `TicketBuyerV2Service.RunTicketBuyer` has been added to run
+  the SPV-compatible ticket buyer.
+
+* A new gRPC method `WalletService.GetTicket` has been added to query the
+  details of an individual ticket by its transaction hash.
+
+* A new gRPC method `WalletService.SweepAccount` has been added to sweep all
+  UTXOs of an account to a single new output.
+
+* A new gRPC method `WalletService.RpcSync` has been added, providing a similar
+  as `SpvSync` to perform wallet synchronization with a dcrd RPC connection.
+
+* The SPV and RPC syncers now support callbacks for syncing notifications.
+  These notifications are also availble to gRPC clients who invoke the syncers.
+
+* Creating a new simnet wallet now shows an address that can be used for mining
+  rewards.
+
+* RPC syncing connections to dcrd can now be proxied using the `--proxy`,
+  `--proxyuser`, and `--proxypass` options.
+
+## Other improvements
+
+* Builds have been converted to use Go Modules.  The repository has been split
+  into various submodules, making it far easier to write applications that
+  import dcrwallet packages as libraries.
+
+* Wallet database API is exported for projects that need support for alternative
+  database drivers (such as dcrandroid).
+
+* Default transaction relay fee has been dropped to 0.0001 DCR/kB.
+
+* Transaction size and fee estimation is improved for ticket purchases and any
+  transaction that redeems a P2SH output.
+
+* DCP0001-0003 now apply to simnet from the start of the chain (note that this
+  is a hard fork for existing simnets).
+
+* Log files are never automatically deleted.  Previously, log files would be
+  rotated and old log files would be automatically removed.  This has been
+  changed to avoid the loss of potentially important logs.
+
+* Logs for unexpected database consistency issues have been improved by logging
+  the keys and values
+
+## Changelog
+
+All commits since the last release may be viewed on GitHub
+[here](https://github.com/decred/dcrwallet/compare/v1.3.0...v1.4.0).
 
 
 # decrediton v1.4.0-rc3
