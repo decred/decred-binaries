@@ -1,35 +1,45 @@
-## 2018-01-04
+## 2019-01-28
 
 
 ## Install
 
 To install the command line tools, please see [dcrinstaller](https://github.com/decred/decred-release/tree/master/cmd/dcrinstall).
+To install decrediton download, uncompress, and run [decrediton Linux](https://github.com/decred/decred-binaries/releases/download/v1.4.0-rc3/decrediton-1.4.0-rc3.tar.gz) or [decrediton macOS](https://github.com/decred/decred-binaries/releases/download/v1.4.0-rc3/decrediton-v1.4.0-rc3.dmg) or [decrediton Windows](https://github.com/decred/decred-binaries/releases/download/v1.4.0-rc3/decrediton-v1.4.0-rc3.exe).
 
-To install decrediton download, uncompress, and run [decrediton Linux](https://github.com/decred/decred-binaries/releases/download/v1.4.0-rc2/decrediton-1.4.0-rc2.tar.gz) or [decrediton macOS](https://github.com/decred/decred-binaries/releases/download/v1.4.0-rc2/decrediton-v1.4.0-rc2.dmg) or [decrediton Windows](https://github.com/decred/decred-binaries/releases/download/v1.4.0-rc2/decrediton-v1.4.0-rc2.exe).
-
-See manifest-v1.4.0-rc2.txt, and the package specific manifest files for sha256 sums and the associated .asc files to confirm those shas.
+See manifest-v1.4.0-rc3.txt, and the package specific manifest files for sha256 sums and the associated .asc files to confirm those shas.
 
 See [README.md](./README.md#verifying-binaries) for more info on verifying the files.
 
 
 ## Contents
 
-* [dcrd](#dcrd-v140rc2)
-* [dcrwallet](#dcrwallet-v140rc2)
-* [decrediton](#decrediton-v140rc2)
+* [dcrd](#dcrd-v140rc3)
+* [dcrwallet](#dcrwallet-v140rc3)
+* [decrediton](#decrediton-v140rc3)
 
-# dcrd v1.4.0-rc2
+# dcrd v1.4.0-rc3
 
-This release of dcrd contains smart fee estimation, performance enhancements for
-block relay and processing, a major internal restructuring of how unspent
-transaction outputs are handled, support for whitelisting inbound peers to
-ensure service for your own SPV (Simplified Payment Verification) wallets,
-various updates to the RPC server such as a new method to query the state of the
-chain and more easily supporting external RPC connections over TLS,
-infrastructure improvements, and other quality assurance changes.
+This release of dcrd introduces a new consensus vote agenda which allows the
+stakeholders to decide whether or not to activate changes needed to modify the
+sequence lock handling which is required for providing full support for the
+Lightning Network.  For those unfamiliar with the voting process in Decred, this
+means that all code in order to make the necessary changes is already included
+in this release, however its enforcement will remain dormant until the
+stakeholders vote to activate it.
 
-**It is highly recommended that everyone upgrade to this latest release as it
-contains many important scalability improvements and smart fee estimation.**
+It also contains smart fee estimation, performance enhancements for block relay
+and processing, a major internal restructuring of how unspent transaction
+outputs are handled, support for whitelisting inbound peers to ensure service
+for your own SPV (Simplified Payment Verification) wallets, various updates to
+the RPC server such as a new method to query the state of the chain and more
+easily supporting external RPC connections over TLS, infrastructure
+improvements, and other quality assurance changes.
+
+The following Decred Change Proposals (DCP) describes the proposed changes in detail:
+- [DCP0004](https://github.com/decred/dcps/blob/master/dcp-0004/dcp-0004.mediawiki)
+
+**It is important for everyone to upgrade their software to this latest release
+even if you don't intend to vote in favor of the agenda.**
 
 ## Downgrade Warning
 
@@ -42,6 +52,13 @@ downgrade to a previous version of the software without having to delete the
 database and redownload the chain.
 
 ## Notable Changes
+
+### Fix Lightning Network Sequence Locks Vote
+
+In order to fully support the Lightning Network, the current sequence lock
+consensus rules need to be modified.  A new vote with the id `fixlnseqlocks` is
+now available as of this release.  After upgrading, stakeholders may set their
+preferences through their wallet or Voting Service Provider's (VSP) website.
 
 ### Smart Fee Estimation (`estimatesmartfee`)
 
@@ -85,7 +102,7 @@ throughout the network, which in turn improves vote times.
 #### UTXO Set Restructuring
 
 The way the unspent transaction outputs are handled internally has been
-overhauled to significantly decrease the time it takes to validate block and
+overhauled to significantly decrease the time it takes to validate blocks and
 transactions.  While this has many benefits, probably the most important one
 for most stakeholders is that votes can be cast more quickly which helps reduce
 the number of missed votes.
@@ -109,7 +126,7 @@ not make sense to create them offline.
 
 #### Updates to Block and Transaction RPCs
 
-The `getblock`, `getblockheader`, and `getrawtransaction`, and
+The `getblock`, `getblockheader`, `getrawtransaction`, and
 `searchrawtransactions` RPCs now contain additional information such as the
 `extradata` field in the header, the `expiry` field in transactions, and the
 `blockheight` and `blockindex` of  the block that contains a transaction if it
@@ -126,11 +143,13 @@ a separate tool was required to accomplish this configuration.
 
 ## Changelog
 
-All commits since the last release may be viewed on GitHub [here](https://github.com/decred/dcrd/compare/release-v1.3.0...release-v1.4.0-rc2).
+All commits since the last release may be viewed on GitHub [here](https://github.com/decred/dcrd/compare/release-v1.3.0...release-v1.4.0-rc3).
 
 ### Protocol and network:
 
 - chaincfg: Add checkpoints for 1.4.0 release ([decred/dcrd#1547](https://github.com/decred/dcrd/pull/1547))
+- chaincfg: Introduce agenda for fixlnseqlocks vote ([decred/dcrd#1578](https://github.com/decred/dcrd/pull/1578))
+- multi: Enable vote for DCP0004 ([decred/dcrd#1579](https://github.com/decred/dcrd/pull/1579))
 - peer: Add support for specifying ua comments ([decred/dcrd#1413](https://github.com/decred/dcrd/pull/1413))
 - blockmanager: Fast relay checked tip blocks ([decred/dcrd#1443](https://github.com/decred/dcrd/pull/1443))
 - multi: Latest consensus active from simnet genesis ([decred/dcrd#1482](https://github.com/decred/dcrd/pull/1482))
@@ -159,6 +178,7 @@ All commits since the last release may be viewed on GitHub [here](https://github
 - blockchain: Notify stake states after connected block ([decred/dcrd#1515](https://github.com/decred/dcrd/pull/1515))
 - rpcserver: bump version to 5.0. ([decred/dcrd#1531](https://github.com/decred/dcrd/pull/1531))
 - rpcclient: support getblockchaininfo RPC ([decred/dcrd#1539](https://github.com/decred/dcrd/pull/1539))
+- rpcserver: update block template reconstruction ([decred/dcrd#1567](https://github.com/decred/dcrd/pull/1567))
 
 ### dcrd command-line flags and configuration:
 
@@ -247,6 +267,8 @@ All commits since the last release may be viewed on GitHub [here](https://github
 - multi: Resurrect regression network ([decred/dcrd#1480](https://github.com/decred/dcrd/pull/1480))
 - multi: Use regression test network in unit tests ([decred/dcrd#1481](https://github.com/decred/dcrd/pull/1481))
 - main: move cert tests to a separated file ([decred/dcrd#1502](https://github.com/decred/dcrd/pull/1502))
+- mempool: Accept test mungers for create signed tx ([decred/dcrd#1576](https://github.com/decred/dcrd/pull/1576))
+- mempool: Implement test harness seq lock calc ([decred/dcrd#1577](https://github.com/decred/dcrd/pull/1577))
 
 ### Misc:
 
@@ -266,6 +288,7 @@ All commits since the last release may be viewed on GitHub [here](https://github
 
 ### Code Contributors (alphabetical order):
 
+- Corey Osman
 - Dave Collins
 - David Hill
 - Dmitry Fedorov
@@ -279,7 +302,7 @@ All commits since the last release may be viewed on GitHub [here](https://github
 - Sarlor
 - zhizhongzhiwai
 
-# dcrwallet v1.4.0-rc2
+# dcrwallet v1.4.0-rc3
 
 This release focuses on bug fixes and general improvements for both direct
 dcrwallet command line users and other projects building on top of dcrwallet
@@ -388,7 +411,8 @@ improvements and bug fixes follows.
 All commits since the last release may be viewed on GitHub
 [here](https://github.com/decred/dcrwallet/compare/v1.3.0...v1.4.0).
 
-# decrediton v1.4.0-rc2
+
+# decrediton v1.4.0-rc3
 
 This decrediton release has been mostly dedicated to fixing nagging issues
 with users and cleaning up styling and design overall.  We are also happy to
@@ -511,7 +535,7 @@ provide better/faster wallet support for most users.
 ## Changelog
 
 All commits since the last release may be viewed on GitHub
-[here](https://github.com/decred/dcrwallet/compare/v1.3.0...release-v1.4).
+[here](https://github.com/decred/decrediton/compare/v1.3.0...release-v1.4).
 
 
 ## 2018-10-15
