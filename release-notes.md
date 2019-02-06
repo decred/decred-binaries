@@ -340,7 +340,7 @@ A comprehensive list of improvements and bug fixes follows.
 * The process can be interrupted at startup if while being blocked on acquiring
   the wallet's database lock.  Previously, the process would have needed to be
   killed, or wait for an existing running wallet to shutdown.
-  
+
 * Fixed reorganizations failing with "missing credit value" errors.  This
   was not a database corruption issue and a wallet restore is not necessary.
 
@@ -537,7 +537,7 @@ provide better/faster wallet support for most users.
 ## Changelog
 
 All commits since the last release may be viewed on GitHub
-[here](https://github.com/decred/decrediton/compare/v1.3.0...release-v1.4).
+[here](https://github.com/decred/decrediton/compare/release-v1.3.0...release-v1.4.0).
 
 
 ## 2018-10-15
