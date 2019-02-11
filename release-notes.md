@@ -306,8 +306,10 @@ All commits since the last release may be viewed on GitHub [here](https://github
 
 This release focuses on bug fixes and general improvements for both direct
 dcrwallet command line users and other projects building on top of dcrwallet
-(such as Decrediton and upcoming mobile wallets).  A comprehensive list of
-improvements and bug fixes follows.
+(such as Decrediton and upcoming mobile wallets).  A new voting agenda is also
+part of this release to enable votes on
+[DCP0004](https://github.com/decred/dcps/blob/master/dcp-0004/dcp-0004.mediawiki).
+A comprehensive list of improvements and bug fixes follows.
 
 ## Bug fixes
 
@@ -338,7 +340,7 @@ improvements and bug fixes follows.
 * The process can be interrupted at startup if while being blocked on acquiring
   the wallet's database lock.  Previously, the process would have needed to be
   killed, or wait for an existing running wallet to shutdown.
-  
+
 * Fixed reorganizations failing with "missing credit value" errors.  This
   was not a database corruption issue and a wallet restore is not necessary.
 
@@ -409,7 +411,7 @@ improvements and bug fixes follows.
 ## Changelog
 
 All commits since the last release may be viewed on GitHub
-[here](https://github.com/decred/dcrwallet/compare/v1.3.0...v1.4.0).
+[here](https://github.com/decred/dcrwallet/compare/release-v1.3.0...release-v1.4.0).
 
 
 # decrediton v1.4.0
@@ -535,7 +537,7 @@ provide better/faster wallet support for most users.
 ## Changelog
 
 All commits since the last release may be viewed on GitHub
-[here](https://github.com/decred/decrediton/compare/v1.3.0...release-v1.4).
+[here](https://github.com/decred/decrediton/compare/release-v1.3.0...release-v1.4.0).
 
 
 ## 2018-10-15
