@@ -115,7 +115,7 @@ A new RPC named `getblockchaininfo` is now available which can be used to query
 the state of the chain including details such as its overall verification
 progress during initial sync, the maximum supported block size, and that status
 of consensus changes (deployments) which require stakeholder votes.  See the
-[JSON-RPC API Documentation](https://github.com/decred/dcrd/blob/master/docs/json_rpc_api.md#getblockchaininfo)
+[JSON-RPC API Documentation](https://github.com/decred/dcrd/blob/master/docs/json_rpc_api.mediawiki#getblockchaininfo)
 for API details.
 
 #### Removal of Vote Creation RPC (`createrawssgen`)
@@ -130,7 +130,7 @@ The `getblock`, `getblockheader`, `getrawtransaction`, and
 `searchrawtransactions` RPCs now contain additional information such as the
 `extradata` field in the header, the `expiry` field in transactions, and the
 `blockheight` and `blockindex` of  the block that contains a transaction if it
-has been mined.  See the [JSON-RPC API Documentation](https://github.com/decred/dcrd/blob/master/docs/json_rpc_api.md)
+has been mined.  See the [JSON-RPC API Documentation](https://github.com/decred/dcrd/blob/master/docs/json_rpc_api.mediawiki)
 for API details.
 
 #### Built-in Support for Enabling External TLS RPC Connections
