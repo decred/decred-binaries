@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -ex
+
 # Simple bash script to build basic Decred tools for all the platforms
 # we support with the golang cross-compiler.
 #
@@ -7,59 +9,75 @@
 # Use of this source code is governed by the ISC
 # license.
 
-# If no tag specified, use date + version otherwise use tag.
-if [[ $1x = x ]]; then
-    DATE=`date +%Y%m%d`
-    VERSION="01"
-    TAG=$DATE-$VERSION
-else
-    TAG=$1
-    REL=(-ldflags "-X main.appBuild=release")
-    DCRWALLET_REL=(-ldflags "-X github.com/decred/dcrwallet/version.BuildMetadata=release")
+if [[ $# -ne 1 ]]; then
+	echo 'Please specify a version'
+	exit 1
 fi
 
+# GOPATH is currently required
+if [ -z "$GOPATH" ]; then
+	echo 'Please set GOPATH'
+	exit 1
+fi
+
+CWD=$PWD
+TAG=$1
 PACKAGE=decred
 MAINDIR=$PACKAGE-$TAG
+GO111MODULE=on
+REL=(-ldflags "-X github.com/decred/dcrd/internal/version.BuildMetadata=release -X github.com/decred/dcrd/internal/version.PreRelease=")
+DCRWALLET_REL=(-ldflags "-X github.com/decred/dcrwallet/version.BuildMetadata=release -X github.com/decred/dcrwallet/version.PreRelease=")
+
 mkdir -p $MAINDIR
-cd $MAINDIR
 
-SYS="windows-386 windows-amd64 openbsd-386 openbsd-amd64 linux-386 linux-amd64 linux-arm linux-arm64 darwin-amd64 dragonfly-amd64 freebsd-386 freebsd-amd64 freebsd-arm netbsd-386 netbsd-amd64 solaris-amd64"
+SYS="windows-386 windows-amd64 linux-386 linux-amd64 linux-arm linux-arm64 darwin-amd64 freebsd-amd64 openbsd-amd64"
 
-# Use the first element of $GOPATH in the case where GOPATH is a list
-# (something that is totally allowed).
-GPATH=$(echo $GOPATH | cut -f1 -d:)
+mkdir -p "$GOPATH/src/github.com/decred/"
+cd "$GOPATH/src/github.com/decred/"
+rm -r dcrd dcrwallet
+
+git clone -b release-v1.4 https://github.com/decred/dcrd
+git clone -b release-v1.4 https://github.com/decred/dcrwallet
 
 for i in $SYS; do
     OS=$(echo $i | cut -f1 -d-)
     ARCH=$(echo $i | cut -f2 -d-)
-    mkdir $PACKAGE-$i-$TAG
-    cd $PACKAGE-$i-$TAG
-    echo "Building:" $OS $ARCH
-    env GOOS=$OS GOARCH=$ARCH go build "${REL[@]}" github.com/decred/dcrd
-    env GOOS=$OS GOARCH=$ARCH go build "${REL[@]}" github.com/decred/dcrd/cmd/dcrctl
-    env GOOS=$OS GOARCH=$ARCH go build "${REL[@]}" github.com/decred/dcrd/cmd/gencerts
-    env GOOS=$OS GOARCH=$ARCH go build "${REL[@]}" github.com/decred/dcrd/cmd/promptsecret
-    env GOOS=$OS GOARCH=$ARCH go build "${DCRWALLET_REL[@]}" github.com/decred/dcrwallet
-    cp $GPATH/src/github.com/decred/dcrd/cmd/dcrctl/sample-dcrctl.conf .
-    cp $GPATH/src/github.com/decred/dcrwallet/sample-dcrwallet.conf .
-    cd ..
+    mkdir -p $CWD/$PACKAGE-$i-$TAG
+    echo "Building:" $OS $ARCH ${REL[@]}
+    EXT=""
     if [[ $OS = "windows" ]]; then
-	zip -r $PACKAGE-$i-$TAG.zip $PACKAGE-$i-$TAG
-	tar -cvzf $PACKAGE-$i-$TAG.tar.gz $PACKAGE-$i-$TAG
-    else
-	tar -cvzf $PACKAGE-$i-$TAG.tar.gz $PACKAGE-$i-$TAG
+      EXT=".exe"
     fi
-    rm -r $PACKAGE-$i-$TAG
+    rm $PACKAGE-$i-$TAG
+
+    # dcrd
+    cd $GOPATH/src/github.com/decred/dcrd
+    env GO111MODULE=on GOOS=$OS GOARCH=$ARCH go build "${REL[@]}"
+    cp dcrd$EXT $CWD/$PACKAGE-$i-$TAG
+
+    # dcrctl
+    cd $GOPATH/src/github.com/decred/dcrd/cmd/dcrctl
+    env GO111MODULE=on GOOS=$OS GOARCH=$ARCH go build "${REL[@]}"
+    cp dcrctl$EXT sample-dcrctl.conf $CWD/$PACKAGE-$i-$TAG
+
+    # promptsecret
+    cd $GOPATH/src/github.com/decred/dcrd/cmd/promptsecret
+    env GO111MODULE=on GOOS=$OS GOARCH=$ARCH go build "${REL[@]}"
+    cp promptsecret$EXT $CWD/$PACKAGE-$i-$TAG
+
+    # dcrwallet
+    cd $GOPATH/src/github.com/decred/dcrwallet
+    env GO111MODULE=on GOOS=$OS GOARCH=$ARCH go build "${DCRWALLET_REL[@]}"
+    cp dcrwallet$EXT sample-dcrwallet.conf $CWD/$PACKAGE-$i-$TAG
+
+    if [[ $OS = "windows" ]]; then
+       (cd $CWD && zip -r $MAINDIR/$PACKAGE-$i-$TAG.zip $PACKAGE-$i-$TAG)
+    else
+       (cd $CWD && tar -cvzf $MAINDIR/$PACKAGE-$i-$TAG.tar.gz $PACKAGE-$i-$TAG)
+    fi
+    rm $CWD/$PACKAGE-$i-$TAG/*
+    rmdir $CWD/$PACKAGE-$i-$TAG
 done
 
-if [ -e ../decred-copay-darwin-$TAG.dmg ]; then
-    mv ../decred-copay-darwin-$TAG.dmg .
-fi
-if [ -e ../decred-copay-linux-$TAG.zip ]; then
-    mv ../decred-copay-linux-$TAG.zip .
-fi
-if [ -e ../decred-copay-windows-$TAG.exe ]; then
-    mv ../decred-copay-windows-$TAG.exe .
-fi
-
+cd $CWD/$MAINDIR
 sha256sum * > manifest-$TAG.txt
