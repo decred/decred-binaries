@@ -1,3 +1,84 @@
+## 2019-10-21
+
+
+## Install
+
+To install the command line tools, please see [dcrinstaller](https://github.com/decred/decred-release/tree/master/cmd/dcrinstall).
+To install decrediton download, uncompress, and run [decrediton Linux](https://github.com/decred/decred-binaries/releases/download/v1.5.0/decrediton-1.5.0.tar.gz) or [decrediton macOS](https://github.com/decred/decred-binaries/releases/download/v1.5.0/decrediton-v1.5.0.dmg) or [decrediton Windows](https://github.com/decred/decred-binaries/releases/download/v1.5.0/decrediton-v1.5.0.exe).
+
+See manifest-v1.5.0.txt, and the package specific manifest files for sha256 sums and the associated .asc files to confirm those shas.
+
+See [README.md](./README.md#verifying-binaries) for more info on verifying the files.
+
+
+## Contents
+
+* [dcrd](#dcrd-v140)
+* [dcrwallet](#dcrwallet-v140)
+* [decrediton](#decrediton-v140)
+
+# dcrd v1.5.0
+
+
+# dcrwallet v1.5.0
+
+## Changelog
+
+All commits since the last release may be viewed on GitHub
+[here](https://github.com/decred/dcrwallet/compare/release-v1.4.0...release-v1.5.0).
+
+
+# decrediton v1.5.0
+
+This release was primarily focused on overall look and feel refinement and bug
+fixes.  It also includes a preliminary Lightning Network implementation.  
+
+## New Features
+
+- Initial LN Support has been added.  This includes the following functionality:
+  dcrlnd startup/teardown, open/close channels, create invoices, send payments,
+  enabled autopilot and show dcrlnd logs.  This initial support should give users
+  a chance to experience the capabilities of LN while we can also collect user
+  feedback about how to best improve their experience with documentation or help.
+  To enable LN support, please set the new option "ln_enabled" to "true" in your
+  config.json.
+
+- Window size responsiveness has been added to most of the pages to allow for
+  graceful change from small, medium and large screen sizes.  When in "small"
+  mode, the sidebar is moved to the bottom of the screen much like a mobile app.
+  When in "medium" mode, the sidebar is collapsed shows only icons.  When in
+  "large" mode, the sidebar is fully expanded and all the fields are fully shown.
+
+## Other updates
+
+- Dark mode (tonality) has been updated to have a more thoughtfully compiled
+  pallette of color combinations.  We can now start to develop other color modes
+  if users show an interest in such a feature.
+
+- The launcher now has a daemon connection timeout detection.  Previously,
+  the wallet would endlessly attempt to connect to the daemon, even if the
+  daemon had some fatal error that it would never recover from.  This allows 
+  the user to recover from such a situation more gracefully.
+
+- Update Politeia proposal fetching to reduce amount of data that is consistantly
+  requested.  Previously, every load of decrediton would cause an unnecessary 
+  amount of data to be requested.
+
+## Bug fixes
+
+- Fix pasting the hex version of the seed while restoring a wallet.
+
+- Fix incorrect balance reporting for data exports.
+
+- Fix advanced mode staring with an empty app data directory.
+
+- Fix revoked ticket and recent transactions icon.
+
+## Changelog
+
+All commits since the last release may be viewed on GitHub
+[here](https://github.com/decred/decrediton/compare/release-v1.4.0...release-v1.5.0).
+
 ## 2019-02-06
 
 
