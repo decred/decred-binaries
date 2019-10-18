@@ -31,7 +31,8 @@ All commits since the last release may be viewed on GitHub
 # decrediton v1.5.0
 
 This release was primarily focused on overall look and feel refinement and bug
-fixes.  It also includes a preliminary Lightning Network implementation.  
+fixes.  It also includes a preliminary Lightning Network implementation by 
+matheusd.  Most of the other work was completed by vctt and a new member of the team, bgptr.  Many thanks to them for their hard work on this release.
 
 ## New Features
 
@@ -74,6 +75,8 @@ fixes.  It also includes a preliminary Lightning Network implementation.
 
 - Fix revoked ticket and recent transactions icon.
 
+- Update lockedByTickets balance to accomodate dcrwallet balance updates staking.
+  
 ## Changelog
 
 All commits since the last release may be viewed on GitHub
