@@ -9,7 +9,6 @@ Decred.
 This repository contains releases for the following software:
 
 * [dcrd](https://github.com/decred/dcrd)/[dcrwallet](https://github.com/decred/dcrwallet)
-* [Paymetheus](https://github.com/decred/Paymetheus)
 * [gominer](https://github.com/decred/gominer)
 * [decrediton](https://github.com/decred/decrediton)
 
