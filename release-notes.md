@@ -957,57 +957,11 @@ All commits since the last release may be viewed on GitHub [here](https://github
 
 # dcrwallet v1.5.0-rc1
 
-This release introduces the privacy features, based on CoinShuffle++.  A new
+This release introduces the privacy features based on CoinShuffle++.  A new
 voting agenda is also added to vote on the activation of the changes described
 in
 [DCP0005](https://github.com/decred/dcps/blob/master/dcp-0005/dcp-0005.mediawiki).
 A comprehensive list of improvements and bug fixes follows.
-
-## Bug fixes
-
-* A "missing credit value" error seen during reorgs of 2+ transaction spend
-  chains was corrected.
-  
-* The Wallet.TransactionSummary method was fixed so that it correctly returns
-  the block hash of mined transactions, instead of filling the block hash field
-  with the transaction hash.
-
-* Outbounded SPV peers are removed from an internal "connecting" state after any
-  error is hit.  This allows the SPV syncer to try other peers instead of losing
-  the ability to outbound any new peers.
-
-* Duplicate ticket hashes are filtered out of the `livetickets` JSON-RPC if they
-  are recorded internally in both the transaction and stake stores.
-  
-* Data races in the wallet's notification emitter were identified and corrected.
-
-* Duplicate transaction errors when the wallet publishes a transaction to `dcrd`
-  with the `sendrawtransaction` JSON-RPC are now handled as successful
-  transaction publishes, instead of returning the errors back to the caller.
-
-* An unlikely bug in Salsa20 (used by the wallet for storing encrypted messages
-  in the database), which broke the security guarantees if more than 256GiB of
-  the keystream was used, was corrected by upgrading the x/crypto module to a
-  newer version with a fix.
-
-* A data race accessing whether a transaction output is locked or not was fixed.
-
-* A potential address reuse bug was corrected with improvements to the in-memory
-  address index tracking.
-  
-* The `stakepooluserinfo` JSON-RPC method now correctly sets the status of
-  immature tickets to "immature" instead of "live".
-
-* Ticket commitments, which do not follow the UTXO model as they can not be
-  spent, are now handled specially by the wallet.  This corrects balance
-  reporting issues whenever tickets have been bought or observed with relevant
-  commitment addresses.
-  
-* An panic caused by out-of-bounds array access in the SPV syncer was identified
-  and corrected.
-
-* The `listsinceblock` JSON-RPC method now correctly includes zero confirmation
-  transactions and corrects the `last_block` behavior to match bitcoind.
 
 ## New features
 
@@ -1064,8 +1018,53 @@ A comprehensive list of improvements and bug fixes follows.
 * Deprecated config flags from the v1.4.0 release have been removed.
 
 * Several deprecated methods and fields in the JSON-RPC API have been
-  undeprecated.  These were deprecated by bitcoind many of its forks, but are
+  undeprecated.  These were deprecated in upstream code, but are
   still used and necessary for dcrwallet due to differences in account handling.
+
+## Bug fixes
+
+* A "missing credit value" error seen during reorgs of 2+ transaction spend
+  chains was corrected.
+  
+* The Wallet.TransactionSummary method was fixed so that it correctly returns
+  the block hash of mined transactions, instead of filling the block hash field
+  with the transaction hash.
+
+* Outbounded SPV peers are removed from an internal "connecting" state after any
+  error is hit.  This allows the SPV syncer to try other peers instead of losing
+  the ability to outbound any new peers.
+
+* Duplicate ticket hashes are filtered out of the `livetickets` JSON-RPC if they
+  are recorded internally in both the transaction and stake stores.
+  
+* Data races in the wallet's notification emitter were identified and corrected.
+
+* Duplicate transaction errors when the wallet publishes a transaction to `dcrd`
+  with the `sendrawtransaction` JSON-RPC are now handled as successful
+  transaction publishes, instead of returning the errors back to the caller.
+
+* An unlikely bug in Salsa20 (used by the wallet for storing encrypted messages
+  in the database), which broke the security guarantees if more than 256GiB of
+  the keystream was used, was corrected by upgrading the x/crypto module to a
+  newer version with a fix.
+
+* A data race accessing whether a transaction output is locked or not was fixed.
+
+* A potential address reuse bug was corrected with improvements to the in-memory
+  address index tracking.
+  
+* The `stakepooluserinfo` JSON-RPC method now correctly sets the status of
+  immature tickets to "immature" instead of "live".
+
+* Ticket commitments, which do not follow the UTXO model as they can not be
+  spent, are now handled specially by the wallet.  This corrects balance
+  reporting issues whenever tickets have been bought or observed with relevant
+  commitment addresses.
+  
+* A panic caused by out-of-bounds array access in the SPV syncer was identified
+  and corrected.
+dfdfdes zero confirmation
+  transactions and corrects the `last_block` behavior to match bitcoind.
 
 ## Changelog
 
@@ -1125,7 +1124,7 @@ matheusd.  Most of the other work was completed by vctt and a new member of the 
 ## Changelog
 
 All commits since the last release may be viewed on GitHub
-[here](https://github.com/decred/decrediton/compare/release-v1.4.0...release-v1.5.0).
+[here](https://github.com/decred/decrediton/compare/release-v1.4.0...release-v1.5.0-rc1).
 
 ## 2019-02-06
 
