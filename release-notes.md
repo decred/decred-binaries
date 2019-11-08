@@ -16,6 +16,7 @@ See [README.md](./README.md#verifying-binaries) for more info on verifying the f
 * [dcrd](#dcrd-v150-rc1)
 * [dcrwallet](#dcrwallet-v150-rc1)
 * [decrediton](#decrediton-v150-rc1)
+* [dcrlnd](#dcrlnd-v020-rc1)
 
 # dcrd v1.5.0-rc1
 
@@ -1125,6 +1126,48 @@ matheusd.  Most of the other work was completed by vctt and a new member of the 
 
 All commits since the last release may be viewed on GitHub
 [here](https://github.com/decred/decrediton/compare/release-v1.4.0...release-v1.5.0-rc1).
+
+# dcrlnd v0.2.0-rc1
+
+This update has brought dcrlnd synced to the [v0.8.0-beta](https://github.com/lightningnetwork/lnd/releases/tag/v0.8.0-beta) of upstream lnd.
+
+Most upstream work that was done since our original branching point in January 2019 was merged and Decred-specific work has been done to enable more seamless integration of dcrlnd to Decrediton.
+
+Decred's LN network is still only in its begining stages, therefore please use caution when comitting funds to it.
+
+## Network Reset & Backwards Incompatible Change
+
+Those running v0.1.0 or other versions built from code, please note that v0.2.0 has a **network-wide breaking change**. [PR46](https://github.com/decred/dcrlnd/pull/46) changed the algorithm used to encode payment requests from the Decred-default of Blake256 to the Bicoin-compatible SHA-256.
+
+This means v0.1.0 nodes cannot use channels with v0.2.0 nodes. and will fail and force-close on the first attempt of payment.
+
+Given the v0.1.0 network was still very small we decided to not implement signalling and backwards compatible changes to simplify implementation. Anyone still running the old version **MUST UPGRADE** their node. 
+
+## Notable Changes 
+
+- Support for remote dcrwallets which is used in Decrediton integration [decred/dcrlnd#40](https://github.com/decred/dcrlnd/pull/40)
+
+- Switch payment hash algorithm to SHA-256 [decred/dcrlnd#46](https://github.com/decred/dcrlnd/pull/46)
+
+- Remove the need to connect to a dcrd running with `--txindex` [decred/dcrlnd#41](https://github.com/decred/dcrlnd/pull/41)
+
+## Notable Upstream Changes
+
+[PR36](https://github.com/decred/dcrlnd/pull/36) and [PR42](https://github.com/decred/dcrlnd/pull/42) are the ones that port the upstream work. Some notable upstream changes brought include the following.
+
+- Safu Commitments, which was an LN-wide protocol change enabling wallets to retrieve their local channel balance stored in unilaterally-closed channels without requiring coordination with the counterparty.
+
+- Watchtower support, which allows a wallet to remain closed for a longer period of time by offloading the reposability to watch for channel breaches to a third party called a _watchtower_.
+
+- Static Channel Backups which are a race-condition-free way of backing up the channel data required to safely execute the Data Loss Protection protocol if the main database of lnd is lost.
+
+- Hodl invoices which is a way of creating and settling invoices by providing the payment hash/preimage via gRPC and allows bridging the lnd service to more advanced LN-based services such as atomic swaps.
+
+## Changelog
+
+All commits since the last release may be viewed on GitHub
+[here](https://github.com/decred/dcrlnd/compare/v0.1.0...v0.2.0-rc1).
+
 
 ## 2019-02-06
 
