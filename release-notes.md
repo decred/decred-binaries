@@ -967,7 +967,7 @@ A comprehensive list of improvements and bug fixes follows.
 ## New features
 
 * CoinShuffle++ cooperative mixing features are added.  Through this process,
-  tickets may be bought from outputs in a CoinJoin transaction.  CoinJoin change
+  tickets may be bought from outputs of a CoinJoin transaction.  CoinJoin change
   is not anonymized, and must be isolated to a different account and mixed down
   at standard amount values.
   
@@ -995,7 +995,7 @@ A comprehensive list of improvements and bug fixes follows.
 
 * The `abandontransaction` method has been implemented by the JSON-RPC server.
   This method allows the wallet to forget about any unmined transaction, and
-  allows any previous outputs spend by the abandoned transaction to become
+  allows any previous outputs spent by the abandoned transaction to become
   spendable again.
   
 * A `GetAccountExtendedPrivKey` method has been added to the gRPC WalletService
@@ -1003,8 +1003,8 @@ A comprehensive list of improvements and bug fixes follows.
   
 ## Other improvements
 
-* Double spending vote/revocation transaction errors now include the hashes the
-  conflicting transactions.
+* Double spending vote/revocation transaction errors now include the hashes of
+  the conflicting transactions.
 
 * Concurrency was improved throughout with better in-memory data structures and
   reducing how long operations are performed while inside of database views and
@@ -1081,7 +1081,7 @@ matheusd.  Most of the other work was completed by vctt and a new member of the 
 
 ## New Features
 
-- Initial LN Support has been added.  This includes the following functionality:
+- Initial LN support has been added.  This includes the following functionality:
   dcrlnd startup/teardown, open/close channels, create invoices, send payments,
   enabled autopilot and show dcrlnd logs.  This initial support should give users
   a chance to experience the capabilities of LN while we can also collect user
@@ -1106,7 +1106,7 @@ matheusd.  Most of the other work was completed by vctt and a new member of the 
   daemon had some fatal error that it would never recover from.  This allows 
   the user to recover from such a situation more gracefully.
 
-- Update Politeia proposal fetching to reduce amount of data that is consistantly
+- Update Politeia proposal fetching to reduce amount of data that is constantly
   requested.  Previously, every load of decrediton would cause an unnecessary 
   amount of data to be requested.
 
@@ -1129,11 +1129,11 @@ All commits since the last release may be viewed on GitHub
 
 # dcrlnd v0.2.0-rc1
 
-This update has brought dcrlnd synced to the [v0.8.0-beta](https://github.com/lightningnetwork/lnd/releases/tag/v0.8.0-beta) of upstream lnd.
+This update has brought dcrlnd in sync with the [v0.8.0-beta](https://github.com/lightningnetwork/lnd/releases/tag/v0.8.0-beta) of upstream lnd.
 
 Most upstream work that was done since our original branching point in January 2019 was merged and Decred-specific work has been done to enable more seamless integration of dcrlnd to Decrediton.
 
-Decred's LN network is still only in its begining stages, therefore please use caution when comitting funds to it.
+Decred's LN network is still only in its beginning stages, therefore please use caution when comitting funds to it.
 
 ## Network Reset & Backwards Incompatible Change
 
@@ -1149,19 +1149,19 @@ Given the v0.1.0 network was still very small we decided to not implement signal
 
 - Switch payment hash algorithm to SHA-256 [decred/dcrlnd#46](https://github.com/decred/dcrlnd/pull/46)
 
-- Remove the need to connect to a dcrd running with `--txindex` [decred/dcrlnd#41](https://github.com/decred/dcrlnd/pull/41)
+- Remove the need to run the associated dcrd with transaction index enabled [decred/dcrlnd#41](https://github.com/decred/dcrlnd/pull/41)
 
 ## Notable Upstream Changes
 
-[PR36](https://github.com/decred/dcrlnd/pull/36) and [PR42](https://github.com/decred/dcrlnd/pull/42) are the ones that port the upstream work. Some notable upstream changes brought include the following.
+[PR36](https://github.com/decred/dcrlnd/pull/36) and [PR42](https://github.com/decred/dcrlnd/pull/42) are the ones that port the upstream work. Some notable changes brought from the upstream include the following:
 
 - Safu Commitments, which was an LN-wide protocol change enabling wallets to retrieve their local channel balance stored in unilaterally-closed channels without requiring coordination with the counterparty.
 
 - Watchtower support, which allows a wallet to remain closed for a longer period of time by offloading the reposability to watch for channel breaches to a third party called a _watchtower_.
 
-- Static Channel Backups which are a race-condition-free way of backing up the channel data required to safely execute the Data Loss Protection protocol if the main database of lnd is lost.
+- Static Channel Backups, which are a race-condition-free way of backing up the channel data required to safely execute the Data Loss Protection protocol if the main database of lnd is lost.
 
-- Hodl invoices which is a way of creating and settling invoices by providing the payment hash/preimage via gRPC and allows bridging the lnd service to more advanced LN-based services such as atomic swaps.
+- Hodl invoices, which is a way of creating and settling invoices by providing the payment hash/preimage via gRPC and allows bridging the lnd service to more advanced LN-based services such as atomic swaps.
 
 ## Changelog
 
