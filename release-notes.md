@@ -73,7 +73,7 @@ After upgrading, stakeholders may set their preferences through their wallet or
 Voting Service Provider's (VSP) website.
 
 The primary goal of this change is to increase the security and efficiency of
-lightweight clients, such as Decrediton in its SPV mode and the
+lightweight clients, such as Decrediton in its lightweight mode and the
 dcrandroid/dcrios mobile wallets, as well as add infrastructure that paves the
 way for several future scalability enhancements.
 
