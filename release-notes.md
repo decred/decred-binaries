@@ -1,4 +1,4 @@
-## 2019-11-07
+## 2019-12-16
 
 
 ## Install
@@ -13,12 +13,12 @@ See [README.md](./README.md#verifying-binaries) for more info on verifying the f
 
 ## Contents
 
-* [dcrd](#dcrd-v150-rc1)
-* [dcrwallet](#dcrwallet-v150-rc1)
-* [decrediton](#decrediton-v150-rc1)
-* [dcrlnd](#dcrlnd-v020-rc1)
+* [dcrd](#dcrd-v150)
+* [dcrwallet](#dcrwallet-v150)
+* [decrediton](#decrediton-v150)
+* [dcrlnd](#dcrlnd-v020)
 
-# dcrd v1.5.0-rc1
+# dcrd v1.5.0
 
 This release of dcrd introduces a large number of updates.  Some of the key
 highlights are:
@@ -303,7 +303,7 @@ tested, documented, and relatively efficient.
 This release consists of 600 commits from 17 contributors which total to 537
 files changed, 41494 additional lines of code, and 29215 deleted lines of code.
 
-All commits since the last release may be viewed on GitHub [here](https://github.com/decred/dcrd/compare/release-v1.4.0...release-v1.5.0-rc1).
+All commits since the last release may be viewed on GitHub [here](https://github.com/decred/dcrd/compare/release-v1.4.0...release-v1.5.0).
 
 ### Protocol and network:
 
@@ -956,7 +956,7 @@ All commits since the last release may be viewed on GitHub [here](https://github
 - Victor Oliveira
 
 
-# dcrwallet v1.5.0-rc1
+# dcrwallet v1.5.0
 
 This release introduces the privacy features based on CoinShuffle++.  A new
 voting agenda is also added to vote on the activation of the changes described
@@ -1070,10 +1070,10 @@ dfdfdes zero confirmation
 ## Changelog
 
 All commits since the last release may be viewed on GitHub
-[here](https://github.com/decred/dcrwallet/compare/release-v1.4.0...v1.5.0-rc1).
+[here](https://github.com/decred/dcrwallet/compare/release-v1.4.0...v1.5.0).
 
 
-# decrediton v1.5.0-rc1
+# decrediton v1.5.0
 
 This release was primarily focused on overall look and feel refinement and bug
 fixes.  It also includes a preliminary Lightning Network implementation by 
@@ -1125,9 +1125,9 @@ matheusd.  Most of the other work was completed by vctt and a new member of the 
 ## Changelog
 
 All commits since the last release may be viewed on GitHub
-[here](https://github.com/decred/decrediton/compare/release-v1.4.0...release-v1.5.0-rc1).
+[here](https://github.com/decred/decrediton/compare/release-v1.4.0...release-v1.5.0).
 
-# dcrlnd v0.2.0-rc1
+# dcrlnd v0.2.0
 
 This update has brought dcrlnd in sync with the [v0.8.0-beta](https://github.com/lightningnetwork/lnd/releases/tag/v0.8.0-beta) of upstream lnd.
 
@@ -1166,7 +1166,7 @@ Given the v0.1.0 network was still very small we decided to not implement signal
 ## Changelog
 
 All commits since the last release may be viewed on GitHub
-[here](https://github.com/decred/dcrlnd/compare/v0.1.0...v0.2.0-rc1).
+[here](https://github.com/decred/dcrlnd/compare/v0.1.0...v0.2.0).
 
 
 ## 2019-02-06
