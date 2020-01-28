@@ -1,3 +1,60 @@
+## 2019-01-28
+
+
+## Install
+
+To install the command line tools, please see [dcrinstaller](https://github.com/decred/decred-release/releases/tag/v1.5.1).
+To install decrediton download, uncompress, and run [decrediton Linux](https://github.com/decred/decred-binaries/releases/download/v1.5.1/decrediton-1.5.1.tar.gz) or [decrediton macOS](https://github.com/decred/decred-binaries/releases/download/v1.5.1/decrediton-v1.5.1.dmg) or [decrediton Windows](https://github.com/decred/decred-binaries/releases/download/v1.5.1/decrediton-v1.5.1.exe).
+
+See manifest-v1.5.1.txt, and the package specific manifest files for sha256 sums and the associated .asc files to confirm those shas.
+
+See [README.md](./README.md#verifying-binaries) for more info on verifying the files.
+
+
+## Contents
+
+* [dcrd](#dcrd-v151)
+* [dcrwallet](#dcrwallet-v151)
+* [decrediton](#decrediton-v151)
+
+# dcrd v1.5.1
+
+# dcrwallet v1.5.1
+
+# decrediton v1.5.1
+
+This patch release for decrediton mainly focuses on patching various issues that
+were found during public usage.  We have also included an update to the QR
+code that shows a basic DCR logo within.
+
+## New Features
+
+- The QR Code generated for addresses to receive funds in Decrediton now
+  include a blue/green DCR logo in the center.  Functionally, this will be no
+  different than before.  ([#2385](https://github.com/decred/decrediton/pull/2385)) 
+
+## Bug Fixes
+
+- Double notifications were being shown when sending transactions ([#2375](https://github.com/decred/decrediton/pull/2375))
+
+- Allow for the second instance warning to be closed and quit the application.
+  ([#2394](https://github.com/decred/decrediton/pull/2394))
+
+- Various typos and spelling fixes. ([#2383](https://github.com/decred/decrediton/pull/2383), [#2400](https://github.com/decred/decrediton/pull/2400), [#2395](https://github.com/decred/decrediton/pull/2395))
+
+- The number of active tickets on the overview was not showing correctly 
+  while in SPV wallets.  ([#2389](https://github.com/decred/decrediton/pull/2389))
+
+- Prevent gap exhaustion during change generation. ([#2358](https://github.com/decred/decrediton/pull/2358))
+
+- Disable various elements from being selectable. ([#2388](https://github.com/decred/decrediton/pull/2388))
+
+## Changelog
+
+All commits since the last release may be viewed on GitHub
+[here](https://github.com/decred/decrediton/compare/release-v1.5.0...release-v1.5.1).
+
+
 ## 2019-12-16
 
 
