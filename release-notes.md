@@ -21,6 +21,60 @@ See [README.md](./README.md#verifying-binaries) for more info on verifying the f
 
 # dcrwallet v1.5.1
 
+This release contains bug fixes and minor feature additions.  A
+comprehensive list of improvements and bug fixes follows.
+
+## New features
+
+* An `auditreuse` JSON-RPC method was added.  This method reports all
+  transactions that reuse an output address, excluding votes and
+  revocations which must use the committed address from a ticket.  An
+  optional block height parameter may be provided to only search for
+  reuse following a block.
+
+* The `createrawtransaction` JSON-RPC method was implemented directly.
+  This allows users of the SPV syncing mode to perform the call, rather
+  than the call erroring due to no RPC passthrough to a `dcrd` JSON-RPC
+  server.
+
+## Other improvements
+
+* The `--csppserver.ca` option is now expanded with `~` and environment
+  variables.
+
+* The sample config has been updated with options related to
+  CoinShuffle++.
+
+## Bug fixes
+
+* Duplicate logs for insufficient balance errors during automated
+  ticketbuying have been silenced.
+
+* The gRPC method `TicketBuyerV2Service.RunTicketBuyer` contained a
+  regression causing all change to be created for only the default
+  (first) account.  A fix was made to restore the previous behavior,
+  where change is created for the source account.
+
+* An address reuse bug caused by resetting child indexes backwards
+  after address and account discovery was corrected.  It was possible
+  for this bug to be hit any time network synchronization had to be
+  restarted (e.g. the `dcrd` JSON-RPC link was lost), because address
+  discovery would always occur on resync.
+
+* A shutdown hang of the `dcrwallet` process following a panic in a
+  JSON-RPC handler was fixed with improved synchronization code.
+
+* A data race in the `signrawtransaction` JSON-RPC method was
+  corrected.
+
+* A memory leak in the JSON-RPC websocket client to `dcrd` was fixed.
+  This bug caused excessive memory usage by retaining every unmarshaled
+  response in memory for the lifetime of the websocket connection.
+
+* Extended pubkeys imported via the `importxpub` JSON-RPC method may
+  now be used immediately rather than requiring a restart of the process.
+
+
 # decrediton v1.5.1
 
 This patch release for decrediton mainly focuses on patching various issues that
