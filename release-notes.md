@@ -1,3 +1,146 @@
+## 2019-01-28
+
+
+## Install
+
+To install the command line tools, please see [dcrinstaller](https://github.com/decred/decred-release/releases/tag/v1.5.1).
+To install decrediton download, uncompress, and run [decrediton Linux](https://github.com/decred/decred-binaries/releases/download/v1.5.1/decrediton-1.5.1.tar.gz) or [decrediton macOS](https://github.com/decred/decred-binaries/releases/download/v1.5.1/decrediton-v1.5.1.dmg) or [decrediton Windows](https://github.com/decred/decred-binaries/releases/download/v1.5.1/decrediton-v1.5.1.exe).
+
+See manifest-v1.5.1.txt, and the package specific manifest files for sha256 sums and the associated .asc files to confirm those shas.
+
+See [README.md](./README.md#verifying-binaries) for more info on verifying the files.
+
+
+## Contents
+
+* [dcrd](#dcrd-v151)
+* [dcrwallet](#dcrwallet-v151)
+* [decrediton](#decrediton-v151)
+
+# dcrd v1.5.1
+
+This is a patch release of dcrd to address a minor memory leak with authenticated RPC websocket clients on intermitent connections.   It also updates the `dcrctl` utility to include the new `auditreuse` dcrwallet command.
+
+## Changelog
+
+This patch release consists of 4 commits from 3 contributors which total to 4 files changed, 27 additional lines of code, and 6 deleted lines of code.
+
+All commits since the last release may be viewed on GitHub [here](https://github.com/decred/dcrd/compare/release-v1.5.0...release-v1.5.1).
+
+### RPC:
+
+- rpcwebsocket: Remove client from missed maps ([decred/dcrd#2049](https://github.com/decred/dcrd/pull/2049))
+- rpcwebsocket: Use nonblocking messages and ntfns ([decred/dcrd#2050](https://github.com/decred/dcrd/pull/2050))
+
+### dcrctl utility changes:
+
+- dcrctl: Update dcrwallet RPC types package ([decred/dcrd#2051](https://github.com/decred/dcrd/pull/2051))
+
+### Misc:
+
+- release: Bump for 1.5.1([decred/dcrd#2052](https://github.com/decred/dcrd/pull/2052))
+
+### Code Contributors (alphabetical order):
+
+- Dave Collins
+- Josh Rickmar
+- Matheus Degiovani
+
+
+# dcrwallet v1.5.1
+
+This release contains bug fixes and minor feature additions.  A
+comprehensive list of improvements and bug fixes follows.
+
+## New features
+
+* An `auditreuse` JSON-RPC method was added.  This method reports all
+  transactions that reuse an output address, excluding votes and
+  revocations which must use the committed address from a ticket.  An
+  optional block height parameter may be provided to only search for
+  reuse following a block.
+
+* The `createrawtransaction` JSON-RPC method was implemented directly.
+  This allows users of the SPV syncing mode to perform the call, rather
+  than the call erroring due to no RPC passthrough to a `dcrd` JSON-RPC
+  server.
+
+## Other improvements
+
+* The `--csppserver.ca` option is now expanded with `~` and environment
+  variables.
+
+* The sample config has been updated with options related to
+  CoinShuffle++.
+
+## Bug fixes
+
+* Duplicate logs for insufficient balance errors during automated
+  ticketbuying have been silenced.
+
+* The gRPC method `TicketBuyerV2Service.RunTicketBuyer` contained a
+  regression causing all change to be created for only the default
+  (first) account.  A fix was made to restore the previous behavior,
+  where change is created for the source account.
+
+* An address reuse bug caused by resetting child indexes backwards
+  after address and account discovery was corrected.  It was possible
+  for this bug to be hit any time network synchronization had to be
+  restarted (e.g. the `dcrd` JSON-RPC link was lost), because address
+  discovery would always occur on resync.
+
+* A shutdown hang of the `dcrwallet` process following a panic in a
+  JSON-RPC handler was fixed with improved synchronization code.
+
+* A data race in the `signrawtransaction` JSON-RPC method was
+  corrected.
+
+* A memory leak in the JSON-RPC websocket client to `dcrd` was fixed.
+  This bug caused excessive memory usage by retaining every unmarshaled
+  response in memory for the lifetime of the websocket connection.
+
+* Extended pubkeys imported via the `importxpub` JSON-RPC method may
+  now be used immediately rather than requiring a restart of the process.
+
+## Changelog
+
+All commits since the last release may be viewed on GitHub
+[here](https://github.com/decred/dcrwallet/compare/v1.5.0...v1.5.1).
+
+# decrediton v1.5.1
+
+This patch release for decrediton mainly focuses on patching various issues that
+were found during public usage.  We have also included an update to the QR
+code that shows a basic DCR logo within.
+
+## New Features
+
+- The QR Code generated for addresses to receive funds in Decrediton now
+  include a blue/green DCR logo in the center.  Functionally, this will be no
+  different than before.  ([#2385](https://github.com/decred/decrediton/pull/2385)) 
+
+## Bug Fixes
+
+- Double notifications were being shown when sending transactions ([#2375](https://github.com/decred/decrediton/pull/2375))
+
+- Allow for the second instance warning to be closed and quit the application.
+  ([#2394](https://github.com/decred/decrediton/pull/2394))
+
+- Various typos and spelling fixes. ([#2383](https://github.com/decred/decrediton/pull/2383), [#2400](https://github.com/decred/decrediton/pull/2400), [#2395](https://github.com/decred/decrediton/pull/2395))
+
+- The number of active tickets on the overview was not showing correctly 
+  while in SPV wallets.  ([#2389](https://github.com/decred/decrediton/pull/2389))
+
+- Prevent gap exhaustion during change generation. ([#2358](https://github.com/decred/decrediton/pull/2358))
+
+- Disable various elements from being selectable. ([#2388](https://github.com/decred/decrediton/pull/2388))
+
+## Changelog
+
+All commits since the last release may be viewed on GitHub
+[here](https://github.com/decred/decrediton/compare/release-v1.5.0...release-v1.5.1).
+
+
 ## 2019-12-16
 
 
