@@ -74,6 +74,10 @@ comprehensive list of improvements and bug fixes follows.
 * Extended pubkeys imported via the `importxpub` JSON-RPC method may
   now be used immediately rather than requiring a restart of the process.
 
+## Changelog
+
+All commits since the last release may be viewed on GitHub
+[here](https://github.com/decred/dcrwallet/compare/v1.5.0...v1.5.1).
 
 # decrediton v1.5.1
 
