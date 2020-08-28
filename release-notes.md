@@ -43,7 +43,7 @@ All commits since the last release may be viewed on GitHub [here](https://github
 
 # decrediton v1.5.2
 
-Decrediton has no code changes for 1.5.2, but includes an dcrd which has the
+Decrediton has no code changes for 1.5.2, but includes a dcrd which has the
 required fix.
 
 
