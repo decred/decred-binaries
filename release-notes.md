@@ -13,6 +13,7 @@ See [README.md](./README.md#verifying-binaries) for more info on verifying the f
 ## Contents
 
 * [dcrd](#dcrd-v152)
+* [decrediton](#decrediton-v152)
 
 # dcrd v1.5.2
 
@@ -39,6 +40,11 @@ All commits since the last release may be viewed on GitHub [here](https://github
 
 - Dave Collins
 - David Hill
+
+# decrediton v1.5.2
+
+Decrediton has no code changes for 1.5.2, but includes a dcrd which has the
+required fix.
 
 
 ## 2019-01-28
