@@ -1121,7 +1121,8 @@ fguisso
 ## Changelog
 
 All commits since the last release may be viewed on GitHub
-[here](https://github.com/decred/decrediton/compare/v1.5.0...v1.6.0-rc1).
+[here](https://github.com/decred/decrediton/compare/release-v1.5...v1.6.0-rc1).
+
 
 # dcrlnd v0.3.0
 
