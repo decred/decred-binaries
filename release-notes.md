@@ -1081,16 +1081,15 @@ We have also included the new ticket purchasing schema for VSP v3.  No longer
 do users have to set up VSP accounts.  Tickets are purchased and then the
 tickets are paid for by paying a small fee upfront.  
 
-Once the process is fully working and smoothed out, we'll be adding mixing
-to the auto buyer in the same way that has been working for dcrwallet CLI for
-sometime.  
+With the addition of this new ticket purchasing without accounts, we can
+now mix staking funds with CSPP just like has been available on CLI for some
+time.  Once privacy is enabled, users may start their autobuyer which will
+mix funds as new tickets are purchased.
 
 JoeGruffins went through and updated the whole trezor implementation to work
-with their new "connect" changes upstream.
+with their new trezor-connect changes upstream.
 
-LN 
-
-We have had some great additions to our decrediton team:
+I'd like to welcome our new additions to the decrediton team:
 
 guilhermemntt
 victorgcramos
@@ -1100,9 +1099,6 @@ JoeGruffins
 fguisso
 
 ## New features
-
-* Users can now mix funds from a specified unmixed account into a clean mixed 
-  account.  This can be found under Accounts --> Privacy
 
 * Individual ticket purchasing and auto buyer for VSP v3 tickets is implemented
   and will be improved upon in the coming releases.  The Legacy method is 
@@ -1116,7 +1112,8 @@ fguisso
 * A full refactor of components into functional components is now mostly
   complete.  
 
-* An SPV indicator has been added to the sidebar.
+* An SPV indicator has been added to the sidebar.  This should help people
+  figure out an issues they may be encountering.
 
 * Unmined transactions are now able to be abandoned under transaction details.
 
