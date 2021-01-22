@@ -1,3 +1,0 @@
-75ccf0233c44253c9fa8a7c96927285ad0a0606b11b21ccc01a6077958f68ffe *decrediton-v1.6.0-rc1.dmg
-862a393f01e3fcc6a358203928194de24ef6c7cccab9c824d1fec8de28afa77d *decrediton-v1.6.0-rc1.exe
-fb44541e9cadc04131b82e8f110a378dbe9f604467e5ab4ddb073af586570ab6 *decrediton-v1.6.0-rc1.tar.gz

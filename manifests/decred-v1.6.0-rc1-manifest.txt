@@ -1,9 +1,0 @@
-f73a4317c1cb901e9c72904fa17c40f188459ea9cf68af6d9ef507795e07d6c4  decred-darwin-amd64-v1.6.0-rc1.tar.gz
-88949ef65740b590dc295b55beae48b3079bba8a3010e83d41f2acde4ce6f115  decred-freebsd-amd64-v1.6.0-rc1.tar.gz
-b1e0717e89dbc7d6d28e7da7cc16c99769078e5e15bfc0fa6963c763f5e7eae2  decred-linux-386-v1.6.0-rc1.tar.gz
-2291a122f837333240fd4ab4a88525f230fe098570c9188a92012b923a56c07e  decred-linux-amd64-v1.6.0-rc1.tar.gz
-28e0b1c4aa9e67440a269367874227f674de3bebd0785c19caddb2af0e4ed8bb  decred-linux-arm-v1.6.0-rc1.tar.gz
-918417191f955e4aeed0c02f5b255af14746f7a80219f14542800b8606c2d371  decred-linux-arm64-v1.6.0-rc1.tar.gz
-ec35f1b82e1994dce25f73d3fd7e319ccec731aadc3384c33ebd316e603b29ef  decred-openbsd-amd64-v1.6.0-rc1.tar.gz
-9ec41be512d77ad5cff7bdb5a33f48637e06fad3ea5bb32b7c5cf959cca22bdc  decred-windows-386-v1.6.0-rc1.zip
-dbdc0c88fc0115c1b29ea84ff0bfce2739615b616905ad131d3b29866be31c9b  decred-windows-amd64-v1.6.0-rc1.zip

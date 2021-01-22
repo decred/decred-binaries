@@ -1,32 +1,32 @@
-## 2020-10-21
+## 2021-01-25
 
 
 ## Install
 
 To install the command line tools, please see [dcrinstaller](https://github.com/decred/decred-release/tree/master/cmd/dcrinstall).
-To install decrediton download, uncompress, and run [decrediton Linux](https://github.com/decred/decred-binaries/releases/download/v1.6.0-rc1/decrediton-1.6.0-rc1.tar.gz) or [decrediton macOS](https://github.com/decred/decred-binaries/releases/download/v1.6.0-rc1/decrediton-v1.6.0-rc1.dmg) or [decrediton Windows](https://github.com/decred/decred-binaries/releases/download/v1.6.0-rc1/decrediton-v1.6.0-rc1.exe).
+To install decrediton download, uncompress, and run [decrediton Linux](https://github.com/decred/decred-binaries/releases/download/v1.6.0/decrediton-1.6.0.tar.gz) or [decrediton macOS](https://github.com/decred/decred-binaries/releases/download/v1.6.0/decrediton-v1.6.0.dmg) or [decrediton Windows](https://github.com/decred/decred-binaries/releases/download/v1.6.0/decrediton-v1.6.0.exe).
 
-See manifest-v1.6.0-rc1.txt, and the package specific manifest files for sha256 sums and the associated .asc files to confirm those shas.
+See manifest-v1.6.0.txt, and the package specific manifest files for sha256 sums and the associated .asc files to confirm those shas.
 
 See [README.md](./README.md#verifying-binaries) for more info on verifying the files.
 
 
 ## Contents
 
-* [dcrd](#dcrd-v160-rc1)
-* [dcrwallet](#dcrwallet-v160-rc1)
-* [decrediton](#decrediton-v160-rc1)
+* [dcrd](#dcrd-v160)
+* [dcrwallet](#dcrwallet-v160)
+* [decrediton](#decrediton-v160)
 * [dcrlnd](#dcrlnd-v030)
 
 
-# dcrd v1.6.0-rc1.1
+# dcrd v1.6.0
 
 This release of dcrd introduces a large number of updates.  Some of the key
 highlights are:
 
 * A new consensus vote agenda which allows the stakeholders to decide whether or
   not to activate support for a decentralized treasury
-* Aggregate fee transaction selection in block templates (CPFP)
+* Aggregate fee transaction selection in block templates (Child Pays For Parent)
 * Improved peer discovery via HTTPS seeding with filtering capabilities
 * Major performance enhancements for signature validation and other
   cryptographic operations
@@ -40,9 +40,11 @@ highlights are:
 * Infrastructure improvements
 * Quality assurance changes
 
-For those unfamiliar with the voting process in Decred, all code needed in order
-to support a decentralized treasury is already included in this release, however
-it will remain dormant until the stakeholders vote to activate it.
+For those unfamiliar with the
+[voting process](https://docs.decred.org/governance/consensus-rule-voting/overview/)
+in Decred, all code needed in order to support a decentralized treasury is
+already included in this release, however it will remain dormant until the
+stakeholders vote to activate it.
 
 For reference, the decentralized treasury work was originally proposed and
 approved for initial implementation via the following Politeia proposal:
@@ -77,7 +79,7 @@ upgrading, stakeholders may set their preferences through their wallet or Voting
 Service Provider's (VSP) website.
 
 The primary goal of this change is to fully decentralize treasury spending so
-that it is controlled by the stakeholders via stake voting.
+that it is controlled by the stakeholders via ticket voting.
 
 See the initial
 [Politeia proposal](https://proposals.decred.org/proposals/c96290a2478d0a1916284438ea2c59a1215fe768a87648d04d45f6b7ecb82c3f)
@@ -86,8 +88,8 @@ for more details.
 ### Aggregate Fee Block Template Transaction Selection (Child Pays For Parent)
 
 The transactions that are selected for inclusion in block templates that
-Proof-of-Work miners solve have been modified to prioritize the overall fees of
-the entire transaction ancestor graph.
+Proof-of-Work miners solve now prioritize the overall fees of the entire
+transaction ancestor graph.
 
 This is beneficial for both miners and end users as it:
 
@@ -185,7 +187,7 @@ Some examples of the aforementioned information are the mining state as of the
 current tip block and, with the introduction of the decentralized treasury, any
 outstanding treasury spend transactions that are being voted on.
 
-### Mining State Protocol Messages Deprecated  (`getminings`/`minings`)
+### Mining State Protocol Messages Deprecated (`getminings`/`minings`)
 
 Due to the addition of the previously-described initial state peer-to-peer
 protocol messages, the `getminings` and `minings` protocol messages are now
@@ -194,7 +196,7 @@ deprecated.  Use the new `getinitstate` and `initstate` messages with the
 
 ### RPC Server Changes
 
-The RPC server version as of this release is 6.1.2.
+The RPC server version as of this release is 6.2.0.
 
 #### New Treasury Balance Query RPC (`gettreasurybalance`)
 
@@ -232,7 +234,7 @@ for API details.
 #### New Unspent Transaction Output Set Query RPC (`gettxoutsetinfo`)
 
 A new RPC named `gettxoutsetinfo` is now available which can be used to retrieve
-statistics about the current global set of unspent transaction outputs (utxos).
+statistics about the current global set of unspent transaction outputs (UTXOs).
 
 See the
 [gettxoutsetinfo JSON-RPC API Documentation](https://github.com/decred/dcrd/blob/master/docs/json_rpc_api.mediawiki#gettxoutsetinfo)
@@ -278,11 +280,11 @@ instead.
 
 ## Changelog
 
-This release consists of 605 commits from 17 contributors which total to 525
-files changed, 61568 additional lines of code, and 25364 deleted lines of code.
+This release consists of 616 commits from 17 contributors which total to 526
+files changed, 63090 additional lines of code, and 26279 deleted lines of code.
 
 All commits since the last release may be viewed on GitHub
-[here](https://github.com/decred/dcrd/compare/release-v1.5.2...release-v1.6.0-rc1.1).
+[here](https://github.com/decred/dcrd/compare/release-v1.5.2...release-v1.6.0).
 
 ### Protocol and network:
 
@@ -322,6 +324,7 @@ All commits since the last release may be viewed on GitHub
 - blockmanager: limit the requested maps ([decred/dcrd#2253](https://github.com/decred/dcrd/pull/2253))
 - server: increase ban score for notfound messages ([decred/dcrd#2253](https://github.com/decred/dcrd/pull/2253))
 - server: return whether addBanScore disconnected the peer ([decred/dcrd#2253](https://github.com/decred/dcrd/pull/2253))
+- blockchain: Whitelist DCP0005 violations ([decred/dcrd#2533](https://github.com/decred/dcrd/pull/2533))
 
 ### Transaction relay (memory pool):
 
@@ -339,6 +342,7 @@ All commits since the last release may be viewed on GitHub
 - mempool: Fix wrong tx type in error message ([decred/dcrd#2350](https://github.com/decred/dcrd/pull/2350))
 - dcrd: trickle mempool response to peer ([decred/dcrd#2359](https://github.com/decred/dcrd/pull/2359))
 - mempool: Allow treasury txn vers as standard ([decred/dcrd#2412](https://github.com/decred/dcrd/pull/2412))
+- mempool: Limit ancestor tracking in mempool ([decred/dcrd#2468](https://github.com/decred/dcrd/pull/2468))
 
 ### Mining:
 
@@ -423,6 +427,13 @@ All commits since the last release may be viewed on GitHub
 - rpcserver: Fix race in TestHandleTSpendVotes ([decred/dcrd#2393](https://github.com/decred/dcrd/pull/2393))
 - rpcserver: Correct known wallet method handling ([decred/dcrd#2416](https://github.com/decred/dcrd/pull/2416))
 - rpcserver: Update known wallet RPC methods ([decred/dcrd#2416](https://github.com/decred/dcrd/pull/2416))
+- multi: Add TAdd support to getrawmempool ([decred/dcrd#2448](https://github.com/decred/dcrd/pull/2448))
+- config: Use the P-256 curve by default for RPC ([decred/dcrd#2459](https://github.com/decred/dcrd/pull/2459))
+- rpcserver: Correct getpeerinfo for peers w/o conn ([decred/dcrd#2465](https://github.com/decred/dcrd/pull/2465))
+- rpcserver: Correct treasury vote status handling ([decred/dcrd#2469](https://github.com/decred/dcrd/pull/2469))
+- multi: Add tx inputs treasurybase RPC support ([decred/dcrd#2470](https://github.com/decred/dcrd/pull/2470))
+- multi: Add tx inputs treasuryspend RPC support ([decred/dcrd#2472](https://github.com/decred/dcrd/pull/2472))
+- rpcserver: Fix count tspend votes in mined block ([decred/dcrd#2565](https://github.com/decred/dcrd/pull/2565))
 
 ### dcrd command-line flags and configuration:
 
@@ -435,6 +446,7 @@ All commits since the last release may be viewed on GitHub
 
 - gencerts: Rewrite for additional use cases ([decred/dcrd#2425](https://github.com/decred/dcrd/pull/2425))
 - gencerts: Add missing newline for unknown algorithm error ([decred/dcrd#2427](https://github.com/decred/dcrd/pull/2427))
+- gencerts: Use the P-256 curve by default ([decred/dcrd#2461](https://github.com/decred/dcrd/pull/2461))
 
 ### dcrctl utility changes:
 
@@ -493,6 +505,8 @@ All commits since the last release may be viewed on GitHub
 - docs: Update for peer/v2 module ([decred/dcrd#2422](https://github.com/decred/dcrd/pull/2422))
 - docs: Update for rpcclient/v6 module ([decred/dcrd#2423](https://github.com/decred/dcrd/pull/2423))
 - docs: Update for blockchain v3 module ([decred/dcrd#2424](https://github.com/decred/dcrd/pull/2424))
+- docs: Update several JSON-RPC APIs ([decred/dcrd#2470](https://github.com/decred/dcrd/pull/2470))
+- docs: Update several JSON-RPC APIs ([decred/dcrd#2472](https://github.com/decred/dcrd/pull/2472))
 
 ### Developer-related package and module changes:
 
@@ -727,6 +741,12 @@ All commits since the last release may be viewed on GitHub
 - blockchain: Simplify old block ver upgrade checks ([decred/dcrd#2401](https://github.com/decred/dcrd/pull/2401))
 - multi: update blockchain and mempool error types ([decred/dcrd#2278](https://github.com/decred/dcrd/pull/2278))
 - blockchain/mempool: Update for recent err convrsn ([decred/dcrd#2421](https://github.com/decred/dcrd/pull/2421))
+- blockchain: Create treasury buckets during upgrade ([decred/dcrd#2441](https://github.com/decred/dcrd/pull/2441))
+- blockchain: Fix stxosToScriptSource ([decred/dcrd#2444](https://github.com/decred/dcrd/pull/2444))
+- blockchain: Make ver 5 to 6 db upgrades work again ([decred/dcrd#2446](https://github.com/decred/dcrd/pull/2446))
+- blockchain: Clear failed block flags for HF ([decred/dcrd#2447](https://github.com/decred/dcrd/pull/2447))
+- blockchain: Handle db upgrade paths for ver < 5 ([decred/dcrd#2449](https://github.com/decred/dcrd/pull/2449))
+- blockchain: No context dep checks for orphans ([decred/dcrd#2474](https://github.com/decred/dcrd/pull/2474))
 
 ### Developer-related module management:
 
@@ -789,339 +809,340 @@ All commits since the last release may be viewed on GitHub
 - peer: Prepare v2.2.0 ([decred/dcrd#2422](https://github.com/decred/dcrd/pull/2422))
 - rpcclient: Prepare v6.0.0 ([decred/dcrd#2423](https://github.com/decred/dcrd/pull/2423))
 - blockchain: Prepare v3.0.0 ([decred/dcrd#2424](https://github.com/decred/dcrd/pull/2424))
+- rpcclient: Prepare v6.0.1 ([decred/dcrd#2455](https://github.com/decred/dcrd/pull/2455))
 - main: Update to use all new module versions ([decred/dcrd#2426](https://github.com/decred/dcrd/pull/2426))
 - main: Remove module replacements ([decred/dcrd#2428](https://github.com/decred/dcrd/pull/2428))
-
-### Testing and Quality Assurance:
-
-- build: update golangci-lint to v1.21.0 ([decred/dcrd#1951](https://github.com/decred/dcrd/pull/1951))
-- mining: Add priority calculation tests ([decred/dcrd#1967](https://github.com/decred/dcrd/pull/1967))
-- build: Add deadcode to linters for CI tests ([decred/dcrd#1993](https://github.com/decred/dcrd/pull/1993))
-- multi: Updates for staticcheck results ([decred/dcrd#1994](https://github.com/decred/dcrd/pull/1994))
-- blockchain: Separate processing order tests ([decred/dcrd#2004](https://github.com/decred/dcrd/pull/2004))
-- blockchain: Add benchmark for ancestor traversal ([decred/dcrd#2010](https://github.com/decred/dcrd/pull/2010))
-- multi: Address a bunch of lint issues ([decred/dcrd#2028](https://github.com/decred/dcrd/pull/2028))
-- build: golangci-lint v1.22.2 ([decred/dcrd#2029](https://github.com/decred/dcrd/pull/2029))
-- secpk256k1: Add benchmark for RFC6979 nonce gen ([decred/dcrd#2044](https://github.com/decred/dcrd/pull/2044))
-- secp256k1: Cleanup signature tests ([decred/dcrd#2048](https://github.com/decred/dcrd/pull/2048))
-- rpctest: adapt new API ([decred/dcrd#1980](https://github.com/decred/dcrd/pull/1980))
-- rpcserver: Add handlers test ([decred/dcrd#2066](https://github.com/decred/dcrd/pull/2066))
-- build: use golangci v1.23.6 ([decred/dcrd#2068](https://github.com/decred/dcrd/pull/2068))
-- rpctest: Update for hdkeychain API changes ([decred/dcrd#2092](https://github.com/decred/dcrd/pull/2092))
-- build: test against go 1.14 ([decred/dcrd#2092](https://github.com/decred/dcrd/pull/2092))
-- secp256k1: Add benchmark for signing ([decred/dcrd#2085](https://github.com/decred/dcrd/pull/2085))
-- seck256k1: Add benchmark for sig serialization ([decred/dcrd#2087](https://github.com/decred/dcrd/pull/2087))
-- secp256k1: Add benchmark for pubkey decompression ([decred/dcrd#2094](https://github.com/decred/dcrd/pull/2094))
-- secp256k1: Move sig benchmarks to separate file ([decred/dcrd#2095](https://github.com/decred/dcrd/pull/2095))
-- secp256k1: Add benchmark for SignCompact ([decred/dcrd#2095](https://github.com/decred/dcrd/pull/2095))
-- secp256k1: Add benchmark for Recov
+- main: Use backported module up
 
 
-# dcrwallet v1.6.0-rc1
+# dcrwallet v1.6.0
 
-This release focuses on adding support for the decentralized Decred treasury,
-improved SPV syncing with version 2 committed filters, and client support for
-the new privacy-conscious VSP implementation to make mixed VSP ticketbuying
+This release focuses on adding support for the decentralized Decred treasury, 
+improved SPV syncing with version 2 committed filters, and client support for 
+the new privacy-conscious VSP implementation to make mixed VSP ticketbuying 
 viable.
 
 A comprehensive list of improvements and bug fixes follows.
 
 ## New features
 
-* The `WalletService.PurchaseTickets` gRPC method gained a `dont_sign_tx`
-  parameter to support unsigned ticket purchasing and eventual hardware wallet
-  signing.
+* The `WalletService.PurchaseTickets` gRPC method gained a `dont_sign_tx` 
+parameter to support unsigned ticket purchasing and eventual hardware wallet 
+signing.
 
 * An `AccountMixerService` was added to the gRPC server to perform CoinShuffle++
-  mixing on all funds received by an account.
+ mixing on all funds received by an account.
 
-* A `createsignature` JSON-RPC method was introduced, analogous to the gRPC
-  `WalletService.CreateSignature` method.
+* A `createsignature` JSON-RPC method was introduced, analogous to the gRPC 
+`WalletService.CreateSignature` method.
 
-* A `discoverusage` JSON-RPC method was introduced, which triggers the same
-  address and account discovery as performed on startup when there are new
-  blocks available.  However, this method is more general purpose and is useful
-  when correcting issues with prior discoveries, at it allows specifying the
-  exact starting blocks and a BIP0044 gap limit to use.
+* A `discoverusage` JSON-RPC method was introduced, which triggers the same 
+address and account discovery as performed on startup when there are new blocks
+ available.  However, this method is more general purpose and is useful when 
+ correcting issues with prior discoveries, at it allows specifying the exact 
+ starting blocks and a BIP0044 gap limit to use.
 
 * A `WalletService.SignHashes` gRPC method was added to sign an arbitrary number
-  of 32-byte hashes.  This method was used by the now-defunct TumbleBit
-  implementation.
+ of 32-byte hashes.  This method was used by the now-defunct TumbleBit 
+ implementation.
 
-* A `WalletService.Spender` gRPC method was added to query the transaction and
-  input index which spends a wallet output.
+* A `WalletService.Spender` gRPC method was added to query the transaction and 
+input index which spends a wallet output.
 
-* Version 2 committed filters are now used, rather than the previous version 1
-  filters.  These filters are consensus validated by proof-of-work miners as
-  part of the commitments in the block header.  Version 2 filters are smaller
-  and also do not require knowledge of the exact outputs spent, but rather only
-  the previous output script (or address).
+* Version 2 committed filters are now used, rather than the previous version 1 
+filters.  These filters are consensus validated by proof-of-work miners as part 
+of the commitments in the block header.  Version 2 filters are smaller and also
+ do not require knowledge of the exact outputs spent, but rather only the 
+ previous output script (or address).
 
-* The `WalletService.TransactionNotifications` gRPC method now provides more
-  details about the block headers which were detached during a reorganize,
-  rather than only their hashes.
+* The `WalletService.TransactionNotifications` gRPC method now provides more 
+details about the block headers which were detached during a reorganize, rather 
+than only their hashes.
 
-* The `fundrawtransaction` JSON-RPC method is now directly implemented by
-  dcrwallet, rather than delegating this method to dcrd through RPC passthrough.
-  This allows the method to be usable under SPV mode.
+* The `fundrawtransaction` JSON-RPC method is now directly implemented by 
+dcrwallet, rather than delegating this method to dcrd through RPC passthrough.  
+This allows the method to be usable under SPV mode.
 
-* An `addtransaction` JSON-RPC method was added, allowing transactions to be
-  manually added to the wallet, mined in a specified block, without discovering
-  the transaction through the network.
+* An `addtransaction` JSON-RPC method was added, allowing transactions to be 
+manually added to the wallet, mined in a specified block, without discovering 
+the transaction through the network.
 
-* The `stakepooluserinfo` JSON-RPC method has been reintroduced, after being
-  removed from prior releases.  This is used by the new vspd server.
+* The `stakepooluserinfo` JSON-RPC method has been reintroduced, after being 
+removed from prior releases.  This is used by the new vspd server.
 
-* Vote preferences may now be specified on a per-ticket basis with added
-  optional parameters to the `setvotechoice` JSON-RPC method.  This feature is
-  used by the new vspd server.
+* Vote preferences may now be specified on a per-ticket basis with added 
+optional parameters to the `setvotechoice` JSON-RPC method.  This feature is 
+used by the new vspd server.
 
-* A `WalletService.GetRawCFilters` gRPC method was added to query the
-  wallet-stored version 2 committed filter for specified blocks.
+* A `WalletService.GetRawCFilters` gRPC method was added to query the 
+wallet-stored version 2 committed filter for specified blocks.
 
-* A `NetworkService.GetRawBlock` gRPC method was added to fetch raw blocks using
-  the wallet's peer-to-peer implementation.
+* A `NetworkService.GetRawBlock` gRPC method was added to fetch raw blocks 
+using the wallet's peer-to-peer implementation.
 
-* An optional account parameter was added to the `listunspent` and
-  `listlockunspent` JSON-RPC methods to filter results for a particular account.
+* An optional account parameter was added to the `listunspent` and 
+`listlockunspent` JSON-RPC methods to filter results for a particular account.
 
-* A `ticketinfo` JSON-RPC method was added to provide detailed status
-  information regarding all tickets from the wallet.
+* A `ticketinfo` JSON-RPC method was added to provide detailed status 
+information regarding all tickets from the wallet.
 
-* The `WalletService.PurchaseTickets` method gained support for specifying
-  CoinShuffle++ options for mixed ticket buying.
+* The `WalletService.PurchaseTickets` method gained support for specifying 
+CoinShuffle++ options for mixed ticket buying.
 
-* Both a `getpeerinfo` JSON-RPC method and `WalletService.GetPeerInfo` gRPC
-  method were implemented to provide peer info in SPV mode.  The JSON-RPC method
-  continues to return results from a connected dcrd when syncing in RPC mode.
+* Both a `getpeerinfo` JSON-RPC method and `WalletService.GetPeerInfo` gRPC 
+method were implemented to provide peer info in SPV mode.  The JSON-RPC method 
+continues to return results from a connected dcrd when syncing in RPC mode.
 
 * A `walletpassphrasechange` JSON-RPC method was added to modify the wallet's
-  public data encryption passphrase.  Changing to the default insecure value
-  "public" effectively removes any prompts for the public passphrase at startup.
+ public data encryption passphrase.  Changing to the default insecure value 
+ "public" effectively removes any prompts for the public passphrase at startup.
 
-* A client for the new vspd server was added, and dcrwallet supports this client
-  functionality from both the ticket autobuyer and through various gRPC methods.
+* A client for the new vspd server was added, and dcrwallet supports this 
+client functionality from both the ticket autobuyer and through various gRPC 
+methods.
 
-* The `getcoinjoinsbyacct` JSON-RPC method and
-  `WalletService.GetCoinjoinOutputspByAcct` gRPC methods were added to discover
-  probable CoinJoin transactions and report them by account.
+* The `getcoinjoinsbyacct` JSON-RPC method and 
+`WalletService.GetCoinjoinOutputspByAcct` gRPC methods were added to discover 
+probable CoinJoin transactions and report them by account.
 
-* Unpublished transactions are now supported.  When an unpublished transaction
-  is saved to the database, the outputs it spends are tallied in balance results
-  and are not spendable by other transactions.  Unpublishd transactions will not
-  be automatically rebroadast to the network when the wallet starts up and
-  begins syncing.  Unpublished transactions are used to record transactions
-  paying vspd fees prior to the vspd instance accepting the client's ticket
-  request.
+* Unpublished transactions are now supported.  When an unpublished transaction 
+is saved to the database, the outputs it spends are tallied in balance results 
+and are not spendable by other transactions.  Unpublishd transactions will not 
+be automatically rebroadast to the network when the wallet starts up and begins 
+syncing.  Unpublished transactions are used to record transactions paying vspd 
+fees prior to the vspd instance accepting the client's ticket request.
 
-* A `--manualtickets` flag was added to the application config.  This setting
-  disables discovering any tickets from the network syncing, instead requiring
-  any tickets to be manually added to the wallet using `addtransaction`.  This
-  feature is used by the new vspd server to avoid voting on unprocessed tickets
-  which used a vspd voting address.  The current state of this setting is
-  reported in the `walletinfo` JSON-RPC result.
+* A `--manualtickets` flag was added to the application config.  This setting 
+disables discovering any tickets from the network syncing, instead requiring any
+ tickets to be manually added to the wallet using `addtransaction`.  This 
+ feature is used by the new vspd server to avoid voting on unprocessed tickets 
+ which used a vspd voting address.  The current state of this setting is 
+ reported in the `walletinfo` JSON-RPC result.
 
-* The LOGFLAGS environment variable may now include a UTC flag to cause the
-  wallet to always log with UTC timestamps, regardless of the current system
-  timezone.
+* The LOGFLAGS environment variable may now include a UTC flag to cause the 
+wallet to always log with UTC timestamps, regardless of the current system 
+timezone.
 
-* The `listunspent` JSON-RPC method now includes the hex encoding of a redeem
-  script when the output is P2SH and the redeem script is known.
+* The `listunspent` JSON-RPC method now includes the hex encoding of a redeem 
+script when the output is P2SH and the redeem script is known.
 
-* Support for the decentralized treasury hard fork is added.  Two new JSON-RPC
-  methods `sendtotreasury` and `spendfromtreasury` are added, to send to and
-  spend from value in the treasury, respectively.  The vote version and current
-  agendas have been updated to allow stakeholders to vote on the activation of
-  the decentralized treasury.
+* Support for the decentralized treasury hard fork is added.  Two new JSON-RPC 
+methods `sendtotreasury` and `spendfromtreasury` are added, to send to and spend
+ from value in the treasury, respectively.  The vote version and current agendas
+  have been updated to allow stakeholders to vote on the activation of the 
+  decentralized treasury.
 
-* A `sendrawtransaction` implementation has been added to the JSON-RPC server.
-  This allows arbitrary transactions to be published under SPV mode.
+* A `sendrawtransaction` implementation has been added to the JSON-RPC server. 
+This allows arbitrary transactions to be published under SPV mode.
 
 * Accounts are now able to be encrypted using separate, per-account passphrases.
-  Unlocking an account only provides access to that account's private keys, and
-  no others.  Account passphrases may be set using the `setaccountpassphrase`
-  JSON-RPC method, and locked and unlocked by the `unlockaccount` and
+ Unlocking an account only provides access to that account's private keys, 
+ and no others.  Account passphrases may be set using the `setaccountpassphrase`
+  JSON-RPC method, and locked and unlocked by the `unlockaccount` and 
   `lockaccount` methods.
 
-* JSON-RPC clients may now be authenticated using TLS client certificates, and
-  this authentication is now required for the gRPC server.  The feature may be
-  enabled for JSON-RPC by using the `--jsonrpcauthtype=clientcert` config flag.
-  Client certificates read from a `clients.pem` file in the application
-  directory are trusted by default, and this file may be modified by the
-  `--clientcafile` config flag.  Additionally, an `--issueclientcert` flag is
-  provided which causes the wallet to issue and send an ephemeral client
-  certificate and key over the TX pipe to the parent process which forked
-  dcrwallet.  Client certificates may be generated by the `gencerts` tool, which
-  is now part of the Decred CLI distribution.
+* JSON-RPC clients may now be authenticated using TLS client certificates, and 
+this authentication is now required for the gRPC server.  The feature may be 
+enabled for JSON-RPC by using the `--jsonrpcauthtype=clientcert` config flag.  
+Client certificates read from a `clients.pem` file in the application directory
+ are trusted by default, and this file may be modified by the `--clientcafile` 
+ config flag.  Additionally, an `--issueclientcert` flag is provided which 
+ causes the wallet to issue and send an ephemeral client certificate and key 
+ over the TX pipe to the parent process which forked dcrwallet.  Client 
+ certificates may be generated by the `gencerts` tool, which is now part of the 
+ Decred CLI distribution.
 
-* gRPC methods to lock and unlock the wallet's global keys and
-  individually-encrypted accounts are now added, and the passphrase in all
-  requests which required an unlocked wallet are now optional.  As the gRPC
-  server now requires client authentication, there is no a risk of an
-  unauthenticated client from quickly hitting an already-unlocked wallet or
-  account and using private keys it should not otherwise have access to.
+* gRPC methods to lock and unlock the wallet's global keys and 
+individually-encrypted accounts are now added, and the passphrase in all 
+requests which required an unlocked wallet are now optional.  As the gRPC 
+server now requires client authentication, there is no a risk of an 
+unauthenticated client from quickly hitting an already-unlocked wallet or 
+account and using private keys it should not otherwise have access to.
 
 ## Other improvements
 
-* Peer-to-peer seeding is now performed over an HTTPS API rather than DNS.  This
-  improves reliability (HTTPS is authenticated), as well as greater control of
-  filtering results by various URL parameters.
+* Peer-to-peer seeding is now performed over an HTTPS API rather than DNS.  
+This improves reliability (HTTPS is authenticated), as well as greater control 
+of filtering results by various URL parameters.
 
-* Many log messages were added, removed, or rewritten to better reflect the
-  operational state of the application.
+* Many log messages were added, removed, or rewritten to better reflect the 
+operational state of the application.
 
-* The scrypt KDF used for wallet encryption keys now defaults to weaker
-  parameters on simnet.  This is primarily done for quicker unit tests, but will
-  also affect real dcrwallet simnet instances by requiring less time and memory
-  to derive keys.
+* The scrypt KDF used for wallet encryption keys now defaults to weaker 
+parameters on simnet.  This is primarily done for quicker unit tests, but will 
+also affect real dcrwallet simnet instances by requiring less time and memory 
+to derive keys.
 
-* Imported scripts are now recorded in plain text and the wallet does not need
-  to be unlocked to retrieve the full script for the P2SH address.  This change
-  is made under the assumption that imported redeem scripts should not be
-  secrets themselves, but still require a signature check at the very least.
+* Imported scripts are now recorded in plain text and the wallet does not need 
+to be unlocked to retrieve the full script for the P2SH address.  This change is
+ made under the assumption that imported redeem scripts should not be secrets 
+ themselves, but still require a signature check at the very least.
 
-* Importing an already-existing redeem script from the `importscript` JSON-RPC
-  method no longer starts a rescan.
+* Importing an already-existing redeem script from the `importscript` JSON-RPC 
+method no longer starts a rescan.
 
-* Outputs which are being mixed are now locked to prevent accidental spending
-  before the mix completes.
+* Outputs which are being mixed are now locked to prevent accidental spending 
+before the mix completes.
 
-* Mix denominations above the ticket price are now avoided when mixing large
-  value outputs.  This improves pairing with the large volume of mixes occurring
-  from ticket buying, as there are many pairings occurring at the standard
-  denominations below the ticket price to mix CoinJoin change outputs.
+* Mix denominations above the ticket price are now avoided when mixing large 
+value outputs.  This improves pairing with the large volume of mixes occurring 
+from ticket buying, as there are many pairings occurring at the standard 
+denominations below the ticket price to mix CoinJoin change outputs.
 
-* Mixed ticketbuying using the autobuyer will now default to buy one ticket per
-  client connection if the limit is unset.  Setting a larger limit will continue
-  to buy at most limit number of tickets per client connection.
+* Mixed ticketbuying using the autobuyer will now default to buy one ticket per 
+client connection if the limit is unset.  Setting a larger limit will continue 
+to buy at most limit number of tickets per client connection.
 
-* Output locking no longer considers differences between the regular and stake
-  transaction trees.
+* Output locking no longer considers differences between the regular and stake 
+transaction trees.
 
-* Wallet setup may now be performed by providing answers to the prompts from
-  piped output or a redirected file, as long as the passphrase is provided using
-  the `--pass` flag.
+* Wallet setup may now be performed by providing answers to the prompts from 
+piped output or a redirected file, as long as the passphrase is provided using 
+the `--pass` flag.
 
-* Newly created simnet wallets now always use the SLIP0044 coin type.  This
-  ensures that the printed mining address during the creation process will not
-  become invalid after a coin type upgrade from the legacy to the SLIP0044 coin
-  type following address discovery.
+* Newly created simnet wallets now always use the SLIP0044 coin type.  This 
+ensures that the printed mining address during the creation process will not 
+become invalid after a coin type upgrade from the legacy to the SLIP0044 coin 
+type following address discovery.
 
-* The latest peer-to-peer protocol version is now supported.  The miningstate
-  and initstate messages which are expected in this version are replied to with
-  empty responses.
+* The latest peer-to-peer protocol version is now supported.  The `miningstate` 
+and `initstate` messages which are expected in this version are replied to with
+ empty responses.
 
-* Ticket purchasing will now attempt to buy fewer tickets than requested when
-  there is a low balance, either due to a bad estimate of how many tickets could
-  be purchased, or due to outputs being reserved to pay the fees for the new
-  vspd server.
+* Ticket purchasing will now attempt to buy fewer tickets than requested when 
+there is a low balance, either due to a bad estimate of how many tickets could
+ be purchased, or due to outputs being reserved to pay the fees for the new 
+ vspd server.
 
 ## Bug fixes
 
-* A memory leak of requests and responses made to a dcrd websocket server was
-  plugged.
+* A memory leak of requests and responses made to a dcrd websocket server was 
+plugged.
 
-* Imported xpub accounts no longer produce errors while trying to read the
-  account's xpriv.
+* Imported xpub accounts no longer produce errors while trying to read the 
+account's xpriv.
 
-* Created transactions are now checked against the current network's maximum
-  transaction size limit, to avoid creating transactions which are too long for
-  consensus-validating nodes to accept.
+* Created transactions are now checked against the current network's maximum 
+transaction size limit, to avoid creating transactions which are too long for 
+consensus-validating nodes to accept.
 
 * An out-of-bounds panic seen during address discovery of imported xpub accounts
-  was corrected.
+ was corrected.
 
-* A data race during the subscribing of transaction notifications involving
-  wallet addresses was fixed.
+* A data race during the subscribing of transaction notifications involving 
+wallet addresses was fixed.
 
-* The `getaddressesbyaccount` JSON-RPC method now returns results for the
-  imported account.
+* The `getaddressesbyaccount` JSON-RPC method now returns results for the 
+imported account.
 
-* The database implementation used by dcrwallet (bbolt) was fixed and updated to
-  remove invalid usage of Go's unsafe programming features.
+* The database implementation used by dcrwallet (bbolt) was fixed and updated 
+to remove invalid usage of Go's unsafe programming features.
 
-* The peer-to-peer implementation now allows the same block to be requested
-  concurrently by the same peer.  This fixes some occasional errors which
-  stopped the SPV syncer under normal wallet usage.
+* The peer-to-peer implementation now allows the same block to be requested 
+concurrently by the same peer.  This fixes some occasional errors which stopped 
+the SPV syncer under normal wallet usage.
 
-* The autobuyer will no longer mix the change account when the wallet is not up
-  to date with other peers on the network.  This avoids submitting mix requests
-  involving outputs which may have already been spent.
+* The autobuyer will no longer mix the change account when the wallet is not 
+up to date with other peers on the network.  This avoids submitting mix requests
+ involving outputs which may have already been spent.
 
-* A memory leak of wallet address private keys when operating a wallet that
-  remained always unlocked was plugged.
+* A memory leak of wallet address private keys when operating a wallet that 
+remained always unlocked was plugged.
 
 * The stakebase script found in vote transactions is now included when creating
-  the unsigned vote, rather than during signing.  This fix ensures that the
-  correct stakebase script for the active network is always used, instead of
-  filling in the script for a different network.
+ the unsigned vote, rather than during signing.  This fix ensures that the 
+ correct stakebase script for the active network is always used, instead of 
+ filling in the script for a different network.
 
-* UTXO selection is now aware of output maturity and will not include immature
-  outputs.
+* UTXO selection is now aware of output maturity and will not include immature 
+outputs.
 
 ## Changelog
 
 All commits since the last release may be viewed on GitHub
-[here](https://github.com/decred/dcrwallet/compare/v1.5.1...v1.6.0-rc1).
+[here](https://github.com/decred/dcrwallet/compare/v1.5.1...v1.6.0).
 
 
-# decrediton v1.6.0-rc1
+# decrediton v1.6.0
 
-This release includes some great new features and also includes a large 
-portion of refactor of the codebase that will, hopefully, lead to more
-efficient development in the future.
+This release is proud to include 2 major functionality improvements for staking
+and privacy.  The past privacy improvements that were available for dcrwallet
+are now implemented in decrediton for ticket purchasing and account mixing.  
+Accountless VSP ticket purchasing has been added as well.  So no longer will
+users have to add VSPs via API key.  
 
-We are proud to include the first iteration of our privacy implementation in 
-this release.  Users may not set up their wallet to be a "privacy" wallet
-which will allow them to mix funds from a set unmixed account into a clean
-mixed account.  This new privacy mode also restricts spending to external
-addresses if turned on to avoid privacy leakage.  Once set up, spending 
-out of the wallet must only be done from the mixed account. 
-
-We have also included the new ticket purchasing schema for VSP v3.  No longer
-do users have to set up VSP accounts.  Tickets are purchased and then the
-tickets are paid for by paying a small fee upfront.  
-
-With the addition of this new ticket purchasing without accounts, we can
-now mix staking funds with CSPP just like has been available on CLI for some
-time.  Once privacy is enabled, users may start their autobuyer which will
-mix funds as new tickets are purchased.
-
-JoeGruffins went through and updated the whole trezor implementation to work
-with their new trezor-connect changes upstream.
+There have been numerous graphical improvements and bug fixes that will
+hopefully lead to a smoother UX and reduce support questions and intervention.
 
 I'd like to welcome our new additions to the decrediton team:
 
-guilhermemntt
-victorgcramos
-amassarwi
-bgptr
-JoeGruffins
-fguisso
+  * guilhermemntt
+  * victorgcramos
+  * amassarwi
+  * bgptr
+  * JoeGruffins
+  * fguisso
 
-## New features
+## New features 
 
-* Individual ticket purchasing and auto buyer for VSP v3 tickets is implemented
-  and will be improved upon in the coming releases.  The Legacy method is 
-  still available while people migrate away from those set ups.
+  * We have added a new menu item that covers Privacy and Security tools.  
+  Users should go there to 'enable' privacy on their wallets.  This enabling
+  process is not done automatically yet, mostly due to required user
+  intervention with private passphrase entry to create needed mixed and unmixed 
+  accounts.  Hopefully in the future we will add this step to the wallet
+  launcher.  
 
-* Peer count is now shown on the side bar.  This should allviate issues where
+  Once enabled, the privacy page will transform into an account mixer form that
+  allows users to mix funds from the unmixed account into the mixed account.  To
+  follow what dcrwallet is doing, there is a log window below.  In the future,
+  we may add better messaging that will allow updates to the mixing process
+  instead of just showing raw logs.
+
+  Once privacy is enabled we have restricted external spending to the mixed
+  account.  This is to ensure privacy is not broken by spending from any unmixed
+  account.  Additionally, we have restricted address generation to the mixed account,
+  since only funds that have been properly mixed should be allowed to end up
+  there.  
+
+  There is a checkbox that allows users to forgo the external spending
+  restriction.  There is a dominant warning and users must confirm the risks
+  they are imposing by spending from unmixed accounts.
+
+  * The new accountless VSP ticket purchasing process has been added as well.
+  Now there is no need to 'link' a VSP by API key.  Users may now simply go
+  to the tickets page, select the VSP they'd like to use and the number of
+  tickets to purchase.  If privacy is enabled, the process of purchasing a 
+  ticket requires there to be a successful mix to occur. Mix sessions happen 
+  every 20 minutes and participating in a single session is usually (though not 
+  always) sufficient.  If successful, the mixed split ticket funding 
+  transaction, the ticket, and the ticket's fee, should all be seen on the 
+  overview.  But as you may notice, the ticket's fee is not yet broadcast onto 
+  the network by the VSP until the ticket has been confirmed by 6 blocks.  If 
+  any tickets have missing or errored fees, the user will be notified if they 
+  try to close Decrediton.
+
+  * Peer count is now shown on the side bar.  This should alleviate issues where
   people don't know why their transactions aren't getting mined.
 
-## Other improvements
+## Other updates
 
-* A full refactor of components into functional components is now mostly
-  complete.  
+  * Menu reorganization and optimization due to added tabs and tools.  Since
+  we are quickly adding functionality we need to make sure the left-side sidebar
+  menu is as efficient as possible without becoming bloated with items.
+  Hopefully the current layout allows for more growth for tools and
+  functionality.
 
-* An SPV indicator has been added to the sidebar.  This should help people
-  figure out an issues they may be encountering.
+  * A full refactor of components into functional components is now mostly
+  complete.  This should now allow for more agile development moving forward.
 
-* Unmined transactions are now able to be abandoned under transaction details.
+  * An SPV indicator has been added to the sidebar.  Previously there
+  was no way of understanding what mode the wallet was running in without
+  looking at Settings page.
 
-## Changelog
-
-All commits since the last release may be viewed on GitHub
-[here](https://github.com/decred/decrediton/compare/release-v1.5...v1.6.0-rc1).
+  * Unmined transactions are now able to be abandoned under transaction details.
+  This should fix issues that people previously had unminable transactions
+  "stuck" in their wallet.  If the network doesn't know about the transaction,
+  then they should be able to be abandoned and the funds unreserved.
 
 
 # dcrlnd v0.3.0
