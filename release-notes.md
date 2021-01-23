@@ -1286,7 +1286,7 @@ try to close Decrediton.
 * Peer count is now shown on the side bar.  This should alleviate issues where 
 people don't know why their transactions aren't getting mined.
 
-* Menu reorganization and optimization due to added tabs and tools.  Since 
+* Menu was reorganized and optimized to accomodate added tabs and tools.  Since 
 we are quickly adding functionality we need to make sure the left-hand sidebar 
 menu is as efficient as possible without becoming bloated with items. 
  Hopefully the current layout allows for more growth for tools and 
