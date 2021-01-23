@@ -1267,11 +1267,14 @@ they are imposing by spending from unmixed accounts.
 ### Accountless VSP staking with optional mixing
 
 The new accountless VSP ticket purchasing process has been added. 
-Now there is no need to create a VSP account, leave your email to the VSP and 
-add its API key in Decrediton.  Users may now simply go 
+Now there is no need to create an account at VSP's website, add its API key in 
+Decrediton and backup redeem scripts.  Users may now simply go 
 to the tickets page, select the VSP they'd like to use and the number of 
-tickets to purchase. This new way of staking is more private even without 
-mixing enabled and it is recommended that users migrate sooner. Read more 
+tickets to purchase.
+
+This new way of staking is more private even without mixing enabled since it 
+eliminates address reuse and the use of email. It is recommended that users 
+migrate their tickets to this new system sooner. Read more 
 [here](https://blog.decred.org/2020/06/02/A-More-Private-Way-to-Stake/).
 
 If privacy is enabled, the process of purchasing a 
