@@ -1237,35 +1237,41 @@ I'd like to welcome our new additions to the decrediton team:
 * JoeGruffins
 * fguisso
 
-## New features 
+## New features
 
-* We have added a new menu item that covers Privacy and Security tools. 
+### Privacy
+
+We have added a new menu item that covers Privacy and Security tools. 
 Users should go there to 'enable' privacy on their wallets.  This enabling 
 process is not done automatically yet, mostly due to required user 
 intervention with private passphrase entry to create needed mixed and unmixed 
 accounts.  Hopefully in the future we will add this step to the wallet 
 launcher.
 
-  Once enabled, the privacy page will transform into an account mixer form that 
+Once enabled, the privacy page will transform into an account mixer form that 
 allows users to mix funds from the unmixed account into the mixed account.  To 
 follow what dcrwallet is doing, there is a log window below.  In the future, 
 we may add better messaging that will allow updates to the mixing process 
 instead of just showing raw logs.
 
-  Once privacy is enabled we have restricted external spending to the mixed 
+Once privacy is enabled we have restricted external spending to the mixed 
 account.  This is to ensure privacy is not broken by spending from any unmixed 
 account.  Additionally, we have restricted address generation to the mixed 
 account, since only funds that have been properly mixed should be allowed to 
 end up there.
 
-  There is a checkbox that allows users to forgo the external spending 
+There is a checkbox that allows users to forgo the external spending 
 restriction.  There is a dominant warning and users must confirm the risks 
 they are imposing by spending from unmixed accounts.
 
-* The new accountless VSP ticket purchasing process has been added as well. 
+### Accountless VSP staking with optional mixing
+
+The new accountless VSP ticket purchasing process has been added as well. 
 Now there is no need to 'link' a VSP by API key.  Users may now simply go 
 to the tickets page, select the VSP they'd like to use and the number of 
-tickets to purchase.  If privacy is enabled, the process of purchasing a 
+tickets to purchase.
+
+If privacy is enabled, the process of purchasing a 
 ticket requires there to be a successful mix to occur.  Mix sessions happen 
 every 20 minutes and participating in a single session is usually (though not 
 always) sufficient.  If successful, the mixed split ticket funding 
@@ -1275,10 +1281,10 @@ the network by the VSP until the ticket has been confirmed by 6 blocks.  If
 any tickets have missing or errored fees, the user will be notified if they 
 try to close Decrediton.
 
+## Other updates
+
 * Peer count is now shown on the side bar.  This should alleviate issues where 
 people don't know why their transactions aren't getting mined.
-
-## Other updates
 
 * Menu reorganization and optimization due to added tabs and tools.  Since 
 we are quickly adding functionality we need to make sure the left-side sidebar 
