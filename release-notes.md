@@ -1254,7 +1254,7 @@ follow what dcrwallet is doing, there is a log window below.  In the future,
 we may add better messaging that will allow updates to the mixing process 
 instead of just showing raw logs.
 
-Once privacy is enabled spending to external addresses is only allowed from the 
+Once privacy is enabled, spending to external addresses is only allowed from the 
 mixed account.  This is to ensure privacy is not broken by spending from any 
 unmixed account.  Additionally, it is not allowed to manually generate 
 addresses in the mixed account, since only funds that have been properly mixed 
