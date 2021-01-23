@@ -1287,7 +1287,7 @@ try to close Decrediton.
 people don't know why their transactions aren't getting mined.
 
 * Menu reorganization and optimization due to added tabs and tools.  Since 
-we are quickly adding functionality we need to make sure the left-side sidebar 
+we are quickly adding functionality we need to make sure the left-hand sidebar 
 menu is as efficient as possible without becoming bloated with items. 
  Hopefully the current layout allows for more growth for tools and 
 functionality.
