@@ -838,31 +838,31 @@ signing.
 `WalletService.CreateSignature` method.
 
 * A `discoverusage` JSON-RPC method was introduced, which triggers the same 
-address and account discovery as performed on startup when there are new blocks
- available.  However, this method is more general purpose and is useful when 
- correcting issues with prior discoveries, at it allows specifying the exact 
- starting blocks and a BIP0044 gap limit to use.
+address and account discovery as performed on startup when there are new blocks 
+available.  However, this method is more general purpose and is useful when 
+correcting issues with prior discoveries, at it allows specifying the exact 
+starting blocks and a BIP0044 gap limit to use.
 
 * A `WalletService.SignHashes` gRPC method was added to sign an arbitrary number
  of 32-byte hashes.  This method was used by the now-defunct TumbleBit 
- implementation.
+implementation.
 
 * A `WalletService.Spender` gRPC method was added to query the transaction and 
 input index which spends a wallet output.
 
 * Version 2 committed filters are now used, rather than the previous version 1 
 filters.  These filters are consensus validated by proof-of-work miners as part 
-of the commitments in the block header.  Version 2 filters are smaller and also
- do not require knowledge of the exact outputs spent, but rather only the 
- previous output script (or address).
+of the commitments in the block header.  Version 2 filters are smaller and also 
+do not require knowledge of the exact outputs spent, but rather only the 
+previous output script (or address).
 
 * The `WalletService.TransactionNotifications` gRPC method now provides more 
 details about the block headers which were detached during a reorganize, rather 
 than only their hashes.
 
 * The `fundrawtransaction` JSON-RPC method is now directly implemented by 
-dcrwallet, rather than delegating this method to dcrd through RPC passthrough.  
-This allows the method to be usable under SPV mode.
+dcrwallet, rather than delegating this method to dcrd through RPC passthrough. 
+ This allows the method to be usable under SPV mode.
 
 * An `addtransaction` JSON-RPC method was added, allowing transactions to be 
 manually added to the wallet, mined in a specified block, without discovering 
@@ -894,9 +894,9 @@ CoinShuffle++ options for mixed ticket buying.
 method were implemented to provide peer info in SPV mode.  The JSON-RPC method 
 continues to return results from a connected dcrd when syncing in RPC mode.
 
-* A `walletpassphrasechange` JSON-RPC method was added to modify the wallet's
- public data encryption passphrase.  Changing to the default insecure value 
- "public" effectively removes any prompts for the public passphrase at startup.
+* A `walletpassphrasechange` JSON-RPC method was added to modify the wallet's 
+public data encryption passphrase.  Changing to the default insecure value 
+"public" effectively removes any prompts for the public passphrase at startup.
 
 * A client for the new vspd server was added, and dcrwallet supports this 
 client functionality from both the ticket autobuyer and through various gRPC 
@@ -916,9 +916,9 @@ fees prior to the vspd instance accepting the client's ticket request.
 * A `--manualtickets` flag was added to the application config.  This setting 
 disables discovering any tickets from the network syncing, instead requiring any
  tickets to be manually added to the wallet using `addtransaction`.  This 
- feature is used by the new vspd server to avoid voting on unprocessed tickets 
- which used a vspd voting address.  The current state of this setting is 
- reported in the `walletinfo` JSON-RPC result.
+feature is used by the new vspd server to avoid voting on unprocessed tickets 
+which used a vspd voting address.  The current state of this setting is 
+reported in the `walletinfo` JSON-RPC result.
 
 * The LOGFLAGS environment variable may now include a UTC flag to cause the 
 wallet to always log with UTC timestamps, regardless of the current system 
@@ -930,28 +930,28 @@ script when the output is P2SH and the redeem script is known.
 * Support for the decentralized treasury hard fork is added.  Two new JSON-RPC 
 methods `sendtotreasury` and `spendfromtreasury` are added, to send to and spend
  from value in the treasury, respectively.  The vote version and current agendas
-  have been updated to allow stakeholders to vote on the activation of the 
-  decentralized treasury.
+ have been updated to allow stakeholders to vote on the activation of the 
+decentralized treasury.
 
 * A `sendrawtransaction` implementation has been added to the JSON-RPC server. 
 This allows arbitrary transactions to be published under SPV mode.
 
 * Accounts are now able to be encrypted using separate, per-account passphrases.
  Unlocking an account only provides access to that account's private keys, 
- and no others.  Account passphrases may be set using the `setaccountpassphrase`
-  JSON-RPC method, and locked and unlocked by the `unlockaccount` and 
-  `lockaccount` methods.
+and no others.  Account passphrases may be set using the `setaccountpassphrase` 
+JSON-RPC method, and locked and unlocked by the `unlockaccount` and 
+`lockaccount` methods.
 
 * JSON-RPC clients may now be authenticated using TLS client certificates, and 
 this authentication is now required for the gRPC server.  The feature may be 
-enabled for JSON-RPC by using the `--jsonrpcauthtype=clientcert` config flag.  
-Client certificates read from a `clients.pem` file in the application directory
+enabled for JSON-RPC by using the `--jsonrpcauthtype=clientcert` config flag. 
+ Client certificates read from a `clients.pem` file in the application directory
  are trusted by default, and this file may be modified by the `--clientcafile` 
- config flag.  Additionally, an `--issueclientcert` flag is provided which 
- causes the wallet to issue and send an ephemeral client certificate and key 
- over the TX pipe to the parent process which forked dcrwallet.  Client 
- certificates may be generated by the `gencerts` tool, which is now part of the 
- Decred CLI distribution.
+config flag.  Additionally, an `--issueclientcert` flag is provided which 
+causes the wallet to issue and send an ephemeral client certificate and key 
+over the TX pipe to the parent process which forked dcrwallet.  Client 
+certificates may be generated by the `gencerts` tool, which is now part of the 
+Decred CLI distribution.
 
 * gRPC methods to lock and unlock the wallet's global keys and 
 individually-encrypted accounts are now added, and the passphrase in all 
@@ -962,8 +962,8 @@ account and using private keys it should not otherwise have access to.
 
 ## Other improvements
 
-* Peer-to-peer seeding is now performed over an HTTPS API rather than DNS.  
-This improves reliability (HTTPS is authenticated), as well as greater control 
+* Peer-to-peer seeding is now performed over an HTTPS API rather than DNS. 
+ This improves reliability (HTTPS is authenticated), as well as greater control 
 of filtering results by various URL parameters.
 
 * Many log messages were added, removed, or rewritten to better reflect the 
@@ -977,7 +977,7 @@ to derive keys.
 * Imported scripts are now recorded in plain text and the wallet does not need 
 to be unlocked to retrieve the full script for the P2SH address.  This change is
  made under the assumption that imported redeem scripts should not be secrets 
- themselves, but still require a signature check at the very least.
+themselves, but still require a signature check at the very least.
 
 * Importing an already-existing redeem script from the `importscript` JSON-RPC 
 method no longer starts a rescan.
@@ -1007,13 +1007,13 @@ become invalid after a coin type upgrade from the legacy to the SLIP0044 coin
 type following address discovery.
 
 * The latest peer-to-peer protocol version is now supported.  The `miningstate` 
-and `initstate` messages which are expected in this version are replied to with
- empty responses.
+and `initstate` messages which are expected in this version are replied to with 
+empty responses.
 
 * Ticket purchasing will now attempt to buy fewer tickets than requested when 
-there is a low balance, either due to a bad estimate of how many tickets could
- be purchased, or due to outputs being reserved to pay the fees for the new 
- vspd server.
+there is a low balance, either due to a bad estimate of how many tickets could 
+be purchased, or due to outputs being reserved to pay the fees for the new 
+vspd server.
 
 ## Bug fixes
 
@@ -1050,17 +1050,17 @@ up to date with other peers on the network.  This avoids submitting mix requests
 * A memory leak of wallet address private keys when operating a wallet that 
 remained always unlocked was plugged.
 
-* The stakebase script found in vote transactions is now included when creating
- the unsigned vote, rather than during signing.  This fix ensures that the 
- correct stakebase script for the active network is always used, instead of 
- filling in the script for a different network.
+* The stakebase script found in vote transactions is now included when creating 
+the unsigned vote, rather than during signing.  This fix ensures that the 
+correct stakebase script for the active network is always used, instead of 
+filling in the script for a different network.
 
 * UTXO selection is now aware of output maturity and will not include immature 
 outputs.
 
 ## Changelog
 
-All commits since the last release may be viewed on GitHub
+All commits since the last release may be viewed on GitHub 
 [here](https://github.com/decred/dcrwallet/compare/v1.5.1...v1.6.0).
 
 
