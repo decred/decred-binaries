@@ -287,7 +287,7 @@ files changed, 63090 additional lines of code, and 26279 deleted lines of code.
 All commits since the last release may be viewed on GitHub
 [here](https://github.com/decred/dcrd/compare/release-v1.5.2...release-v1.6.0).
 
-### Protocol and network
+### Protocol and Network
 
 - chaincfg: Add checkpoints for upcoming release ([decred/dcrd#2370](https://github.com/decred/dcrd/pull/2370))
 - multi: Introduce initial sync min known chain work ([decred/dcrd#2000](https://github.com/decred/dcrd/pull/2000))
@@ -327,7 +327,7 @@ All commits since the last release may be viewed on GitHub
 - server: return whether addBanScore disconnected the peer ([decred/dcrd#2253](https://github.com/decred/dcrd/pull/2253))
 - blockchain: Whitelist DCP0005 violations ([decred/dcrd#2533](https://github.com/decred/dcrd/pull/2533))
 
-### Transaction relay (memory pool)
+### Transaction Relay (Memory Pool)
 
 - mempool: Implement orphan expiration ([decred/dcrd#1974](https://github.com/decred/dcrd/pull/1974))
 - mempool: Associated tag with orphan txns ([decred/dcrd#1982](https://github.com/decred/dcrd/pull/1982))
@@ -436,20 +436,20 @@ All commits since the last release may be viewed on GitHub
 - multi: Add tx inputs treasuryspend RPC support ([decred/dcrd#2472](https://github.com/decred/dcrd/pull/2472))
 - rpcserver: Fix count tspend votes in mined block ([decred/dcrd#2565](https://github.com/decred/dcrd/pull/2565))
 
-### dcrd command-line flags and configuration
+### dcrd Command-line Flags and Configuration
 
 - server: Add tlscurve config parameter ([decred/dcrd#1983](https://github.com/decred/dcrd/pull/1983))
 - config: Add flag to allow unsynced testnet mining ([decred/dcrd#2023](https://github.com/decred/dcrd/pull/2023))
 - config: add --dialtimeout defaulting to 30 seconds ([decred/dcrd#2068](https://github.com/decred/dcrd/pull/2068))
 - multi: add --peeridletimeout defaulting to 120s ([decred/dcrd#2067](https://github.com/decred/dcrd/pull/2067))
 
-### gencerts utility changes
+### gencerts Utility Changes
 
 - gencerts: Rewrite for additional use cases ([decred/dcrd#2425](https://github.com/decred/dcrd/pull/2425))
 - gencerts: Add missing newline for unknown algorithm error ([decred/dcrd#2427](https://github.com/decred/dcrd/pull/2427))
 - gencerts: Use the P-256 curve by default ([decred/dcrd#2461](https://github.com/decred/dcrd/pull/2461))
 
-### dcrctl utility changes
+### dcrctl Utility Changes
 
 - multi: Split dcrctl to own repo and update docs ([decred/dcrd#2175](https://github.com/decred/dcrd/pull/2175))
 
@@ -509,7 +509,7 @@ All commits since the last release may be viewed on GitHub
 - docs: Update several JSON-RPC APIs ([decred/dcrd#2470](https://github.com/decred/dcrd/pull/2470))
 - docs: Update several JSON-RPC APIs ([decred/dcrd#2472](https://github.com/decred/dcrd/pull/2472))
 
-### Developer-related package and module changes
+### Developer-related Package and Module Changes
 
 - blockmanager: remove serverPeer from blockmanager completely ([decred/dcrd#1735](https://github.com/decred/dcrd/pull/1735))
 - txscript: Add signature type to KeyClosure API ([decred/dcrd#1961](https://github.com/decred/dcrd/pull/1961))
@@ -749,7 +749,7 @@ All commits since the last release may be viewed on GitHub
 - blockchain: Handle db upgrade paths for ver < 5 ([decred/dcrd#2449](https://github.com/decred/dcrd/pull/2449))
 - blockchain: No context dep checks for orphans ([decred/dcrd#2474](https://github.com/decred/dcrd/pull/2474))
 
-### Developer-related module management
+### Developer-related Module Management
 
 - mining: Start v3 module dev cycle ([decred/dcrd#1955](https://github.com/decred/dcrd/pull/1955))
 - dcrutil: Start v3 module dev cycle ([decred/dcrd#1956](https://github.com/decred/dcrd/pull/1956))
@@ -948,7 +948,7 @@ All commits since the last release may be viewed on GitHub
 - docker: Update image to golang:1.15 ([decred/dcrd#2335](https://github.com/decred/dcrd/pull/2335))
 - release: Bump for 1.6.0 ([decred/dcrd#2340](https://github.com/decred/dcrd/pull/2340))
 
-### Code Contributors (alphabetical order)
+### Code Contributors (Alphabetical Order)
 
 - Brian Stafford
 - Dave Collins
@@ -978,9 +978,9 @@ viable.
 
 A comprehensive list of improvements and bug fixes follows.
 
-## New features
+## New Features
 
-### Decentralized treasury
+### Decentralized Treasury
 
 * Support for the decentralized treasury consensus change is added.  Two new 
 JSON-RPC methods `sendtotreasury` and `spendfromtreasury` are added, to send to 
@@ -988,7 +988,7 @@ and spend from value in the treasury, respectively.  The vote version and
 current agendas have been updated to allow stakeholders to vote on the 
 activation of the decentralized treasury.
 
-### SPV mode
+### SPV Mode
 
 * Version 2 committed filters are now used, rather than the previous version 1 
 filters.  These filters are consensus validated by proof-of-work miners as part 
@@ -1056,7 +1056,7 @@ CoinShuffle++ options for mixed ticket buying.
 `WalletService.GetCoinjoinOutputspByAcct` gRPC methods were added to discover 
 probable CoinJoin transactions and report them by account.
 
-### Other new features
+### Other new Features
 
 * A `createsignature` JSON-RPC method was introduced, analogous to the gRPC 
 `WalletService.CreateSignature` method.
@@ -1119,7 +1119,7 @@ server now requires client authentication, there is no a risk of an
 unauthenticated client from quickly hitting an already-unlocked wallet or 
 account and using private keys it should not otherwise have access to.
 
-## Other improvements
+## Other Improvements
 
 * Peer-to-peer seeding is now performed over an HTTPS API rather than DNS. 
  This improves reliability (HTTPS is authenticated), as well as greater control 
@@ -1178,7 +1178,7 @@ there is a low balance, either due to a bad estimate of how many tickets could
 be purchased, or due to outputs being reserved to pay the fees for the new 
 vspd server.
 
-## Bug fixes
+## Bug Fixes
 
 * A memory leak of requests and responses made to a dcrd websocket server was 
 plugged.
@@ -1247,7 +1247,7 @@ I'd like to welcome our new additions to the decrediton team:
 * JoeGruffins
 * fguisso
 
-## New features
+## New Features
 
 ### Privacy
 
@@ -1274,7 +1274,7 @@ There is a checkbox that allows users to forgo the external spending
 restriction.  There is a dominant warning and users must confirm the risks 
 they are imposing by spending from unmixed accounts.
 
-### Accountless VSP staking with optional mixing
+### Accountless VSP Staking with Optional Mixing
 
 The new accountless VSP ticket purchasing process has been added. 
 Now there is no need to create an account at VSP's website, add its API key in 
@@ -1297,7 +1297,7 @@ the network by the VSP until the ticket has been confirmed by 6 blocks.  If
 any tickets have missing or errored fees, the user will be notified if they 
 try to close Decrediton.
 
-## Other updates
+## Other Updates
 
 * Menu was reorganized and optimized to accomodate added tabs and tools.  Since 
 we are quickly adding functionality we need to make sure the left-hand sidebar 
@@ -1956,7 +1956,7 @@ This release uses an experimental system to set the maximum order quantity
 based on their swap history. It is likely to change, but it is described in [PR #750](https://github.com/decred/dcrdex/pull/750).
 
 
-## Code summary
+## Code Summary
 
 This release consists of 473 pull requests comprising 506 commits from 12 contributors.
 
