@@ -1299,17 +1299,14 @@ try to close Decrediton.
 
 ## Other updates
 
-* Peer count is now shown on the side bar.  This should alleviate issues where 
-people don't know why their transactions aren't getting mined.
-
 * Menu was reorganized and optimized to accomodate added tabs and tools.  Since 
 we are quickly adding functionality we need to make sure the left-hand sidebar 
 menu is as efficient as possible without becoming bloated with items. 
  Hopefully the current layout allows for more growth for tools and 
 functionality.
 
-* A full refactor of components into functional components is now mostly 
-complete.  This should now allow for more agile development moving forward.
+* Peer count is now shown on the side bar.  This should alleviate issues where 
+people don't know why their transactions aren't getting mined.
 
 * An SPV indicator has been added to the sidebar.  Previously there 
 was no way of understanding what mode the wallet was running in without 
@@ -1320,6 +1317,8 @@ looking at Settings page.
 "stuck" in their wallet.  If the network doesn't know about the transaction, 
 then they should be able to be abandoned and the funds unreserved.
 
+* A full refactor of components into functional components is now mostly 
+complete.  This should now allow for more agile development moving forward.
 
 # dcrlnd v0.3.0
 
