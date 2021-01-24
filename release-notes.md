@@ -1080,11 +1080,11 @@ timezone.
 * The `listunspent` JSON-RPC method now includes the hex encoding of a redeem 
 script when the output is P2SH and the redeem script is known.
 
-* Support for the decentralized treasury hard fork is added.  Two new JSON-RPC 
-methods `sendtotreasury` and `spendfromtreasury` are added, to send to and spend
- from value in the treasury, respectively.  The vote version and current agendas
- have been updated to allow stakeholders to vote on the activation of the 
-decentralized treasury.
+* Support for the decentralized treasury consensus change is added.  Two new 
+JSON-RPC methods `sendtotreasury` and `spendfromtreasury` are added, to send to 
+and spend from value in the treasury, respectively.  The vote version and 
+current agendas have been updated to allow stakeholders to vote on the 
+activation of the decentralized treasury.
 
 * A `sendrawtransaction` implementation has been added to the JSON-RPC server. 
 This allows arbitrary transactions to be published under SPV mode.
