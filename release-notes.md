@@ -287,7 +287,7 @@ files changed, 63090 additional lines of code, and 26279 deleted lines of code.
 All commits since the last release may be viewed on GitHub
 [here](https://github.com/decred/dcrd/compare/release-v1.5.2...release-v1.6.0).
 
-### Protocol and network:
+### Protocol and network
 
 - chaincfg: Add checkpoints for upcoming release ([decred/dcrd#2370](https://github.com/decred/dcrd/pull/2370))
 - multi: Introduce initial sync min known chain work ([decred/dcrd#2000](https://github.com/decred/dcrd/pull/2000))
@@ -327,7 +327,7 @@ All commits since the last release may be viewed on GitHub
 - server: return whether addBanScore disconnected the peer ([decred/dcrd#2253](https://github.com/decred/dcrd/pull/2253))
 - blockchain: Whitelist DCP0005 violations ([decred/dcrd#2533](https://github.com/decred/dcrd/pull/2533))
 
-### Transaction relay (memory pool):
+### Transaction relay (memory pool)
 
 - mempool: Implement orphan expiration ([decred/dcrd#1974](https://github.com/decred/dcrd/pull/1974))
 - mempool: Associated tag with orphan txns ([decred/dcrd#1982](https://github.com/decred/dcrd/pull/1982))
@@ -345,7 +345,7 @@ All commits since the last release may be viewed on GitHub
 - mempool: Allow treasury txn vers as standard ([decred/dcrd#2412](https://github.com/decred/dcrd/pull/2412))
 - mempool: Limit ancestor tracking in mempool ([decred/dcrd#2468](https://github.com/decred/dcrd/pull/2468))
 
-### Mining:
+### Mining
 
 - mining: Introduce PriorityInputser interface ([decred/dcrd#1966](https://github.com/decred/dcrd/pull/1966))
 - mining: Correct priority calcs for Decred sizes ([decred/dcrd#1967](https://github.com/decred/dcrd/pull/1967))
@@ -366,7 +366,7 @@ All commits since the last release may be viewed on GitHub
 - multi: add rpcserver.CPUMiner ([decred/dcrd#2286](https://github.com/decred/dcrd/pull/2286))
 - mining: Prevent panic in child prio item handling ([decred/dcrd#2435](https://github.com/decred/dcrd/pull/2435))
 
-### RPC:
+### RPC
 
 - rpcserver: decouple from server ([decred/dcrd#1730](https://github.com/decred/dcrd/pull/1730))
 - rpcserver: refactor listener logic to server ([decred/dcrd#1734](https://github.com/decred/dcrd/pull/1734))
@@ -436,24 +436,24 @@ All commits since the last release may be viewed on GitHub
 - multi: Add tx inputs treasuryspend RPC support ([decred/dcrd#2472](https://github.com/decred/dcrd/pull/2472))
 - rpcserver: Fix count tspend votes in mined block ([decred/dcrd#2565](https://github.com/decred/dcrd/pull/2565))
 
-### dcrd command-line flags and configuration:
+### dcrd command-line flags and configuration
 
 - server: Add tlscurve config parameter ([decred/dcrd#1983](https://github.com/decred/dcrd/pull/1983))
 - config: Add flag to allow unsynced testnet mining ([decred/dcrd#2023](https://github.com/decred/dcrd/pull/2023))
 - config: add --dialtimeout defaulting to 30 seconds ([decred/dcrd#2068](https://github.com/decred/dcrd/pull/2068))
 - multi: add --peeridletimeout defaulting to 120s ([decred/dcrd#2067](https://github.com/decred/dcrd/pull/2067))
 
-### gencerts utility changes:
+### gencerts utility changes
 
 - gencerts: Rewrite for additional use cases ([decred/dcrd#2425](https://github.com/decred/dcrd/pull/2425))
 - gencerts: Add missing newline for unknown algorithm error ([decred/dcrd#2427](https://github.com/decred/dcrd/pull/2427))
 - gencerts: Use the P-256 curve by default ([decred/dcrd#2461](https://github.com/decred/dcrd/pull/2461))
 
-### dcrctl utility changes:
+### dcrctl utility changes
 
 - multi: Split dcrctl to own repo and update docs ([decred/dcrd#2175](https://github.com/decred/dcrd/pull/2175))
 
-### Documentation:
+### Documentation
 
 - rpcserver: Refactor and update documentation ([decred/dcrd#2066](https://github.com/decred/dcrd/pull/2066))
 - multi: replace godoc.org with pkg.go.dev ([decred/dcrd#2091](https://github.com/decred/dcrd/pull/2091))
@@ -509,7 +509,7 @@ All commits since the last release may be viewed on GitHub
 - docs: Update several JSON-RPC APIs ([decred/dcrd#2470](https://github.com/decred/dcrd/pull/2470))
 - docs: Update several JSON-RPC APIs ([decred/dcrd#2472](https://github.com/decred/dcrd/pull/2472))
 
-### Developer-related package and module changes:
+### Developer-related package and module changes
 
 - blockmanager: remove serverPeer from blockmanager completely ([decred/dcrd#1735](https://github.com/decred/dcrd/pull/1735))
 - txscript: Add signature type to KeyClosure API ([decred/dcrd#1961](https://github.com/decred/dcrd/pull/1961))
@@ -749,7 +749,7 @@ All commits since the last release may be viewed on GitHub
 - blockchain: Handle db upgrade paths for ver < 5 ([decred/dcrd#2449](https://github.com/decred/dcrd/pull/2449))
 - blockchain: No context dep checks for orphans ([decred/dcrd#2474](https://github.com/decred/dcrd/pull/2474))
 
-### Developer-related module management:
+### Developer-related module management
 
 - mining: Start v3 module dev cycle ([decred/dcrd#1955](https://github.com/decred/dcrd/pull/1955))
 - dcrutil: Start v3 module dev cycle ([decred/dcrd#1956](https://github.com/decred/dcrd/pull/1956))
@@ -815,7 +815,7 @@ All commits since the last release may be viewed on GitHub
 - main: Remove module replacements ([decred/dcrd#2428](https://github.com/decred/dcrd/pull/2428))
 - main: Use backported module updates ([decred/dcrd#2456](https://github.com/decred/dcrd/pull/2456))
 
-### Testing and Quality Assurance:
+### Testing and Quality Assurance
 
 - build: update golangci-lint to v1.21.0 ([decred/dcrd#1951](https://github.com/decred/dcrd/pull/1951))
 - mining: Add priority calculation tests ([decred/dcrd#1967](https://github.com/decred/dcrd/pull/1967))
@@ -930,7 +930,7 @@ All commits since the last release may be viewed on GitHub
 - blockchain: Rework AdvanceToHeight ([decred/dcrd#2090](https://github.com/decred/dcrd/pull/2090))
 - rpcserver: Add --rejectnonstd to rpctest ([decred/dcrd#2415](https://github.com/decred/dcrd/pull/2415))
 
-### Misc:
+### Misc
 
 - release: Bump for 1.6 release cycle ([decred/dcrd#1948](https://github.com/decred/dcrd/pull/1948))
 - multi: resolve todos ([decred/dcrd#1869](https://github.com/decred/dcrd/pull/1869))
@@ -948,7 +948,7 @@ All commits since the last release may be viewed on GitHub
 - docker: Update image to golang:1.15 ([decred/dcrd#2335](https://github.com/decred/dcrd/pull/2335))
 - release: Bump for 1.6.0 ([decred/dcrd#2340](https://github.com/decred/dcrd/pull/2340))
 
-### Code Contributors (alphabetical order):
+### Code Contributors (alphabetical order)
 
 - Brian Stafford
 - Dave Collins
