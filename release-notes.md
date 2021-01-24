@@ -1405,18 +1405,18 @@ respective upstream releases for additional information.
 - Healthchecks to ensure adequate operating conditions of the node
 - Several bug fixes throughout the app.
 
-# Porting Effort
+## Porting Effort
 
 A total of 450 upstream PRs were considered for inclusion. The list of of PRs 
 can be found in the acompanying [upstream-prs.csv](/docs/upstream-prs.csv) doc.
 
-# Decred Contributors (Alphabetical Order)
+## Decred Contributors (Alphabetical Order)
 
 - Fernando Guisso
 - Matheus Degiovani
 - Ole Andre Birkedal
 
-# Acknowledgement
+## Acknowledgement
 
 The majority of the work included in this release is from features and bugfixes 
 performed by the contributors to the upstream 
