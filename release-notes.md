@@ -1336,6 +1336,20 @@ This release brings dcrlnd in line with the upstream lnd
 [v0.10.0](https://github.com/lightningnetwork/lnd/releases/tag/v0.10.0-beta) and
  [v0.9.0](https://github.com/lightningnetwork/lnd/releases/tag/v0.9.0-beta).
 
+## Vulnerability Fixes
+
+This release includes fixes for 
+[CVE-2020-26896](https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-October/002857.html)
+ and [CVE-2020-895](https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-October/002858.html)
+ made in the upstream lnd project. Fixes for these were released in upstream 
+versions v0.11.0 and v0.10.0 respectively and the underlying issues were fully 
+disclosed in Oct 20, 2020.
+
+Additional context for the vulnerabilities and its impact in LN implementations,
+ written by the original discoverer can be found 
+[here](https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-October/002859.html)
+ and [here](https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-October/002855.html)
+
 ## Database Migrations
 
 This release contains database migrations for the new TLV encoding of invoices, 
