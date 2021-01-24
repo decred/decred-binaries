@@ -1348,8 +1348,8 @@ even when their wallet is using the SPV configuration.
 
 CLI users now have two options for the `--node` argument:
 
-  - `--node=dcrd` instructs dcrlnd to connect to a dcrd instance for on-chain operations.
-  - `--node=dcrw` instructs dcrlnd to use the underlying dcrwallet instance for on-chain operations.
+- `--node=dcrd` instructs dcrlnd to connect to a dcrd instance for on-chain operations.
+- `--node=dcrw` instructs dcrlnd to use the underlying dcrwallet instance for on-chain operations.
 
 When using `--node=dcrd`, the `--dcrd.`-namespaced options should be used to 
 configure the connection to the underlying dcrd node.
@@ -1381,22 +1381,22 @@ were ported to dcrlnd. These include changes from the upstream
 [v0.11](https://github.com/decred/dcrlnd/pull/103) lines. Please refer to the 
 respective upstream releases for additional information.
 
-  - Multi Path Payment (MPP) support so that a single payment can be split 
-    among multiple channels.
-  - Track payments with a new Payment Address field.
-  - Additional TLV data sent in payments, which allows creating new use cases 
-    to deliver payload data via LN payments.
-  - Keysend payment experiment which allows spontaneous payments without the 
-    need for a precreated invoice.
-  - Upfront shutdown script support to enforce channel closure to pay to 
-    pre-configured addresses.
-  - HTLC Interception API to allow creation of custom payment forwarding engines.
-  - Additional data in Channel Close Summaries.
-  - Add ability to limit max remote pending HTLC amount during channel opening.
-  - Anchor outputs experimental feature.
-  - External channel funding experimental feature.
-  - Healthchecks to ensure adequate operating conditions of the node
-  - Several bug fixes throughout the app.
+- Multi Path Payment (MPP) support so that a single payment can be split 
+  among multiple channels.
+- Track payments with a new Payment Address field.
+- Additional TLV data sent in payments, which allows creating new use cases 
+  to deliver payload data via LN payments.
+- Keysend payment experiment which allows spontaneous payments without the 
+  need for a precreated invoice.
+- Upfront shutdown script support to enforce channel closure to pay to 
+  pre-configured addresses.
+- HTLC Interception API to allow creation of custom payment forwarding engines.
+- Additional data in Channel Close Summaries.
+- Add ability to limit max remote pending HTLC amount during channel opening.
+- Anchor outputs experimental feature.
+- External channel funding experimental feature.
+- Healthchecks to ensure adequate operating conditions of the node
+- Several bug fixes throughout the app.
 
 # Porting Effort
 
@@ -1406,9 +1406,9 @@ can be found in the acompanying [upstream-prs.csv](/docs/upstream-prs.csv) doc.
 
 # Decred Contributors (Alphabetical Order)
 
-  - Fernando Guisso
-  - Matheus Degiovani
-  - Ole Andre Birkedal
+- Fernando Guisso
+- Matheus Degiovani
+- Ole Andre Birkedal
 
 # Acknowledgement
 
