@@ -1232,8 +1232,8 @@ All commits since the last release may be viewed on GitHub
 This release includes two major functionality improvements for staking 
 and privacy.  The past privacy improvements that were available for dcrwallet 
 are now implemented in decrediton for ticket purchasing and account mixing. 
-Accountless VSP ticket purchasing has been added as well.  So no longer will 
-users have to add VSPs via API key.
+Accountless VSP ticket purchasing has been added as well that should greatly 
+simplify the staking process and increase privacy.
 
 There have been numerous graphical improvements and bug fixes that will 
 hopefully lead to a smoother UX and reduce support questions and intervention.
