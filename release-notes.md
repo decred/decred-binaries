@@ -1229,7 +1229,7 @@ All commits since the last release may be viewed on GitHub
 
 # decrediton v1.6.0
 
-This release is proud to include 2 major functionality improvements for staking 
+This release includes two major functionality improvements for staking 
 and privacy.  The past privacy improvements that were available for dcrwallet 
 are now implemented in decrediton for ticket purchasing and account mixing. 
 Accountless VSP ticket purchasing has been added as well.  So no longer will 
