@@ -1477,7 +1477,7 @@ and continually check sync status on RPC errors as it is common for node/wallet
 dexc were started with both active orders and an unlocked wallet. ([f8c47a1](https://github.com/decred/dcrdex/commit/f8c47a163387b8c63201f2f9ad1053a205e6203f))
 - Fix duplicate notify_fee requests that resulted from multiple fee coin 
 waiters being created for the same coin. ([ee1bd84](https://github.com/decred/dcrdex/commit/ee1bd84c8ef6136fcbbcf764782b610d20c3540c))
-- Fix retrieving the full list of historical orders (284681488b5812157dd8624151efc576764eb824)
+- Fix retrieving the full list of historical orders ([2846814](https://github.com/decred/dcrdex/commit/284681488b5812157dd8624151efc576764eb824))
 - Fix incorrect year displayed for a match's date. ([a347b0f](https://github.com/decred/dcrdex/commit/a347b0f34d0fd143b566b59588cda4f86f1b218b))
 - Wallet deposit addresses are validated and more often refreshed whenever the 
 wallet is connected ([c3990c7](https://github.com/decred/dcrdex/commit/c3990c765f7a7de2017da08c29fb9fae8853a522), [6a66a1c](https://github.com/decred/dcrdex/commit/6a66a1cb7701ed6d6e7187231a46ad1f2a74a782))
