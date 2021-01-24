@@ -980,12 +980,83 @@ A comprehensive list of improvements and bug fixes follows.
 
 ## New features
 
+### Decentralized treasury
+
+* Support for the decentralized treasury consensus change is added.  Two new 
+JSON-RPC methods `sendtotreasury` and `spendfromtreasury` are added, to send to 
+and spend from value in the treasury, respectively.  The vote version and 
+current agendas have been updated to allow stakeholders to vote on the 
+activation of the decentralized treasury.
+
+### SPV mode
+
+* Version 2 committed filters are now used, rather than the previous version 1 
+filters.  These filters are consensus validated by proof-of-work miners as part 
+of the commitments in the block header.  Version 2 filters are smaller and also 
+do not require knowledge of the exact outputs spent, but rather only the 
+previous output script (or address).
+
+* The `fundrawtransaction` JSON-RPC method is now directly implemented by 
+dcrwallet, rather than delegating this method to dcrd through RPC passthrough. 
+ This allows the method to be usable under SPV mode.
+
+* A `WalletService.GetRawCFilters` gRPC method was added to query the 
+wallet-stored version 2 committed filter for specified blocks.
+
+* Both a `getpeerinfo` JSON-RPC method and `WalletService.GetPeerInfo` gRPC 
+method were implemented to provide peer info in SPV mode.  The JSON-RPC method 
+continues to return results from a connected dcrd when syncing in RPC mode.
+
+* A `sendrawtransaction` implementation has been added to the JSON-RPC server. 
+This allows arbitrary transactions to be published under SPV mode.
+
+### Staking
+
+* A client for the new vspd server was added, and dcrwallet supports this 
+client functionality from both the ticket autobuyer and through various gRPC 
+methods.
+
+* A `ticketinfo` JSON-RPC method was added to provide detailed status 
+information regarding all tickets from the wallet.
+
+* Vote preferences may now be specified on a per-ticket basis with added 
+optional parameters to the `setvotechoice` JSON-RPC method.  This feature is 
+used by the new vspd server.
+
+* The `stakepooluserinfo` JSON-RPC method has been reintroduced, after being 
+removed from prior releases.  This is used by the new vspd server.
+
+* Unpublished transactions are now supported.  When an unpublished transaction 
+is saved to the database, the outputs it spends are tallied in balance results 
+and are not spendable by other transactions.  Unpublishd transactions will not 
+be automatically rebroadast to the network when the wallet starts up and begins 
+syncing.  Unpublished transactions are used to record transactions paying vspd 
+fees prior to the vspd instance accepting the client's ticket request.
+
+* A `--manualtickets` flag was added to the application config.  This setting 
+disables discovering any tickets from the network syncing, instead requiring any
+ tickets to be manually added to the wallet using `addtransaction`.  This 
+feature is used by the new vspd server to avoid voting on unprocessed tickets 
+which used a vspd voting address.  The current state of this setting is 
+reported in the `walletinfo` JSON-RPC result.
+
 * The `WalletService.PurchaseTickets` gRPC method gained a `dont_sign_tx` 
 parameter to support unsigned ticket purchasing and eventual hardware wallet 
 signing.
 
+### Mixing
+
 * An `AccountMixerService` was added to the gRPC server to perform CoinShuffle++
  mixing on all funds received by an account.
+
+* The `WalletService.PurchaseTickets` method gained support for specifying 
+CoinShuffle++ options for mixed ticket buying.
+
+* The `getcoinjoinsbyacct` JSON-RPC method and 
+`WalletService.GetCoinjoinOutputspByAcct` gRPC methods were added to discover 
+probable CoinJoin transactions and report them by account.
+
+### Other new features
 
 * A `createsignature` JSON-RPC method was introduced, analogous to the gRPC 
 `WalletService.CreateSignature` method.
@@ -1003,33 +1074,13 @@ implementation.
 * A `WalletService.Spender` gRPC method was added to query the transaction and 
 input index which spends a wallet output.
 
-* Version 2 committed filters are now used, rather than the previous version 1 
-filters.  These filters are consensus validated by proof-of-work miners as part 
-of the commitments in the block header.  Version 2 filters are smaller and also 
-do not require knowledge of the exact outputs spent, but rather only the 
-previous output script (or address).
-
 * The `WalletService.TransactionNotifications` gRPC method now provides more 
 details about the block headers which were detached during a reorganize, rather 
 than only their hashes.
 
-* The `fundrawtransaction` JSON-RPC method is now directly implemented by 
-dcrwallet, rather than delegating this method to dcrd through RPC passthrough. 
- This allows the method to be usable under SPV mode.
-
 * An `addtransaction` JSON-RPC method was added, allowing transactions to be 
 manually added to the wallet, mined in a specified block, without discovering 
 the transaction through the network.
-
-* The `stakepooluserinfo` JSON-RPC method has been reintroduced, after being 
-removed from prior releases.  This is used by the new vspd server.
-
-* Vote preferences may now be specified on a per-ticket basis with added 
-optional parameters to the `setvotechoice` JSON-RPC method.  This feature is 
-used by the new vspd server.
-
-* A `WalletService.GetRawCFilters` gRPC method was added to query the 
-wallet-stored version 2 committed filter for specified blocks.
 
 * A `NetworkService.GetRawBlock` gRPC method was added to fetch raw blocks 
 using the wallet's peer-to-peer implementation.
@@ -1037,57 +1088,12 @@ using the wallet's peer-to-peer implementation.
 * An optional account parameter was added to the `listunspent` and 
 `listlockunspent` JSON-RPC methods to filter results for a particular account.
 
-* A `ticketinfo` JSON-RPC method was added to provide detailed status 
-information regarding all tickets from the wallet.
-
-* The `WalletService.PurchaseTickets` method gained support for specifying 
-CoinShuffle++ options for mixed ticket buying.
-
-* Both a `getpeerinfo` JSON-RPC method and `WalletService.GetPeerInfo` gRPC 
-method were implemented to provide peer info in SPV mode.  The JSON-RPC method 
-continues to return results from a connected dcrd when syncing in RPC mode.
-
 * A `walletpassphrasechange` JSON-RPC method was added to modify the wallet's 
 public data encryption passphrase.  Changing to the default insecure value 
 "public" effectively removes any prompts for the public passphrase at startup.
 
-* A client for the new vspd server was added, and dcrwallet supports this 
-client functionality from both the ticket autobuyer and through various gRPC 
-methods.
-
-* The `getcoinjoinsbyacct` JSON-RPC method and 
-`WalletService.GetCoinjoinOutputspByAcct` gRPC methods were added to discover 
-probable CoinJoin transactions and report them by account.
-
-* Unpublished transactions are now supported.  When an unpublished transaction 
-is saved to the database, the outputs it spends are tallied in balance results 
-and are not spendable by other transactions.  Unpublishd transactions will not 
-be automatically rebroadast to the network when the wallet starts up and begins 
-syncing.  Unpublished transactions are used to record transactions paying vspd 
-fees prior to the vspd instance accepting the client's ticket request.
-
-* A `--manualtickets` flag was added to the application config.  This setting 
-disables discovering any tickets from the network syncing, instead requiring any
- tickets to be manually added to the wallet using `addtransaction`.  This 
-feature is used by the new vspd server to avoid voting on unprocessed tickets 
-which used a vspd voting address.  The current state of this setting is 
-reported in the `walletinfo` JSON-RPC result.
-
-* The LOGFLAGS environment variable may now include a UTC flag to cause the 
-wallet to always log with UTC timestamps, regardless of the current system 
-timezone.
-
 * The `listunspent` JSON-RPC method now includes the hex encoding of a redeem 
 script when the output is P2SH and the redeem script is known.
-
-* Support for the decentralized treasury consensus change is added.  Two new 
-JSON-RPC methods `sendtotreasury` and `spendfromtreasury` are added, to send to 
-and spend from value in the treasury, respectively.  The vote version and 
-current agendas have been updated to allow stakeholders to vote on the 
-activation of the decentralized treasury.
-
-* A `sendrawtransaction` implementation has been added to the JSON-RPC server. 
-This allows arbitrary transactions to be published under SPV mode.
 
 * Accounts are now able to be encrypted using separate, per-account passphrases.
  Unlocking an account only provides access to that account's private keys, 
@@ -1118,6 +1124,10 @@ account and using private keys it should not otherwise have access to.
 * Peer-to-peer seeding is now performed over an HTTPS API rather than DNS. 
  This improves reliability (HTTPS is authenticated), as well as greater control 
 of filtering results by various URL parameters.
+
+* The LOGFLAGS environment variable may now include a UTC flag to cause the 
+wallet to always log with UTC timestamps, regardless of the current system 
+timezone.
 
 * Many log messages were added, removed, or rewritten to better reflect the 
 operational state of the application.
