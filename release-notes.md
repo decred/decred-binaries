@@ -1457,53 +1457,53 @@ Please read the [initial release (v0.1.0) notes](https://github.com/decred/dcrde
 
 - The account ID for each configured DEX server is now displayed on the settings 
 page.  When not logged in, there is a placeholder that says to login to display 
-the account ID. (https://github.com/decred/dcrdex/commit/1a5c070196ab7899214b524a9c681168fbdcfd75)
-- Focus password field in order dialogs. (https://github.com/decred/dcrdex/commit/5eb9fb2de51722158eaf1d2122c11f30154bd9b3)
-- Colorize the "Side" column in the orders table. (https://github.com/decred/dcrdex/commit/83b07cd08a8a7ecced012335092c0f196d7fcfb0)
+the account ID. ([1a5c070](https://github.com/decred/dcrdex/commit/1a5c070196ab7899214b524a9c681168fbdcfd75))
+- Focus password field in order dialogs. ([5eb9fb2](https://github.com/decred/dcrdex/commit/5eb9fb2de51722158eaf1d2122c11f30154bd9b3))
+- Colorize the "Side" column in the orders table. ([83b07cd](https://github.com/decred/dcrdex/commit/83b07cd08a8a7ecced012335092c0f196d7fcfb0))
 - The registration fee address is no longer logged if their is a funding error 
 since there is nothing a user can do with the address other than shoot their 
 self in the foot and send to it manually.  Registration fee payment should only 
-be done via the app. (https://github.com/decred/dcrdex/commit/dc67cdbb09fe6e296164da0b916ab8a1744912f6)
-- Wallet balances are updated on all wallet settings changes. (https://github.com/decred/dcrdex/commit/8ff4d943d69182b9866faf6637e9e3c17e97db69)
+be done via the app. ([dc67cdb](https://github.com/decred/dcrdex/commit/dc67cdbb09fe6e296164da0b916ab8a1744912f6))
+- Wallet balances are updated on all wallet settings changes. ([8ff4d94](https://github.com/decred/dcrdex/commit/8ff4d943d69182b9866faf6637e9e3c17e97db69))
 - Wallet sync status is more consistently checked on wallet (re)connect events, 
 and continually check sync status on RPC errors as it is common for node/wallet
  startup to initially error and then start reporting status (e.g. bitcoind's 
- "verifying blocks..." error while starting up). (https://github.com/decred/dcrdex/commit/1c9ca02db974cbd76dceac5b29a825b5cc805c84, https://github.com/decred/dcrdex/commit/53194c615ee3179c2c6ec08278a41bbd9b234634)
+ "verifying blocks..." error while starting up). ([1c9ca02](https://github.com/decred/dcrdex/commit/1c9ca02db974cbd76dceac5b29a825b5cc805c84), [53194c6](https://github.com/decred/dcrdex/commit/53194c615ee3179c2c6ec08278a41bbd9b234634))
 
 ### Fixes
 
-- Fix changing wallet settings possibly interrupting active swaps. (https://github.com/decred/dcrdex/commit/f0a304f7ea74af3ce75f3edc1cbb3f4f524f1c84)
+- Fix changing wallet settings possibly interrupting active swaps. ([f0a304f](https://github.com/decred/dcrdex/commit/f0a304f7ea74af3ce75f3edc1cbb3f4f524f1c84))
 - Fix a case where a wallet can become unlockable without restarting dexc if 
-dexc were started with both active orders and an unlocked wallet. (https://github.com/decred/dcrdex/commit/f8c47a163387b8c63201f2f9ad1053a205e6203f)
+dexc were started with both active orders and an unlocked wallet. ([f8c47a1](https://github.com/decred/dcrdex/commit/f8c47a163387b8c63201f2f9ad1053a205e6203f))
 - Fix duplicate notify_fee requests that resulted from multiple fee coin 
-waiters being created for the same coin. (https://github.com/decred/dcrdex/commit/ee1bd84c8ef6136fcbbcf764782b610d20c3540c)
+waiters being created for the same coin. ([ee1bd84](https://github.com/decred/dcrdex/commit/ee1bd84c8ef6136fcbbcf764782b610d20c3540c))
 - Fix retrieving the full list of historical orders (284681488b5812157dd8624151efc576764eb824)
-- Fix incorrect year displayed for a match's date. (https://github.com/decred/dcrdex/commit/a347b0f34d0fd143b566b59588cda4f86f1b218b)
+- Fix incorrect year displayed for a match's date. ([a347b0f](https://github.com/decred/dcrdex/commit/a347b0f34d0fd143b566b59588cda4f86f1b218b))
 - Wallet deposit addresses are validated and more often refreshed whenever the 
-wallet is connected (https://github.com/decred/dcrdex/commit/c3990c765f7a7de2017da08c29fb9fae8853a522, https://github.com/decred/dcrdex/commit/6a66a1cb7701ed6d6e7187231a46ad1f2a74a782)
+wallet is connected ([c3990c7](https://github.com/decred/dcrdex/commit/c3990c765f7a7de2017da08c29fb9fae8853a522), [6a66a1c](https://github.com/decred/dcrdex/commit/6a66a1cb7701ed6d6e7187231a46ad1f2a74a782))
 - Correctly handle chain sync status when in initial block download state, but 
 blocks are up-to-date with headers. This is only possible in practice with 
-simnet. (https://github.com/decred/dcrdex/commit/3523de11b270fed9162c0b2bd8aee2333fe2e8f6)
-- Fix DCR withdraws in various cases. (https://github.com/decred/dcrdex/commit/d0ba1e5dbcdc063c8fb4abf95725c67174868291)
+simnet. ([3523de1](https://github.com/decred/dcrdex/commit/3523de11b270fed9162c0b2bd8aee2333fe2e8f6))
+- Fix DCR withdraws in various cases. ([d0ba1e5](https://github.com/decred/dcrdex/commit/d0ba1e5dbcdc063c8fb4abf95725c67174868291))
 - Allow dexc to shutdown without hanging if a wallet was unexpectedly shutdown 
-first. (https://github.com/decred/dcrdex/commit/7321c364297b8f5c0dd85cf798902b169bd3eebf)
+first. ([7321c36](https://github.com/decred/dcrdex/commit/7321c364297b8f5c0dd85cf798902b169bd3eebf))
 - When loading active matches on login, correctly skip adding cancel order 
-matches to the trades map. (https://github.com/decred/dcrdex/commit/61697bbc4364466d9eb55763aed8e7fb849e01e0)
+matches to the trades map. ([61697bb](https://github.com/decred/dcrdex/commit/61697bbc4364466d9eb55763aed8e7fb849e01e0))
 - Prevent login while already logged in from re-creating the entries in the 
-trades map. (https://github.com/decred/dcrdex/commit/b6f81adcc9a05f4c604420b3b138f1286b25c9c7)
-- Resolve a data race on wallet reconfigure for DCR. (https://github.com/decred/dcrdex/commit/bca1325ab1ccdd21b3447571693a8212e5874e97)
-- Avoid a possible deadlock on wallet reconfigure. (https://github.com/decred/dcrdex/commit/4bed3e2f55f97cac45ca30cf7ad4faac94d20604)
+trades map. ([b6f81ad](https://github.com/decred/dcrdex/commit/b6f81adcc9a05f4c604420b3b138f1286b25c9c7))
+- Resolve a data race on wallet reconfigure for DCR. ([bca1325](https://github.com/decred/dcrdex/commit/bca1325ab1ccdd21b3447571693a8212e5874e97))
+- Avoid a possible deadlock on wallet reconfigure. ([4bed3e2](https://github.com/decred/dcrdex/commit/4bed3e2f55f97cac45ca30cf7ad4faac94d20604))
 
 ## Developer
 
 - Simnet harnesses are quicker to start, being based on archives, and more well 
-funded. (https://github.com/decred/dcrdex/commit/0de89456c129bc39a200e816fb660f216a7d41e2)
+funded. ([0de8945](https://github.com/decred/dcrdex/commit/0de89456c129bc39a200e816fb660f216a7d41e2))
 - Update simnet trade tests for current wallet unlocking system and more well 
-funded harnesses. (https://github.com/decred/dcrdex/commit/e198b1f095be8cad51c8e49604c873ed2ac4f02d)
+funded harnesses. ([e198b1f](https://github.com/decred/dcrdex/commit/e198b1f095be8cad51c8e49604c873ed2ac4f02d))
 
 ## Server (dcrdex)
 
-Create a fee rate scaling administrative endpoint. (https://github.com/decred/dcrdex/commit/7a3f18313a34a5945c064a06a1b85bfdc07b0dd4)
+Create a fee rate scaling administrative endpoint. ([7a3f183](https://github.com/decred/dcrdex/commit/7a3f18313a34a5945c064a06a1b85bfdc07b0dd4))
 The endpoint is `api/asset/{sym}/setfeescale/{scale}`, using a GET request 
 instead of POST for convenience.
 
@@ -1539,15 +1539,15 @@ Please read the [initial release (v0.1.0) notes](https://github.com/decred/dcrde
 
 ### Fixes
 
-- Eliminate a possible deadlock (hang) introduced in v0.1.2. (https://github.com/decred/dcrdex/commit/65c98309370779e747d676b2c29020610645284d)
+- Eliminate a possible deadlock (hang) introduced in v0.1.2. ([65c9830](https://github.com/decred/dcrdex/commit/65c98309370779e747d676b2c29020610645284d))
 - Fix the client's validation of the server's deterministic epoch matching 
 result.  This avoids an error message in the logs, but the bug was otherwise 
-not a problem. (https://github.com/decred/dcrdex/commit/10b4689ae9a1118f94747951fd3ac444e490faab)
+not a problem. ([10b4689](https://github.com/decred/dcrdex/commit/10b4689ae9a1118f94747951fd3ac444e490faab))
 
 ### Other
 
 The location of the dexcctl.conf file is now in ~/.dexcctl instead of ~/.dexc 
-(or the corresponding "appdata" folders on Windows and macOS)  (https://github.com/decred/dcrdex/commit/16a0fb003e2eca51fd2c29b938b0ec9bf681f7e5)
+(or the corresponding "appdata" folders on Windows and macOS)  ([16a0fb0](https://github.com/decred/dcrdex/commit/16a0fb003e2eca51fd2c29b938b0ec9bf681f7e5))
 
 ## Server (dcrdex)
 
@@ -1582,23 +1582,23 @@ Please read the [initial release (v0.1.0) notes](https://github.com/decred/dcrde
 
 - When already logged in, automatically attempt to unlock wallets as needed for
 trades.  This helps prevent users from breaking their swaps by accidentally 
-locking their wallets. (https://github.com/decred/dcrdex/commit/de409134c37270145dc7094e89d6ef9d8e2d1f74)
-- Display cancel order matches differently from trade matches. (https://github.com/decred/dcrdex/commit/b01358159eeb7cbe5024f58f035306e98bb0a2f8)
+locking their wallets. ([de40913](https://github.com/decred/dcrdex/commit/de409134c37270145dc7094e89d6ef9d8e2d1f74))
+- Display cancel order matches differently from trade matches. ([b013581](https://github.com/decred/dcrdex/commit/b01358159eeb7cbe5024f58f035306e98bb0a2f8))
 
 #### Developer
 
 - Create a `Ready` method so consumer packages know when the client core is 
-done starting up.  (https://github.com/decred/dcrdex/commit/c3d9e80602e9cad8cc7ebc80e2d7e96a2257d3ab)
+done starting up.  ([c3d9e80](https://github.com/decred/dcrdex/commit/c3d9e80602e9cad8cc7ebc80e2d7e96a2257d3ab))
 - Increase notification channel capacity to prevent dropped notifications when 
-there are many simultaneous events. (https://github.com/decred/dcrdex/commit/2de62a378d8b964c6ff2a485ca907b0b1c2b7ac4)
-- Remove the obsolete (and incomplete) terminal UI.  (https://github.com/decred/dcrdex/commit/75ff8d09f6f5f898dfd23ebbacbb7a3f1d2e473f)
+there are many simultaneous events. ([2de62a3](https://github.com/decred/dcrdex/commit/2de62a378d8b964c6ff2a485ca907b0b1c2b7ac4))
+- Remove the obsolete (and incomplete) terminal UI.  ([75ff8d0](https://github.com/decred/dcrdex/commit/75ff8d09f6f5f898dfd23ebbacbb7a3f1d2e473f))
 
 ### Fixes
 
-- Workaround for 64-bit atomic variable access on 32-bit platforms. (https://github.com/decred/dcrdex/commit/3abaf434a3da3603916969f7af4b0c487b76b149)
+- Workaround for 64-bit atomic variable access on 32-bit platforms. ([3abaf43](https://github.com/decred/dcrdex/commit/3abaf434a3da3603916969f7af4b0c487b76b149))
 - Prevent contract auditing from blocking incoming messages.  Continue to 
 search for counterparty contracts until it succeeds or the match is revoked, 
-and log a warning of the audit is taking a long time. (https://github.com/decred/dcrdex/commit/23f2f362486141419d4a321674229f3716fd4faf)
+and log a warning of the audit is taking a long time. ([23f2f36](https://github.com/decred/dcrdex/commit/23f2f362486141419d4a321674229f3716fd4faf))
 
 ## Server (dcrdex)
 
@@ -1630,41 +1630,41 @@ Please read the [initial release (v0.1.0) notes](https://github.com/decred/dcrde
 
 ### Features and Improvements 
 
-- Add the mainnet ["client quick start" guide](https://github.com/decred/dcrdex#client-quick-start-installation). (https://github.com/decred/dcrdex/commit/a383d5e76d2de90969f4eaf372084d290a051032)
-- Tor support for connections with DEX servers. (https://github.com/decred/dcrdex/commit/824f1c0da0b17afcab271c60665be6f8da3d6025) **WARNING**: This should be used with caution since Tor is slow and unreliable.
+- Add the mainnet ["client quick start" guide](https://github.com/decred/dcrdex#client-quick-start-installation). ([a383d5e](https://github.com/decred/dcrdex/commit/a383d5e76d2de90969f4eaf372084d290a051032))
+- Tor support for connections with DEX servers. ([824f1c0](https://github.com/decred/dcrdex/commit/824f1c0da0b17afcab271c60665be6f8da3d6025)) **WARNING**: This should be used with caution since Tor is slow and unreliable.
 - On dexc start-up, display a link (URL) to the browser page, and if there are 
-active orders, warn the user. (https://github.com/decred/dcrdex/commit/a01e403d09c491765d71ac34fc2d60b7898c3596)
-- Add the ability to generate new deposit addresses. (https://github.com/decred/dcrdex/commit/860af3e19b49db9fb6b68016e894edd71361db3d)
+active orders, warn the user. ([a01e403](https://github.com/decred/dcrdex/commit/a01e403d09c491765d71ac34fc2d60b7898c3596))
+- Add the ability to generate new deposit addresses. ([860af3e](https://github.com/decred/dcrdex/commit/860af3e19b49db9fb6b68016e894edd71361db3d))
 - Various browser UI improvements, including order dialog wording and button 
-formatting. (https://github.com/decred/dcrdex/commit/dbf9d2c1f7c4644530b8a91f407818d4f435aa7b)
-- Dialogs now have a close/cancel button. (https://github.com/decred/dcrdex/commit/6716b58c87933e71661f922d8cd2f479e6851a0d)
+formatting. ([dbf9d2c](https://github.com/decred/dcrdex/commit/dbf9d2c1f7c4644530b8a91f407818d4f435aa7b))
+- Dialogs now have a close/cancel button. ([6716b58](https://github.com/decred/dcrdex/commit/6716b58c87933e71661f922d8cd2f479e6851a0d))
 - Taker redemption transactions are more readily batched, potentially requiring 
-fewer transactions for a taker order that matches with multiple maker orders. (https://github.com/decred/dcrdex/commit/3ea75a91d8e6935ad2cde128190042bde24f1e1d)
+fewer transactions for a taker order that matches with multiple maker orders. ([3ea75a9](https://github.com/decred/dcrdex/commit/3ea75a91d8e6935ad2cde128190042bde24f1e1d))
 - When any node (e.g. bitcoind and dcrd) is still synchronizing with the 
-network, new orders cannot be placed. (https://github.com/decred/dcrdex/commit/2cac73a6655550d3cdd02ca2591844988e8126e7)
+network, new orders cannot be placed. ([2cac73a](https://github.com/decred/dcrdex/commit/2cac73a6655550d3cdd02ca2591844988e8126e7))
 
 ### Fixes
 
 - Match recover is more robust, with fixes to revoked match handling on 
-reconnect or restart. (https://github.com/decred/dcrdex/commit/9790fb1cfb6e7ed7ffadc4624979ca57341d2ca0)
-- Resolve a potential deadlock during match status resolution, (https://github.com/decred/dcrdex/commit/c09017d8170602bfae4fc2e34edd5ccfee34127e)
+reconnect or restart. ([9790fb1](https://github.com/decred/dcrdex/commit/9790fb1cfb6e7ed7ffadc4624979ca57341d2ca0))
+- Resolve a potential deadlock during match status resolution, ([c09017d](https://github.com/decred/dcrdex/commit/c09017d8170602bfae4fc2e34edd5ccfee34127e))
 - Explicitly set js Content-Type in webserver to workaround misconfigured 
-operating systems, such as Windows with misconfigured CLASSES_ROOT registry entries. (https://github.com/decred/dcrdex/commit/f6328937f815f210daf4d910cb4722205ddf6e79)
-- Delete obsolete notifications on frontend. (https://github.com/decred/dcrdex/commit/8a69e991b518170eacc23d99eb8e1629ce7517d4)
+operating systems, such as Windows with misconfigured CLASSES_ROOT registry entries. ([f632893](https://github.com/decred/dcrdex/commit/f6328937f815f210daf4d910cb4722205ddf6e79))
+- Delete obsolete notifications on frontend. ([8a69e99](https://github.com/decred/dcrdex/commit/8a69e991b518170eacc23d99eb8e1629ce7517d4))
 - Avoid harmless but confusing warnings about returning zero coins when 
-resumed trades are later completed. (https://github.com/decred/dcrdex/commit/a01e403d09c491765d71ac34fc2d60b7898c3596)
+resumed trades are later completed. ([a01e403](https://github.com/decred/dcrdex/commit/a01e403d09c491765d71ac34fc2d60b7898c3596))
 - Avoid redundant swap negotiation invocations on restart with unknown matches 
-reported from a server. (https://github.com/decred/dcrdex/commit/c0adb2659fe4ab341fc75b995c261b2cee029675)
+reported from a server. ([c0adb26](https://github.com/decred/dcrdex/commit/c0adb2659fe4ab341fc75b995c261b2cee029675))
 - Orphaned cancel orders that could be created in certain circumstances are now 
-retired during status resolution of the linked trade. (https://github.com/decred/dcrdex/commit/867ba894b6da4f6cda16ba4c371eb2436cc4d977)
+retired during status resolution of the linked trade. ([867ba89](https://github.com/decred/dcrdex/commit/867ba894b6da4f6cda16ba4c371eb2436cc4d977))
 
 ## Server (dcrdex)
 
-- Fix book purge heap orientation. (https://github.com/decred/dcrdex/commit/eb6ccd464af474c4d7b506ee465a66e1f69f534f)
+- Fix book purge heap orientation. ([eb6ccd4](https://github.com/decred/dcrdex/commit/eb6ccd464af474c4d7b506ee465a66e1f69f534f))
 - Avoid orphaned epoch status orders when shutting down via SIGINT *without* a 
-preceding suspend command. (https://github.com/decred/dcrdex/commit/d4634395495f25b92cdc935fb7a72f311d23d118)
+preceding suspend command. ([d463439](https://github.com/decred/dcrdex/commit/d4634395495f25b92cdc935fb7a72f311d23d118))
 - When any node (e.g. bitcoind and dcrd) is still synchronizing with the 
-network, relevant markets will not accept new orders. (https://github.com/decred/dcrdex/commit/2cac73a6655550d3cdd02ca2591844988e8126e7)
+network, relevant markets will not accept new orders. ([2cac73a](https://github.com/decred/dcrdex/commit/2cac73a6655550d3cdd02ca2591844988e8126e7))
 
 ## Code Summary
 
