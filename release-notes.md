@@ -1,4 +1,4 @@
-## 2021-01-25
+# 2021-01-25
 
 
 ## Install
@@ -287,7 +287,7 @@ files changed, 63090 additional lines of code, and 26279 deleted lines of code.
 All commits since the last release may be viewed on GitHub
 [here](https://github.com/decred/dcrd/compare/release-v1.5.2...release-v1.6.0).
 
-### Protocol and network:
+### Protocol and Network
 
 - chaincfg: Add checkpoints for upcoming release ([decred/dcrd#2370](https://github.com/decred/dcrd/pull/2370))
 - multi: Introduce initial sync min known chain work ([decred/dcrd#2000](https://github.com/decred/dcrd/pull/2000))
@@ -327,7 +327,7 @@ All commits since the last release may be viewed on GitHub
 - server: return whether addBanScore disconnected the peer ([decred/dcrd#2253](https://github.com/decred/dcrd/pull/2253))
 - blockchain: Whitelist DCP0005 violations ([decred/dcrd#2533](https://github.com/decred/dcrd/pull/2533))
 
-### Transaction relay (memory pool):
+### Transaction Relay (Memory Pool)
 
 - mempool: Implement orphan expiration ([decred/dcrd#1974](https://github.com/decred/dcrd/pull/1974))
 - mempool: Associated tag with orphan txns ([decred/dcrd#1982](https://github.com/decred/dcrd/pull/1982))
@@ -345,7 +345,7 @@ All commits since the last release may be viewed on GitHub
 - mempool: Allow treasury txn vers as standard ([decred/dcrd#2412](https://github.com/decred/dcrd/pull/2412))
 - mempool: Limit ancestor tracking in mempool ([decred/dcrd#2468](https://github.com/decred/dcrd/pull/2468))
 
-### Mining:
+### Mining
 
 - mining: Introduce PriorityInputser interface ([decred/dcrd#1966](https://github.com/decred/dcrd/pull/1966))
 - mining: Correct priority calcs for Decred sizes ([decred/dcrd#1967](https://github.com/decred/dcrd/pull/1967))
@@ -366,7 +366,7 @@ All commits since the last release may be viewed on GitHub
 - multi: add rpcserver.CPUMiner ([decred/dcrd#2286](https://github.com/decred/dcrd/pull/2286))
 - mining: Prevent panic in child prio item handling ([decred/dcrd#2435](https://github.com/decred/dcrd/pull/2435))
 
-### RPC:
+### RPC
 
 - rpcserver: decouple from server ([decred/dcrd#1730](https://github.com/decred/dcrd/pull/1730))
 - rpcserver: refactor listener logic to server ([decred/dcrd#1734](https://github.com/decred/dcrd/pull/1734))
@@ -436,24 +436,24 @@ All commits since the last release may be viewed on GitHub
 - multi: Add tx inputs treasuryspend RPC support ([decred/dcrd#2472](https://github.com/decred/dcrd/pull/2472))
 - rpcserver: Fix count tspend votes in mined block ([decred/dcrd#2565](https://github.com/decred/dcrd/pull/2565))
 
-### dcrd command-line flags and configuration:
+### dcrd Command-line Flags and Configuration
 
 - server: Add tlscurve config parameter ([decred/dcrd#1983](https://github.com/decred/dcrd/pull/1983))
 - config: Add flag to allow unsynced testnet mining ([decred/dcrd#2023](https://github.com/decred/dcrd/pull/2023))
 - config: add --dialtimeout defaulting to 30 seconds ([decred/dcrd#2068](https://github.com/decred/dcrd/pull/2068))
 - multi: add --peeridletimeout defaulting to 120s ([decred/dcrd#2067](https://github.com/decred/dcrd/pull/2067))
 
-### gencerts utility changes:
+### gencerts Utility Changes
 
 - gencerts: Rewrite for additional use cases ([decred/dcrd#2425](https://github.com/decred/dcrd/pull/2425))
 - gencerts: Add missing newline for unknown algorithm error ([decred/dcrd#2427](https://github.com/decred/dcrd/pull/2427))
 - gencerts: Use the P-256 curve by default ([decred/dcrd#2461](https://github.com/decred/dcrd/pull/2461))
 
-### dcrctl utility changes:
+### dcrctl Utility Changes
 
 - multi: Split dcrctl to own repo and update docs ([decred/dcrd#2175](https://github.com/decred/dcrd/pull/2175))
 
-### Documentation:
+### Documentation
 
 - rpcserver: Refactor and update documentation ([decred/dcrd#2066](https://github.com/decred/dcrd/pull/2066))
 - multi: replace godoc.org with pkg.go.dev ([decred/dcrd#2091](https://github.com/decred/dcrd/pull/2091))
@@ -509,7 +509,7 @@ All commits since the last release may be viewed on GitHub
 - docs: Update several JSON-RPC APIs ([decred/dcrd#2470](https://github.com/decred/dcrd/pull/2470))
 - docs: Update several JSON-RPC APIs ([decred/dcrd#2472](https://github.com/decred/dcrd/pull/2472))
 
-### Developer-related package and module changes:
+### Developer-related Package and Module Changes
 
 - blockmanager: remove serverPeer from blockmanager completely ([decred/dcrd#1735](https://github.com/decred/dcrd/pull/1735))
 - txscript: Add signature type to KeyClosure API ([decred/dcrd#1961](https://github.com/decred/dcrd/pull/1961))
@@ -749,7 +749,7 @@ All commits since the last release may be viewed on GitHub
 - blockchain: Handle db upgrade paths for ver < 5 ([decred/dcrd#2449](https://github.com/decred/dcrd/pull/2449))
 - blockchain: No context dep checks for orphans ([decred/dcrd#2474](https://github.com/decred/dcrd/pull/2474))
 
-### Developer-related module management:
+### Developer-related Module Management
 
 - mining: Start v3 module dev cycle ([decred/dcrd#1955](https://github.com/decred/dcrd/pull/1955))
 - dcrutil: Start v3 module dev cycle ([decred/dcrd#1956](https://github.com/decred/dcrd/pull/1956))
@@ -813,7 +813,160 @@ All commits since the last release may be viewed on GitHub
 - rpcclient: Prepare v6.0.1 ([decred/dcrd#2455](https://github.com/decred/dcrd/pull/2455))
 - main: Update to use all new module versions ([decred/dcrd#2426](https://github.com/decred/dcrd/pull/2426))
 - main: Remove module replacements ([decred/dcrd#2428](https://github.com/decred/dcrd/pull/2428))
-- main: Use backported module up
+- main: Use backported module updates ([decred/dcrd#2456](https://github.com/decred/dcrd/pull/2456))
+
+### Testing and Quality Assurance
+
+- build: update golangci-lint to v1.21.0 ([decred/dcrd#1951](https://github.com/decred/dcrd/pull/1951))
+- mining: Add priority calculation tests ([decred/dcrd#1967](https://github.com/decred/dcrd/pull/1967))
+- build: Add deadcode to linters for CI tests ([decred/dcrd#1993](https://github.com/decred/dcrd/pull/1993))
+- multi: Updates for staticcheck results ([decred/dcrd#1994](https://github.com/decred/dcrd/pull/1994))
+- blockchain: Separate processing order tests ([decred/dcrd#2004](https://github.com/decred/dcrd/pull/2004))
+- blockchain: Add benchmark for ancestor traversal ([decred/dcrd#2010](https://github.com/decred/dcrd/pull/2010))
+- multi: Address a bunch of lint issues ([decred/dcrd#2028](https://github.com/decred/dcrd/pull/2028))
+- build: golangci-lint v1.22.2 ([decred/dcrd#2029](https://github.com/decred/dcrd/pull/2029))
+- secpk256k1: Add benchmark for RFC6979 nonce gen ([decred/dcrd#2044](https://github.com/decred/dcrd/pull/2044))
+- secp256k1: Cleanup signature tests ([decred/dcrd#2048](https://github.com/decred/dcrd/pull/2048))
+- rpctest: adapt new API ([decred/dcrd#1980](https://github.com/decred/dcrd/pull/1980))
+- rpcserver: Add handlers test ([decred/dcrd#2066](https://github.com/decred/dcrd/pull/2066))
+- build: use golangci v1.23.6 ([decred/dcrd#2068](https://github.com/decred/dcrd/pull/2068))
+- rpctest: Update for hdkeychain API changes ([decred/dcrd#2092](https://github.com/decred/dcrd/pull/2092))
+- build: test against go 1.14 ([decred/dcrd#2092](https://github.com/decred/dcrd/pull/2092))
+- secp256k1: Add benchmark for signing ([decred/dcrd#2085](https://github.com/decred/dcrd/pull/2085))
+- seck256k1: Add benchmark for sig serialization ([decred/dcrd#2087](https://github.com/decred/dcrd/pull/2087))
+- secp256k1: Add benchmark for pubkey decompression ([decred/dcrd#2094](https://github.com/decred/dcrd/pull/2094))
+- secp256k1: Move sig benchmarks to separate file ([decred/dcrd#2095](https://github.com/decred/dcrd/pull/2095))
+- secp256k1: Add benchmark for SignCompact ([decred/dcrd#2095](https://github.com/decred/dcrd/pull/2095))
+- secp256k1: Add benchmark for RecoverCompact ([decred/dcrd#2095](https://github.com/decred/dcrd/pull/2095))
+- secp256k1: Rework DER sig parsing tests ([decred/dcrd#2109](https://github.com/decred/dcrd/pull/2109))
+- schnorr: Cleanup signature benchmarking ([decred/dcrd#2126](https://github.com/decred/dcrd/pull/2126))
+- schnorr: Rework signing tests ([decred/dcrd#2128](https://github.com/decred/dcrd/pull/2128))
+- secp256k1: Make field value tests more consistent ([decred/dcrd#2134](https://github.com/decred/dcrd/pull/2134))
+- secp256k1: Move field val set hex to test file ([decred/dcrd#2134](https://github.com/decred/dcrd/pull/2134))
+- schnorr: Add negative tests for sig verification ([decred/dcrd#2145](https://github.com/decred/dcrd/pull/2145))
+- hdkeychain: Add child key with leading zeros test ([decred/dcrd#2155](https://github.com/decred/dcrd/pull/2155))
+- schnorr: Add benchmark for Signature.Serialize ([decred/dcrd#2158](https://github.com/decred/dcrd/pull/2158))
+- secp256k1: Rework pubkey tests ([decred/dcrd#2160](https://github.com/decred/dcrd/pull/2160))
+- secp256k1: Explicit pubkey parsing errors in tests ([decred/dcrd#2160](https://github.com/decred/dcrd/pull/2160))
+- secp256k1: Add compressed pubkey parse benchmark ([decred/dcrd#2167](https://github.com/decred/dcrd/pull/2167))
+- secp256k1: Add uncompressed pubkey parse benchmark ([decred/dcrd#2167](https://github.com/decred/dcrd/pull/2167))
+- build: use newer github and linter versions ([decred/dcrd#2182](https://github.com/decred/dcrd/pull/2182))
+- wire: Test no-relay case in TestVersionWire ([decred/dcrd#2184](https://github.com/decred/dcrd/pull/2184))
+- wire: Use new errors.Is capabilities in tests ([decred/dcrd#2183](https://github.com/decred/dcrd/pull/2183))
+- connmgr: Add test for dial timeout ([decred/dcrd#2189](https://github.com/decred/dcrd/pull/2189))
+- connmgr: Add test for connect context cancel ([decred/dcrd#2189](https://github.com/decred/dcrd/pull/2189))
+- connmgr: Refactor conn req ID/state test asserts ([decred/dcrd#2192](https://github.com/decred/dcrd/pull/2192))
+- connmgr: Update tests to ensure clean shutdown ([decred/dcrd#2192](https://github.com/decred/dcrd/pull/2192))
+- connmgr: Improve TestConnectMode robustness ([decred/dcrd#2192](https://github.com/decred/dcrd/pull/2192))
+- connmgr: Increase timeout in TestTargetOutbound ([decred/dcrd#2192](https://github.com/decred/dcrd/pull/2192))
+- connmgr: Shore up TestMaxRetryDuration ([decred/dcrd#2192](https://github.com/decred/dcrd/pull/2192))
+- connmgr: Tighten TestNetworkFailure ([decred/dcrd#2192](https://github.com/decred/dcrd/pull/2192))
+- connmgr: Tighten TestStopFailed ([decred/dcrd#2192](https://github.com/decred/dcrd/pull/2192))
+- connmgr: Tighten TestRemovePendingConnection ([decred/dcrd#2192](https://github.com/decred/dcrd/pull/2192))
+- connmgr: Cleanup TestCancelIgnoreDelayedConnection ([decred/dcrd#2192](https://github.com/decred/dcrd/pull/2192))
+- server: Actively prevent regnet network discovery ([decred/dcrd#2197](https://github.com/decred/dcrd/pull/2197))
+- Add debug and trace facility to rpctest ([decred/dcrd#2176](https://github.com/decred/dcrd/pull/2176))
+- build: use golangci-lint v1.27.0 ([decred/dcrd#2207](https://github.com/decred/dcrd/pull/2207))
+- rpcserver: Add handler test coverage ([decred/dcrd#2230](https://github.com/decred/dcrd/pull/2230))
+- rpcserver: Add handleDecodeScript test ([decred/dcrd#2238](https://github.com/decred/dcrd/pull/2238))
+- txscript: Add tests for new strict null data func ([decred/dcrd#2248](https://github.com/decred/dcrd/pull/2248))
+- rpcserver: Add default configs for tests ([decred/dcrd#2249](https://github.com/decred/dcrd/pull/2249))
+- txscript: Rework check signature encoding test ([decred/dcrd#2244](https://github.com/decred/dcrd/pull/2244))
+- rpcserver: Add tests for block related handlers ([decred/dcrd#2250](https://github.com/decred/dcrd/pull/2250))
+- txscript: Rework check pubkey encoding test ([decred/dcrd#2247](https://github.com/decred/dcrd/pull/2247))
+- txscript: Add benchmark for CheckSignatureEncoding ([decred/dcrd#2246](https://github.com/decred/dcrd/pull/2246))
+- connmgr: Use t.Fatal when there are no params ([decred/dcrd#2254](https://github.com/decred/dcrd/pull/2254))
+- rpcserver: Rework default configs for tests ([decred/dcrd#2257](https://github.com/decred/dcrd/pull/2257))
+- rpcserver: Update tests to use default configs ([decred/dcrd#2257](https://github.com/decred/dcrd/pull/2257))
+- rpcserver: Run tests in parallel ([decred/dcrd#2257](https://github.com/decred/dcrd/pull/2257))
+- rpcserver: Update error case handling in tests ([decred/dcrd#2257](https://github.com/decred/dcrd/pull/2257))
+- rpcserver: Add handleEstimateSmartFee test ([decred/dcrd#2255](https://github.com/decred/dcrd/pull/2255))
+- rpcserver: Add handleEstimateStakeDiff test ([decred/dcrd#2269](https://github.com/decred/dcrd/pull/2269))
+- rpcserver: Add handleGetTicketPoolValue test ([decred/dcrd#2272](https://github.com/decred/dcrd/pull/2272))
+- rpcserver: Add handleGetStakeVersions test ([decred/dcrd#2272](https://github.com/decred/dcrd/pull/2272))
+- rpcserver: Add handleGetStakeVersionInfo test ([decred/dcrd#2272](https://github.com/decred/dcrd/pull/2272))
+- mempool: Don't use deprecated reject code in tests ([decred/dcrd#2273](https://github.com/decred/dcrd/pull/2273))
+- build: golangci-lint v1.28.3 ([decred/dcrd#2266](https://github.com/decred/dcrd/pull/2266))
+- rpcserver: add missed and live tickets rpc tests ([decred/dcrd#2284](https://github.com/decred/dcrd/pull/2284))
+- rpcserver: add verifychain & getdifficulty tests ([decred/dcrd#2285](https://github.com/decred/dcrd/pull/2285))
+- multi: add BlockTemplater interface ([decred/dcrd#2292](https://github.com/decred/dcrd/pull/2292))
+- multi: add rpcCPUMiner adaptor ([decred/dcrd#2300](https://github.com/decred/dcrd/pull/2300))
+- connmgr: Improve dial timeout test synchronization ([decred/dcrd#2309](https://github.com/decred/dcrd/pull/2309))
+- rpcserver: Add handleGetCFilter tests ([decred/dcrd#2312](https://github.com/decred/dcrd/pull/2312))
+- rpcserver: Add handleGetCFilterHeader tests ([decred/dcrd#2312](https://github.com/decred/dcrd/pull/2312))
+- rpcserver: Add handleGetCFilterV2 tests ([decred/dcrd#2312](https://github.com/decred/dcrd/pull/2312))
+- rpcserver: Add handleExistsAddress test ([decred/dcrd#2291](https://github.com/decred/dcrd/pull/2291))
+- rpcserver: Add handleExistsAddresses test ([decred/dcrd#2291](https://github.com/decred/dcrd/pull/2291))
+- contrib: Respect quoted args in simnet ctl scripts ([decred/dcrd#2322](https://github.com/decred/dcrd/pull/2322))
+- contrib: Support MSYS2 in simnet setup script ([decred/dcrd#2323](https://github.com/decred/dcrd/pull/2323))
+- multi: add getwork tests ([decred/dcrd#2306](https://github.com/decred/dcrd/pull/2306))
+- rpcserver: add setgenerate & regentemplate tests ([decred/dcrd#2308](https://github.com/decred/dcrd/pull/2308))
+- rpcserver: Add TxMempooler interface ([decred/dcrd#2324](https://github.com/decred/dcrd/pull/2324))
+- rpcserver: Add handleExistsMempoolTxs test ([decred/dcrd#2324](https://github.com/decred/dcrd/pull/2324))
+- contrib: Update simnet script for dcrwallet master ([decred/dcrd#2327](https://github.com/decred/dcrd/pull/2327))
+- contrib: Support env var in simnet setup script ([decred/dcrd#2328](https://github.com/decred/dcrd/pull/2328))
+- contrib: Use var for simnet wallet create answers ([decred/dcrd#2328](https://github.com/decred/dcrd/pull/2328))
+- contrib: Update simnet script for wallet cointype ([decred/dcrd#2333](https://github.com/decred/dcrd/pull/2333))
+- build: test against go 1.15 ([decred/dcrd#2334](https://github.com/decred/dcrd/pull/2334))
+- blockchain: Add test func to remove deployment ([decred/dcrd#2343](https://github.com/decred/dcrd/pull/2343))
+- rpcserver: Add AddrIndexer interface ([decred/dcrd#2330](https://github.com/decred/dcrd/pull/2330))
+- rpcserver: Add TxIndexer interface ([decred/dcrd#2330](https://github.com/decred/dcrd/pull/2330))
+- rpcserver: Add testDB and testDatabaseTx ([decred/dcrd#2330](https://github.com/decred/dcrd/pull/2330))
+- rpcserver: Add handleSearchRawTransactions tests ([decred/dcrd#2330](https://github.com/decred/dcrd/pull/2330))
+- rpcserver: Add handleGenerate test ([decred/dcrd#2342](https://github.com/decred/dcrd/pull/2342))
+- mempool: Add TAdd Tests ([decred/dcrd#2350](https://github.com/decred/dcrd/pull/2350))
+- mempool: Improve tspend expiry handling and tests ([decred/dcrd#2350](https://github.com/decred/dcrd/pull/2350))
+- rpcserver: Verify tbase values in treasury rpctest ([decred/dcrd#2352](https://github.com/decred/dcrd/pull/2352))
+- rpctest: Add ability to limit VotingWallet votes ([decred/dcrd#2352](https://github.com/decred/dcrd/pull/2352))
+- rpcserver: Assert vote counts in treasury rpctest ([decred/dcrd#2351](https://github.com/decred/dcrd/pull/2351))
+- rpctest: Make votingwallet txs standard ([decred/dcrd#2373](https://github.com/decred/dcrd/pull/2373))
+- dcrutil: Cleanup verify tests and use mock params ([decred/dcrd#2382](https://github.com/decred/dcrd/pull/2382))
+- standalone: Add IsTreasuryVoteInterval tests ([decred/dcrd#2394](https://github.com/decred/dcrd/pull/2394))
+- standalone: Rework and add CalcTSpendExpiry tests ([decred/dcrd#2394](https://github.com/decred/dcrd/pull/2394))
+- standalone: Add InsideTSpendWindow tests ([decred/dcrd#2394](https://github.com/decred/dcrd/pull/2394))
+- standalone: Add IsTreasuryBase tests ([decred/dcrd#2394](https://github.com/decred/dcrd/pull/2394))
+- chaingen: implement DCP0001 for generator ([decred/dcrd#2329](https://github.com/decred/dcrd/pull/2329))
+- blockchain: Add chaingen harness AdvanceToHeight ([decred/dcrd#2090](https://github.com/decred/dcrd/pull/2090))
+- blockchain: Rework AdvanceToHeight ([decred/dcrd#2090](https://github.com/decred/dcrd/pull/2090))
+- rpcserver: Add --rejectnonstd to rpctest ([decred/dcrd#2415](https://github.com/decred/dcrd/pull/2415))
+
+### Misc
+
+- release: Bump for 1.6 release cycle ([decred/dcrd#1948](https://github.com/decred/dcrd/pull/1948))
+- multi: resolve todos ([decred/dcrd#1869](https://github.com/decred/dcrd/pull/1869))
+- multi: remove whitespace ([decred/dcrd#2009](https://github.com/decred/dcrd/pull/2009))
+- release: Add example OpenBSD rc.d service script ([decred/dcrd#2030](https://github.com/decred/dcrd/pull/2030))
+- release: Remove build metadata from master branch ([decred/dcrd#2053](https://github.com/decred/dcrd/pull/2053))
+- secp256k1: Improve NonceRFC6979 comment ([decred/dcrd#2044](https://github.com/decred/dcrd/pull/2044))
+- secp256k1: Correct comments in signature.go ([decred/dcrd#2046](https://github.com/decred/dcrd/pull/2046))
+- multi: Resolve go1.15 vet complaints ([decred/dcrd#2310](https://github.com/decred/dcrd/pull/2310))
+- multi: Address some linter complaints ([decred/dcrd#2399](https://github.com/decred/dcrd/pull/2399))
+- build: bump golangci-lint to 1.24.0 ([decred/dcrd#2141](https://github.com/decred/dcrd/pull/2141))
+- main: Simplify startup logic slightly ([decred/dcrd#2293](https://github.com/decred/dcrd/pull/2293))
+- docker: Update image to golang:1.14 ([decred/dcrd#2202](https://github.com/decred/dcrd/pull/2202))
+- release: Remove no longer used release bits ([decred/dcrd#2317](https://github.com/decred/dcrd/pull/2317))
+- docker: Update image to golang:1.15 ([decred/dcrd#2335](https://github.com/decred/dcrd/pull/2335))
+- release: Bump for 1.6.0 ([decred/dcrd#2340](https://github.com/decred/dcrd/pull/2340))
+
+### Code Contributors (Alphabetical Order)
+
+- Brian Stafford
+- Dave Collins
+- David Hill
+- degeri
+- Donald Adu-Poku
+- Jamie Holdstock
+- Joe Gruffins
+- Josh Rickmar
+- Julian Yap
+- Marco Peereboom
+- Matheus Degiovani
+- Matt Hawkins
+- Ryan Riley
+- Ryan Staudt
+- Wisdom Arerosuoghene
+- Youssef Boukenken
+- zhizhongzhiwai
 
 
 # dcrwallet v1.6.0
@@ -825,86 +978,53 @@ viable.
 
 A comprehensive list of improvements and bug fixes follows.
 
-## New features
+## New Features
 
-* The `WalletService.PurchaseTickets` gRPC method gained a `dont_sign_tx` 
-parameter to support unsigned ticket purchasing and eventual hardware wallet 
-signing.
+### Decentralized Treasury
 
-* An `AccountMixerService` was added to the gRPC server to perform CoinShuffle++
- mixing on all funds received by an account.
+* Support for the decentralized treasury consensus change is added.  Two new 
+JSON-RPC methods `sendtotreasury` and `spendfromtreasury` are added, to send to 
+and spend from value in the treasury, respectively.  The vote version and 
+current agendas have been updated to allow stakeholders to vote on the 
+activation of the decentralized treasury.
 
-* A `createsignature` JSON-RPC method was introduced, analogous to the gRPC 
-`WalletService.CreateSignature` method.
-
-* A `discoverusage` JSON-RPC method was introduced, which triggers the same 
-address and account discovery as performed on startup when there are new blocks
- available.  However, this method is more general purpose and is useful when 
- correcting issues with prior discoveries, at it allows specifying the exact 
- starting blocks and a BIP0044 gap limit to use.
-
-* A `WalletService.SignHashes` gRPC method was added to sign an arbitrary number
- of 32-byte hashes.  This method was used by the now-defunct TumbleBit 
- implementation.
-
-* A `WalletService.Spender` gRPC method was added to query the transaction and 
-input index which spends a wallet output.
+### SPV Mode
 
 * Version 2 committed filters are now used, rather than the previous version 1 
 filters.  These filters are consensus validated by proof-of-work miners as part 
-of the commitments in the block header.  Version 2 filters are smaller and also
- do not require knowledge of the exact outputs spent, but rather only the 
- previous output script (or address).
-
-* The `WalletService.TransactionNotifications` gRPC method now provides more 
-details about the block headers which were detached during a reorganize, rather 
-than only their hashes.
+of the commitments in the block header.  Version 2 filters are smaller and also 
+do not require knowledge of the exact outputs spent, but rather only the 
+previous output script (or address).
 
 * The `fundrawtransaction` JSON-RPC method is now directly implemented by 
-dcrwallet, rather than delegating this method to dcrd through RPC passthrough.  
-This allows the method to be usable under SPV mode.
-
-* An `addtransaction` JSON-RPC method was added, allowing transactions to be 
-manually added to the wallet, mined in a specified block, without discovering 
-the transaction through the network.
-
-* The `stakepooluserinfo` JSON-RPC method has been reintroduced, after being 
-removed from prior releases.  This is used by the new vspd server.
-
-* Vote preferences may now be specified on a per-ticket basis with added 
-optional parameters to the `setvotechoice` JSON-RPC method.  This feature is 
-used by the new vspd server.
+dcrwallet, rather than delegating this method to dcrd through RPC passthrough. 
+ This allows the method to be usable under SPV mode.
 
 * A `WalletService.GetRawCFilters` gRPC method was added to query the 
 wallet-stored version 2 committed filter for specified blocks.
-
-* A `NetworkService.GetRawBlock` gRPC method was added to fetch raw blocks 
-using the wallet's peer-to-peer implementation.
-
-* An optional account parameter was added to the `listunspent` and 
-`listlockunspent` JSON-RPC methods to filter results for a particular account.
-
-* A `ticketinfo` JSON-RPC method was added to provide detailed status 
-information regarding all tickets from the wallet.
-
-* The `WalletService.PurchaseTickets` method gained support for specifying 
-CoinShuffle++ options for mixed ticket buying.
 
 * Both a `getpeerinfo` JSON-RPC method and `WalletService.GetPeerInfo` gRPC 
 method were implemented to provide peer info in SPV mode.  The JSON-RPC method 
 continues to return results from a connected dcrd when syncing in RPC mode.
 
-* A `walletpassphrasechange` JSON-RPC method was added to modify the wallet's
- public data encryption passphrase.  Changing to the default insecure value 
- "public" effectively removes any prompts for the public passphrase at startup.
+* A `sendrawtransaction` implementation has been added to the JSON-RPC server. 
+This allows arbitrary transactions to be published under SPV mode.
+
+### Staking
 
 * A client for the new vspd server was added, and dcrwallet supports this 
 client functionality from both the ticket autobuyer and through various gRPC 
 methods.
 
-* The `getcoinjoinsbyacct` JSON-RPC method and 
-`WalletService.GetCoinjoinOutputspByAcct` gRPC methods were added to discover 
-probable CoinJoin transactions and report them by account.
+* A `ticketinfo` JSON-RPC method was added to provide detailed status 
+information regarding all tickets from the wallet.
+
+* Vote preferences may now be specified on a per-ticket basis with added 
+optional parameters to the `setvotechoice` JSON-RPC method.  This feature is 
+used by the new vspd server.
+
+* The `stakepooluserinfo` JSON-RPC method has been reintroduced, after being 
+removed from prior releases.  This is used by the new vspd server.
 
 * Unpublished transactions are now supported.  When an unpublished transaction 
 is saved to the database, the outputs it spends are tallied in balance results 
@@ -916,42 +1036,81 @@ fees prior to the vspd instance accepting the client's ticket request.
 * A `--manualtickets` flag was added to the application config.  This setting 
 disables discovering any tickets from the network syncing, instead requiring any
  tickets to be manually added to the wallet using `addtransaction`.  This 
- feature is used by the new vspd server to avoid voting on unprocessed tickets 
- which used a vspd voting address.  The current state of this setting is 
- reported in the `walletinfo` JSON-RPC result.
+feature is used by the new vspd server to avoid voting on unprocessed tickets 
+which used a vspd voting address.  The current state of this setting is 
+reported in the `walletinfo` JSON-RPC result.
 
-* The LOGFLAGS environment variable may now include a UTC flag to cause the 
-wallet to always log with UTC timestamps, regardless of the current system 
-timezone.
+* The `WalletService.PurchaseTickets` gRPC method gained a `dont_sign_tx` 
+parameter to support unsigned ticket purchasing and eventual hardware wallet 
+signing.
+
+### Mixing
+
+* An `AccountMixerService` was added to the gRPC server to perform CoinShuffle++
+ mixing on all funds received by an account.
+
+* The `WalletService.PurchaseTickets` method gained support for specifying 
+CoinShuffle++ options for mixed ticket buying.
+
+* The `getcoinjoinsbyacct` JSON-RPC method and 
+`WalletService.GetCoinjoinOutputspByAcct` gRPC methods were added to discover 
+probable CoinJoin transactions and report them by account.
+
+### Other new Features
+
+* A `createsignature` JSON-RPC method was introduced, analogous to the gRPC 
+`WalletService.CreateSignature` method.
+
+* A `discoverusage` JSON-RPC method was introduced, which triggers the same 
+address and account discovery as performed on startup when there are new blocks 
+available.  However, this method is more general purpose and is useful when 
+correcting issues with prior discoveries, at it allows specifying the exact 
+starting blocks and a BIP0044 gap limit to use.
+
+* A `WalletService.SignHashes` gRPC method was added to sign an arbitrary number
+ of 32-byte hashes.  This method was used by the now-defunct TumbleBit 
+implementation.
+
+* A `WalletService.Spender` gRPC method was added to query the transaction and 
+input index which spends a wallet output.
+
+* The `WalletService.TransactionNotifications` gRPC method now provides more 
+details about the block headers which were detached during a reorganize, rather 
+than only their hashes.
+
+* An `addtransaction` JSON-RPC method was added, allowing transactions to be 
+manually added to the wallet, mined in a specified block, without discovering 
+the transaction through the network.
+
+* A `NetworkService.GetRawBlock` gRPC method was added to fetch raw blocks 
+using the wallet's peer-to-peer implementation.
+
+* An optional account parameter was added to the `listunspent` and 
+`listlockunspent` JSON-RPC methods to filter results for a particular account.
+
+* A `walletpassphrasechange` JSON-RPC method was added to modify the wallet's 
+public data encryption passphrase.  Changing to the default insecure value 
+"public" effectively removes any prompts for the public passphrase at startup.
 
 * The `listunspent` JSON-RPC method now includes the hex encoding of a redeem 
 script when the output is P2SH and the redeem script is known.
 
-* Support for the decentralized treasury hard fork is added.  Two new JSON-RPC 
-methods `sendtotreasury` and `spendfromtreasury` are added, to send to and spend
- from value in the treasury, respectively.  The vote version and current agendas
-  have been updated to allow stakeholders to vote on the activation of the 
-  decentralized treasury.
-
-* A `sendrawtransaction` implementation has been added to the JSON-RPC server. 
-This allows arbitrary transactions to be published under SPV mode.
-
 * Accounts are now able to be encrypted using separate, per-account passphrases.
  Unlocking an account only provides access to that account's private keys, 
- and no others.  Account passphrases may be set using the `setaccountpassphrase`
-  JSON-RPC method, and locked and unlocked by the `unlockaccount` and 
-  `lockaccount` methods.
+and no others.  Account passphrases may be set using the `setaccountpassphrase` 
+JSON-RPC method, and locked and unlocked by the `unlockaccount` and 
+`lockaccount` methods.
 
 * JSON-RPC clients may now be authenticated using TLS client certificates, and 
 this authentication is now required for the gRPC server.  The feature may be 
-enabled for JSON-RPC by using the `--jsonrpcauthtype=clientcert` config flag.  
-Client certificates read from a `clients.pem` file in the application directory
+enabled for JSON-RPC by using the `--jsonrpcauthtype=clientcert` config flag. 
+ Client certificates read from a `clients.pem` file in the application directory
  are trusted by default, and this file may be modified by the `--clientcafile` 
- config flag.  Additionally, an `--issueclientcert` flag is provided which 
- causes the wallet to issue and send an ephemeral client certificate and key 
- over the TX pipe to the parent process which forked dcrwallet.  Client 
- certificates may be generated by the `gencerts` tool, which is now part of the 
- Decred CLI distribution.
+config flag.  Additionally, an `--issueclientcert` flag is provided which 
+causes the wallet to issue and send an ephemeral client certificate and key 
+over the TX pipe to the parent process which forked dcrwallet.  Client 
+certificates may be generated by the `gencerts` tool, which is now part of the 
+Decred CLI distribution.
 
 * gRPC methods to lock and unlock the wallet's global keys and 
 individually-encrypted accounts are now added, and the passphrase in all 
@@ -960,11 +1119,15 @@ server now requires client authentication, there is no a risk of an
 unauthenticated client from quickly hitting an already-unlocked wallet or 
 account and using private keys it should not otherwise have access to.
 
-## Other improvements
+## Other Improvements
 
-* Peer-to-peer seeding is now performed over an HTTPS API rather than DNS.  
-This improves reliability (HTTPS is authenticated), as well as greater control 
+* Peer-to-peer seeding is now performed over an HTTPS API rather than DNS. 
+ This improves reliability (HTTPS is authenticated), as well as greater control 
 of filtering results by various URL parameters.
+
+* The LOGFLAGS environment variable may now include a UTC flag to cause the 
+wallet to always log with UTC timestamps, regardless of the current system 
+timezone.
 
 * Many log messages were added, removed, or rewritten to better reflect the 
 operational state of the application.
@@ -977,7 +1140,7 @@ to derive keys.
 * Imported scripts are now recorded in plain text and the wallet does not need 
 to be unlocked to retrieve the full script for the P2SH address.  This change is
  made under the assumption that imported redeem scripts should not be secrets 
- themselves, but still require a signature check at the very least.
+themselves, but still require a signature check at the very least.
 
 * Importing an already-existing redeem script from the `importscript` JSON-RPC 
 method no longer starts a rescan.
@@ -1007,15 +1170,15 @@ become invalid after a coin type upgrade from the legacy to the SLIP0044 coin
 type following address discovery.
 
 * The latest peer-to-peer protocol version is now supported.  The `miningstate` 
-and `initstate` messages which are expected in this version are replied to with
- empty responses.
+and `initstate` messages which are expected in this version are replied to with 
+empty responses.
 
 * Ticket purchasing will now attempt to buy fewer tickets than requested when 
-there is a low balance, either due to a bad estimate of how many tickets could
- be purchased, or due to outputs being reserved to pay the fees for the new 
- vspd server.
+there is a low balance, either due to a bad estimate of how many tickets could 
+be purchased, or due to outputs being reserved to pay the fees for the new 
+vspd server.
 
-## Bug fixes
+## Bug Fixes
 
 * A memory leak of requests and responses made to a dcrd websocket server was 
 plugged.
@@ -1050,100 +1213,153 @@ up to date with other peers on the network.  This avoids submitting mix requests
 * A memory leak of wallet address private keys when operating a wallet that 
 remained always unlocked was plugged.
 
-* The stakebase script found in vote transactions is now included when creating
- the unsigned vote, rather than during signing.  This fix ensures that the 
- correct stakebase script for the active network is always used, instead of 
- filling in the script for a different network.
+* The stakebase script found in vote transactions is now included when creating 
+the unsigned vote, rather than during signing.  This fix ensures that the 
+correct stakebase script for the active network is always used, instead of 
+filling in the script for a different network.
 
 * UTXO selection is now aware of output maturity and will not include immature 
 outputs.
 
 ## Changelog
 
-All commits since the last release may be viewed on GitHub
+All commits since the last release may be viewed on GitHub 
 [here](https://github.com/decred/dcrwallet/compare/v1.5.1...v1.6.0).
+
+### Code Contributors
+
+In alphabetical order:
+
+- Alex Yocom-Piatt
+- Brian Stafford
+- Dave Collins
+- David Hill
+- Donald Adu-Poku
+- Jamie Holdstock
+- Jonathan Chappelow
+- Josh Rickmar
+- Julian Yap
+- Kifen
+- Marco Peereboom
+- Matheus Degiovani
+- Matt Hawkins
+- Mike Belopuhov
+- peterzen
+- Victor Oliveira
+- Wisdom Arerosuoghene
 
 
 # decrediton v1.6.0
 
-This release is proud to include 2 major functionality improvements for staking
-and privacy.  The past privacy improvements that were available for dcrwallet
-are now implemented in decrediton for ticket purchasing and account mixing.  
-Accountless VSP ticket purchasing has been added as well.  So no longer will
-users have to add VSPs via API key.  
+This release includes two major functionality improvements for staking 
+and privacy.  The past privacy improvements that were available for dcrwallet 
+are now implemented in decrediton for ticket purchasing and account mixing. 
+Accountless VSP ticket purchasing has been added as well that should greatly 
+simplify the staking process and increase privacy.
 
-There have been numerous graphical improvements and bug fixes that will
+There have been numerous graphical improvements and bug fixes that will 
 hopefully lead to a smoother UX and reduce support questions and intervention.
 
-I'd like to welcome our new additions to the decrediton team:
+## New Features
 
-  * guilhermemntt
-  * victorgcramos
-  * amassarwi
-  * bgptr
-  * JoeGruffins
-  * fguisso
+### Privacy
 
-## New features 
+We have added a new menu item that covers Privacy and Security tools. 
+Users should go there to 'enable' privacy on their wallets.  This enabling 
+process is not done automatically yet, mostly due to required user 
+intervention with private passphrase entry to create needed mixed and unmixed 
+accounts.  Hopefully in the future we will add this step to the wallet 
+launcher.
 
-  * We have added a new menu item that covers Privacy and Security tools.  
-  Users should go there to 'enable' privacy on their wallets.  This enabling
-  process is not done automatically yet, mostly due to required user
-  intervention with private passphrase entry to create needed mixed and unmixed 
-  accounts.  Hopefully in the future we will add this step to the wallet
-  launcher.  
+Once enabled, the privacy page will transform into an account mixer form that 
+allows users to mix funds from the unmixed account into the mixed account.  To 
+follow what dcrwallet is doing, there is a log window below.  In the future, 
+we may add better messaging that will allow updates to the mixing process 
+instead of just showing raw logs.
 
-  Once enabled, the privacy page will transform into an account mixer form that
-  allows users to mix funds from the unmixed account into the mixed account.  To
-  follow what dcrwallet is doing, there is a log window below.  In the future,
-  we may add better messaging that will allow updates to the mixing process
-  instead of just showing raw logs.
+Once privacy is enabled, spending to external addresses is only allowed from the 
+mixed account.  This is to ensure privacy is not broken by spending from any 
+unmixed account.  Additionally, it is not allowed to manually generate 
+addresses in the mixed account, since only funds that have been properly mixed 
+should be allowed to end up there.
 
-  Once privacy is enabled we have restricted external spending to the mixed
-  account.  This is to ensure privacy is not broken by spending from any unmixed
-  account.  Additionally, we have restricted address generation to the mixed account,
-  since only funds that have been properly mixed should be allowed to end up
-  there.  
+There is a checkbox that allows users to forgo the external spending 
+restriction.  There is a dominant warning and users must confirm the risks 
+they are imposing by spending from unmixed accounts.
 
-  There is a checkbox that allows users to forgo the external spending
-  restriction.  There is a dominant warning and users must confirm the risks
-  they are imposing by spending from unmixed accounts.
+### Accountless VSP Staking with Optional Mixing
 
-  * The new accountless VSP ticket purchasing process has been added as well.
-  Now there is no need to 'link' a VSP by API key.  Users may now simply go
-  to the tickets page, select the VSP they'd like to use and the number of
-  tickets to purchase.  If privacy is enabled, the process of purchasing a 
-  ticket requires there to be a successful mix to occur. Mix sessions happen 
-  every 20 minutes and participating in a single session is usually (though not 
-  always) sufficient.  If successful, the mixed split ticket funding 
-  transaction, the ticket, and the ticket's fee, should all be seen on the 
-  overview.  But as you may notice, the ticket's fee is not yet broadcast onto 
-  the network by the VSP until the ticket has been confirmed by 6 blocks.  If 
-  any tickets have missing or errored fees, the user will be notified if they 
-  try to close Decrediton.
+The new accountless VSP ticket purchasing process has been added. 
+Now there is no need to create an account at VSP's website, add its API key in 
+Decrediton and backup redeem scripts.  Users may now simply go 
+to the tickets page, select the VSP they'd like to use and the number of 
+tickets to purchase.
 
-  * Peer count is now shown on the side bar.  This should alleviate issues where
-  people don't know why their transactions aren't getting mined.
+This new way of staking is more private even without mixing enabled since it 
+eliminates address reuse and the use of email. It is recommended that users 
+migrate their tickets to this new system sooner. Read more 
+[here](https://blog.decred.org/2020/06/02/A-More-Private-Way-to-Stake/).
 
-## Other updates
+If privacy is enabled, the process of purchasing a 
+ticket requires there to be a successful mix to occur.  Mix sessions happen 
+every 20 minutes and participating in a single session is usually (though not 
+always) sufficient.  If successful, the mixed split ticket funding 
+transaction, the ticket, and the ticket's fee, should all be seen on the 
+overview.  But as you may notice, the ticket's fee is not yet broadcast onto 
+the network by the VSP until the ticket has been confirmed by 6 blocks.  If 
+any tickets have missing or errored fees, the user will be notified if they 
+try to close Decrediton.
 
-  * Menu reorganization and optimization due to added tabs and tools.  Since
-  we are quickly adding functionality we need to make sure the left-side sidebar
-  menu is as efficient as possible without becoming bloated with items.
-  Hopefully the current layout allows for more growth for tools and
-  functionality.
+## Other Updates
 
-  * A full refactor of components into functional components is now mostly
-  complete.  This should now allow for more agile development moving forward.
+* Menu was reorganized and optimized to accomodate added tabs and tools.  Since 
+we are quickly adding functionality we need to make sure the left-hand sidebar 
+menu is as efficient as possible without becoming bloated with items. 
+ Hopefully the current layout allows for more growth for tools and 
+functionality.
 
-  * An SPV indicator has been added to the sidebar.  Previously there
-  was no way of understanding what mode the wallet was running in without
-  looking at Settings page.
+* Peer count is now shown on the side bar.  This should alleviate issues where 
+people don't know why their transactions aren't getting mined.
 
-  * Unmined transactions are now able to be abandoned under transaction details.
-  This should fix issues that people previously had unminable transactions
-  "stuck" in their wallet.  If the network doesn't know about the transaction,
-  then they should be able to be abandoned and the funds unreserved.
+* An SPV indicator has been added to the sidebar.  Previously there 
+was no way of understanding what mode the wallet was running in without 
+looking at Settings page.
+
+* Unmined transactions are now able to be abandoned under transaction details. 
+ This should fix issues that people previously had unminable transactions 
+"stuck" in their wallet.  If the network doesn't know about the transaction, 
+then they should be able to be abandoned and the funds unreserved.
+
+* A full refactor of components into functional components is now mostly 
+complete.  This should now allow for more agile development moving forward.
+
+## Code Contributors
+
+In alphabetical order:
+
+- Alex Yocom-Piatt
+- Amir Massarwa
+- artikozel
+- bgptr
+- David Hill
+- degeri
+- Fernando Guisso
+- Guilherme Marques
+- Jamie Holdstock
+- JoeGruffins
+- Jonathan Zeppettini
+- karamble
+- Matheus Degiovani
+- Nicola Larosa
+- Piotr Delikat
+- Thiago F. Figueiredo
+- unimere
+- Victor Oliveira
+- Victor Guedes
+- Zubair Zia
+
+Welcome our new additions to the decrediton team: Amir Massarwa, bgptr, 
+Fernando Guisso, JoeGruffins, Guilherme Marques, Victor Guedes.
 
 
 # dcrlnd v0.3.0
@@ -1155,7 +1371,26 @@ channels._
 
 This is a major dcrlnd release including significant amount of changes.
 
-This release brings dcrlnd in line with the upstream lnd [release v0.11.1](https://github.com/lightningnetwork/lnd/releases/tag/v0.11.1-beta) and also includes ports for versions [v0.11.0](https://github.com/lightningnetwork/lnd/releases/tag/v0.11.0-beta), [v0.10.0](https://github.com/lightningnetwork/lnd/releases/tag/v0.10.0-beta) and [v0.9.0](https://github.com/lightningnetwork/lnd/releases/tag/v0.9.0-beta).
+This release brings dcrlnd in line with the upstream lnd 
+[release v0.11.1](https://github.com/lightningnetwork/lnd/releases/tag/v0.11.1-beta)
+ and also includes ports for versions 
+[v0.11.0](https://github.com/lightningnetwork/lnd/releases/tag/v0.11.0-beta), 
+[v0.10.0](https://github.com/lightningnetwork/lnd/releases/tag/v0.10.0-beta) and
+ [v0.9.0](https://github.com/lightningnetwork/lnd/releases/tag/v0.9.0-beta).
+
+## Vulnerability Fixes
+
+This release includes fixes for 
+[CVE-2020-26896](https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-October/002857.html)
+ and [CVE-2020-895](https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-October/002858.html)
+ made in the upstream lnd project. Fixes for these were released in upstream 
+versions v0.11.0 and v0.10.0 respectively and the underlying issues were fully 
+disclosed in Oct 20, 2020.
+
+Additional context for the vulnerabilities and its impact in LN implementations,
+ written by the original discoverer can be found 
+[here](https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-October/002859.html)
+ and [here](https://lists.linuxfoundation.org/pipermail/lightning-dev/2020-October/002855.html)
 
 ## Database Migrations
 
@@ -1167,15 +1402,17 @@ cannot use the new database version once these migrations are applied.
 
 The major Decred-specific feature introduced in this release is the ability to 
 run a dcrlnd instance connected to a dcrwallet running in SPV mode. This is 
-useful mostly for Decrediton users that will now have the option to run dcrlnd
+useful mostly for Decrediton users that will now have the option to run dcrlnd 
 even when their wallet is using the SPV configuration.
 
 ### Node Syncing Config
 
 CLI users now have two options for the `--node` argument:
 
-  - `--node=dcrd` instructs dcrlnd to connect to a dcrd instance for on-chain operations.
-  - `--node=dcrw` instructs dcrlnd to use the underlying dcrwallet instance for on-chain operations.
+- `--node=dcrd` instructs dcrlnd to connect to a dcrd instance for on-chain 
+  operations.
+- `--node=dcrw` instructs dcrlnd to use the underlying dcrwallet instance for 
+  on-chain operations.
 
 When using `--node=dcrd`, the `--dcrd.`-namespaced options should be used to 
 configure the connection to the underlying dcrd node.
@@ -1196,7 +1433,7 @@ is to use embedded wallets with a dcrd instance.
 This release adapts the [Wumbo](https://github.com/lightningnetwork/lnd/pull/4429)
 feature for the realities of Decred. Wumbo channel support can be enabled by 
 running dcrlnd with `--protocol.wumbo-channels` and has a global maximum channel
-size of 500 DCR.
+ size of 500 DCR.
 
 ### Relevant Upstream Changes
 
@@ -1207,44 +1444,43 @@ were ported to dcrlnd. These include changes from the upstream
 [v0.11](https://github.com/decred/dcrlnd/pull/103) lines. Please refer to the 
 respective upstream releases for additional information.
 
-  - Multi Path Payment (MPP) support so that a single payment can be split 
-    among multiple channels.
-  - Track payments with a new Payment Address field.
-  - Additional TLV data sent in payments, which allows creating new use cases 
-    to deliver payload data via LN payments.
-  - Keysend payment experiment which allows spontaneous payments without the 
-    need for a precreated invoice.
-  - Upfront shutdown script support to enforce channel closure to pay to 
-    pre-configured addresses.
-  - HTLC Interception API to allow creation of custom payment forwarding engines.
-  - Additional data in Channel Close Summaries.
-  - Add ability to limit max remote pending HTLC amount during channel opening.
-  - Anchor outputs experimental feature.
-  - External channel funding experimental feature.
-  - Healthchecks to ensure adequate operating conditions of the node
-  - Several bug fixes throughout the app.
+- Multi Path Payment (MPP) support so that a single payment can be split 
+  among multiple channels.
+- Track payments with a new Payment Address field.
+- Additional TLV data sent in payments, which allows creating new use cases 
+  to deliver payload data via LN payments.
+- Keysend payment experiment which allows spontaneous payments without the 
+  need for a precreated invoice.
+- Upfront shutdown script support to enforce channel closure to pay to 
+  pre-configured addresses.
+- HTLC Interception API to allow creation of custom payment forwarding engines.
+- Additional data in Channel Close Summaries.
+- Add ability to limit max remote pending HTLC amount during channel opening.
+- Anchor outputs experimental feature.
+- External channel funding experimental feature.
+- Healthchecks to ensure adequate operating conditions of the node
+- Several bug fixes throughout the app.
 
-# Porting Effort
+## Porting Effort
 
 A total of 450 upstream PRs were considered for inclusion. The list of of PRs 
 can be found in the acompanying [upstream-prs.csv](/docs/upstream-prs.csv) doc.
 
+## Decred Contributors (Alphabetical Order)
 
-# Decred Contributors (Alphabetical Order)
+- Fernando Guisso
+- Matheus Degiovani
+- Ole Andre Birkedal
 
-  - Fernando Guisso
-  - Matheus Degiovani
-  - Ole Andre Birkedal
+## Acknowledgement
 
-# Acknowledgement
-
-The majority of the work included in this release is from features and bugfixes
-performed by the contributors to the upstream
+The majority of the work included in this release is from features and bugfixes 
+performed by the contributors to the upstream 
 [lnd](https://github.com/lightningnetwork/lnd) project that were ported to 
 Decred.
 
 We wish to sincerely thank them for providing such a high quality project 
-and hope we can continue to contribute in building a large scale and cross-coin
+and hope we can continue to contribute in building a large scale and cross-coin 
 LN ecosystem.
 
 # dcrdex v0.1.4
@@ -1263,53 +1499,53 @@ Please read the [initial release (v0.1.0) notes](https://github.com/decred/dcrde
 
 - The account ID for each configured DEX server is now displayed on the settings 
 page.  When not logged in, there is a placeholder that says to login to display 
-the account ID. (https://github.com/decred/dcrdex/commit/1a5c070196ab7899214b524a9c681168fbdcfd75)
-- Focus password field in order dialogs. (https://github.com/decred/dcrdex/commit/5eb9fb2de51722158eaf1d2122c11f30154bd9b3)
-- Colorize the "Side" column in the orders table. (https://github.com/decred/dcrdex/commit/83b07cd08a8a7ecced012335092c0f196d7fcfb0)
-- The registration fee address is no longer logged if their is a funding error 
-since there is nothing a user can do with the address other than shoot their 
-self in the foot and send to it manually.  Registration fee payment should only 
-be done via the app. (https://github.com/decred/dcrdex/commit/dc67cdbb09fe6e296164da0b916ab8a1744912f6)
-- Wallet balances are updated on all wallet settings changes. (https://github.com/decred/dcrdex/commit/8ff4d943d69182b9866faf6637e9e3c17e97db69)
+the account ID. ([1a5c070](https://github.com/decred/dcrdex/commit/1a5c070196ab7899214b524a9c681168fbdcfd75))
+- Focus password field in order dialogs. ([5eb9fb2](https://github.com/decred/dcrdex/commit/5eb9fb2de51722158eaf1d2122c11f30154bd9b3))
+- Colorize the "Side" column in the orders table. ([83b07cd](https://github.com/decred/dcrdex/commit/83b07cd08a8a7ecced012335092c0f196d7fcfb0))
+- The registration fee address is no longer logged if there is a funding error 
+since there is nothing a user can do with the address other than shoot 
+themselves in the foot and send to it manually.  Registration fee payment should
+ only be done via the app. ([dc67cdb](https://github.com/decred/dcrdex/commit/dc67cdbb09fe6e296164da0b916ab8a1744912f6))
+- Wallet balances are updated on all wallet settings changes. ([8ff4d94](https://github.com/decred/dcrdex/commit/8ff4d943d69182b9866faf6637e9e3c17e97db69))
 - Wallet sync status is more consistently checked on wallet (re)connect events, 
 and continually check sync status on RPC errors as it is common for node/wallet
  startup to initially error and then start reporting status (e.g. bitcoind's 
- "verifying blocks..." error while starting up). (https://github.com/decred/dcrdex/commit/1c9ca02db974cbd76dceac5b29a825b5cc805c84, https://github.com/decred/dcrdex/commit/53194c615ee3179c2c6ec08278a41bbd9b234634)
+ "verifying blocks..." error while starting up). ([1c9ca02](https://github.com/decred/dcrdex/commit/1c9ca02db974cbd76dceac5b29a825b5cc805c84), [53194c6](https://github.com/decred/dcrdex/commit/53194c615ee3179c2c6ec08278a41bbd9b234634))
 
 ### Fixes
 
-- Fix changing wallet settings possibly interrupting active swaps. (https://github.com/decred/dcrdex/commit/f0a304f7ea74af3ce75f3edc1cbb3f4f524f1c84)
+- Fix changing wallet settings possibly interrupting active swaps. ([f0a304f](https://github.com/decred/dcrdex/commit/f0a304f7ea74af3ce75f3edc1cbb3f4f524f1c84))
 - Fix a case where a wallet can become unlockable without restarting dexc if 
-dexc were started with both active orders and an unlocked wallet. (https://github.com/decred/dcrdex/commit/f8c47a163387b8c63201f2f9ad1053a205e6203f)
+dexc were started with both active orders and an unlocked wallet. ([f8c47a1](https://github.com/decred/dcrdex/commit/f8c47a163387b8c63201f2f9ad1053a205e6203f))
 - Fix duplicate notify_fee requests that resulted from multiple fee coin 
-waiters being created for the same coin. (https://github.com/decred/dcrdex/commit/ee1bd84c8ef6136fcbbcf764782b610d20c3540c)
-- Fix retrieving the full list of historical orders (284681488b5812157dd8624151efc576764eb824)
-- Fix incorrect year displayed for a match's date. (https://github.com/decred/dcrdex/commit/a347b0f34d0fd143b566b59588cda4f86f1b218b)
+waiters being created for the same coin. ([ee1bd84](https://github.com/decred/dcrdex/commit/ee1bd84c8ef6136fcbbcf764782b610d20c3540c))
+- Fix retrieving the full list of historical orders ([2846814](https://github.com/decred/dcrdex/commit/284681488b5812157dd8624151efc576764eb824))
+- Fix incorrect year displayed for a match's date. ([a347b0f](https://github.com/decred/dcrdex/commit/a347b0f34d0fd143b566b59588cda4f86f1b218b))
 - Wallet deposit addresses are validated and more often refreshed whenever the 
-wallet is connected (https://github.com/decred/dcrdex/commit/c3990c765f7a7de2017da08c29fb9fae8853a522, https://github.com/decred/dcrdex/commit/6a66a1cb7701ed6d6e7187231a46ad1f2a74a782)
+wallet is connected ([c3990c7](https://github.com/decred/dcrdex/commit/c3990c765f7a7de2017da08c29fb9fae8853a522), [6a66a1c](https://github.com/decred/dcrdex/commit/6a66a1cb7701ed6d6e7187231a46ad1f2a74a782))
 - Correctly handle chain sync status when in initial block download state, but 
 blocks are up-to-date with headers. This is only possible in practice with 
-simnet. (https://github.com/decred/dcrdex/commit/3523de11b270fed9162c0b2bd8aee2333fe2e8f6)
-- Fix DCR withdraws in various cases. (https://github.com/decred/dcrdex/commit/d0ba1e5dbcdc063c8fb4abf95725c67174868291)
+simnet. ([3523de1](https://github.com/decred/dcrdex/commit/3523de11b270fed9162c0b2bd8aee2333fe2e8f6))
+- Fix DCR withdraws in various cases. ([d0ba1e5](https://github.com/decred/dcrdex/commit/d0ba1e5dbcdc063c8fb4abf95725c67174868291))
 - Allow dexc to shutdown without hanging if a wallet was unexpectedly shutdown 
-first. (https://github.com/decred/dcrdex/commit/7321c364297b8f5c0dd85cf798902b169bd3eebf)
+first. ([7321c36](https://github.com/decred/dcrdex/commit/7321c364297b8f5c0dd85cf798902b169bd3eebf))
 - When loading active matches on login, correctly skip adding cancel order 
-matches to the trades map. (https://github.com/decred/dcrdex/commit/61697bbc4364466d9eb55763aed8e7fb849e01e0)
+matches to the trades map. ([61697bb](https://github.com/decred/dcrdex/commit/61697bbc4364466d9eb55763aed8e7fb849e01e0))
 - Prevent login while already logged in from re-creating the entries in the 
-trades map. (https://github.com/decred/dcrdex/commit/b6f81adcc9a05f4c604420b3b138f1286b25c9c7)
-- Resolve a data race on wallet reconfigure for DCR. (https://github.com/decred/dcrdex/commit/bca1325ab1ccdd21b3447571693a8212e5874e97)
-- Avoid a possible deadlock on wallet reconfigure. (https://github.com/decred/dcrdex/commit/4bed3e2f55f97cac45ca30cf7ad4faac94d20604)
+trades map. ([b6f81ad](https://github.com/decred/dcrdex/commit/b6f81adcc9a05f4c604420b3b138f1286b25c9c7))
+- Resolve a data race on wallet reconfigure for DCR. ([bca1325](https://github.com/decred/dcrdex/commit/bca1325ab1ccdd21b3447571693a8212e5874e97))
+- Avoid a possible deadlock on wallet reconfigure. ([4bed3e2](https://github.com/decred/dcrdex/commit/4bed3e2f55f97cac45ca30cf7ad4faac94d20604))
 
 ## Developer
 
 - Simnet harnesses are quicker to start, being based on archives, and more well 
-funded. (https://github.com/decred/dcrdex/commit/0de89456c129bc39a200e816fb660f216a7d41e2)
+funded. ([0de8945](https://github.com/decred/dcrdex/commit/0de89456c129bc39a200e816fb660f216a7d41e2))
 - Update simnet trade tests for current wallet unlocking system and more well 
-funded harnesses. (https://github.com/decred/dcrdex/commit/e198b1f095be8cad51c8e49604c873ed2ac4f02d)
+funded harnesses. ([e198b1f](https://github.com/decred/dcrdex/commit/e198b1f095be8cad51c8e49604c873ed2ac4f02d))
 
 ## Server (dcrdex)
 
-Create a fee rate scaling administrative endpoint. (https://github.com/decred/dcrdex/commit/7a3f18313a34a5945c064a06a1b85bfdc07b0dd4)
+Create a fee rate scaling administrative endpoint. ([7a3f183](https://github.com/decred/dcrdex/commit/7a3f18313a34a5945c064a06a1b85bfdc07b0dd4))
 The endpoint is `api/asset/{sym}/setfeescale/{scale}`, using a GET request 
 instead of POST for convenience.
 
@@ -1345,15 +1581,15 @@ Please read the [initial release (v0.1.0) notes](https://github.com/decred/dcrde
 
 ### Fixes
 
-- Eliminate a possible deadlock (hang) introduced in v0.1.2. (https://github.com/decred/dcrdex/commit/65c98309370779e747d676b2c29020610645284d)
+- Eliminate a possible deadlock (hang) introduced in v0.1.2. ([65c9830](https://github.com/decred/dcrdex/commit/65c98309370779e747d676b2c29020610645284d))
 - Fix the client's validation of the server's deterministic epoch matching 
 result.  This avoids an error message in the logs, but the bug was otherwise 
-not a problem. (https://github.com/decred/dcrdex/commit/10b4689ae9a1118f94747951fd3ac444e490faab)
+not a problem. ([10b4689](https://github.com/decred/dcrdex/commit/10b4689ae9a1118f94747951fd3ac444e490faab))
 
 ### Other
 
 The location of the dexcctl.conf file is now in ~/.dexcctl instead of ~/.dexc 
-(or the corresponding "appdata" folders on Windows and macOS)  (https://github.com/decred/dcrdex/commit/16a0fb003e2eca51fd2c29b938b0ec9bf681f7e5)
+(or the corresponding "appdata" folders on Windows and macOS)  ([16a0fb0](https://github.com/decred/dcrdex/commit/16a0fb003e2eca51fd2c29b938b0ec9bf681f7e5))
 
 ## Server (dcrdex)
 
@@ -1388,23 +1624,23 @@ Please read the [initial release (v0.1.0) notes](https://github.com/decred/dcrde
 
 - When already logged in, automatically attempt to unlock wallets as needed for
 trades.  This helps prevent users from breaking their swaps by accidentally 
-locking their wallets. (https://github.com/decred/dcrdex/commit/de409134c37270145dc7094e89d6ef9d8e2d1f74)
-- Display cancel order matches differently from trade matches. (https://github.com/decred/dcrdex/commit/b01358159eeb7cbe5024f58f035306e98bb0a2f8)
+locking their wallets. ([de40913](https://github.com/decred/dcrdex/commit/de409134c37270145dc7094e89d6ef9d8e2d1f74))
+- Display cancel order matches differently from trade matches. ([b013581](https://github.com/decred/dcrdex/commit/b01358159eeb7cbe5024f58f035306e98bb0a2f8))
 
 #### Developer
 
 - Create a `Ready` method so consumer packages know when the client core is 
-done starting up.  (https://github.com/decred/dcrdex/commit/c3d9e80602e9cad8cc7ebc80e2d7e96a2257d3ab)
+done starting up.  ([c3d9e80](https://github.com/decred/dcrdex/commit/c3d9e80602e9cad8cc7ebc80e2d7e96a2257d3ab))
 - Increase notification channel capacity to prevent dropped notifications when 
-there are many simultaneous events. (https://github.com/decred/dcrdex/commit/2de62a378d8b964c6ff2a485ca907b0b1c2b7ac4)
-- Remove the obsolete (and incomplete) terminal UI.  (https://github.com/decred/dcrdex/commit/75ff8d09f6f5f898dfd23ebbacbb7a3f1d2e473f)
+there are many simultaneous events. ([2de62a3](https://github.com/decred/dcrdex/commit/2de62a378d8b964c6ff2a485ca907b0b1c2b7ac4))
+- Remove the obsolete (and incomplete) terminal UI.  ([75ff8d0](https://github.com/decred/dcrdex/commit/75ff8d09f6f5f898dfd23ebbacbb7a3f1d2e473f))
 
 ### Fixes
 
-- Workaround for 64-bit atomic variable access on 32-bit platforms. (https://github.com/decred/dcrdex/commit/3abaf434a3da3603916969f7af4b0c487b76b149)
+- Workaround for 64-bit atomic variable access on 32-bit platforms. ([3abaf43](https://github.com/decred/dcrdex/commit/3abaf434a3da3603916969f7af4b0c487b76b149))
 - Prevent contract auditing from blocking incoming messages.  Continue to 
 search for counterparty contracts until it succeeds or the match is revoked, 
-and log a warning of the audit is taking a long time. (https://github.com/decred/dcrdex/commit/23f2f362486141419d4a321674229f3716fd4faf)
+and log a warning of the audit is taking a long time. ([23f2f36](https://github.com/decred/dcrdex/commit/23f2f362486141419d4a321674229f3716fd4faf))
 
 ## Server (dcrdex)
 
@@ -1436,41 +1672,41 @@ Please read the [initial release (v0.1.0) notes](https://github.com/decred/dcrde
 
 ### Features and Improvements 
 
-- Add the mainnet ["client quick start" guide](https://github.com/decred/dcrdex#client-quick-start-installation). (https://github.com/decred/dcrdex/commit/a383d5e76d2de90969f4eaf372084d290a051032)
-- Tor support for connections with DEX servers. (https://github.com/decred/dcrdex/commit/824f1c0da0b17afcab271c60665be6f8da3d6025) **WARNING**: This should be used with caution since Tor is slow and unreliable.
+- Add the mainnet ["client quick start" guide](https://github.com/decred/dcrdex#client-quick-start-installation). ([a383d5e](https://github.com/decred/dcrdex/commit/a383d5e76d2de90969f4eaf372084d290a051032))
+- Tor support for connections with DEX servers. ([824f1c0](https://github.com/decred/dcrdex/commit/824f1c0da0b17afcab271c60665be6f8da3d6025)) **WARNING**: This should be used with caution since Tor is slow and unreliable.
 - On dexc start-up, display a link (URL) to the browser page, and if there are 
-active orders, warn the user. (https://github.com/decred/dcrdex/commit/a01e403d09c491765d71ac34fc2d60b7898c3596)
-- Add the ability to generate new deposit addresses. (https://github.com/decred/dcrdex/commit/860af3e19b49db9fb6b68016e894edd71361db3d)
+active orders, warn the user. ([a01e403](https://github.com/decred/dcrdex/commit/a01e403d09c491765d71ac34fc2d60b7898c3596))
+- Add the ability to generate new deposit addresses. ([860af3e](https://github.com/decred/dcrdex/commit/860af3e19b49db9fb6b68016e894edd71361db3d))
 - Various browser UI improvements, including order dialog wording and button 
-formatting. (https://github.com/decred/dcrdex/commit/dbf9d2c1f7c4644530b8a91f407818d4f435aa7b)
-- Dialogs now have a close/cancel button. (https://github.com/decred/dcrdex/commit/6716b58c87933e71661f922d8cd2f479e6851a0d)
+formatting. ([dbf9d2c](https://github.com/decred/dcrdex/commit/dbf9d2c1f7c4644530b8a91f407818d4f435aa7b))
+- Dialogs now have a close/cancel button. ([6716b58](https://github.com/decred/dcrdex/commit/6716b58c87933e71661f922d8cd2f479e6851a0d))
 - Taker redemption transactions are more readily batched, potentially requiring 
-fewer transactions for a taker order that matches with multiple maker orders. (https://github.com/decred/dcrdex/commit/3ea75a91d8e6935ad2cde128190042bde24f1e1d)
+fewer transactions for a taker order that matches with multiple maker orders. ([3ea75a9](https://github.com/decred/dcrdex/commit/3ea75a91d8e6935ad2cde128190042bde24f1e1d))
 - When any node (e.g. bitcoind and dcrd) is still synchronizing with the 
-network, new orders cannot be placed. (https://github.com/decred/dcrdex/commit/2cac73a6655550d3cdd02ca2591844988e8126e7)
+network, new orders cannot be placed. ([2cac73a](https://github.com/decred/dcrdex/commit/2cac73a6655550d3cdd02ca2591844988e8126e7))
 
 ### Fixes
 
 - Match recover is more robust, with fixes to revoked match handling on 
-reconnect or restart. (https://github.com/decred/dcrdex/commit/9790fb1cfb6e7ed7ffadc4624979ca57341d2ca0)
-- Resolve a potential deadlock during match status resolution, (https://github.com/decred/dcrdex/commit/c09017d8170602bfae4fc2e34edd5ccfee34127e)
+reconnect or restart. ([9790fb1](https://github.com/decred/dcrdex/commit/9790fb1cfb6e7ed7ffadc4624979ca57341d2ca0))
+- Resolve a potential deadlock during match status resolution, ([c09017d](https://github.com/decred/dcrdex/commit/c09017d8170602bfae4fc2e34edd5ccfee34127e))
 - Explicitly set js Content-Type in webserver to workaround misconfigured 
-operating systems, such as Windows with misconfigured CLASSES_ROOT registry entries. (https://github.com/decred/dcrdex/commit/f6328937f815f210daf4d910cb4722205ddf6e79)
-- Delete obsolete notifications on frontend. (https://github.com/decred/dcrdex/commit/8a69e991b518170eacc23d99eb8e1629ce7517d4)
+operating systems, such as Windows with misconfigured CLASSES_ROOT registry entries. ([f632893](https://github.com/decred/dcrdex/commit/f6328937f815f210daf4d910cb4722205ddf6e79))
+- Delete obsolete notifications on frontend. ([8a69e99](https://github.com/decred/dcrdex/commit/8a69e991b518170eacc23d99eb8e1629ce7517d4))
 - Avoid harmless but confusing warnings about returning zero coins when 
-resumed trades are later completed. (https://github.com/decred/dcrdex/commit/a01e403d09c491765d71ac34fc2d60b7898c3596)
+resumed trades are later completed. ([a01e403](https://github.com/decred/dcrdex/commit/a01e403d09c491765d71ac34fc2d60b7898c3596))
 - Avoid redundant swap negotiation invocations on restart with unknown matches 
-reported from a server. (https://github.com/decred/dcrdex/commit/c0adb2659fe4ab341fc75b995c261b2cee029675)
+reported from a server. ([c0adb26](https://github.com/decred/dcrdex/commit/c0adb2659fe4ab341fc75b995c261b2cee029675))
 - Orphaned cancel orders that could be created in certain circumstances are now 
-retired during status resolution of the linked trade. (https://github.com/decred/dcrdex/commit/867ba894b6da4f6cda16ba4c371eb2436cc4d977)
+retired during status resolution of the linked trade. ([867ba89](https://github.com/decred/dcrdex/commit/867ba894b6da4f6cda16ba4c371eb2436cc4d977))
 
 ## Server (dcrdex)
 
-- Fix book purge heap orientation. (https://github.com/decred/dcrdex/commit/eb6ccd464af474c4d7b506ee465a66e1f69f534f)
+- Fix book purge heap orientation. ([eb6ccd4](https://github.com/decred/dcrdex/commit/eb6ccd464af474c4d7b506ee465a66e1f69f534f))
 - Avoid orphaned epoch status orders when shutting down via SIGINT *without* a 
-preceding suspend command. (https://github.com/decred/dcrdex/commit/d4634395495f25b92cdc935fb7a72f311d23d118)
+preceding suspend command. ([d463439](https://github.com/decred/dcrdex/commit/d4634395495f25b92cdc935fb7a72f311d23d118))
 - When any node (e.g. bitcoind and dcrd) is still synchronizing with the 
-network, relevant markets will not accept new orders. (https://github.com/decred/dcrdex/commit/2cac73a6655550d3cdd02ca2591844988e8126e7)
+network, relevant markets will not accept new orders. ([2cac73a](https://github.com/decred/dcrdex/commit/2cac73a6655550d3cdd02ca2591844988e8126e7))
 
 ## Code Summary
 
@@ -1762,7 +1998,7 @@ This release uses an experimental system to set the maximum order quantity
 based on their swap history. It is likely to change, but it is described in [PR #750](https://github.com/decred/dcrdex/pull/750).
 
 
-## Code summary
+## Code Summary
 
 This release consists of 473 pull requests comprising 506 commits from 12 contributors.
 
