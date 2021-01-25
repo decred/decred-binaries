@@ -1480,10 +1480,10 @@ page.  When not logged in, there is a placeholder that says to login to display
 the account ID. ([1a5c070](https://github.com/decred/dcrdex/commit/1a5c070196ab7899214b524a9c681168fbdcfd75))
 - Focus password field in order dialogs. ([5eb9fb2](https://github.com/decred/dcrdex/commit/5eb9fb2de51722158eaf1d2122c11f30154bd9b3))
 - Colorize the "Side" column in the orders table. ([83b07cd](https://github.com/decred/dcrdex/commit/83b07cd08a8a7ecced012335092c0f196d7fcfb0))
-- The registration fee address is no longer logged if their is a funding error 
-since there is nothing a user can do with the address other than shoot their 
-self in the foot and send to it manually.  Registration fee payment should only 
-be done via the app. ([dc67cdb](https://github.com/decred/dcrdex/commit/dc67cdbb09fe6e296164da0b916ab8a1744912f6))
+- The registration fee address is no longer logged if there is a funding error 
+since there is nothing a user can do with the address other than shoot 
+themselves in the foot and send to it manually.  Registration fee payment should
+ only be done via the app. ([dc67cdb](https://github.com/decred/dcrdex/commit/dc67cdbb09fe6e296164da0b916ab8a1744912f6))
 - Wallet balances are updated on all wallet settings changes. ([8ff4d94](https://github.com/decred/dcrdex/commit/8ff4d943d69182b9866faf6637e9e3c17e97db69))
 - Wallet sync status is more consistently checked on wallet (re)connect events, 
 and continually check sync status on RPC errors as it is common for node/wallet
