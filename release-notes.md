@@ -1226,6 +1226,26 @@ outputs.
 All commits since the last release may be viewed on GitHub 
 [here](https://github.com/decred/dcrwallet/compare/v1.5.1...v1.6.0).
 
+### Code Contributors (Alphabetical Order)
+
+- Alex Yocom-Piatt
+- Brian Stafford
+- Dave Collins
+- David Hill
+- Donald Adu-Poku
+- Jamie Holdstock
+- Jonathan Chappelow
+- Josh Rickmar
+- Julian Yap
+- Kifen
+- Marco Peereboom
+- Matheus Degiovani
+- Matt Hawkins
+- Mike Belopuhov
+- peterzen
+- Victor Oliveira
+- Wisdom Arerosuoghene
+
 
 # decrediton v1.6.0
 
