@@ -1,0 +1,9 @@
+7913d15cab21a839276e222daaff80abacb1aac5ca1438f3710aa01da508b720  dexc-darwin-amd64-v0.1.4.tar.gz
+350f3a9dba559a9c2527e081848943970825f2f1dc8c1ae8d5f649c46b8aca60  dexc-freebsd-amd64-v0.1.4.tar.gz
+91664f7a829ad4e4daad55a360f2b162ea0e2790f2d2763a6afd283a71f26b11  dexc-linux-386-v0.1.4.tar.gz
+b566b387ee48334d2c235a41912b18c30d36b71cd4b47a8aef3aed4002d63c1d  dexc-linux-amd64-v0.1.4.tar.gz
+bfc1683772258aa2ae8fde3d3ceab1709fdd7be0c94ea07f22ec03cc1fa88143  dexc-linux-arm-v0.1.4.tar.gz
+c404b75b8c1dff1d57a93047bce4ca8fbf5467596ccca4f7997732ebb71778e3  dexc-linux-arm64-v0.1.4.tar.gz
+20bf9694c5d972b68b493cb166f0edd1477d7bebf2881337daea60079dd48e33  dexc-openbsd-amd64-v0.1.4.tar.gz
+b4b3570babadda07cdc805ad62aa75a30b4a5d4337e397ea3c8c0bfdc5bcce1d  dexc-windows-386-v0.1.4.zip
+c57d4552ca463d448c3f4b9d17448f8ec1d906f37abc24f11e920286e8487115  dexc-windows-amd64-v0.1.4.zip
