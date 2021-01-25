@@ -1226,7 +1226,9 @@ outputs.
 All commits since the last release may be viewed on GitHub 
 [here](https://github.com/decred/dcrwallet/compare/v1.5.1...v1.6.0).
 
-### Code Contributors (Alphabetical Order)
+### Code Contributors
+
+In alphabetical order:
 
 - Alex Yocom-Piatt
 - Brian Stafford
