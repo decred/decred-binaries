@@ -1258,15 +1258,6 @@ simplify the staking process and increase privacy.
 There have been numerous graphical improvements and bug fixes that will 
 hopefully lead to a smoother UX and reduce support questions and intervention.
 
-I'd like to welcome our new additions to the decrediton team:
-
-* guilhermemntt
-* victorgcramos
-* amassarwi
-* bgptr
-* JoeGruffins
-* fguisso
-
 ## New Features
 
 ### Privacy
@@ -1339,6 +1330,35 @@ then they should be able to be abandoned and the funds unreserved.
 
 * A full refactor of components into functional components is now mostly 
 complete.  This should now allow for more agile development moving forward.
+
+## Code Contributors
+
+In alphabetical order:
+
+- Alex Yocom-Piatt
+- Amir Massarwa
+- artikozel
+- bgptr
+- David Hill
+- degeri
+- Fernando Guisso
+- Guilherme Marques
+- Jamie Holdstock
+- JoeGruffins
+- Jonathan Zeppettini
+- karamble
+- Matheus Degiovani
+- Nicola Larosa
+- Piotr Delikat
+- Thiago F. Figueiredo
+- unimere
+- Victor Oliveira
+- Victor Guedes
+- Zubair Zia
+
+Welcome our new additions to the decrediton team: Amir Massarwa, bgptr, 
+Fernando Guisso, JoeGruffins, Guilherme Marques, Victor Guedes.
+
 
 # dcrlnd v0.3.0
 
