@@ -1,0 +1,4 @@
+57fe3294ca6ab7cbc6ad7b7ec45843f9d87906c6b68d6c42d6ae62811cd2c93f  https://github.com/decred/decred-binaries/releases/download/v1.6.1/decred-v1.6.1-manifest.txt
+0dfa2fe640bc8dfd1f99941962483828e441f68a241cb7c640a104abc0520bb8  https://github.com/decred/decred-binaries/releases/download/v1.6.1/dexc-v0.1.5-manifest.txt
+20b0edcfe683d75c127ee222418635d0244df838ba9d4a2d81a5b806181f6369  https://github.com/decred/decred-release/releases/download/v1.6.1/dcrinstall-v1.6.1-manifest.txt
+b5c04fe37b40119bdc2d329b9c8fb9c0b402a10388fd0837d1a30fb0cd99b344  https://bitcoincore.org/bin/bitcoin-core-0.20.1/SHA256SUMS.asc
