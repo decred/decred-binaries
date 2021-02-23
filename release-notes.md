@@ -111,56 +111,58 @@ when purchasing new VSP tickets in decrediton.
 
 ## Updates
 
-- Consensus voting is now working as expected.  When a user chooses to update
-their choice it is updated on their local wallet and also sent to any legacy
-VSP.  Every live ticket they have with a new VSP is updated as well.
+* Consensus voting is now working as expected.  When a user chooses to update
+  their choice it is updated on their local wallet and also sent to any legacy
+  VSP.  Every live ticket they have with a new VSP is updated as well.
 
-- Show better message when purchasing less than requested
-- Due to required utxos for each ticket purchase 
+* Due to required utxos for each ticket purchase there is a possibility of 
+  dcrwallet purchasing less than what the user requested.  We have added
+  a better message for this instance.  Users should be able to now understand
+  why they only got 1 when trying to buy 2 etc.
 
-- We've updated some staking tab labels to hopefully help make things more clear
-with the new tickets and the old tickets.  
+* We've updated some staking tab labels to hopefully help make things more clear
+  with the new tickets and the old tickets.  
 
-- An initial Traditional Chinese translation was completed smartwojak by 
-verified by long standing community member chang_hugo.
+* An initial Traditional Chinese translation was completed smartwojak by 
+  verified by long standing community member chang_hugo.
 
-- We've decided to not allow multiple things from running or attempted at the
-same time to avoid possible issues or unexpected errors.  So, for instance,
-when the mixer is running, users may not purchase tickets or run the autobuyer.
-Same for vice versa.  To complete any of the tasks you may want, simply just 
-turn off the thing running and proceed.  The added tooltips should make the 
-situation clear.
+* We've decided to not allow multiple things from running or attempted at the
+  same time to avoid possible issues or unexpected errors.  So, for instance,
+  when the mixer is running, users may not purchase tickets or run the autobuyer.
+  Same for vice versa.  To complete any of the tasks you may want, simply just 
+  turn off the thing running and proceed.  The added tooltips should make the 
+  situation clear.
 
-- Added loading indicators to various buttons related to ticket purchasing.  Due
-to long wait times that are required for some actions (mixed ticket purchasing)
-it's important to give the user feedback to indicate that something is still
-happening behind the scenes and they should be patient.
+* Added loading indicators to various buttons related to ticket purchasing.  Due
+  to long wait times that are required for some actions (mixed ticket purchasing)
+  it's important to give the user feedback to indicate that something is still
+  happening behind the scenes and they should be patient.
 
-- Added success and failure messages to various new ticket purchasing actions.
-Now when users successfully complete (or receive errorrs) the following actions
-they will be shown a message:  Process managed, process unmanaged and Sync
-Failed VSP Tickets.
+* Added success and failure messages to various new ticket purchasing actions.
+  Now when users successfully complete (or receive errorrs) the following actions
+  they will be shown a message:  Process managed, process unmanaged and Sync
+  Failed VSP Tickets.
 
 ## Bug fixes
 
-- A timeout check was added when not receiving a response back from a VSP
-for getting their VSPInfo.
+* A timeout check was added when not receiving a response back from a VSP
+  for getting their VSPInfo.
 
-- Transaction history filtering has been fixed and now should allow for multiple
-types of transaction to be selected at once. 
+* Transaction history filtering has been fixed and now should allow for multiple
+  types of transaction to be selected at once. 
 
-- Tickets should now show as "Processing", "Error" or "Paid" shortly after
-purchase.  Previously they would be shown "Solo" until a restart or another
-block was mined.
+* Tickets should now show as "Processing", "Error" or "Paid" shortly after
+  purchase.  Previously they would be shown "Solo" until a restart or another
+  block was mined.
 
-- Added explicit wallet lock calls to ensure that wallet is locked after 
-mixing or ticket auto buyer requests.
+* Added explicit wallet lock calls to ensure that wallet is locked after 
+  mixing or ticket auto buyer requests.
 
-- There were a few reports of incorrectly created legacy ticket purchases
-due to a still unknown cause.  To avoid this we've added sanity checks prior 
-to purchase request to dcrwallet to avoid any potential malformed requests
-from being sent.  This won't solve the core issue, but should at least notify 
-users of something wrong occuring and we can provide triage in that situation.
+* There were a few reports of incorrectly created legacy ticket purchases
+  due to a still unknown cause.  To avoid this we've added sanity checks prior 
+  to purchase request to dcrwallet to avoid any potential malformed requests
+  from being sent.  This won't solve the core issue, but should at least notify 
+  users of something wrong occuring and we can provide triage in that situation.
 
 ## Code Contributors (Alphabetical Order)
 
@@ -192,24 +194,30 @@ The user's account ID is now logged on connect and authentication with a DEX ser
 
 ### Fixes
 
-- Fix a possible panic when reconfiguring a wallet that is not connected. (dfe4cd12234d1d17d6114f3de8f062ff912c594b)
-- When resuming trades on startup and login, counterparty contract audits now 
-retry repeatedly, as is the case when an audit request is initially received.  
-This prevents a match from being incorrectly revoked on startup if the 
-wallet/node fails to locate the counterparty contract immediately. (dfe4cd12234d1d17d6114f3de8f062ff912c594b)
-- The client's database subsystem is always started first and stopped last.  (b4ef3ff01f3a1567aecf762c5db75f83a9687d64) 
-This is a prerequisite for the following wallet lock-on-shutdown change.
-- On shutdown of client `Core`, the wallets are now locked even if the 
-`PromptShutdown` function is not used.  This does not affect dexc users, 
-only direct Go consumers of the `client/core.Core` type. (70044e68740faffc4888c6f4b4303806531a0255) 
-- Fix a possible interruption of the DEX reconnect loop if the config response 
-timed out. (4df683a10d755d71f37c979655b6ceea6343db8d)
-- Update the crypto/x/blake2 dependency to prevent silent memory corruption 
-from the hash function's assembly code. (c67af3f3b88750e69957e019d9eacc80d6aa7555)
-- Handle orders that somehow loose their funding coins.  Previously, such 
-orders would forever be logged at startup but never retired, and any matches 
-from such orders that required swap negotiation of other recovery would have 
-been improperly abandoned. (a7b5aa0a67dd2962c33d229cf101c59e85cb7b85)
+* Fix a possible panic when reconfiguring a wallet that is not connected. (dfe4cd12234d1d17d6114f3de8f062ff912c594b)
+
+* When resuming trades on startup and login, counterparty contract audits now 
+  retry repeatedly, as is the case when an audit request is initially received.  
+  This prevents a match from being incorrectly revoked on startup if the 
+  wallet/node fails to locate the counterparty contract immediately. (dfe4cd12234d1d17d6114f3de8f062ff912c594b)
+
+* The client's database subsystem is always started first and stopped last.  (b4ef3ff01f3a1567aecf762c5db75f83a9687d64) 
+  This is a prerequisite for the following wallet lock-on-shutdown change.
+
+* On shutdown of client `Core`, the wallets are now locked even if the 
+  `PromptShutdown` function is not used.  This does not affect dexc users, 
+  only direct Go consumers of the `client/core.Core` type. (70044e68740faffc4888c6f4b4303806531a0255) 
+
+* Fix a possible interruption of the DEX reconnect loop if the config response 
+  timed out. (4df683a10d755d71f37c979655b6ceea6343db8d)
+
+* Update the crypto/x/blake2 dependency to prevent silent memory corruption 
+  from the hash function's assembly code. (c67af3f3b88750e69957e019d9eacc80d6aa7555)
+
+* Handle orders that somehow loose their funding coins.  Previously, such 
+  orders would forever be logged at startup but never retired, and any matches 
+  from such orders that required swap negotiation of other recovery would have 
+  been improperly abandoned. (a7b5aa0a67dd2962c33d229cf101c59e85cb7b85)
 
 ## Server (dcrdex)
 
