@@ -94,6 +94,11 @@ All commits since the last release may be viewed on GitHub
 [here](https://github.com/decred/dcrwallet/compare/release-v1.6.0...release-v1.6.1).
 
 
+### Code Contributors (alphabetical order)
+
+- Josh Rickmar
+
+
 # Decrediton v1.6.1
 
 This patch release fixes several issues discovered in the v1.6.0 release.
