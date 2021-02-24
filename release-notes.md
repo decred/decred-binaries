@@ -106,7 +106,7 @@ Process Managed, Process Unmanaged, Sync Failed VSP tickets.
 We have also updated the process to change the consensus vote choices for the
 wallet and those choices now get updated on the chosen VSP.
 
-Altogether, this should provide users with a much more pleasant experience
+Altogether, this should provide users with a better experience
 when purchasing new VSP tickets in Decrediton.
 
 ## Updates
