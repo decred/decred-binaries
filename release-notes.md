@@ -53,7 +53,7 @@ All commits since the last release may be viewed on GitHub
 
 # dcrwallet v1.6.1
 
-This release focuses on fixing issues for the new VSP fee payments and
+This release focuses on fixing issues with the new VSP fee payments and
 account mixing.
 
 ## New Features
