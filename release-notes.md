@@ -37,16 +37,16 @@ files changed, 30 additional lines of code, and 9 deleted lines of code.
 All commits since the last release may be viewed on GitHub
 [here](https://github.com/decred/dcrd/compare/release-v1.6.0...release-v1.6.1).
 
-### Protocol and network:
+### Protocol and network
 
 - server: Notify block mgr later and track ntfn ([decred/dcrd#2588](https://github.com/decred/dcrd/pull/2588))
 - server: Force PoW upgrade to v8 ([decred/dcrd#2597](https://github.com/decred/dcrd/pull/2597))
 
-### Misc:
+### Misc
 
 - release: Bump for 1.6.1 ([decred/dcrd#2600](https://github.com/decred/dcrd/pull/2600))
 
-### Code Contributors (alphabetical order):
+### Code Contributors (alphabetical order)
 
 - Dave Collins
 
