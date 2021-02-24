@@ -3,14 +3,21 @@
 
 ## Install
 
-To install Decrediton desktop wallet, download, uncompress, and run [Decrediton Linux](https://github.com/decred/decred-binaries/releases/download/v1.6.1/decrediton-v1.6.1.AppImage) or [Decrediton macOS](https://github.com/decred/decred-binaries/releases/download/v1.6.1/decrediton-v1.6.1.dmg) or [Decrediton Windows](https://github.com/decred/decred-binaries/releases/download/v1.6.1/decrediton-v1.6.1.exe).
+To install Decrediton desktop wallet, download, uncompress, and run
+[Decrediton Linux](https://github.com/decred/decred-binaries/releases/download/v1.6.1/decrediton-v1.6.1.AppImage)
+or
+[Decrediton macOS](https://github.com/decred/decred-binaries/releases/download/v1.6.1/decrediton-v1.6.1.dmg)
+or
+[Decrediton Windows](https://github.com/decred/decred-binaries/releases/download/v1.6.1/decrediton-v1.6.1.exe).
 
-To install the command-line tools, please see [dcrinstall](https://github.com/decred/decred-release/tree/master/cmd/dcrinstall).
+To install the command-line tools, please see
+[dcrinstall](https://github.com/decred/decred-release/tree/master/cmd/dcrinstall).
 
 See decred-v1.6.1-manifest.txt and the other manifest files for SHA-256 hashes
 and the associated .asc signature files to confirm those hashes.
 
-See [README.md](./README.md#verifying-binaries) for more info on verifying the files.
+See [README.md](./README.md#verifying-binaries) for more info on verifying the
+files.
 
 
 ## Contents
@@ -41,12 +48,15 @@ All commits since the last release may be viewed on GitHub
 
 ### Protocol and Network
 
-- server: Notify block mgr later and track ntfn ([decred/dcrd#2588](https://github.com/decred/dcrd/pull/2588))
-- server: Force PoW upgrade to v8 ([decred/dcrd#2597](https://github.com/decred/dcrd/pull/2597))
+- server: Notify block mgr later and track ntfn
+  ([decred/dcrd#2588](https://github.com/decred/dcrd/pull/2588))
+- server: Force PoW upgrade to v8
+  ([decred/dcrd#2597](https://github.com/decred/dcrd/pull/2597))
 
 ### Misc
 
-- release: Bump for 1.6.1 ([decred/dcrd#2600](https://github.com/decred/dcrd/pull/2600))
+- release: Bump for 1.6.1
+  ([decred/dcrd#2600](https://github.com/decred/dcrd/pull/2600))
 
 ### Code Contributors (alphabetical order)
 
@@ -192,7 +202,9 @@ All commits since the last release may be viewed on GitHub
 
 This patch release provides several important bug fixes.
 
-Please read the [initial release (v0.1.0) notes](https://github.com/decred/dcrdex/releases/tag/release-v0.1.0) for important information and instructions.
+Please read the
+[initial release (v0.1.0) notes](https://github.com/decred/dcrdex/releases/tag/release-v0.1.0)
+for important information and instructions.
 
 ## Client (dexc)
 
