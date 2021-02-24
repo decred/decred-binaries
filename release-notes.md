@@ -141,24 +141,24 @@ choices on the new VSP was implemented.
 
 ## Bug Fixes
 
-* A timeout check was added when not receiving a response back from a VSP
-  for getting their VSPInfo.
+* Added a timeout when not receiving VSP status response within 5 seconds.
 
-* Transaction history filtering has been fixed and now should allow for multiple
-  types of transactions to be selected at once.
+* Transaction history filtering has been fixed and now allows to select multiple
+  types of transactions at once.
 
-* Tickets should now show as "Processing", "Error" or "Paid" shortly after
-  purchase.  Previously they would be shown "Solo" until a restart or another
+* Tickets will now show as "Processing", "Error" or "Paid" shortly after
+  purchase.  Previously they would be shown as "Solo" until a restart or another
   block was mined.
 
-* Added explicit wallet lock calls to ensure that wallet is locked after
-  mixing or ticket autobuyer requests.
+* Added explicit wallet lock calls to ensure that wallet is locked after mixing
+  or ticket autobuyer requests.
 
 * There were a few reports of incorrectly created legacy ticket purchases
-  due to a still unknown cause.  To avoid this we've added sanity checks prior
-  to purchase request to dcrwallet to avoid any potential malformed requests
-  from being sent.  This won't solve the core issue, but should at least notify
-  users of something wrong occuring and we can provide triage in that situation.
+  due to a still unknown cause.  To work-around this we've added sanity checks
+  prior to purchase request to dcrwallet to avoid any potential malformed
+  requests from being sent.  This won't solve the core issue, but should at
+  least notify users of something wrong occuring and give us data to investigate
+  further.
 
 ## Code Contributors (alphabetical order)
 
