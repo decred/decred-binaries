@@ -96,18 +96,12 @@ All commits since the last release may be viewed on GitHub
 
 # Decrediton v1.6.1
 
-This patch release covers a few different issues that were persistently reported
-after the release of v1.6.0.  First and foremost we have smoothed out new ticket
-purchasing so if users have enough balance to purchase a ticket they should
-never receive an insufficient balance error.  We have also added success
-and failure responses to most requests with the new ticket purchasing:
-Process Managed, Process Unmanaged, Sync Failed VSP tickets.
+This patch release fixes several issues discovered in the v1.6.0 release.
 
-We have also updated the process to change the consensus vote choices for the
-wallet and those choices now get updated on the chosen VSP.
-
-Altogether, this should provide users with a better experience
-when purchasing new VSP tickets in Decrediton.
+Most changes are focused on improving the staking experience with the new VSP
+system: unexpected insufficient balance error is fixed, successes and failures
+of various staking operations are better reported now, setting consensus vote
+choices on the new VSP was implemented.
 
 ## Updates
 
