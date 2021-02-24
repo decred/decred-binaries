@@ -191,8 +191,8 @@ Please read the [initial release (v0.1.0) notes](https://github.com/decred/dcrde
 
 ### Features and Improvements
 
-* The user's account ID is now logged on connect and authentication with a DEX
-server.
+* The user's account ID is now logged on connection and authentication with a
+  DEX server.
   ([8ce328](https://github.com/decred/dcrdex/commit/8ce328cacc4d7b0d35973a39917eef48ac1d1d64))
 
 ### Fixes
@@ -223,7 +223,7 @@ server.
   from the hash function's assembly code.
   ([c67af3](https://github.com/decred/dcrdex/commit/c67af3f3b88750e69957e019d9eacc80d6aa7555))
 
-* Handle orders that somehow loose their funding coins.  Previously, such
+* Handle orders that somehow lose their funding coins.  Previously, such
   orders would forever be logged at startup but never retired, and any matches
   from such orders that required swap negotiation of other recovery would have
   been improperly abandoned.
