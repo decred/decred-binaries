@@ -124,7 +124,7 @@ when purchasing new VSP tickets in Decrediton.
   with the new tickets and the old tickets.
 
 * An initial Traditional Chinese translation was completed by smartwojak and
-  verified by long-standing community member chang_hugo.
+  verified by long-standing community member Hugo Chang (@changhugo).
 
 * We've decided to not allow multiple things from running or attempted at the
   same time to avoid possible issues or unexpected errors.  So, for instance,
