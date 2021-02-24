@@ -178,7 +178,7 @@ when purchasing new VSP tickets in decrediton.
 ## Changelog
 
 All commits since the last release may be viewed on GitHub 
-[here](https://github.com/decred/decrediton/compare/v1.6.0...v1.6.1).
+[here](https://github.com/decred/decrediton/compare/release-v1.6.0...release-v1.6.1).
 
 # dcrdex v0.1.5
 
