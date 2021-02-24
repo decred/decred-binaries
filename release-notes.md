@@ -6,7 +6,7 @@
 To install the command line tools, please see [dcrinstaller](https://github.com/decred/decred-release/tree/master/cmd/dcrinstall).
 To install decrediton download, uncompress, and run [decrediton Linux](https://github.com/decred/decred-binaries/releases/download/v1.6.1/decrediton-v1.6.1.AppImage) or [decrediton macOS](https://github.com/decred/decred-binaries/releases/download/v1.6.1/decrediton-v1.6.1.dmg) or [decrediton Windows](https://github.com/decred/decred-binaries/releases/download/v1.6.1/decrediton-v1.6.1.exe).
 
-See manifest-v1.6.1.txt, and the package specific manifest files for sha256 sums and the associated .asc files to confirm those shas.
+See decred-v1.6.1-manifest.txt, and the package specific manifest files for sha256 sums and the associated .asc files to confirm those shas.
 
 See [README.md](./README.md#verifying-binaries) for more info on verifying the files.
 
