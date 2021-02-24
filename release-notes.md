@@ -81,8 +81,8 @@ account mixing.
   mixing for some outputs which are currently being rejected by the
   CoinShuffle++ server due to not paying enough of the required transaction fee.
 
-* Fixed a chance to pay too high fee when mixing outputs due to the selection of
-  a wrong mix denomination.
+* Fixed a chance to select wrong mix denomination during output mixing, which
+  could result in a very high transaction fee.
 
 * The `signrawtransaction` JSON-RPC method was changed to return an error
   if the transaction being signed has no inputs.
