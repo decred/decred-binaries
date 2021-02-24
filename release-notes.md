@@ -165,7 +165,12 @@ choices on the new VSP was implemented.
   least notify users of something wrong occuring and give us data to investigate
   further.
 
-## Code Contributors (alphabetical order)
+## Changelog
+
+All commits since the last release may be viewed on GitHub
+[here](https://github.com/decred/decrediton/compare/release-v1.6.0...release-v1.6.1).
+
+### Code Contributors (alphabetical order)
 
 - Alex Yocom-Piatt
 - Amir Massarwa
@@ -177,10 +182,6 @@ choices on the new VSP was implemented.
 - smartwojak
 - Victor Oliveira
 
-## Changelog
-
-All commits since the last release may be viewed on GitHub
-[here](https://github.com/decred/decrediton/compare/release-v1.6.0...release-v1.6.1).
 
 # dcrdex v0.1.5
 
