@@ -4,7 +4,7 @@
 ## Install
 
 To install the command line tools, please see [dcrinstaller](https://github.com/decred/decred-release/tree/master/cmd/dcrinstall).
-To install decrediton download, uncompress, and run [decrediton Linux](https://github.com/decred/decred-binaries/releases/download/v1.6.1/decrediton-v1.6.1.AppImage) or [decrediton macOS](https://github.com/decred/decred-binaries/releases/download/v1.6.1/decrediton-v1.6.1.dmg) or [decrediton Windows](https://github.com/decred/decred-binaries/releases/download/v1.6.1/decrediton-v1.6.1.exe).
+To install Decrediton download, uncompress, and run [Decrediton Linux](https://github.com/decred/decred-binaries/releases/download/v1.6.1/decrediton-v1.6.1.AppImage) or [Decrediton macOS](https://github.com/decred/decred-binaries/releases/download/v1.6.1/decrediton-v1.6.1.dmg) or [Decrediton Windows](https://github.com/decred/decred-binaries/releases/download/v1.6.1/decrediton-v1.6.1.exe).
 
 See decred-v1.6.1-manifest.txt, and the package specific manifest files for sha256 sums and the associated .asc files to confirm those shas.
 
@@ -15,7 +15,7 @@ See [README.md](./README.md#verifying-binaries) for more info on verifying the f
 
 * [dcrd](#dcrd-v161)
 * [dcrwallet](#dcrwallet-v161)
-* [decrediton](#decrediton-v161)
+* [Decrediton](#decrediton-v161)
 * [dcrdex](#dcrdex-v015)
 
 
@@ -94,7 +94,7 @@ All commits since the last release may be viewed on GitHub
 [here](https://github.com/decred/dcrwallet/compare/release-v1.6.0...release-v1.6.1).
 
 
-# decrediton v1.6.1
+# Decrediton v1.6.1
 
 This patch release covers a few different issues that were persistently reported
 after the release of v1.6.0.  First and foremost we have smoothed out new ticket
@@ -107,7 +107,7 @@ We have also updated the process to change the consensus vote choices for the
 wallet and those choices now get updated on the chosen VSP.
 
 Altogether, this should provide users with a much more pleasant experience
-when purchasing new VSP tickets in decrediton.
+when purchasing new VSP tickets in Decrediton.
 
 ## Updates
 
