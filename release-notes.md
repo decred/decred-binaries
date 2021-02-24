@@ -37,7 +37,7 @@ files changed, 30 additional lines of code, and 9 deleted lines of code.
 All commits since the last release may be viewed on GitHub
 [here](https://github.com/decred/dcrd/compare/release-v1.6.0...release-v1.6.1).
 
-### Protocol and network
+### Protocol and Network
 
 - server: Notify block mgr later and track ntfn ([decred/dcrd#2588](https://github.com/decred/dcrd/pull/2588))
 - server: Force PoW upgrade to v8 ([decred/dcrd#2597](https://github.com/decred/dcrd/pull/2597))
@@ -56,12 +56,12 @@ All commits since the last release may be viewed on GitHub
 This release focuses on fixing issues for the new VSP fee payments and
 account mixing.
 
-## New features
+## New Features
 
 * A `WalletServer.SetVspdVoteChoice` gRPC method was added, allowing clients to
   update the agenda preferences for the new VSP software.
 
-## Bug fixes
+## Bug Fixes
 
 * An additional transaction may be created now when an account does not have
   enough UTXOs to pay for both a ticket and a VSP fee.  This avoids insufficient
@@ -143,7 +143,7 @@ when purchasing new VSP tickets in decrediton.
   they will be shown a message:  Process managed, process unmanaged and Sync
   Failed VSP Tickets.
 
-## Bug fixes
+## Bug Fixes
 
 * A timeout check was added when not receiving a response back from a VSP
   for getting their VSPInfo.
@@ -164,7 +164,7 @@ when purchasing new VSP tickets in decrediton.
   from being sent.  This won't solve the core issue, but should at least notify
   users of something wrong occuring and we can provide triage in that situation.
 
-## Code Contributors (Alphabetical Order)
+## Code Contributors (alphabetical order)
 
 - Alex Yocom-Piatt
 - Amir Massarwa
