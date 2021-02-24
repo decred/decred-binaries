@@ -115,21 +115,21 @@ when purchasing new VSP tickets in Decrediton.
   their choice it is updated on their local wallet and also sent to any legacy
   VSP.  Every live ticket they have with a new VSP is updated as well.
 
-* Due to required utxos for each ticket purchase there is a possibility of
+* Due to required UTXOs for each ticket purchase there is a possibility of
   dcrwallet purchasing less than what the user requested.  We have added
   a better message for this instance.  Users should be able to now understand
   why they only got 1 when trying to buy 2 etc.
 
-* We've updated some staking tab labels to hopefully help make things more clear
+* We've updated some Staking tab labels to hopefully help make things more clear
   with the new tickets and the old tickets.
 
-* An initial Traditional Chinese translation was completed smartwojak by
-  verified by long standing community member chang_hugo.
+* An initial Traditional Chinese translation was completed by smartwojak and
+  verified by long-standing community member chang_hugo.
 
 * We've decided to not allow multiple things from running or attempted at the
   same time to avoid possible issues or unexpected errors.  So, for instance,
   when the mixer is running, users may not purchase tickets or run the autobuyer.
-  Same for vice versa.  To complete any of the tasks you may want, simply just
+  Same for vice versa.  To complete any of the tasks you may want, simply
   turn off the thing running and proceed.  The added tooltips should make the
   situation clear.
 
@@ -139,9 +139,9 @@ when purchasing new VSP tickets in Decrediton.
   happening behind the scenes and they should be patient.
 
 * Added success and failure messages to various new ticket purchasing actions.
-  Now when users successfully complete (or receive errorrs) the following actions
-  they will be shown a message:  Process managed, process unmanaged and Sync
-  Failed VSP Tickets.
+  Now when users successfully complete (or receive errors for) the following
+  actions they will be shown a message: Process Managed, Process Unmanaged and
+  Sync Failed VSP Tickets.
 
 ## Bug Fixes
 
@@ -149,14 +149,14 @@ when purchasing new VSP tickets in Decrediton.
   for getting their VSPInfo.
 
 * Transaction history filtering has been fixed and now should allow for multiple
-  types of transaction to be selected at once.
+  types of transactions to be selected at once.
 
 * Tickets should now show as "Processing", "Error" or "Paid" shortly after
   purchase.  Previously they would be shown "Solo" until a restart or another
   block was mined.
 
 * Added explicit wallet lock calls to ensure that wallet is locked after
-  mixing or ticket auto buyer requests.
+  mixing or ticket autobuyer requests.
 
 * There were a few reports of incorrectly created legacy ticket purchases
   due to a still unknown cause.  To avoid this we've added sanity checks prior
