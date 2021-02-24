@@ -105,37 +105,39 @@ choices on the new VSP was implemented.
 
 ## Updates
 
-* Consensus voting is now working as expected.  When a user chooses to update
-  their choice it is updated on their local wallet and also sent to any legacy
-  VSP.  Every live ticket they have with a new VSP is updated as well.
+* Consensus change voting is now working as expected.  When a user sets their
+  vote choice, it is updated in their local wallet and also sent to any legacy
+  VSP.  Every live ticket they have assigned with a new VSP is updated as well.
 
-* Due to required UTXOs for each ticket purchase there is a possibility of
-  dcrwallet purchasing less than what the user requested.  We have added
-  a better message for this instance.  Users should be able to now understand
-  why they only got 1 when trying to buy 2 etc.
+* Due to the way the coins (UTXOs) are handled when purchasing tickets, there is
+  a possibility of the underlying dcrwallet purchasing fewer tickets than what
+  the user requested.  This condition is now explained with a better message,
+  to help the user understand why, for example, they only got 1 ticket when
+  trying to buy 2.
 
-* We've updated some Staking tab labels to hopefully help make things more clear
-  with the new tickets and the old tickets.
+* Labels on the Staking tab have been updated to make things more clear with the
+  new tickets and the old tickets.
 
-* An initial Traditional Chinese translation was completed by smartwojak and
+* An initial Traditional Chinese translation was completed by @smartwojak and
   verified by long-standing community member Hugo Chang (@changhugo).
 
-* We've decided to not allow multiple things from running or attempted at the
-  same time to avoid possible issues or unexpected errors.  So, for instance,
-  when the mixer is running, users may not purchase tickets or run the autobuyer.
-  Same for vice versa.  To complete any of the tasks you may want, simply
-  turn off the thing running and proceed.  The added tooltips should make the
-  situation clear.
+* Running or attempting multiple things at the same time is no longer allowed
+  to avoid possible issues or unexpected errors.  For instance, when the mixer
+  is running, users may not purchase tickets or run the autobuyer, and vice
+  versa.  To perform an action, the user needs to turn off a running activity
+  before proceeding. Several tooltips have been added to make the user aware of
+  the situation.
 
-* Added loading indicators to various buttons related to ticket purchasing.  Due
-  to long wait times that are required for some actions (mixed ticket purchasing)
-  it's important to give the user feedback to indicate that something is still
-  happening behind the scenes and they should be patient.
+* Loading indicators have been added to various buttons related to ticket
+  purchasing, to indicate that the user should wait for a long-running operation
+  (like mixed ticket purchasing) to complete.
 
-* Added success and failure messages to various new ticket purchasing actions.
-  Now when users successfully complete (or receive errors for) the following
-  actions they will be shown a message: Process Managed, Process Unmanaged and
-  Sync Failed VSP Tickets.
+* Success and failure messages have been added to various new ticket purchasing
+  actions. Now users will be shown a message when they successfully complete (or
+  receive errors for) the following actions: verify that visible tickets are
+  assigned to VSPs and have their fees paid (Process Managed), discover tickets
+  not yet assigned to a VSP and pay their fees (Process Unmanaged), and sync
+  failed VSP tickets.
 
 ## Bug Fixes
 
