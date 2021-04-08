@@ -24,7 +24,7 @@ files.
 
 * [dcrd](#dcrd-v162)
 * [dcrwallet](#dcrwallet-v162)
-* [Decrediton](#decrediton-v162)=
+* [Decrediton](#decrediton-v162)
 
 
 # dcrd v1.6.2
@@ -41,15 +41,15 @@ files changed, 55 additional lines of code, and 31 deleted lines of code.
 All commits since the last release may be viewed on GitHub
 [here](https://github.com/decred/dcrd/compare/release-v1.6.1...release-v1.6.2).
 
-### Protocol and network:
+### Protocol and Network
 
 - server: Only send fast block anns to full nodes ([decred/dcrd#2609](https://github.com/decred/dcrd/pull/2609))
 
-### Misc:
+### Misc
 
 - release: Bump for 1.6.2 ([decred/dcrd#2629](https://github.com/decred/dcrd/pull/2629))
 
-### Code Contributors (alphabetical order):
+### Code Contributors (alphabetical order)
 
 - Dave Collins
 
@@ -85,16 +85,16 @@ and change mixing.
 All commits since the last release may be viewed on GitHub
 [here](https://github.com/decred/dcrwallet/compare/release-v1.6.1...release-v1.6.2).
 
-## Code Contributors (alphabetical order)
+### Code Contributors (alphabetical order)
 
 * Jonathan Chappelow
 * Josh Rickmar
 
 
-# decrediton v1.6.2
+# Decrediton v1.6.2
 
-This patch release for decrediton includes just a few small changes for copy
-and buttons missing text.  
+This patch release for Decrediton includes just a few small changes for copy
+and buttons missing text.
 
 ## Bug Fixes
 
