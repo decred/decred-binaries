@@ -107,6 +107,13 @@ and buttons missing text.
 All commits since the last release may be viewed on GitHub
 [here](https://github.com/decred/decrediton/compare/release-v1.6.1...release-v1.6.2).
 
+### Code Contributors (alphabetical order)
+
+- Alex Yocom-Piatt
+- Amir Massarwa
+- bgptr
+- Matheus Degiovani
+
 
 # 2021-02-23
 
