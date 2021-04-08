@@ -56,7 +56,7 @@ All commits since the last release may be viewed on GitHub
 
 # dcrwallet v1.6.2
 
-This release focus on bug fixes and feature improvements for VSP ticketbuying
+This release focuses on bug fixes and feature improvements for VSP ticketbuying
 and change mixing.
 
 ## New Features
