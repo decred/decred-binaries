@@ -29,7 +29,8 @@ files.
 
 # dcrwallet v1.6.3
 
-This release focus on bug fixes and feature improvements for VSP ticketbuying.
+This release focuses on bug fixes and feature improvements for VSP ticket 
+buying.
 
 ## New features
 
@@ -80,9 +81,9 @@ All commits since the last release may be viewed on GitHub
 * Wisdom Arerosuoghene
 
 
-# decrediton v1.6.3
+# Decrediton v1.6.3
 
-This release decrediton includes the initial DEX integration, as well as 
+This release of Decrediton includes the initial DEX integration, as well as 
 many other graphical improvements, security upgrades, and bug fixes.
 
 ## New features
@@ -98,13 +99,13 @@ many other graphical improvements, security upgrades, and bug fixes.
   Once enabled, users need to set a DEX passphrase.  This passphrase is what 
   they will use to Login and to submit orders etc.  Next they need to select
   or create a new account for DEX.  Theses funds are what will be accessible
-  inside of the dcrdex trading platform. 
+  inside of the DCRDEX trading platform.
 
   Users must then connect their DCR and BTC wallets to DEX.  Once connected,
   they will be guided to register their DEX account and pay the required fee.
 
   Once these steps are complete they will be able to launch the trading 
-  platform.  Upon attempting to close Decrediton, there will be an attempt 
+  platform.  Upon attempting to close Decrediton, there will be an attempt to 
   logout of the DEX.  If there are any open orders, Decrediton will not be
   allowed to close.  This is to ensure that the swaps are able to complete
   successfully.
@@ -114,9 +115,9 @@ many other graphical improvements, security upgrades, and bug fixes.
   is invisible to the user (Electron/Webpack upgrades), we have added 
   per-account locking.  Previously, when any action occured the whole wallet
   was unlocked and then relocked upon completion.  Now only the pertinent 
-  account for the transcation will be unlocked.  This will protect other accounts
-  for situations like DEX and mixing where accounts will be unlocked for long
-  periods of time.
+  account for the transcation will be unlocked.  This will protect other 
+  accounts for situations like DEX and mixing where accounts will be unlocked 
+  for long periods of time.
 
 * We have improved the new vspd ticket tracking so fees are now paid more 
   frequently and process managed tickets is only shown when the user hasn't yet
@@ -132,7 +133,7 @@ All commits since the last release may be viewed on GitHub
 * Alex Yocom-Piatt
 * Amir Massarwa
 * bgptr
-- Guilherme Marques
+* Guilherme Marques
 * Jamie Holdstock
 * Joe Gruffins
 * Matheus Degiovani
