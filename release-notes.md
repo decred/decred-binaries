@@ -1,3 +1,142 @@
+# 2021-12-22
+
+
+## Install
+
+To install Decrediton desktop wallet, download, uncompress, and run
+[Decrediton Linux](https://github.com/decred/decred-binaries/releases/download/v1.7.0-rc1/decrediton-v1.7.0-rc1.AppImage)
+or
+[Decrediton macOS](https://github.com/decred/decred-binaries/releases/download/v1.7.0-rc1/decrediton-v1.7.0-rc1.dmg)
+or
+[Decrediton Windows](https://github.com/decred/decred-binaries/releases/download/v1.7.0-rc1/decrediton-v1.7.0-rc1.exe).
+
+To install the command-line tools, please see
+[dcrinstall](https://github.com/decred/decred-release/tree/master/cmd/dcrinstall).
+
+See decred-v1.7.0-rc1-manifest.txt and the other manifest files for SHA-256 hashes
+and the associated .asc signature files to confirm those hashes.
+
+See [README.md](./README.md#verifying-binaries) for more info on verifying the
+files.
+
+
+## Contents
+* [dcrd](#dcrd-v170-rc1)
+* [dcrwallet](#dcrwallet-v170-rc1)
+* [Decrediton](#decrediton-v170-rc1)
+
+
+# dcrd v1.7.0-rc1
+
+# dcrwallet v1.7.0-rc1
+
+# Decrediton v1.7.0-rc1
+
+This release of Decrediton includes numerous bug fixes and refinement across
+all pages/tabs.  
+
+Matheusd has overhauled the security of Decrediton so that we can
+keep using electron in the future, with a decent amount of assurance that it's
+safe and not prone to intrusion.  The overal jist of the work done could be
+described simply as: layer/context isolation.  He reduced the total number of
+dependencies as well as the access those dependencies may have to private 
+information.  Users will be shown some new modals while confirming wallet 
+seeds and confirming destination addresses.
+
+DCRDEX is now at 0.4.0 and considered to be fully integrated with Decrediton.  
+Some extra work has been done to improve bitcoin config handling and overall
+stability of new dex account creation.  Users are now able to restore their DEX
+accounts with a seed from their DCRDEX windows.  This should help users avoid 
+paying fees to trading servers unnecessarily. There are a few remaining features
+that will be added in the future (dcrwallet SPV and ETH support), but overall is 
+feature complete in terms of decrediton pieces.
+
+bgptr has begun to implement redesigns to some areas of decrediton.  The 
+Governance and LN pages got full redesigns.  Changes were also made to the
+confirm seed view screen.  There will be more of these redesigns implemented
+in the near future: Settings and Launcher (wallet selection) coming up next!
+
+bgptr has also added test coverage to all of the tabs on the Transactions page.
+Ideally, as we increase test coverage we will avoid bugs caused by reversions or
+oversight.
+
+Lastly, bgptr has begun the process of using our react component library: pi-ui.
+Things like text inputs, paginators, toggles, radio buttons are now from pi-ui.
+Centralizing these components should streamline the look and feel across many
+Decred products (politeia, cms, decrediton).
+
+## New features
+
+* We have added a few new tools that will hopefully reduce the amount of support
+  requests that are commonly issued.  First, when restoring a wallet from seed
+  users are now given the option to 'disable coin type upgrades' which will
+  allow older wallet (pre-2017) to be restored on the previous coin type.  We have
+  also added a 'gap limit' setting when restoring, this should help avoid 
+  address indexes being not correctly synced which could result in incorrect
+  balances being shown.  Note: If the gap limit is changed on restore, then that
+  gap limit will be used for that wallet from then on.  
+
+  For wallets that have already been restored that may have incorrect address
+  indices, we have replaced the Gap Limit in settings with a 'discover usage'
+  tool.  This will allow users to properly determine their address indices and
+  balances.
+
+* We have added the ability to revoke tickets while in SPV mode.  This seems
+  to be a common request in support.  The new 'revoke ticket' button is found
+  in the transaction details for any non-spent ticket.  Users will be presented
+  with a confirmation modal that informs them of the risk of attempting to
+  revoke before that confirm that the ticket is missed on dcrdata.  (They would
+  have to Abandon the 'bad' revocation transcation and rescan.)
+
+* We have decided to hide the legacy ticket purchase area.  We will wait until
+  a later date to remove the components and code itself, but after 1.7.0 users
+  will only be able to purchase private/acccount-less tickets.
+
+## Bug Fixes
+
+* Fix issues with the Sync VSP Tickets Dropdown
+
+* Various fixes for Trezor wallets.
+
+* VSPD ticket processing has been fixed and revamped.  A new status of 
+  'confirmed' has been added.  This should reduce the number of misses that some
+  users have encountered during the changeover from legacy ticket purchasing.
+
+* Fix issue that caused large input transactions (PoW mining payouts) to crash
+  decrediton.  These transactions caused large numbers of addresses to be
+  validated within dcrwallet which lead to resource exhaustion.  
+
+* Make sure that the unmixed account was unlocked when using the ticket
+  autobuyer.  This could cause funds not to be spent during auto-buying.  We
+  never had any reports of this, so unsure of the overall usage of autobuyer
+  in general.
+
+* Fix Duplicates ticket transactions being shown in the Ticket History.  Each
+  are now labeled appropriately (eg Vote, Voted, Revoke, Revoked)
+
+* Add insufficient balance check for the account mixer.  Previously the mixer
+  could be started even if there was no balance to mix.
+
+## Changelog
+
+All commits since the last release may be viewed on GitHub
+[here](https://github.com/decred/decrediton/compare/release-v1.6.3...release-v1.7.0-rc1).
+
+## Code Contributors (alphabetical order)
+
+* Alex Yocom-Piatt
+* Amir Massarwa
+* bgptr
+* Degeri
+* Guilherme Marques
+* Jamie Holdstock
+* Joe Gruffins
+* Jonathan Chappelow
+* Jonathan Zeppettini
+* Matheus Degiovani
+* Victor Oliveira
+
+
 # 2021-05-12
 
 
