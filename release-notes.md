@@ -28,39 +28,516 @@ files.
 
 # dcrd v1.7.0-rc1
 
+This is a new major release of dcrd.  Some of the key highlights are:
+
+* Four new consensus vote agendas which allow stakeholders to decide whether or not to activate support for the following:
+  * Reverting the Treasury maximum expenditure policy
+  * Enforcing explicit version upgrades
+  * Support for automatic ticket revocations for missed votes
+  * Changing the Proof-of-Work and Proof-of-Stake subsidy split from 60%/30% to 10%/80%
+* Substantially reduced initial sync time
+* Major performance enhancements to unspent transaction output handling
+* Faster cryptographic signature validation
+* Significant improvements to network synchronization
+* Support for a configurable assumed valid block
+* Block index memory usage reduction
+* Asynchronous indexing
+* Version 1 block filters removal
+* Various updates to the RPC server:
+  * Additional per-connection read limits
+  * A more strict cross origin request policy
+  * A new alternative client authentication mechanism based on TLS certificates
+  * Availability of the scripting language version for transaction outputs
+  * Several other notable updates, additions, and removals related to the JSON-RPC API
+* New developer modules:
+  * Age-Partitioned Bloom Filters
+  * Fixed-Precision Unsigned 256-bit Integers
+  * Standard Scripts
+  * Standard Addresses
+* Infrastructure improvements
+* Quality assurance changes
+
+For those unfamiliar with the [voting process](https://docs.decred.org/governance/consensus-rule-voting/overview/) in Decred, all code needed in order to support each of the aforementioned consensus changes is already included in this release, however it will remain dormant until the stakeholders vote to activate it.
+
+For reference, the consensus change work for each of the four changes was originally proposed and approved for initial implementation via the following Politeia proposals:
+- [Decentralized Treasury Spending](https://proposals-archive.decred.org/proposals/c96290a)
+- [Explicit Version Upgrades Consensus Change](https://proposals.decred.org/record/3a98861)
+- [Automatic Ticket Revocations Consensus Change](https://proposals.decred.org/record/e2d7b7d)
+- [Change PoW/PoS Subsidy Split From 60/30 to 10/80](https://proposals.decred.org/record/427e1d4)
+
+The following Decred Change Proposals (DCPs) describe the proposed changes in detail and provide full technical specifications:
+- [DCP0007](https://github.com/decred/dcps/blob/master/dcp-0007/dcp-0007.mediawiki)
+- [DCP0008](https://github.com/decred/dcps/blob/master/dcp-0008/dcp-0008.mediawiki)
+- [DCP0009](https://github.com/decred/dcps/blob/master/dcp-0009/dcp-0009.mediawiki)
+- [DCP0010](https://github.com/decred/dcps/blob/master/dcp-0010/dcp-0010.mediawiki)
+
+**It is important for everyone to upgrade their software to this latest release even if you don't intend to vote in favor of the agenda.**
+
+## Downgrade Warning
+
+The database format in v1.7.0 is not compatible with previous versions of the software.  This only affects downgrades as users upgrading from previous versions will see a one time database migration.
+
+Once this migration has been completed, it will no longer be possible to downgrade to a previous version of the software without having to delete the database and redownload the chain.
+
+The database migration typically takes around 40-50 minutes on HDDs and 20-30 minutes on SSDs.
+
+## Notable Changes
+
+### Four New Consensus Change Votes
+
+Four new consensus change votes are now available as of this release.  After upgrading, stakeholders may set their preferences through their wallet.
+
+#### Revert Treasury Maximum Expenditure Policy Vote
+
+The first new vote available as of this release has the id `reverttreasurypolicy`.
+
+The primary goal of this change is to revert the currently active maximum expenditure policy of the decentralized Treasury to the one specified in the [original Politeia proposal](https://proposals-archive.decred.org/proposals/c96290a).
+
+See [DCP0007](https://github.com/decred/dcps/blob/master/dcp-0007/dcp-0007.mediawiki) for the full technical specification.
+
+#### Explicit Version Upgrades Vote
+
+The second new vote available as of this release has the id `explicitverupgrades`.
+
+The primary goals of this change are to:
+
+* Provide an easy, reliable, and efficient method for software and hardware to determine exactly which rules should be applied to transaction and script versions
+* Further embrace the increased security and other desirable properties that hard forks provide over soft forks
+
+See the following for more details:
+
+* [Politeia proposal](https://proposals.decred.org/record/3a98861)
+* [DCP0008](https://github.com/decred/dcps/blob/master/dcp-0008/dcp-0008.mediawiki)
+
+#### Automatic Ticket Revocations Vote
+
+The third new vote available as of this release has the id `autorevocations`.
+
+The primary goals of this change are to:
+
+* Improve the Decred stakeholder user experience by removing the requirement for stakeholders to manually revoke missed and expired tickets
+* Enable the recovery of funds for users who lost their redeem script for the legacy VSP system (before the release of vspd, which removed the need for the redeem script)
+
+See the following for more details:
+
+* [Politeia proposal](https://proposals.decred.org/record/e2d7b7d)
+* [DCP0009](https://github.com/decred/dcps/blob/master/dcp-0009/dcp-0009.mediawiki)
+
+#### Change PoW/PoS Subsidy Split to 10/80 Vote
+
+The fourth new vote available as of this release has the id `changesubsidysplit`.
+
+The proposed modification to the subsidy split is intended to substantially diminish the ability to attack Decred's markets with mined coins and improve decentralization of the issuance process.
+
+See the following for more details:
+
+* [Politeia proposal](https://proposals.decred.org/record/427e1d4)
+* [DCP0010](https://github.com/decred/dcps/blob/master/dcp-0010/dcp-0010.mediawiki)
+
+### Substantially Reduced Initial Sync Time
+
+The amount of time it takes to complete the initial chain synchronization process has been substantially reduced.  With default settings, it is around 48% faster versus the previous release.
+
+### Unspent Transaction Output Overhaul
+
+The way unspent transaction outputs (UTXOs) are handled has been significantly reworked to provide major performance enhancements to both steady-state operation as well as the initial chain sync process as follows:
+
+* Each UTXO is now tracked independently on a per-output basis
+* The UTXOs now reside in a dedicated database
+* All UTXO reads and writes now make use of a cache
+
+#### Unspent Transaction Output Cache
+
+All reads and writes of unspent transaction outputs (utxos) now go through a cache that sits on top of the utxo set database which drastically reduces the amount of reading and writing to disk, especially during the initial sync process when a very large number of blocks are being processed in quick succession.
+
+This utxo cache provides significant runtime performance benefits at the cost of some additional memory usage.  The maximum size of the cache can be configured with the new `--utxocachemaxsize` command-line configuration option.  The default value is 150 MiB, the minimum value is 25 MiB, and the maximum value is 32768 MiB (32 GiB).
+
+Some key properties of the cache are as follows:
+
+* For reads, the UTXO cache acts as a read-through cache
+  * All UTXO reads go through the cache
+  * Cache misses load the missing data from the disk and cache it for future lookups
+* For writes, the UTXO cache acts as a write-back cache
+  * Writes to the cache are acknowledged by the cache immediately, but are only periodically flushed to disk
+* Allows intermediate steps to effectively be skipped thereby avoiding the need to write millions of entries to disk
+* On average, recent UTXOs are much more likely to be spent in upcoming blocks than older UTXOs, so only the oldest UTXOs are evicted as needed in order to maximize the hit ratio of the cache
+* The cache is periodically flushed with conditional eviction:
+  * When the cache is NOT full, nothing is evicted, but the changes are still written to the disk set to allow for a quicker reconciliation in the case of an unclean shutdown
+  * When the cache is full, 15% of the oldest UTXOs are evicted
+
+### Faster Cryptographic Signature Validation
+
+Some aspects of the underlying crypto code has been updated to further improve its execution speed and reduce the number of memory allocations resulting in about a 1% reduction to signature verification time.
+
+The primary benefits are:
+
+* Improved vote times since blocks and transactions propagate more quickly throughout the network
+* Approximately a 2% reduction to the duration of the initial sync process
+
+### Significant Improvements to Network Synchronization
+
+The method used to obtain blocks from other peers on the network is now guided entirely by block headers.  This provides a wide variety of benefits, but the most notable ones for most users are:
+
+* Faster initial synchronization
+* Reduced bandwidth usage
+* Enhanced protection against attempted DoS attacks
+* Percentage-based progress reporting
+* Improved steady state logging
+
+### Support for Configurable Assumed Valid Block
+
+This release introduces a new model for deciding when several historical validation checks may be skipped for blocks that are an ancestor of a known good block.
+
+Specifically, a new `AssumeValid` parameter is now used to specify the aforementioned known good block.  The default value of the parameter is updated with each release to a recent block that is part of the main chain.
+
+The default value of the parameter can be overridden with the `--assumevalid` command-line option by setting it as follows:
+
+* `--assumevalid=0`: Disable the feature resulting in no skipped validation checks
+* `--assumevalid=[blockhash]`:  Set `AssumeValid` to the specified block hash
+
+Specifying a block hash closer to the current best chain tip allows for faster syncing.  This is useful since the validation requirements increase the longer a particular release build is out as the default known good block becomes deeper in the chain.
+
+### Block Index Memory Usage Reduction
+
+The block index that keeps track of block status and connectivity now occupies around 30MiB less memory and scales better as more blocks are added to the chain.
+
+### Asynchronous Indexing
+
+The various optional indexes are now created asynchronously versus when blocks are processed as was previously the case.
+
+This permits blocks to be validated more quickly when the indexes are enabled since the validation no longer needs to wait for the indexing operations to complete.
+
+In order to help keep consistent behavior for RPC clients, RPCs that involve interacting with the indexes will not return results until the associated indexing operation completes when the indexing tip is close to the current best chain tip.
+
+One side effect of this change that RPC clients should be aware of is that it is now possible to receive sync timeout errors on RPCs that involve interacting with the indexes if the associated indexing tip gets so far behind it would end up delaying results for too long.  In practice, errors of this type are rare and should only ever be observed during the initial sync process before the associated indexes are current.  However, callers should be aware of the possibility and handle the error accordingly.
+
+The following RPCs are affected:
+
+* `existsaddress`
+* `existsaddresses`
+* `getrawtransaction`
+* `searchrawtransactions`
+
+### Version 1 Block Filters Removal
+
+The previously deprecated version 1 block filters are no longer available on the peer-to-peer network.  Use [version 2 block filters](https://github.com/decred/dcps/blob/master/dcp-0005/dcp-0005.mediawiki#version-2-block-filters) with their associated [block header commitment](https://github.com/decred/dcps/blob/master/dcp-0005/dcp-0005.mediawiki#block-header-commitments) and [inclusion proof](https://github.com/decred/dcps/blob/master/dcp-0005/dcp-0005.mediawiki#verifying-commitment-root-inclusion-proofs) instead.
+
+### RPC Server Changes
+
+The RPC server version as of this release is 7.0.0.
+
+#### Max Request Limits
+
+The RPC server now imposes the following additional per-connection read limits to help further harden it against potential abuse in non-standard configurations on poorly-configured networks:
+
+* 0 B / 8 MiB for pre and post auth HTTP connections
+* 4 KiB / 16 MiB for pre and post auth WebSocket connections
+
+In practice, these changes will not have any noticeable effect for the vast majority of nodes since the RPC server is not publicly accessible by default and also requires authentication.
+
+Nevertheless, it can still be useful for scenarios such as authenticated fuzz testing and improperly-configured networks that have disabled all other security measures.
+
+#### More Strict Cross Origin Request (CORS) Policy
+
+The CORS policy for WebSocket clients is now more strict and rejects requests from other domains.
+
+In practice, CORS requests will be rejected before ever reaching that point due to the use of a self-signed TLS certificate and the requirement for
+authentication to issue any commands.  However, additional protection mechanisms make it that much more difficult to attack by providing defense in depth.
+
+#### Alternative Client Authentication Method Based on TLS Certificates
+
+A new alternative method for TLS clients to authenticate to the RPC server by presenting a client certificate in the TLS handshake is now available.
+
+Under this authentication method, the certificate authority for a client certificate must be added to the RPC server as a trusted root in order for it to trust the client.  Once activated, clients will no longer be required to provide HTTP Basic authentication nor use the `authenticate` RPC in the case of WebSocket clients.
+
+Note that while TLS client authentication has the potential to ultimately allow more fine grained access controls on a per-client basis, it currently only supports clients with full administrative privileges.  In other words, it is not currently compatible with the `--rpclimituser` and `--rpclimitpass` mechanism, so users depending on the limited user settings should avoid the new authentication method for now.
+
+The new authentication type can be activated with the `--authtype=clientcert` configuration option.
+
+By default, the trusted roots are loaded from the `clients.pem` file in dcrd's application data directory, however, that location can be modified via the `--clientcafile` option if desired.
+
+#### Updates to Transaction Output Query RPC (`gettxout`)
+
+The `gettxout` RPC has the following modifications:
+
+* An additional `tree` parameter is now required in order to explicitly identify the exact transaction output being requested
+* The transaction `version` field is no longer available in the primary JSON object of the results
+* The child `scriptPubKey` JSON object in the results now includes a new `version` field that identifies the scripting language version
+
+See the [gettxout JSON-RPC API Documentation](https://github.com/decred/dcrd/blob/master/docs/json_rpc_api.mediawiki#gettxout) for API details.
+
+#### Removal of Stake Difficulty Notification RPCs (`notifystakedifficulty` and `stakedifficulty`)
+
+The deprecated `notifystakedifficulty` and `stakedifficulty` WebSocket-only RPCs are no longer available.  This notification is unnecessary since the difficulty change interval is well defined.  Callers may obtain the difficulty via `getstakedifficulty` at the appropriate difficulty change intervals instead.
+
+See the [getstakedifficulty JSON-RPC API Documentation](https://github.com/decred/dcrd/blob/master/docs/json_rpc_api.mediawiki#getstakedifficulty) for API details.
+
+#### Removal of Version 1 Filter RPCs (`getcfilter` and `getcfilterheader`)
+
+The deprecated `getcfilter` and `getcfilterheader` RPCs, which were previously used to obtain version 1 block filters via RPC are no longer available. Use `getcfilterv2` instead.
+
+See the [getcfilterv2 JSON-RPC API Documentation](https://github.com/decred/dcrd/blob/master/docs/json_rpc_api.mediawiki#getcfilterv2) for API details.
+
+#### New Median Time Field on Block Query RPCs (`getblock` and `getblockheader`)
+
+The verbose results of the `getblock` and `getblockheader` RPCs now include a `mediantime` field that specifies the median block time associated with the block.
+
+See the following for API details:
+
+* [getblock JSON-RPC API Documentation](https://github.com/decred/dcrd/blob/master/docs/json_rpc_api.mediawiki#getblock)
+* [getblockheader JSON-RPC API Documentation](https://github.com/decred/dcrd/blob/master/docs/json_rpc_api.mediawiki#getblockheader)
+
+#### New Scripting Language Version Field on Raw Transaction RPCs (`getrawtransaction`, `decoderawtransaction`, `searchrawtransactions`, and `getblock`)
+
+The verbose results of the `getrawtransaction`, `decoderawtransaction`, `searchrawtransactions`, and `getblock` RPCs now include a `version` field in the child `scriptPubKey` JSON object that identifies the scripting language version.
+
+See the following for API details:
+
+* [getrawtransaction JSON-RPC API Documentation](https://github.com/decred/dcrd/blob/master/docs/json_rpc_api.mediawiki#getrawtransaction)
+* [decoderawtransaction JSON-RPC API Documentation](https://github.com/decred/dcrd/blob/master/docs/json_rpc_api.mediawiki#decoderawtransaction)
+* [searchrawtransactions JSON-RPC API Documentation](https://github.com/decred/dcrd/blob/master/docs/json_rpc_api.mediawiki#searchrawtransactions)
+* [getblock JSON-RPC API Documentation](https://github.com/decred/dcrd/blob/master/docs/json_rpc_api.mediawiki#getblock)
+
+#### New Treasury Add Transaction Filter on Mempool Query RPC (`getrawmempool`)
+
+The transaction type parameter of the `getrawmempool` RPC now accepts `tadd` to only include treasury add transactions in the results.
+
+See the [getrawmempool JSON-RPC API Documentation](https://github.com/decred/dcrd/blob/master/docs/json_rpc_api.mediawiki#getrawmempool) for API details.
+
+#### New Manual Block Invalidation and Reconsideration RPCs (`invalidateblock` and `reconsiderblock`)
+
+A new pair of RPCs named `invalidateblock` and `reconsiderblock` are now available.  These RPCs can be used to manually invalidate a block as if it had violated consensus rules and reconsider a block for validation and best chain selection by removing any invalid status from it and its ancestors, respectively.
+
+This capability is provided for development, testing, and debugging.  It can be particularly useful when developing services that build on top of Decred to more easily ensure edge conditions associated with invalid blocks and chain reorganization are being handled properly.
+
+These RPCs do not apply to regular users and can safely be ignored outside of development.
+
+See the following for API details:
+
+* [invalidateblock JSON-RPC API Documentation](https://github.com/decred/dcrd/blob/master/docs/json_rpc_api.mediawiki#invalidateblock)
+* [reconsiderblock JSON-RPC API Documentation](https://github.com/decred/dcrd/blob/master/docs/json_rpc_api.mediawiki#reconsiderblock)
+
+### Reject Protocol Message Deprecated (`reject`)
+
+The `reject` peer-to-peer protocol message is now deprecated and is scheduled to be removed in a future release.
+
+This message is a holdover from the original codebase where it was required, but it really is not a useful message and has several downsides:
+
+* Nodes on the network must be trustless, which means anything relying on such a message is setting itself up for failure because nodes are not obligated to send it at all nor be truthful as to the reason
+* It can be harmful to privacy as it allows additional node fingerprinting
+* It can lead to security issues for implementations that don't handle it with proper sanitization practices
+* It can easily give software implementations the fully incorrect impression that it can be relied on for determining if transactions and blocks are valid
+* The only way it is actually used currently is to show a debug log message, however, all of that information is already available via the peer and/or wire logging anyway
+* It carries a non-trivial amount of development overhead to continue to support it when nothing actually uses it
+
+### No DNS Seeds Command-Line Option Deprecated (`--nodnsseed`)
+
+The `--nodnsseed` command-line configuration option is now deprecated and will be removed in a future release.  Use `--noseeders` instead.
+
+DNS seeding has not been used since the previous release.
+
+## Notable New Developer Modules
+
+### Age-Partitioned Bloom Filters 
+
+A new `github.com/decred/dcrd/container/apbf` module is now available that provides Age-Partitioned Bloom Filters (APBFs).
+
+An APBF is a probabilistic lookup device that can quickly determine if it contains an element.  It permits tracking large amounts of data while using very little memory at the cost of a controlled rate of false positives.  Unlike classic Bloom filters, it is able to handle an unbounded amount of data by aging and discarding old items.
+
+For a concrete example of actual savings achieved in Decred by making use of an APBF, the memory to track addresses known by 125 peers was reduced from ~200 MiB to ~5 MiB.
+
+See the [apbf module documentation](https://pkg.go.dev/github.com/decred/dcrd/container/apbf) for full details on usage, accuracy under workloads, expected memory usage, and performance benchmarks.
+
+### Fixed-Precision Unsigned 256-bit Integers
+
+A new `github.com/decred/dcrd/math/uint256` module is now available that provides highly optimized allocation free fixed precision unsigned 256-bit integer arithmetic.
+
+The package has a strong focus on performance and correctness and features arithmetic, boolean comparison, bitwise logic, bitwise shifts, conversion to/from relevant types, and full formatting support - all served with an ergonomic API, full test coverage, and benchmarks.
+
+Every operation is faster than the standard library `big.Int` equivalent and the primary math operations provide reductions of over 90% in the calculation time. Most other operations are also significantly faster.
+
+See the [uint256 module documentation](https://pkg.go.dev/github.com/decred/dcrd/math/uint256) for full details on usage, including a categorized summary, and performance benchmarks.
+
+### Standard Scripts
+
+A new `github.com/decred/dcrd/txscript/v4/stdscript` package is now available that provides facilities for identifying and extracting data from transaction scripts that are considered standard by the default policy of most nodes.
+
+The package is part of the `github.com/decred/dcrd/txscript/v4` module.
+
+See the [stdscript package documentation](https://pkg.go.dev/github.com/decred/dcrd/txscript/v4/stdscript) for full details on usage and a list of the recognized standard scripts.
+
+### Standard Addresses
+
+A new `github.com/decred/dcrd/txscript/v4/stdaddr` package is now available that provides facilities for working with human-readable Decred payment addresses.
+
+The package is part of the `github.com/decred/dcrd/txscript/v4` module.
+
+See the [stdaddr package documentation](https://pkg.go.dev/github.com/decred/dcrd/txscript/v4/stdaddr) for full details on usage and a list of the supported addresses.
+
+## Changelog
+
+This release consists of 875 commits from 16 contributors which total to 492 files changed, 77921 additional lines of code, and 30952 deleted lines of code.
+
+All commits since the last release may be viewed on GitHub [here](https://github.com/decred/dcrd/compare/release-v1.6.0...release-v1.7.0-rc1).
+
+See the [dcrd's own release notes](https://github.com/decred/dcrd/releases/tag/release-v1.7.0-rc1) for a categorized breakdown of all commits since the last release.
+
+### Code Contributors (alphabetical order):
+
+- briancolecoinmetrics
+- Dave Collins
+- David Hill
+- degeri
+- Donald Adu-Poku
+- J Fixby
+- Jamie Holdstock
+- Joe Gruffins
+- Jonathan Chappelow
+- Josh Rickmar
+- lolandhold
+- Matheus Degiovani
+- Naveen
+- Ryan Staudt
+- Youssef Boukenken
+- Wisdom Arerosuoghene
 # dcrwallet v1.7.0-rc1
+
+This release focuses on implementing a mixing protocol change to add additional
+post-quantum security in the key exchanges, improvements to VSP ticketbuying,
+and adding support for current dcrd consensus agendas.
+
+This prerelease software contains a database upgrade.  Testers are advised to
+backup their wallet databases before upgrading.
+
+## New features
+
+* Mixing support now uses a different, incompatible protocol for extra security.
+  Users of the cspp.decred.org mix server are advised to updated their
+  configurations to use mix.decred.org.  A new server certificate will need to
+  be downloaded as well.
+
+* New JSON-RPC methods (`settreasurypolicy`, `settspendpolicy`,
+  `treasurypolicy`, `tspendpolicy`) were added to control the approval policy of
+  treasury expenditure transactions.  Policies are set on a per-key basis with
+  overriding policies for particular transaction hashes.
+
+* The `purchaseticket` JSON-RPC method now respects mixing configurations and
+  will buy mixed tickets when these settings are used.
+
+* A `mixsplitlimit` config option was added to control how many concurrent
+  connections may be made to the mixer server for a given output value for
+  account and change mixing.
+
+* The `walletinfo` JSON-RPC method now returns whether the wallet is in SPV mode
+  or not.
+
+* The `validateaddress` JSON-RPC and `WalletService.ValidateAddress` gRPC
+  methods now include additional wallet information for decoded wallet address,
+  including the account and branch paths.
+
+* It is now possible to import extended xpriv accounts that are derived from
+  arbitrary seeds.  This is intended for importing accounts for voting and is
+  performed with the `WalletService.ImportVotingAccountFromSeed` gRPC method.
+
+* The `getblock`, `getblockheader`, `getcfilterv2`, `getcurrentnet` `gettxout`,
+  and JSON-RPC methods are now supported under SPV mode.
+
+* The median time is now included reported by the `getblock` JSON-RPC response.
+
+* The `WalletService.DiscoverUsage` gRPC method was added to force address and
+  account discovery.
+
+* The `WalletService.ImportExtendedPublicKey` gRPC method was added to import
+  xpubs as accounts (providing the same functionality as the `importxpub`
+  JSON-RPC method).
+
+* Ticket tracking in the database now records which VSP (if any) a ticket was
+  purchased for.  This allows the VSP client to check the status of
+  previously-bought tickets without the polling every VSP for the ticket info.
+  VSP tickets will also processed even if no current VSP is configured in the
+  current application settings.
+
+* The `ticketbuyer.limit` option now defaults to 1.
+
+* A `logsize` config option was added to control how large log files may become
+  before they are rotated and compressed.
+
+## Bug fixes
+
+* The wallet no longer attempts to perform votes or revocations if the wallet
+  only has an imported address or pubkey but no private key to sign the
+  transaction inputs.
+
+* The `ticketbuyer.limit` config option now controls how many separate
+  connections are made to the mix server with distinct groups of transaction
+  inputs to mix.  This reduces mix correlation of larger sets of inputs with
+  their change output.
+
+* The `WalletService.Accounts` gRPC method response now contains the last
+  returned account indexes rather than the total number of keys in an account,
+  which more accurately reflects account usage due to how the gap limit is
+  internally handled by the wallet.
+
+* A bug negatively affecting performance and memory usage related to address
+  watching was corrected.
+
+* Several issues preventing blockchain reorganization from being handled
+  correctly in SPV mode were fixed.
+
+* Several deadlocks in the SPV implementation mode were corrected.
+
+* Transaction size and fee estimation for multisig transactions was improved.
+
+* Data races were corrected.
+
+## Changelog
+
+All commits since the last release may be viewed on GitHub
+[here](https://github.com/decred/dcrwallet/compare/release-v1.6.3...release-v1.7.0-rc1).
+
+## Code Contributors (alphabetical order)
+
+* Alex Yocom-Piatt
+* David Hill
+* Matheus Degiovani
+* Jamie Holdstock
+* JoeGruffins
+* Jonathan Chappelow
+* Josh Rickmar
+* Victor Oliveira
+* Wisdom Arerosuoghene
 
 # Decrediton v1.7.0-rc1
 
 This release of Decrediton includes numerous bug fixes and refinement across
 all pages/tabs.  
 
-Matheusd has overhauled the security of Decrediton so that we can
+We have overhauled the security of Decrediton so that we can
 keep using electron in the future, with a decent amount of assurance that it's
-safe and not prone to intrusion.  The overal jist of the work done could be
-described simply as: layer/context isolation.  He reduced the total number of
+safe and not prone to intrusion.  The overal gist of the work done could be
+described simply as: layer/context isolation.  We reduced the total number of
 dependencies as well as the access those dependencies may have to private 
 information.  Users will be shown some new modals while confirming wallet 
 seeds and confirming destination addresses.
 
 DCRDEX is now at 0.4.0 and considered to be fully integrated with Decrediton.  
 Some extra work has been done to improve bitcoin config handling and overall
-stability of new dex account creation.  Users are now able to restore their DEX
+stability of new DEX account creation.  Users are now able to restore their DEX
 accounts with a seed from their DCRDEX windows.  This should help users avoid 
 paying fees to trading servers unnecessarily. There are a few remaining features
 that will be added in the future (dcrwallet SPV and ETH support), but overall is 
 feature complete in terms of decrediton pieces.
 
-bgptr has begun to implement redesigns to some areas of decrediton.  The 
+We have begun to implement redesigns to some areas of decrediton.  The 
 Governance and LN pages got full redesigns.  Changes were also made to the
 confirm seed view screen.  There will be more of these redesigns implemented
 in the near future: Settings and Launcher (wallet selection) coming up next!
 
-bgptr has also added test coverage to all of the tabs on the Transactions page.
-Ideally, as we increase test coverage we will avoid bugs caused by reversions or
+We have also added test coverage to all of the tabs on the Transactions page.
+Ideally, as we increase test coverage we will avoid bugs caused by regressions or
 oversight.
 
-Lastly, bgptr has begun the process of using our react component library: pi-ui.
+Lastly, we have begun the process of using our react component library: pi-ui.
 Things like text inputs, paginators, toggles, radio buttons are now from pi-ui.
 Centralizing these components should streamline the look and feel across many
 Decred products (politeia, cms, decrediton).
@@ -86,7 +563,7 @@ Decred products (politeia, cms, decrediton).
   in the transaction details for any non-spent ticket.  Users will be presented
   with a confirmation modal that informs them of the risk of attempting to
   revoke before that confirm that the ticket is missed on dcrdata.  (They would
-  have to Abandon the 'bad' revocation transcation and rescan.)
+  have to Abandon the 'bad' revocation transaction and rescan.)
 
 * We have decided to hide the legacy ticket purchase area.  We will wait until
   a later date to remove the components and code itself, but after 1.7.0 users
@@ -94,7 +571,7 @@ Decred products (politeia, cms, decrediton).
 
 ## Bug Fixes
 
-* Fix issues with the Sync VSP Tickets Dropdown
+* Fix issues with the Sync VSP Tickets dropdown
 
 * Various fixes for Trezor wallets.
 
@@ -102,7 +579,7 @@ Decred products (politeia, cms, decrediton).
   'confirmed' has been added.  This should reduce the number of misses that some
   users have encountered during the changeover from legacy ticket purchasing.
 
-* Fix issue that caused large input transactions (PoW mining payouts) to crash
+* Fix issue that caused large input transactions (eg PoW mining payouts) to crash
   decrediton.  These transactions caused large numbers of addresses to be
   validated within dcrwallet which lead to resource exhaustion.  
 
@@ -111,7 +588,7 @@ Decred products (politeia, cms, decrediton).
   never had any reports of this, so unsure of the overall usage of autobuyer
   in general.
 
-* Fix Duplicates ticket transactions being shown in the Ticket History.  Each
+* Fix duplicate ticket transactions being shown in the Ticket History.  Each
   are now labeled appropriately (eg Vote, Voted, Revoke, Revoked)
 
 * Add insufficient balance check for the account mixer.  Previously the mixer
