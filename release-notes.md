@@ -1,19 +1,23 @@
-# 2021-12-22
+# 2021-01-24
 
 
 ## Install
 
 To install Decrediton desktop wallet, download, uncompress, and run
-[Decrediton Linux](https://github.com/decred/decred-binaries/releases/download/v1.7.0-rc1/decrediton-v1.7.0-rc1.AppImage)
+[Decrediton Linux AppImage](https://github.com/decred/decred-binaries/releases/download/v1.7.0/decrediton-v1.7.0.AppImage)
+or 
+[Decrediton Linux tar](https://github.com/decred/decred-binaries/releases/download/v1.7.0/decrediton-v1.7.0.tar.gz)
 or
-[Decrediton macOS](https://github.com/decred/decred-binaries/releases/download/v1.7.0-rc1/decrediton-v1.7.0-rc1.dmg)
+[Decrediton macOS amd64](https://github.com/decred/decred-binaries/releases/download/v1.7.0/decrediton-amd64-v1.7.0.dmg)
 or
-[Decrediton Windows](https://github.com/decred/decred-binaries/releases/download/v1.7.0-rc1/decrediton-v1.7.0-rc1.exe).
+[Decrediton macOS arm64](https://github.com/decred/decred-binaries/releases/download/v1.7.0/decrediton-arm64-v1.7.0.dmg)
+or
+[Decrediton Windows](https://github.com/decred/decred-binaries/releases/download/v1.7.0/decrediton-v1.7.0.exe).
 
 To install the command-line tools, please see
 [dcrinstall](https://github.com/decred/decred-release/tree/master/cmd/dcrinstall).
 
-See decred-v1.7.0-rc1-manifest.txt and the other manifest files for SHA-256 hashes
+See decred-v1.7.0-manifest.txt and the other manifest files for SHA-256 hashes
 and the associated .asc signature files to confirm those hashes.
 
 See [README.md](./README.md#verifying-binaries) for more info on verifying the
@@ -21,12 +25,12 @@ files.
 
 
 ## Contents
-* [dcrd](#dcrd-v170-rc1)
-* [dcrwallet](#dcrwallet-v170-rc1)
-* [Decrediton](#decrediton-v170-rc1)
+* [dcrd](#dcrd-v170)
+* [dcrwallet](#dcrwallet-v170)
+* [Decrediton](#decrediton-v170)
 
 
-# dcrd v1.7.0-rc1
+# dcrd v1.7.0
 
 This is a new major release of dcrd.  Some of the key highlights are:
 
@@ -71,7 +75,13 @@ The following Decred Change Proposals (DCPs) describe the proposed changes in de
 - [DCP0009](https://github.com/decred/dcps/blob/master/dcp-0009/dcp-0009.mediawiki)
 - [DCP0010](https://github.com/decred/dcps/blob/master/dcp-0010/dcp-0010.mediawiki)
 
-**It is important for everyone to upgrade their software to this latest release even if you don't intend to vote in favor of the agenda.**
+## Upgrade Required
+
+**It is extremely important for everyone to upgrade their software to this
+latest release even if you don't intend to vote in favor of the agenda.  This
+particularly applies to PoW miners as failure to upgrade will result in lost
+rewards after block height 635775.  That is estimated to be around Feb 21st,
+2022.**
 
 ## Downgrade Warning
 
@@ -376,11 +386,12 @@ See the [stdaddr package documentation](https://pkg.go.dev/github.com/decred/dcr
 
 ## Changelog
 
-This release consists of 875 commits from 16 contributors which total to 492 files changed, 77921 additional lines of code, and 30952 deleted lines of code.
+This release consists of 877 commits from 16 contributors which total to 492 files changed, 77937 additional lines of code, and 30961 deleted lines of code.
 
-All commits since the last release may be viewed on GitHub [here](https://github.com/decred/dcrd/compare/release-v1.6.0...release-v1.7.0-rc1).
 
-See the [dcrd's own release notes](https://github.com/decred/dcrd/releases/tag/release-v1.7.0-rc1) for a categorized breakdown of all commits since the last release.
+All commits since the last release may be viewed on GitHub [here](https://github.com/decred/dcrd/compare/release-v1.6.0...release-v1.7.0).
+
+See the [dcrd's own release notes](https://github.com/decred/dcrd/releases/tag/release-v1.7.0) for a categorized breakdown of all commits since the last release.
 
 ### Code Contributors (alphabetical order):
 
@@ -400,7 +411,8 @@ See the [dcrd's own release notes](https://github.com/decred/dcrd/releases/tag/r
 - Ryan Staudt
 - Youssef Boukenken
 - Wisdom Arerosuoghene
-# dcrwallet v1.7.0-rc1
+
+# dcrwallet v1.7.0
 
 This release focuses on implementing a mixing protocol change to add additional
 post-quantum security in the key exchanges, improvements to VSP ticketbuying,
@@ -493,7 +505,7 @@ backup their wallet databases before upgrading.
 ## Changelog
 
 All commits since the last release may be viewed on GitHub
-[here](https://github.com/decred/dcrwallet/compare/release-v1.6.3...release-v1.7.0-rc1).
+[here](https://github.com/decred/dcrwallet/compare/release-v1.6.3...release-v1.7.0).
 
 ## Code Contributors (alphabetical order)
 
@@ -507,7 +519,7 @@ All commits since the last release may be viewed on GitHub
 * Victor Oliveira
 * Wisdom Arerosuoghene
 
-# Decrediton v1.7.0-rc1
+# Decrediton v1.7.0
 
 This release of Decrediton includes numerous bug fixes and refinement across
 all pages/tabs.  
@@ -597,7 +609,7 @@ Decred products (politeia, cms, decrediton).
 ## Changelog
 
 All commits since the last release may be viewed on GitHub
-[here](https://github.com/decred/decrediton/compare/release-v1.6.3...release-v1.7.0-rc1).
+[here](https://github.com/decred/decrediton/compare/release-v1.6.3...release-v1.7.0).
 
 ## Code Contributors (alphabetical order)
 
