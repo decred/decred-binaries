@@ -89,7 +89,7 @@ This patch release fixes a few outstanding issues found after the initial
 release of v1.7.0.  We have also included the new design for the Settings page 
 and LN wallet creation.
 
-# Bug Fixes
+## Bug Fixes
 
 * Live tickets were not showing fee status.
 
