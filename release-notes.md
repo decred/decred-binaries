@@ -1,3 +1,122 @@
+# 2021-02-17
+
+
+## Install
+
+To install Decrediton desktop wallet, download, uncompress, and run
+[Decrediton Linux AppImage](https://github.com/decred/decred-binaries/releases/download/v1.7.1/decrediton-v1.7.1.AppImage)
+or 
+[Decrediton Linux tar](https://github.com/decred/decred-binaries/releases/download/v1.7.1/decrediton-v1.7.1.tar.gz)
+or
+[Decrediton macOS amd64](https://github.com/decred/decred-binaries/releases/download/v1.7.1/decrediton-amd64-v1.7.1.dmg)
+or
+[Decrediton macOS arm64](https://github.com/decred/decred-binaries/releases/download/v1.7.1/decrediton-arm64-v1.7.1.dmg)
+or
+[Decrediton Windows](https://github.com/decred/decred-binaries/releases/download/v1.7.1/decrediton-v1.7.1.exe).
+
+To install the command-line tools, please see
+[dcrinstall](https://github.com/decred/decred-release/tree/master/cmd/dcrinstall).
+
+See decred-v1.7.1-manifest.txt and the other manifest files for SHA-256 hashes
+and the associated .asc signature files to confirm those hashes.
+
+See [README.md](./README.md#verifying-binaries) for more info on verifying the
+files.
+
+
+## Contents
+* [dcrd](#dcrd-v171)
+* [dcrwallet](#dcrwallet-v171)
+* [Decrediton](#decrediton-v171)
+
+# dcrd v1.7.1
+
+This is a patch release of dcrd which includes the following changes:
+
+- Resolve an issue related to RPC authentication of limited users
+
+## Changelog
+
+This patch release consists of 2 commits from 2 contributors which total to 3
+files changed, 170 additional lines of code, and 35 deleted lines of code.
+
+All commits since the last release may be viewed on GitHub
+[here](https://github.com/decred/dcrd/compare/release-v1.7.0...release-v1.7.1).
+
+### RPC:
+
+- rpcserver: Fix websocket auth failure ([decred/dcrd#2879](https://github.com/decred/dcrd/pull/2879))
+
+### Misc:
+
+- release: Bump for 1.7.1 ([decred/dcrd#2880](https://github.com/decred/dcrd/pull/2880))
+
+### Code Contributors (alphabetical order):
+
+- Dave Collins
+- 刘昆
+
+
+# dcrwallet v1.7.1
+ 
+This release includes vote policy bug fixes for VSP users.
+ 
+## Bug fixes
+ 
+* The `setvotechoice` JSON-RPC method, when setting a vote choice for a
+  particular ticket, will use the VSP recorded with the ticket from the database
+  rather than using the VSP in the current application configuration.
+ 
+* An issue where vote choices were sometimes not communicated with the VSP for
+  all unexpired tickets was corrected.
+ 
+* The `settreasurypolicy` and `settspendpolicy` JSON-RPC methods now validate
+  that the length of a ticket hash is exactly 32 bytes.
+ 
+## Changelog
+ 
+All commits since the last release may be viewed on GitHub
+[here](https://github.com/decred/dcrwallet/compare/release-v1.7.0...release-v1.7.1).
+ 
+## Code Contributors (alphabetical order)
+ 
+* Alex Yocom-Piatt
+* Jamie Holdstock
+
+# Decrediton v1.7.1
+
+This patch release fixes a few outstanding issues found after the initial 
+release of v1.7.0.  We have also included the new design for the Settings page 
+and LN wallet creation.
+
+## Bug Fixes
+
+* Live tickets were not showing fee status.
+
+* Autobuyer wasn't working due to minimum ticketbuyer limit being 0.
+
+* Update treasury balance to combine legacy and new treasury balances.
+
+* Fix issue when creating DEX account that allowed for users to proceed on
+  bad passphrase entry.
+
+* Update menu items when changing from SPV mode for DEX access.
+
+* Various styling issue.
+
+## Changelog
+
+All commits since the last release may be viewed on GitHub
+[here](https://github.com/decred/decrediton/compare/release-v1.7.0...release-v1.7.1).
+
+## Code Contributors (alphabetical order)
+
+* Alex Yocom-Piatt
+* bgptr
+* Jamie Holdstock
+* Jonathan Chappelow
+* Matheus Degiovani
+
 # 2021-01-24
 
 
