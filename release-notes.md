@@ -103,6 +103,7 @@ and LN wallet creation.
 * Update menu items when changing from SPV mode for DEX access.
 
 * Various styling issue.
+
 ## Changelog
 
 All commits since the last release may be viewed on GitHub
@@ -116,8 +117,9 @@ All commits since the last release may be viewed on GitHub
 * Jonathan Chappelow
 * Matheus Degiovani
 
-
 # 2021-01-24
+
+
 ## Install
 
 To install Decrediton desktop wallet, download, uncompress, and run
