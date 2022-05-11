@@ -1,4 +1,154 @@
-# 2021-02-17
+# 2022-05-11
+
+
+## Install
+
+To install Decrediton desktop wallet, download, uncompress, and run
+[Decrediton Linux AppImage](https://github.com/decred/decred-binaries/releases/download/v1.7.2/decrediton-v1.7.2.AppImage)
+or 
+[Decrediton Linux tar](https://github.com/decred/decred-binaries/releases/download/v1.7.2/decrediton-v1.7.2.tar.gz)
+or
+[Decrediton macOS amd64](https://github.com/decred/decred-binaries/releases/download/v1.7.2/decrediton-amd64-v1.7.2.dmg)
+or
+[Decrediton macOS arm64](https://github.com/decred/decred-binaries/releases/download/v1.7.2/decrediton-arm64-v1.7.2.dmg)
+or
+[Decrediton Windows](https://github.com/decred/decred-binaries/releases/download/v1.7.2/decrediton-v1.7.2.exe).
+
+To install the command-line tools, please see
+[dcrinstall](https://github.com/decred/decred-release/tree/master/cmd/dcrinstall).
+
+See decred-v1.7.2-manifest.txt and the other manifest files for SHA-256 hashes
+and the associated .asc signature files to confirm those hashes.
+
+See [README.md](./README.md#verifying-binaries) for more info on verifying the
+files.
+
+
+## Contents
+* [dcrd](#dcrd-v172)
+* [dcrwallet](#dcrwallet-v172)
+* [Decrediton](#decrediton-v172)
+
+# dcrd v1.7.2
+
+This is a patch release of dcrd to resolve a rare and hard to hit case when optional indexing is enabled.
+
+## Changelog
+
+This patch release consists of 4 commits from 2 contributors which total to 11 files changed, 158 additional lines of code, and 15 deleted lines of code.
+
+All commits since the last release may be viewed on GitHub [here](https://github.com/decred/dcrd/compare/release-v1.7.1...release-v1.7.2) and [here](https://github.com/decred/dcrd/compare/blockchain/v4.0.0...blockchain/v4.0.1).
+
+### Protocol and network:
+
+- server: Fix syncNotified race ([decred/dcrd#2931](https://github.com/decred/dcrd/pull/2931))
+
+### Developer-related package and module changes:
+
+- indexers: fix subscribers race ([decred/dcrd#2921](https://github.com/decred/dcrd/pull/2921))
+- main: Use backported blockchain updates ([decred/dcrd#2935](https://github.com/decred/dcrd/pull/2935))
+
+### Misc:
+
+- release: Bump for 1.7.2 ([decred/dcrd#2936](https://github.com/decred/dcrd/pull/2936))
+
+### Code Contributors (alphabetical order):
+
+- Dave Collins
+- Donald Adu-Poku
+
+# dcrwallet v1.7.2
+
+This release updates the wallet in light of the activation of DCP0009 on all
+Decred networks, as well as providing various other fixes.
+
+## Bug fixes
+
+* All ticket revoking functionality has been removed or disabled due to the
+  activation of DCP0009 which modified consensus rules to require miners to
+  include revocations for new expired or missed tickets.  The wallet will no
+  longer log warnings and errors due to revocations being created in response to
+  missed tickets, and all RPCs which manually revoked tickets have been
+  deprecated and no longer perform any action.  Old unspent tickets will be
+  revoked by project members, eliminating the need for the wallet to ever create
+  a revocation of its own.
+
+* The `verifymessage` JSON-RPC method and
+  `MessageVerificationService.VerifyMessage` gRPC method were corrected to
+  return success when the message is validly signed by the keys associated with
+  a P2PKH address.  P2PK addresses are no longer valid inputs and an appropriate
+  error will be returned if one is used.
+
+* The `walletpubpassphrasechange` JSON-RPC method was enabled.  This method was
+  already implemented but the method was not exposed in the RPC API.
+
+* Some options in the sample configuration were rewritten to move comments that
+  described various options to their own lines.  This prevents parsing and/or
+  runtime errors if an option was uncommented due to the configuration not
+  ignoring comments that do not begin at the start of a line.
+
+## New features
+
+* The `WalletService.GetTicket` gRPC method now provides the VSP host associated
+  with a ticket.
+
+## Changelog
+
+All commits since the last release may be viewed on GitHub
+[here](https://github.com/decred/dcrwallet/compare/release-v1.7.1...release-v1.7.2).
+
+## Code Contributors (alphabetical order)
+
+* bgptr
+* Dave Collins
+* Josh Rickmar
+
+# Decrediton v1.7.2
+
+This Decrediton release includes various bug fixes for issues found during
+v1.7.1 usage.  DCRDEX has been updated to 0.4.3.  We have also
+added a few new features that should improve usage before the next big release.
+## Bug fixes
+
+* Fix 'account not found' error when registering for DCRDEX.  There was a corner
+  case that could be triggered due to using an incorrect password when
+  creating a DEX account.
+
+* Launcher now allows for completion of wallets that had not completed their
+  creation steps.
+
+* Improved performance of Transaction/Ticket history pages.  Better scroll
+  and saving previous place where they were viewing.
+
+* Automatically set the 'per-account encryption' during wallet creation since
+  the passphrase is available.
+
+## New features
+
+* Ticket transaction details now show their associated VSP Host and a button
+  that allows for the user to check the tickets' status at that VSP.  
+
+* Due to the recent network upgrade, we've removed all of the Revoke buttons.
+
+* We've removed DEX login step once the user has successfully launched the
+  DEX window for the first time.  
+
+* Add Treasury Spending tab on the Governance Page.  This allows for stakeholders
+  to approve or deny the public keys that sign the tspends.  
+
+## Changelog
+
+All commits since the last release may be viewed on GitHub
+[here](https://github.com/decred/decrediton/compare/release-v1.7.1...release-v1.7.2).
+
+## Code Contributors (alphabetical order)
+
+* Alex Yocom-Piatt
+- Amir Massarwa (@amassarwi)
+- bgptr
+- Jonathan Chappelow (@chappjc)
+
+# 2022-02-17
 
 
 ## Install
