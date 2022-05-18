@@ -1,3 +1,53 @@
+# 2022-05-18
+
+
+## Install
+
+To install Decrediton desktop wallet, download, uncompress, and run
+[Decrediton Linux AppImage](https://github.com/decred/decred-binaries/releases/download/v1.7.3/decrediton-v1.7.3.AppImage)
+or 
+[Decrediton Linux tar](https://github.com/decred/decred-binaries/releases/download/v1.7.3/decrediton-v1.7.3.tar.gz)
+or
+[Decrediton macOS amd64](https://github.com/decred/decred-binaries/releases/download/v1.7.3/decrediton-amd64-v1.7.3.dmg)
+or
+[Decrediton macOS arm64](https://github.com/decred/decred-binaries/releases/download/v1.7.3/decrediton-arm64-v1.7.3.dmg)
+or
+[Decrediton Windows](https://github.com/decred/decred-binaries/releases/download/v1.7.3/decrediton-v1.7.3.exe).
+
+To install the command-line tools, please see
+[dcrinstall](https://github.com/decred/decred-release/tree/master/cmd/dcrinstall).
+
+See decred-v1.7.2-manifest.txt and the other manifest files for SHA-256 hashes
+and the associated .asc signature files to confirm those hashes.
+
+See [README.md](./README.md#verifying-binaries) for more info on verifying the
+files.
+
+## Contents
+* [Decrediton](#decrediton-v173)
+
+
+# Decrediton v1.7.3
+
+This is a small patch release that fixes an issue with macOS 10.15 (Catalina)
+not being able to launch dcrd and dcrwallet properly.  
+
+We also fixed an issue with updating Treasury Spending failing due to 
+dcrwallet not having an rpc implemented.
+
+A couple other minor styling issues that were found in v1.7.2 were fixed as well.
+
+## Changelog
+
+All commits since the last release may be viewed on GitHub
+[here](https://github.com/decred/decrediton/compare/release-v1.7.2...release-v1.7.3).
+
+## Code Contributors (alphabetical order)
+
+- Alex Yocom-Piatt
+- bgptr
+
+
 # 2022-05-11
 
 
