@@ -114,6 +114,14 @@ must upgrade.
 All commits since the last release may be viewed on GitHub
 [here](https://github.com/decred/dcrwallet/compare/release-v1.7.2...release-v1.7.5).
 
+## Code Contributors (alphabetical order)
+
+* bgptr
+* Dave Collins
+* David Hill
+* Josh Rickmar
+* Matheus Degiovani
+
 
 # Decrediton v1.7.5
 
