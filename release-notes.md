@@ -1,3 +1,209 @@
+# 2022-10-12
+
+
+## Install
+
+To install Decrediton desktop wallet, download, uncompress, and run
+[Decrediton Linux AppImage](https://github.com/decred/decred-binaries/releases/download/v1.7.5/decrediton-v1.7.5.AppImage)
+or 
+[Decrediton Linux tar](https://github.com/decred/decred-binaries/releases/download/v1.7.5/decrediton-v1.7.5.tar.gz)
+or
+[Decrediton macOS amd64](https://github.com/decred/decred-binaries/releases/download/v1.7.5/decrediton-amd64-v1.7.5.dmg)
+or
+[Decrediton macOS arm64](https://github.com/decred/decred-binaries/releases/download/v1.7.5/decrediton-arm64-v1.7.5.dmg)
+or
+[Decrediton Windows](https://github.com/decred/decred-binaries/releases/download/v1.7.5/decrediton-v1.7.5.exe).
+
+To install the command-line tools, please see
+[dcrinstall](https://github.com/decred/decred-release/tree/master/cmd/dcrinstall).
+
+See decred-v1.7.5-manifest.txt and the other manifest files for SHA-256 hashes
+and the associated .asc signature files to confirm those hashes.
+
+See [README.md](./README.md#verifying-binaries) for more info on verifying the
+files.
+
+
+## Contents
+* [dcrd](#dcrd-v175)
+* [dcrwallet](#dcrwallet-v175)
+* [Decrediton](#decrediton-v175)
+
+# dcrd v1.7.5
+
+This is a patch release of dcrd that updates the utxo cache to improve its
+robustness, optimize it, and correct some hard to hit corner cases that involve
+a mix of manual block invalidation, conditional flushing, and successive unclean
+shutdowns.
+
+## Changelog
+
+This patch release consists of 19 commits from 1 contributor which total to 13
+files changed, 1118 additional lines of code, and 484 deleted lines of code.
+
+All commits since the last release may be viewed on GitHub
+[here](https://github.com/decred/dcrd/compare/a2c3c656...release-v1.7.5).
+
+### Developer-related package and module changes:
+
+- blockchain: Misc consistency cleanup pass ([decred/dcrd#3006](https://github.com/decred/dcrd/pull/3006))
+- blockchain: Pre-allocate in-flight utxoview tx map ([decred/dcrd#3006](https://github.com/decred/dcrd/pull/3006))
+- blockchain: Remove unused utxo cache add entry err ([decred/dcrd#3006](https://github.com/decred/dcrd/pull/3006))
+- blockchain: Fix rare unclean utxo cache recovery ([decred/dcrd#3006](https://github.com/decred/dcrd/pull/3006))
+- blockchain: Don't fetch trsy{base,spend} inputs ([decred/dcrd#3006](https://github.com/decred/dcrd/pull/3006))
+- blockchain: Don't add treasurybase utxos ([decred/dcrd#3006](https://github.com/decred/dcrd/pull/3006))
+- blockchain: Separate utxo cache vs view state ([decred/dcrd#3006](https://github.com/decred/dcrd/pull/3006))
+- blockchain: Improve utxo cache spend robustness ([decred/dcrd#3006](https://github.com/decred/dcrd/pull/3006))
+- blockchain: Split regular/stake view tx connect ([decred/dcrd#3006](https://github.com/decred/dcrd/pull/3006))
+- blockchain: Bypass utxo cache for zero conf spends ([decred/dcrd#3006](https://github.com/decred/dcrd/pull/3006))
+- main: Use backported blockchain updates ([decred/dcrd#3007](https://github.com/decred/dcrd/pull/3007))
+
+### Testing and Quality Assurance:
+
+- blockchain: Address some linter complaints ([decred/dcrd#3005](https://github.com/decred/dcrd/pull/3005))
+- blockchain: Allow tests to override cache flushing ([decred/dcrd#3006](https://github.com/decred/dcrd/pull/3006))
+- blockchain: Improve utxo cache initialize tests ([decred/dcrd#3006](https://github.com/decred/dcrd/pull/3006))
+- blockchain: Consolidate utxo cache test entries ([decred/dcrd#3006](https://github.com/decred/dcrd/pull/3006))
+- blockchain: Rework utxo cache spend entry tests ([decred/dcrd#3006](https://github.com/decred/dcrd/pull/3006))
+- blockchain: Rework utxo cache commit tests ([decred/dcrd#3006](https://github.com/decred/dcrd/pull/3006))
+- blockchain: Rework utxo cache add entry tests ([decred/dcrd#3006](https://github.com/decred/dcrd/pull/3006))
+
+### Misc:
+
+- release: Bump for 1.7.5 ([decred/dcrd#3008](https://github.com/decred/dcrd/pull/3008))
+
+### Code Contributors (alphabetical order):
+
+- Dave Collins
+
+# dcrwallet v1.7.5
+
+This release includes minor fixes and improvements for the wallet.
+
+In addition to the fixes and new features listed below, the wallet has also been
+updated to follow the TestNet3 hard fork which throttles the difficulty changes
+allowed as hashpower is quickly increased on the network.  This was an unvoted
+hard fork that only affects the test network, and all users of the test network
+must upgrade.
+
+## Bug fixes
+
+* The SFNodeCF service flag was removed from the required services of nodes
+  connected to in SPV mode.  Version 2 compact filters are now required by
+  consensus rules and there is no service flag to identify their support.
+
+* An issue preventing the `signrawtransaction` JSON-RPC method from using
+  private keys in the request parameters was corrected.
+
+* The automated ticket buyer no longer attempts to mix change if the
+  StakeShuffle server is not specified in the application config
+  (`--csppserver`) or the gRPC requests that started the buyer.
+
+## New features
+
+* The gRPC methods `VotingService.TreasuryPolicies` and
+  `VotingService.SetTreasuryPolicies` were added for gRPC clients to be able to
+  view and set the treasury voting policies of a ticket with VSPs.
+
+* An `importpubkey` JSON-RPC method was introduced to import raw secp256k1
+  public keys and their derived P2PKH address to the `imported` account.  This
+  method is only usable on watching-only wallets.
+
+## Changelog
+
+All commits since the last release may be viewed on GitHub
+[here](https://github.com/decred/dcrwallet/compare/release-v1.7.2...release-v1.7.5).
+
+## Code Contributors (alphabetical order)
+
+* bgptr
+* Dave Collins
+* David Hill
+* Josh Rickmar
+* Matheus Degiovani
+
+
+# Decrediton v1.7.5
+
+This release is mainly due to a critical fix that was included in DEX 0.5.4.  
+
+There are other small bug fixes and improvements included as well.
+## Bug fixes
+
+* Fix never ending loading button on Treasury Spending tab.
+
+* Add Ticket Spent entry to the Revocation tx details page.
+
+* Fix placeholder size in TextInput
+
+* Rename cspp to StakeShuffle throughout.
+
+* Refresh DEX window with F5 key now working as expected.
+
+* Add testnet PiKeys on testnet for treasury spending tab.
+
+## Changelog
+
+All commits since the last release may be viewed on GitHub
+[here](https://github.com/decred/decrediton/compare/release-v1.7.3...release-v1.7.5).
+
+## Code Contributors (alphabetical order)
+
+* Alex Yocom-Piatt
+- bgptr
+- Jonathan Chappelow (@chappjc)
+
+
+# 2022-05-18
+
+
+## Install
+
+To install Decrediton desktop wallet, download, uncompress, and run
+[Decrediton Linux AppImage](https://github.com/decred/decred-binaries/releases/download/v1.7.3/decrediton-v1.7.3.AppImage)
+or 
+[Decrediton Linux tar](https://github.com/decred/decred-binaries/releases/download/v1.7.3/decrediton-v1.7.3.tar.gz)
+or
+[Decrediton macOS amd64](https://github.com/decred/decred-binaries/releases/download/v1.7.3/decrediton-amd64-v1.7.3.dmg)
+or
+[Decrediton macOS arm64](https://github.com/decred/decred-binaries/releases/download/v1.7.3/decrediton-arm64-v1.7.3.dmg)
+or
+[Decrediton Windows](https://github.com/decred/decred-binaries/releases/download/v1.7.3/decrediton-v1.7.3.exe).
+
+To install the command-line tools, please see
+[dcrinstall](https://github.com/decred/decred-release/tree/master/cmd/dcrinstall).
+
+See decred-v1.7.2-manifest.txt and the other manifest files for SHA-256 hashes
+and the associated .asc signature files to confirm those hashes.
+
+See [README.md](./README.md#verifying-binaries) for more info on verifying the
+files.
+
+## Contents
+* [Decrediton](#decrediton-v173)
+
+
+# Decrediton v1.7.3
+
+This is a small patch release that fixes an issue with macOS 10.15 (Catalina)
+not being able to launch dcrd and dcrwallet properly.  
+
+We also fixed an issue with updating Treasury Spending failing due to 
+dcrwallet not having an rpc implemented.
+
+A couple other minor styling issues that were found in v1.7.2 were fixed as well.
+
+## Changelog
+
+All commits since the last release may be viewed on GitHub
+[here](https://github.com/decred/decrediton/compare/release-v1.7.2...release-v1.7.3).
+
+## Code Contributors (alphabetical order)
+
+- Alex Yocom-Piatt
+- bgptr
+
+
 # 2022-05-11
 
 
