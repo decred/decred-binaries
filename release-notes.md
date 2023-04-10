@@ -1,3 +1,47 @@
+# 2022-11-16
+
+
+## Install
+
+To install Decrediton desktop wallet, download, uncompress, and run
+[Decrediton Linux AppImage](https://github.com/decred/decred-binaries/releases/download/v1.7.6/decrediton-v1.7.6.AppImage)
+or 
+[Decrediton Linux tar](https://github.com/decred/decred-binaries/releases/download/v1.7.6/decrediton-v1.7.6.tar.gz)
+or
+[Decrediton macOS amd64](https://github.com/decred/decred-binaries/releases/download/v1.7.6/decrediton-amd64-v1.7.6.dmg)
+or
+[Decrediton macOS arm64](https://github.com/decred/decred-binaries/releases/download/v1.7.6/decrediton-arm64-v1.7.6.dmg)
+or
+[Decrediton Windows](https://github.com/decred/decred-binaries/releases/download/v1.7.6/decrediton-v1.7.6.exe).
+
+To install the command-line tools, please see
+[dcrinstall](https://github.com/decred/decred-release/tree/master/cmd/dcrinstall).
+
+See decred-v1.7.6-manifest.txt and the other manifest files for SHA-256 hashes
+and the associated .asc signature files to confirm those hashes.
+
+See [README.md](./README.md#verifying-binaries) for more info on verifying the
+files.
+
+## Contents
+* [Decrediton](#decrediton-v176)
+
+# Decrediton v1.7.6
+
+This is a small release that contains no changes to the Decrediton base, but 
+fixes an issue with the underlying DEX.  This also fixes an issue with 
+Decrediton v1.7.5 on Windows resolving alternative DNS servers (8.8.8.8 etc).
+
+## Changelog
+
+All commits since the last release may be viewed on GitHub
+[here](https://github.com/decred/decrediton/compare/release-v1.7.5...release-v1.7.6).
+
+## Code Contributors (alphabetical order)
+
+- Jonathan Chappelow (@chappjc)
+
+
 # 2022-10-12
 
 
