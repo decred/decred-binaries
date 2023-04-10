@@ -1,3 +1,200 @@
+# 2022-04-10
+
+
+## Install
+
+To install Decrediton desktop wallet, download, uncompress, and run
+[Decrediton Linux AppImage](https://github.com/decred/decred-binaries/releases/download/v1.7.7/decrediton-v1.7.7.AppImage)
+or 
+[Decrediton Linux tar](https://github.com/decred/decred-binaries/releases/download/v1.7.7/decrediton-v1.7.7.tar.gz)
+or
+[Decrediton macOS amd64](https://github.com/decred/decred-binaries/releases/download/v1.7.7/decrediton-amd64-v1.7.7.dmg)
+or
+[Decrediton macOS arm64](https://github.com/decred/decred-binaries/releases/download/v1.7.7/decrediton-arm64-v1.7.7.dmg)
+or
+[Decrediton Windows](https://github.com/decred/decred-binaries/releases/download/v1.7.7/decrediton-v1.7.7.exe).
+
+To install the command-line tools, please see
+[dcrinstall](https://github.com/decred/decred-release/tree/master/cmd/dcrinstall).
+
+See decred-v1.7.7-manifest.txt and the other manifest files for SHA-256 hashes
+and the associated .asc signature files to confirm those hashes.
+
+See [README.md](./README.md#verifying-binaries) for more info on verifying the
+files.
+
+## Contents
+* [dcrd](#dcrd-v177)
+* [dcrwallet](#dcrwallet-v177)
+* [Decrediton](#decrediton-v177)
+
+
+# dcrd v1.7.7
+
+This is a patch release of dcrd that includes the following changes:
+
+- Use the latest network protocol version
+- Reduce bandwidth usage in certain scenarios by avoiding requests for inventory that is already known
+- Mitigate excessive CPU usage in some rare scenarios specific to the test network
+- Improve best address candidate selection efficiency
+
+## Changelog
+
+This patch release consists of 19 commits from 3 contributors which total to 92
+files changed, 1357 additional lines of code, and 1191 deleted lines of code.
+
+All commits since the last release may be viewed on GitHub
+[here](https://github.com/decred/dcrd/compare/release-v1.7.5...release-v1.7.7).
+
+### Protocol and network:
+
+- peer: Use latest pver by default ([decred/dcrd#3083](https://github.com/decred/dcrd/pull/3083))
+- peer: Correct known inventory check ([decred/dcrd#3083](https://github.com/decred/dcrd/pull/3083))
+
+### Documentation:
+
+- peer: Go 1.19 doc comment formatting ([decred/dcrd#3083](https://github.com/decred/dcrd/pull/3083))
+- addrmgr: Go 1.19 doc comment formatting ([decred/dcrd#3084](https://github.com/decred/dcrd/pull/3084))
+- multi: Go 1.19 doc comment formatting ([decred/dcrd#3087](https://github.com/decred/dcrd/pull/3087))
+- docs: Update README.md to required Go 1.19/1.20 ([decred/dcrd#3087](https://github.com/decred/dcrd/pull/3087))
+
+### Developer-related package and module changes:
+
+- peer: Support module graph prune and lazy load ([decred/dcrd#3083](https://github.com/decred/dcrd/pull/3083))
+- main: Use backported peer updates ([decred/dcrd#3083](https://github.com/decred/dcrd/pull/3083))
+- addmrgr: Use TempDir to create temp test dirs ([decred/dcrd#3084](https://github.com/decred/dcrd/pull/3084))
+- addrmgr: Support module graph prune and lazy load ([decred/dcrd#3084](https://github.com/decred/dcrd/pull/3084))
+- addrmgr: Break after selecting random address ([decred/dcrd#3084](https://github.com/decred/dcrd/pull/3084))
+- addrmgr: Set min value and optimize address chance ([decred/dcrd#3084](https://github.com/decred/dcrd/pull/3084))
+- main: Use backported addrmgr updates ([decred/dcrd#3084](https://github.com/decred/dcrd/pull/3084))
+- main: Update to use latest sys module ([decred/dcrd#3087](https://github.com/decred/dcrd/pull/3087))
+
+### Testing and Quality Assurance:
+
+- build: Enable run_tests.sh to work with go.work ([decred/dcrd#3087](https://github.com/decred/dcrd/pull/3087))
+- build: Update to latest action versions ([decred/dcrd#3087](https://github.com/decred/dcrd/pull/3087))
+- build: Update golangci-lint to v1.51.1 ([decred/dcrd#3087](https://github.com/decred/dcrd/pull/3087))
+- build: Test against Go 1.20 ([decred/dcrd#3087](https://github.com/decred/dcrd/pull/3087))
+
+### Misc:
+
+- release: Bump for 1.7.7 ([decred/dcrd#3085](https://github.com/decred/dcrd/pull/3085))
+
+### Code Contributors (alphabetical order):
+
+- Dave Collins
+- Eng Zer Jun
+- Jonathan Chappelow
+
+
+# dcrwallet v1.7.7
+
+This release includes many bug fixes and performance improvements that, in
+particular, benefits ticketbuying and other heavily-used wallets that contain
+many transactions.
+
+## Bug fixes
+
+* A deadlock during address discovery was corrected.
+
+* SPV peer selection no longer requires excessive CPU usage when few quality
+  peers are known.
+
+* A data race during rescanning in SPV mode was corrected.
+
+* A logic race that could result in failing to watch addresses after purchasing
+  tickets, and subsequently missing transactions paying to these addresses, was
+  corrected.
+
+* A duplicate log message when failing to watch addresses after purchasing
+  tickets was removed.
+
+* Account balances are no longer calculated by the automatic ticket buyer if the
+  `ticketbuyer.balancetomaintainabsolute` flag is unset or zero.  Calculating
+  balances is a expensive operation on wallets with many transactions, and
+  avoiding this unnecessary task can provide a significant performance boost.
+
+* The hardcoded maximum number of UTXOs that can be concurrently mixed during
+  account mixing was removed and replaced with a maximum value that scales with
+  the `mixsplitlimit` config option.
+
+* Mixed ticket buying and account mixing no longer creates change that is
+  smaller than the minimum amount needed to mix a UTXO at the smallest common
+  demonination during change account mixing.  Previously, change that was too
+  small to mix was only discarded (i.e. included in the transaction fee) during
+  mixing at the smallest common denomination.
+
+## New features
+
+* A `watchlast` config setting was included to configure the maximum number of
+  recent addresses on an account branch are watched at startup.
+
+* A new UTXO selection algorithm was implemented to pick UTXOs at random.
+  Previously, randomization was implemented by reading all UTXOs into memory and
+  shuffling.  The new algorithm reads UTXOs from the database directly without
+  needing to read all UTXOs into memory, which provides both performance and
+  memory improvements over the previous algorithm.
+
+## Changelog
+
+All commits since the last release may be viewed on GitHub
+[here](https://github.com/decred/dcrwallet/compare/release-v1.7.5...release-v1.7.7).
+
+
+# Decrediton v1.7.7
+
+This release includes a various new features and bug fixes. Users are now able
+to choose individually on each TSpend instead of by pubkey.  Launcher views have
+been totally revamped and improved.  Trezor views have also had an improved
+UX introduced.  And last but not least, DEX has been upgraded to 0.6.0 which
+now allows for trading with ETH.  
+
+## New Features
+
+* DEX has been updated to 0.6.0 which now allows access to the dcr-eth trading
+  pair.   You can find the full rundown of improvements to DEX for 0.6.0 [here](https://github.com/decred/dcrdex/blob/master/docs/release-notes/release-notes-0.6.0.md).
+
+* TSpends can now be voted on individually instead of by the overall signing
+  pubkey.  This gives stakeholders more control over their voting rights when
+  it comes to treasury expenditures.
+
+* Launching views have been redesigned and should allow for more interactity and
+  learning while waiting for the wallet to fully load in.  Ideally this should
+  reduce the number of support questions we receive overall.
+
+* Trezor wallet creation views have been fully revamped and should allow
+  for a much better user experience.  The new views can be seen [here](https://github.com/decred/decrediton/pull/3570).
+
+  
+## Bug fixes
+
+* Resend vote choices to recently updated VSPs.  If a user updates their local
+  vote preference before the VSP that controls their ticket, this was required
+  to ensure that the User's vote choices were maintained after they update to 
+  the new version.
+
+* Fix Dex Window not launching after wallet reload.
+
+* Speed up and refine wallet start up process.  There were a few extraneous
+  processes that were occurring durign startup that could cause delays in the
+  wallet fully opening.
+
+* Fix an issue with the send form that would cause incorrect amounts to be used
+  as the final value.  Eg.  User enters 50 to send, but only would register 5.
+
+* Fix time remaining estimation during block syncing.
+
+* Fix various minor CSS issues throughout.
+
+## Changelog
+
+All commits since the last release may be viewed on GitHub
+[here](https://github.com/decred/decrediton/compare/release-v1.7.6...release-v1.7.7).
+
+
+
+
+
 # 2022-11-16
 
 
