@@ -1,3 +1,457 @@
+# 2022-06-12
+
+
+## Install
+
+To install Decrediton desktop wallet, download, uncompress, and run
+[Decrediton Linux AppImage](https://github.com/decred/decred-binaries/releases/download/v1.8.0/decrediton-v1.8.0.AppImage)
+or 
+[Decrediton Linux tar](https://github.com/decred/decred-binaries/releases/download/v1.8.0/decrediton-v1.8.0.tar.gz)
+or
+[Decrediton macOS amd64](https://github.com/decred/decred-binaries/releases/download/v1.8.0/decrediton-amd64-v1.8.0.dmg)
+or
+[Decrediton macOS arm64](https://github.com/decred/decred-binaries/releases/download/v1.8.0/decrediton-arm64-v1.8.0.dmg)
+or
+[Decrediton Windows](https://github.com/decred/decred-binaries/releases/download/v1.8.0/decrediton-v1.8.0.exe).
+
+To install the command-line tools, please see
+[dcrinstall](https://github.com/decred/decred-release/tree/master/cmd/dcrinstall).
+
+See decred-v1.8.0-manifest.txt and the other manifest files for SHA-256 hashes
+and the associated .asc signature files to confirm those hashes.
+
+See [README.md](./README.md#verifying-binaries) for more info on verifying the
+files.
+
+## Contents
+* [dcrd](#dcrd-v180)
+* [dcrwallet](#dcrwallet-v180)
+* [Decrediton](#decrediton-v180)
+
+# dcrd v1.8.0
+
+This is a new major release of dcrd.  Some of the key highlights are:
+
+* Two new consensus vote agendas which allow stakeholders to decide whether or
+  not to activate support for the following:
+  * Changing the Proof-of-Work hashing algorithm to BLAKE3 and the difficulty algorithm to ASERT
+  * Changing the Proof-of-Work and Proof-of-Stake subsidy split from 10%/80% to 1%/89%
+* Separation of block hash from Proof-of-Work hash
+* BLAKE3 CPU mining support
+* Initial sync time reduced by about 20%
+* Runtime memory management optimizations
+* Faster cryptographic signature validation
+* Low fee transaction rejection
+* Unspent transaction output set size reduction
+* No more checkpoints
+* Improved network protocol message responsiveness
+* Header proof commitment hash storage
+* Address index removal
+* Several CLI options deprecated
+* Various updates to the RPC server:
+  * Total coin supply output correction
+  * More stable global communication over WebSockets
+  * Winning ticket notifications when unsynced mining on test networks
+  * Several other notable updates, additions, and removals related to the JSON-RPC API
+* Infrastructure improvements
+* Miscellaneous network and protocol optimizations
+* Quality assurance changes
+
+For those unfamiliar with the [voting process](https://docs.decred.org/governance/consensus-rule-voting/overview/) in Decred, all code needed in order to support each of the aforementioned consensus changes is already included in this release, however it will remain
+dormant until the stakeholders vote to activate it.
+
+For reference, the consensus change work for was originally proposed and approved for initial implementation via the following Politeia proposal:
+- [Change PoW/PoS Subsidy Split to 1/89 and Change PoW Algorithm to BLAKE3](https://proposals.decred.org/record/a8501bc)
+
+The following Decred Change Proposals (DCPs) describe the proposed changes in detail and provide full technical specifications:
+- [DCP0011: Change PoW to BLAKE3 and ASERT](https://github.com/decred/dcps/blob/master/dcp-0011/dcp-0011.mediawiki)
+- [DCP0012: Change PoW/PoS Subsidy Split To 1/89](https://github.com/decred/dcps/blob/master/dcp-0012/dcp-0012.mediawiki)
+
+## Upgrade Required
+
+**It is extremely important for everyone to upgrade their software to this latest release even if you don't intend to vote in favor of the agenda.  This particularly applies to PoW miners as failure to upgrade will result in lost rewards after block height 777240.  That is estimated to be around June 29th, 2023.**
+
+## Downgrade Warning
+
+The database format in v1.8.0 is not compatible with previous versions of the software.  This only affects downgrades as users upgrading from previous versions will see a one time database migration.
+
+Once this migration has been completed, it will no longer be possible to downgrade to a previous version of the software without having to delete the database and redownload the chain.
+
+The database migration typically takes around 4-6 minutes on HDDs and 2-3 minutes on SSDs.
+
+## Notable Changes
+
+### Two New Consensus Change Votes
+
+Two new consensus change votes are now available as of this release.  After upgrading, stakeholders may set their preferences through their wallet.
+
+#### Change PoW to BLAKE3 and ASERT
+
+The first new vote available as of this release has the id `blake3pow`.
+
+The primary goals of this change are to:
+
+* Increase decentralization of proof of work mining by obsoleting the current   specialized hardware (ASICs) that is only realistically available to the   existing highly centralized mining monopoly
+* Improve the proof of work mining difficulty adjustment algorithm responsiveness * Provide more equal profitability to steady state PoW miners versus hit and run   miners
+
+See the following for more details:
+
+* [Politeia proposal](https://proposals.decred.org/record/a8501bc)
+* [DCP0011](https://github.com/decred/dcps/blob/master/dcp-0011/dcp-0011.mediawiki)
+
+#### Change PoW/PoS Subsidy Split to 1/89 Vote
+
+The second new vote available as of this release has the id `changesubsidysplitr2`.
+
+The proposed modification to the subsidy split in tandem with the change to the PoW hashing function is intended to break up the mining cartel and further improve decentralization of the issuance process.
+
+See the following for more details:
+
+* [Politeia proposal](https://proposals.decred.org/record/a8501bc)
+* [DCP0012](https://github.com/decred/dcps/blob/master/dcp-0012/dcp-0012.mediawiki)
+
+### Separation of Block Hash from Proof-of-Work Hash
+
+A new Proof-of-Work (PoW) hash that is distinct from the existing block hash is now used for all consensus rules related to PoW verification.
+
+Block hashes have historically served multiple roles which include those related to proof of work (PoW).  As of this release, the roles related to PoW are now solely the domain of the new PoW hash.
+
+Some key points related to this change are:
+
+* The new PoW hash will be exactly the same as the existing block hash for all blocks prior to the activation of the stakeholder vote to change the PoW hashing algorithm
+* The block hash continues to use the existing hashing algorithm
+* The block hash will no longer have the typical pattern of leading zeros upon activation of the PoW hashing algorithm
+* The PoW hash will have the typical pattern of leading zeros both before and after the activation of the new PoW hashing algorithm
+
+### BLAKE3 CPU Mining Support
+
+The internal CPU miner has been significantly optimized to provide much higher hash rates, especially when using multiple cores, and now automatically mines using the BLAKE3 algorithm when the `blake3pow` agenda is active.
+
+### Initial Sync Time Reduced by About 20%
+
+The amount of time it takes to complete the initial chain synchronization process with default settings has been reduced by about 20% versus the previous release.
+
+### Runtime Memory Management Optimizations
+
+The way memory is managed has been optimized to provide performance enhancements to both steady-state operation as well as the initial chain sync process.
+
+The primary benefits are:
+
+* Lower maximum memory usage during transient periods of high demand
+* Approximately a 10% reduction to the duration of the initial sync process
+* Significantly reduced overall total memory allocations (~42%)
+* Less overall CPU usage for the same amount of work
+
+### Faster Cryptographic Signature Validation
+
+Similar to the previous release, this release further improves some aspects of the underlying crypto code to increase its execution speed and reduce the number of memory allocations.  The overall result is a 52% reduction in allocations and about a 1% reduction to the verification time for a single signature.
+
+The primary benefits are:
+
+* Improved vote times since blocks and transactions propagate more quickly throughout the network
+* Approximately a 4% reduction to the duration of the initial sync process
+
+### Low Fee Transaction Rejection
+
+The default transaction acceptance and relay policy is no longer based on priority and instead now immediately rejects all transactions that do not pay the minimum required fee.
+
+This provides a better user experience for transactions that do not pay enough fees.
+
+For some insight into the motivation for this change, historically, prior to the introduction of support for child pays for parent (CPFP), it was possible for transactions to essentially become stuck forever if they didn't pay a high enough fee for miners to include them in a block.
+
+In order to prevent this, a policy was introduced that allowed relaying transactions that do not pay enough fees based on a priority calculated from the fee as well as the age of coins being spent.  The result is that the priority slowly increased over time as the coins aged to ensure such transactions would eventually be relayed and mined.  In order to prevent abuse the behavior could otherwise allow, the policy also included additional rate-limiting of these types of transactions.
+
+While the policy served its purpose, it had some downsides such as:
+
+* A confusing user experience where transactions that do not pay enough fees and also are not old enough to meet the dynamically changing priority requirements are rejected due to having insufficient priority instead of not paying enough fees as the user might expect
+* The priority requirements dynamically change over time which leads to non-deterministic behavior and thus ultimately results in what appear to be intermittent/transient failures to users
+
+The policy is no longer necessary or desirable given such transactions can now use CPFP to increase the overall fee of the entire transaction chain thereby ensuring they are mined.
+
+### Unspent Transaction Output Set Size Reduction
+
+The set of all unspent transaction outputs (UTXO set) no longer contains unspendable `treasurybase` outputs.
+
+A `treasurybase` output is a special output that increases the balance of the decentralized treasury account which requires stakeholder approval to spend funds.  As a result, they do not operate like normal transaction outputs and therefore are never directly spendable.
+
+Removing these unspendable outputs from the UTXO set reduces its overall size.
+
+### No More Checkpoints
+
+This release introduces a new model for deciding when to reject old forks to make use of the hard-coded assumed valid block that is updated with each release to a recent block thereby removing the final remaining usage of checkpoints.
+
+Consequently, the `--nocheckpoints` command-line option and separate `findcheckpoints` utility have been removed.
+
+### Improved Network Protocol Message Responsiveness (`getheaders`/`getcfilterv2`)
+
+All protocol message requests for headers (`getheaders`) and version 2 compact filters (`getcfilterv2`) will now receive empty responses when there is not any available data or the peer is otherwise unwilling to serve the data for a variety of reasons.
+
+For example, a peer might be unwilling to serve data because they are still performing the initial sync or temporarily no longer consider themselves synced with the network due to recently coming back online after being unable to communicate with the network for a long time.
+
+This change helps improve network robustness by preventing peers from appearing unresponsive or stalled in such cases.
+
+### Header Proof Commitment Hash Storage
+
+The individual commitment hashes covered by the commitment root field of the header of each block are now stored in the database for fast access.  This provides better scaling for generating and serving inclusion proofs as more commitments are added to the header proof in future upgrades.
+
+### Address Index Removal (`--addrindex`, `--dropaddrindex`)
+
+The previously deprecated optional address index that could be enabled via `--addrindex` and removed via `--dropaddrindex` is no longer available.  All of the information previously provided from the address index, and much more, is available via [dcrdata](https://github.com/decred/dcrdata/).
+
+### Several CLI Options Deprecated
+
+The following CLI options no longer have any effect and are now deprecated:
+
+* `--norelaypriority`
+* `--limitfreerelay`
+* `--blockminsize`
+* `--blockprioritysize`
+
+They will be removed in a future release.
+
+### RPC Server Changes
+
+The RPC server version as of this release is 8.0.0.
+
+#### Total Coin Supply Output Correction (`getcoinsupply`)
+
+The total coin supply reported by `getcoinsupply` will now correctly include the coins generated as a part of the block reward for the decentralized treasury as intended.
+
+As a result, the amount reported will now be higher than it was previously.  It is important to note that this issue was only an RPC display issue and did not affect consensus in any way.
+
+#### More Stable Global Communication over WebSockets
+
+WebSocket connections now have longer timeouts and remain connected through transient network timeouts.  This significantly improves the stability of high-latency connections such as those communicating across multiple continents.
+
+#### Winning Ticket Notifications when Unsynced Mining on Test Networks (`winningtickets`)
+
+Clients that subscribe to receive `winningtickets` notifications via WebSocket with `notifywinningtickets` will now also receive the notifications on test networks prior to being fully synced when the `--allowunsyncedmining` CLI option is provided.
+
+See the following for API details:
+
+* [notifywinningtickets JSON-RPC API Documentation](https://github.com/decred/dcrd/blob/master/docs/json_rpc_api.mediawiki#notifywinningtickets)
+* [winningtickets JSON-RPC API Documentation](https://github.com/decred/dcrd/blob/master/docs/json_rpc_api.mediawiki#winningtickets)
+
+#### Transaction Fee Priority Fields on Mempool RPC Deprecated (`getrawmempool`)
+
+Due to the removal of the policy related to low fee transaction priority, the `startingpriority` and `currentpriority` fields of the results of the verbose output of the `getrawmempool` RPC are now deprecated.  They will always be set to 0 and are scheduled to be removed in a future version.
+
+See the [getrawmempool JSON-RPC API Documentation](https://github.com/decred/dcrd/blob/master/docs/json_rpc_api.mediawiki#getrawmempool) for API details.
+
+#### Removal of Raw Transaction Search RPC (`searchrawtransactions`)
+
+The deprecated `searchrawtransactions` RPC, which could previously be used to obtain all transactions that either credit or debit a given address via RPC is no longer available.
+
+Callers that wish to access details related to addresses are encouraged to use [dcrdata](https://github.com/decred/dcrdata/) instead.
+
+#### Removal of Address Index Status Field on Info RPC (`getinfo`)
+
+The `addrindex` field of the `getinfo` RPC is no longer available.
+
+See the [getinfo JSON-RPC API Documentation](https://github.com/decred/dcrd/blob/master/docs/json_rpc_api.mediawiki#getinfo) for API details.
+
+#### Removal of Missed and Expired Ticket RPCs
+
+Now that missed and expired tickets are automatically revoked by the consensus rules, all RPCs related to querying and requesting notifications for missed and expired tickets are no longer available.
+
+In particular, the following deprecated RPCs are no longer available:
+
+* `missedtickets`
+* `rebroadcastmissed`
+* `existsmissedtickets`
+* `existsexpiredtickets`
+* `notifyspentandmissedtickets`
+
+#### Updates to Work RPC (`getwork`)
+
+The `getwork` RPC will now return an error message immediately if block template generation is temporarily unable to generate a template indicating the reason.  Previously, the RPC would block until a new template was eventually generated which could potentially be an exceedingly long time.
+
+Additionally, cancelling a `getwork` invocation before the work has been fully generated will now cancel the underlying request which allows the RPC to immediately service other queued work requests.
+
+See the [getwork JSON-RPC API Documentation](https://github.com/decred/dcrd/blob/master/docs/json_rpc_api.mediawiki#getwork) for API details.
+
+## Changelog
+
+This release consists of 439 git commits from 18 contributors which total to 408 files changed, 25840 additional lines of code, and 22871 deleted lines of code.
+
+All commits since the last release may be viewed on GitHub [here](https://github.com/decred/dcrd/compare/release-v1.7.7...release-v1.8.0).
+
+See [dcrd's own release notes](https://github.com/decred/dcrd/releases/tag/release-v1.8.0) for a categorized breakdown of all commits since the last release.
+
+### Code Contributors (alphabetical order):
+
+- Abirdcfly
+- Dave Collins
+- David Hill
+- Donald Adu-Poku
+- Eng Zer Jun
+- Jamie Holdstock
+- JoeGruff
+- Jonathan Chappelow
+- Josh Rickmar
+- Julian Y
+- Matheus Degiovani
+- Ryan Staudt
+- Sef Boukenken
+- arjundashrath
+- matthawkins90
+- norwnd
+- peterzen
+- 刘昆
+
+# dcrwallet v1.8.0
+
+This release enables the votes for and implements the necessary features to follow the upcoming hard forks described by DCP0011 and DCP0012.  As always, other minor feature additions and bug fixes have been included.
+
+## Bug fixes
+
+* Manual ticket revocations are no longer performed by the VSP client ([`c9fc99b2`](https://github.com/decred/dcrwallet/commit/c9fc99b2)).
+
+* A data race on the fee transaction pointer in the VSP client was corrected ([`a8f2b058`](https://github.com/decred/dcrwallet/commit/a8f2b058)).
+
+* VSP options in the config file are validated at startup to prevent invalid configurations that do not specify all required settings ([`6cc8d053`](https://github.com/decred/dcrwallet/commit/6cc8d053)).
+
+* Ticket purchasing performed through the JSON-RPC server now respects the configured maximum VSP fee ([`a19dcb43`](https://github.com/decred/dcrwallet/commit/a19dcb43)).
+
+* A data race on rescanned block hashes in SPV mode was corrected ([`dfcac12f`](https://github.com/decred/dcrwallet/commit/dfcac12f)).
+
+* New addresses can no longer be generated and returned externally for an imported voting account.  This does not affect address generation when paying to voting account addresses during ticket buying ([`d9945563`](https://github.com/decred/dcrwallet/commit/d9945563)).
+
+## New features
+
+* Blocks are now validated according to either the initial proof-of-work algorithm or the difficulty and proof-of-work hash algorithm specified by DCP0011 ([`3a52f00a`](https://github.com/decred/dcrwallet/commit/3a52f00a)).
+
+* Votes created by the wallet will use the subsidy split described by DCP0012 if the agenda is active ([`8374bd52`](https://github.com/decred/dcrwallet/commit/8374bd52)).
+
+* Mixed ticket purchasing now trickles the ticket purchases with random delays to harden against profiling specific buyers by their ticket timings ([`e71decbd`](https://github.com/decred/dcrwallet/commit/e71decbd)).
+
+* Mixed ticket purchasing was implemented by the `WalletService.PurchaseTickets` gRPC method ([`5b6ab6da`](https://github.com/decred/dcrwallet/commit/5b6ab6da), [`4c697648`](https://github.com/decred/dcrwallet/commit/4c697648)).
+
+* A `WalletService.Address` gRPC method was added to query the wallet for details about its addresses ([`80a0e716`](https://github.com/decred/dcrwallet/commit/80a0e716), [`a333c1f5`](https://github.com/decred/dcrwallet/commit/a333c1f5)).
+
+* A `WalletService.DumpPrivateKey` gRPC method was added to dump private keys of wallet addresses ([`c609d558`](https://github.com/decred/dcrwallet/commit/c609d558), [`12b9c552`](https://github.com/decred/dcrwallet/commit/12b9c552)).
+
+* A `VotingService.SetTSpendPolicy` gRPC method was added to set a voting policy for a specific TSpend transaction.  A `VotingService.TSpendPolicies` gRPC method was added to query the voting policies of these specific TSpends ([`7352c1cb`](https://github.com/decred/dcrwallet/commit/7352c1cb)).
+
+* In SPV mode, TSpends now fetched at wallet startup ([`eab54c36`](https://github.com/decred/dcrwallet/commit/eab54c36)).
+
+* A `--cpuprofile` config flag was added to write a pprof CPU profile for the entire process execution.  The `--memprofile` flag was changed to also profile the entire process execution rather than stopping after 5 minutes ([`39a379eb`](https://github.com/decred/dcrwallet/commit/39a379eb)).
+
+* An additional newline character is no longer required when providing the seed during seed restore when entering seeds in hexadecimal form ([`f31e848f`](https://github.com/decred/dcrwallet/commit/f31e848f)).
+
+* The passphrase confirmation can now be piped during the `--create` prompts ([`dd93c2f6`](https://github.com/decred/dcrwallet/commit/dd93c2f6)).
+
+## Changelog
+
+The following lists all commits included in dcrwallet v1.8.0 that were not backported to a prior 1.7.x release:
+
+* [`e71decbd`](https://github.com/decred/dcrwallet/commit/e71decbd): Trickle tickets during mixed buying
+* [`82f59828`](https://github.com/decred/dcrwallet/commit/82f59828): Update version prerelease and metadata for release-v1.8 branch
+* [`92529a4b`](https://github.com/decred/dcrwallet/commit/92529a4b): Prepare v1.8.0 release
+* [`3a52f00a`](https://github.com/decred/dcrwallet/commit/3a52f00a): Validate that blocks satisfy either V1 or V2 PoW
+* [`85b48444`](https://github.com/decred/dcrwallet/commit/85b48444): Bump deps.
+* [`96817277`](https://github.com/decred/dcrwallet/commit/96817277): Remove features marked deprecated
+* [`8374bd52`](https://github.com/decred/dcrwallet/commit/8374bd52): Follow DCP0012 once activated.
+* [`99be2039`](https://github.com/decred/dcrwallet/commit/99be2039): Remove jsonrpc/types module replacement
+* [`1683d3ae`](https://github.com/decred/dcrwallet/commit/1683d3ae): multi: Fix "the the" comment typos.
+* [`c9fc99b2`](https://github.com/decred/dcrwallet/commit/c9fc99b2): vsp: Don't revoke tickets.
+* [`a8f2b058`](https://github.com/decred/dcrwallet/commit/a8f2b058): vsp: Add missing mutex locks.
+* [`b6467521`](https://github.com/decred/dcrwallet/commit/b6467521): multi: Introduce AgendaChoices type.
+* [`816f16d6`](https://github.com/decred/dcrwallet/commit/816f16d6): vsp: Don't export Policy.
+* [`d95475b1`](https://github.com/decred/dcrwallet/commit/d95475b1): vsp: Unparam Policy.
+* [`bf8e7a09`](https://github.com/decred/dcrwallet/commit/bf8e7a09): vsp: Don't export Wallet.
+* [`6cc8d053`](https://github.com/decred/dcrwallet/commit/6cc8d053): Validate VSP configs on startup.
+* [`a19dcb43`](https://github.com/decred/dcrwallet/commit/a19dcb43): jsonrpc: Respect configured VSPMaxFee.
+* [`c6933a35`](https://github.com/decred/dcrwallet/commit/c6933a35): Move logger subsystem variables to internal package
+* [`7cd8248f`](https://github.com/decred/dcrwallet/commit/7cd8248f): linter: fixes
+* [`72eefbed`](https://github.com/decred/dcrwallet/commit/72eefbed): Revert unintentional context change from previous commit
+* [`dc38eb65`](https://github.com/decred/dcrwallet/commit/dc38eb65): Unexport wallet SaveRescanned method
+* [`0aeb02cd`](https://github.com/decred/dcrwallet/commit/0aeb02cd): vsp: Use client provided by vspd package.
+* [`89623dc9`](https://github.com/decred/dcrwallet/commit/89623dc9): build: Test against Go 1.20
+* [`69d8b47b`](https://github.com/decred/dcrwallet/commit/69d8b47b): multi: linter cleanup
+* [`dfcac12f`](https://github.com/decred/dcrwallet/commit/dfcac12f): Avoid spv data race on rescanned block hashes
+* [`86898358`](https://github.com/decred/dcrwallet/commit/86898358): Bump remaining golang.org/x/* modules
+* [`e89da321`](https://github.com/decred/dcrwallet/commit/e89da321): Bump golang.org/x/sys module
+* [`904a6db4`](https://github.com/decred/dcrwallet/commit/904a6db4): cmd: update to latest deps
+* [`5b6ab6da`](https://github.com/decred/dcrwallet/commit/5b6ab6da): multi: Modify PurchaseTickets method.
+* [`4c697648`](https://github.com/decred/dcrwallet/commit/4c697648): rpc: Add parameters to PurchaseTickets.
+* [`c609d558`](https://github.com/decred/dcrwallet/commit/c609d558): server: Add DumpPrivateKey.
+* [`12b9c552`](https://github.com/decred/dcrwallet/commit/12b9c552): rpc: Add DumpPrivateKey method type.
+* [`80a0e716`](https://github.com/decred/dcrwallet/commit/80a0e716): server: Add Address method.
+* [`a333c1f5`](https://github.com/decred/dcrwallet/commit/a333c1f5): rpc: Add address method type.
+* [`eab54c36`](https://github.com/decred/dcrwallet/commit/eab54c36): Fetch tspends in SPV mode
+* [`39a379eb`](https://github.com/decred/dcrwallet/commit/39a379eb): dcrwallet: Add --cpuprofile option
+* [`7352c1cb`](https://github.com/decred/dcrwallet/commit/7352c1cb): rpc: Add TSpendPolicies and SetTSpendPolicy requests
+* [`f31e848f`](https://github.com/decred/dcrwallet/commit/f31e848f): Do not require additional newline prompting a hex seed
+* [`dd93c2f6`](https://github.com/decred/dcrwallet/commit/dd93c2f6): Allow passphrase confirmation to be read from non-tty
+* [`566eff83`](https://github.com/decred/dcrwallet/commit/566eff83): multi: Remove some unused code
+* [`183083d6`](https://github.com/decred/dcrwallet/commit/183083d6): multi: Update dcrd pkgs to wip major versions
+* [`5e7d5e73`](https://github.com/decred/dcrwallet/commit/5e7d5e73): multi: Bump major module version to 3
+* [`b16f7ca0`](https://github.com/decred/dcrwallet/commit/b16f7ca0): vsp: Pass the context to feepayment instead of creating a new one.
+* [`fe1bb25f`](https://github.com/decred/dcrwallet/commit/fe1bb25f): tests:  Use a single context in tests.
+* [`3b3e9e04`](https://github.com/decred/dcrwallet/commit/3b3e9e04): build: Test against Go 1.19
+* [`3d518eab`](https://github.com/decred/dcrwallet/commit/3d518eab): whack a comment
+* [`ed842ec8`](https://github.com/decred/dcrwallet/commit/ed842ec8): Run go fmt from Go 1.19 over the tree
+* [`7cdfb44a`](https://github.com/decred/dcrwallet/commit/7cdfb44a): Bump development version
+* [`4ed5a4c6`](https://github.com/decred/dcrwallet/commit/4ed5a4c6): Prevent panic in RPC-mode getstakeinfo
+* [`4c162c4f`](https://github.com/decred/dcrwallet/commit/4c162c4f): Fix compatibility with latest development dcrd
+* [`04d8d0f6`](https://github.com/decred/dcrwallet/commit/04d8d0f6): Fix regen.sh return code if $UID is unset
+* [`736efd2a`](https://github.com/decred/dcrwallet/commit/736efd2a): Make default fee amount constant more readable
+* [`185f9cd7`](https://github.com/decred/dcrwallet/commit/185f9cd7): Update to latest gRPC
+* [`4941af16`](https://github.com/decred/dcrwallet/commit/4941af16): Updates for Go 1.18
+* [`80bcd2f3`](https://github.com/decred/dcrwallet/commit/80bcd2f3): Switch away from deprecated terminal package
+* [`d9945563`](https://github.com/decred/dcrwallet/commit/d9945563): wallet: No taking voting addresses.
+
+## Code Contributors (alphabetical order):
+
+* Alex Yocom-Piatt (@alexlyp)
+* @bgptr
+* Dave Collins (@davecgh)
+* David Hill (@dajohi)
+* Jamie Holdstock (@jholdstock)
+* @JoeGruffins
+* Josh Rickmar (@jrick)
+* Matheus Degiovani (@matheusd)
+* @norwnd
+
+# Decrediton v1.8.0
+
+This release of Decrediton includes numerous bug fixes and refinement across
+all pages/tabs.
+
+* All pages have had layouts and styling updated to match redesign specs. There
+  are a few more pages that will receive design updates.  Trezor pages
+  were recently updated and Ledger integration is currently on schedule and
+  should be included in an upcoming release in the near future.
+
+* DCRDEX is now at 0.6.1 and has included numerous improvements, as well as new 
+  assets to be able to trade.  There are more exciting updates in the future 
+  for DCRDEX as laid out in the recently approved 
+  [proposal](https://proposals.decred.org/record/4d2324b).  
+
+* Test coverage has also increased to cover most of the front-end areas. 
+  Hopefully, in a few more releases we'll have the entirity of Decrediton 
+  covered with unit tests that should protect us from most regression errors.
+
+* The ability to vote on all treasury spending is now active.  This can be 
+  done by approving/dis-approving all treasury spending or spending can be voted
+  on per transaction.  
+
+* Legacy tickets and references to stakepool have been completely removed from
+  the codebase.  
+
+## Code Contributors (alphabetical order)
+
+* Alex Yocom-Piatt
+* Amir Massarwa
+* artikozel
+* bgptr
+* Joe Gruffins
+* Jonathan Chappelow
+* Jonathan Zeppettini
+* Matheus Degiovani
+* tiagoalvesdulce
+
 # 2022-04-10
 
 
