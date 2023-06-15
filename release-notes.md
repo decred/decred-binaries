@@ -60,7 +60,7 @@ This is a new major release of dcrd.  Some of the key highlights are:
 For those unfamiliar with the [voting process](https://docs.decred.org/governance/consensus-rule-voting/overview/) in Decred, all code needed in order to support each of the aforementioned consensus changes is already included in this release, however it will remain
 dormant until the stakeholders vote to activate it.
 
-For reference, the consensus change work for was originally proposed and approved for initial implementation via the following Politeia proposal:
+For reference, the consensus change work was originally proposed and approved for initial implementation via the following Politeia proposal:
 - [Change PoW/PoS Subsidy Split to 1/89 and Change PoW Algorithm to BLAKE3](https://proposals.decred.org/record/a8501bc)
 
 The following Decred Change Proposals (DCPs) describe the proposed changes in detail and provide full technical specifications:
@@ -157,7 +157,7 @@ The default transaction acceptance and relay policy is no longer based on priori
 
 This provides a better user experience for transactions that do not pay enough fees.
 
-For some insight into the motivation for this change, historically, prior to the introduction of support for child pays for parent (CPFP), it was possible for transactions to essentially become stuck forever if they didn't pay a high enough fee for miners to include them in a block.
+For some insight into the motivation for this change prior to the introduction of support for child pays for parent (CPFP), it was possible for transactions to essentially become stuck forever if they didn't pay a high enough fee for miners to include them in a block.
 
 In order to prevent this, a policy was introduced that allowed relaying transactions that do not pay enough fees based on a priority calculated from the fee as well as the age of coins being spent.  The result is that the priority slowly increased over time as the coins aged to ensure such transactions would eventually be relayed and mined.  In order to prevent abuse the behavior could otherwise allow, the policy also included additional rate-limiting of these types of transactions.
 
@@ -225,7 +225,7 @@ WebSocket connections now have longer timeouts and remain connected through tran
 
 #### Winning Ticket Notifications when Unsynced Mining on Test Networks (`winningtickets`)
 
-Clients that subscribe to receive `winningtickets` notifications via WebSocket with `notifywinningtickets` will now also receive the notifications on test networks prior to being fully synced when the `--allowunsyncedmining` CLI option is provided.
+Clients that subscribe to receive `winningtickets` notifications via WebSockets with `notifywinningtickets` will now also receive the notifications on test networks prior to being fully synced when the `--allowunsyncedmining` CLI option is provided.
 
 See the following for API details:
 
@@ -266,7 +266,7 @@ In particular, the following deprecated RPCs are no longer available:
 
 The `getwork` RPC will now return an error message immediately if block template generation is temporarily unable to generate a template indicating the reason.  Previously, the RPC would block until a new template was eventually generated which could potentially be an exceedingly long time.
 
-Additionally, cancelling a `getwork` invocation before the work has been fully generated will now cancel the underlying request which allows the RPC to immediately service other queued work requests.
+Additionally, cancelling a `getwork` invocation before the work has been fully generated will now cancel the underlying request which allows the RPC server to immediately service other queued work requests.
 
 See the [getwork JSON-RPC API Documentation](https://github.com/decred/dcrd/blob/master/docs/json_rpc_api.mediawiki#getwork) for API details.
 
@@ -3842,9 +3842,9 @@ Depending on the asset, there may be a wallet setting on the Wallets page to
 pre-size funding UTXOs to avoid this over-locking, but (1) it involves an extra 
 transaction that pays to yourself before placing the order, which has on-chain 
 transaction fees that may be undesirable on chains like BTC, and (2) it is only 
-applied for limit orders with standing time-in-force since the the UTXOs are 
-only locked until the swap transaction is broadcasted, which is relatively 
-brief for taker-only orders that are never booked.
+applied for limit orders with standing time-in-force since the UTXOs are only
+locked until the swap transaction is broadcasted, which is relatively brief for
+taker-only orders that are never booked.
 
 ### Epochs
 
@@ -8351,7 +8351,7 @@ wallet seed before upgrading in case a downgrade is necessary.
  
 * Ticket autobuyer was not properly starting and stopping. Now user is
   properly notified when the ticket buyer has started. In the coming releases,
-  we will be adding even more feedback from ticket buyer so the the user
+  we will be adding even more feedback from ticket buyer so the user
   is able to see some of the decision making happening each block.
 
 * Autobuyer settings are now properly set on config updates and have confirmed
