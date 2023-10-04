@@ -1,4 +1,131 @@
-# 2022-06-12
+# 2023-10-06
+
+
+## Install
+
+To install Decrediton desktop wallet, download, uncompress, and run
+[Decrediton Linux AppImage](https://github.com/decred/decred-binaries/releases/download/v1.8.1/decrediton-v1.8.1.AppImage)
+or 
+[Decrediton Linux tar](https://github.com/decred/decred-binaries/releases/download/v1.8.1/decrediton-v1.8.1.tar.gz)
+or
+[Decrediton macOS amd64](https://github.com/decred/decred-binaries/releases/download/v1.8.1/decrediton-amd64-v1.8.1.dmg)
+or
+[Decrediton macOS arm64](https://github.com/decred/decred-binaries/releases/download/v1.8.1/decrediton-arm64-v1.8.1.dmg)
+or
+[Decrediton Windows](https://github.com/decred/decred-binaries/releases/download/v1.8.1/decrediton-v1.8.1.exe).
+
+To install the command-line tools, please see
+[dcrinstall](https://github.com/decred/decred-release/tree/master/cmd/dcrinstall).
+
+See decred-v1.8.1-manifest.txt and the other manifest files for SHA-256 hashes
+and the associated .asc signature files to confirm those hashes.
+
+See [README.md](./README.md#verifying-binaries) for more info on verifying the
+files.
+
+## Contents
+* [dcrd](#dcrd-v181)
+* [dcrwallet](#dcrwallet-v181)
+* [Decrediton](#decrediton-v181)
+
+# dcrd v1.8.1
+
+This is a patch release of dcrd that includes some updates to the RPC server and
+JSON-RPC API in light of the changes made by
+[DCP0011](https://github.com/decred/dcps/blob/master/dcp-0011/dcp-0011.mediawiki) as follows:
+
+* The `getblock` and `getblockheader` RPCs now have an additional `powhash`
+  field for the new Proof-of-Work hash
+* The `getnetworkhashps` RPC now treats -1 for the blocks parameter as the
+  default number of blocks versus the previous behavior that is no longer
+  applicable to the new difficulty ajustement algorithm
+
+The RPC server version as of this release is 8.1.0.
+
+## Changelog
+
+This patch release consists of 5 commits from 2 contributors which total to 7
+files changed, 47 additional lines of code, and 29 deleted lines of code.
+
+All commits since the last release may be viewed on GitHub
+[here](https://github.com/decred/dcrd/compare/release-v1.8.0...release-v1.8.1).
+
+### RPC:
+
+- rpc: Add PoWHash to getblock/getblockheader (verbose) results ([decred/dcrd#3192](https://github.com/decred/dcrd/pull/3192))
+- rpcserver: Modify getnetworkhashps -1 blocks logic ([decred/dcrd#3193](https://github.com/decred/dcrd/pull/3193))
+
+### Developer-related package and module changes:
+
+- jsonrpc/types: Add powhash to verbose block output ([decred/dcrd#3192](https://github.com/decred/dcrd/pull/3192))
+- main: Use backported rpc types updates ([decred/dcrd#3192](https://github.com/decred/dcrd/pull/3192))
+
+### Misc:
+
+- release: Bump for 1.8.1 ([decred/dcrd#3194](https://github.com/decred/dcrd/pull/3194))
+
+### Code Contributors (alphabetical order):
+
+- Dave Collins
+- Jonathan Chappelow
+
+
+# dcrwallet v1.8.1
+
+This release contains important bug fixes for VSP users.
+
+## Bug fixes
+
+* A warning is logged if a VSP fee payment could not be created due to a locked wallet ([`1c1bcfbd`](https://github.com/decred/dcrwallet/commit/1c1bcfbd)).
+
+* VSP fee payments started by RPC requests are no longer cancelled early after the RPC returns ([`07854e37`](https://github.com/decred/dcrwallet/commit/07854e37)).
+
+* The random duration interval during which ticket fee payment operations occur was fixed using the correct calculation of when a ticket goes live ([`c4c6c421`](https://github.com/decred/dcrwallet/commit/c4c6c421)).
+
+* Fee payment confirmations are no longer assumed to be valid after they receive 6 confirmations, and the VSP is contacted to ensure that it has also confirmed the payment ([`7c551ce6`](https://github.com/decred/dcrwallet/commit/7c551ce6)).
+
+* Block heights for ticket liveness and expiry are recalculated properly whenever unmined tickets are processed by the VSP client  ([`1319da0b`](https://github.com/decred/dcrwallet/commit/1319da0b)).
+
+## New features
+
+* The verbose `getblock` and `getblockheader` JSON-RPC results now include a `powhash` field with the hash calculated for the Proof-of-Work algorithm.
+
+## Changelog
+
+The following lists all commits since dcrwallet v1.8.0:
+
+* [`1c1bcfbd`](https://github.com/decred/dcrwallet/commit/1c1bcfbd): vsp: Dont ignore locked wallet errs
+* [`07854e37`](https://github.com/decred/dcrwallet/commit/07854e37): vsp: Hardcode background ctx
+* [`c4c6c421`](https://github.com/decred/dcrwallet/commit/c4c6c421): vsp: Fix blocksUntilLive calc
+* [`7c551ce6`](https://github.com/decred/dcrwallet/commit/7c551ce6): vsp: Only remove confirmed payments
+* [`1319da0b`](https://github.com/decred/dcrwallet/commit/1319da0b): vsp: Recalculate live/expiry height
+* [`bc7f095c`](https://github.com/decred/dcrwallet/commit/bc7f095c): Bump patch version for upcoming 1.8.1 release
+* [`a02926a8`](https://github.com/decred/dcrwallet/commit/a02926a8): Update dcrd JSON-RPC types module
+* [`7cb12ad4`](https://github.com/decred/dcrwallet/commit/7cb12ad4): Update decred dependencies
+
+## Code Contributors (alphabetical order):
+
+* Jamie Holdstock (@jholdstock)
+* Josh Rickmar (@jrick)
+
+
+# Decrediton v1.8.1
+
+This is a minor Decrediton release that updates DEX to the most recent
+release and fixes a few critical bugs.
+
+## Bug fixes
+
+* Fix response buffer size for logging into DEX on v1.8.0
+
+## Changelog
+
+All commits since the last release may be viewed on GitHub
+[here](https://github.com/decred/decrediton/compare/release-v1.8.0...release-v1.8.1).
+
+
+
+# 2023-06-12
 
 
 ## Install
