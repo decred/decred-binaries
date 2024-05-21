@@ -1,3 +1,653 @@
+# 2024-05-21
+
+
+## Install
+
+To install Decrediton desktop wallet, download, uncompress, and run
+[Decrediton Linux AppImage](https://github.com/decred/decred-binaries/releases/download/v2.0.0/decrediton-linux-amd64-v2.0.0.AppImage)
+or 
+[Decrediton Linux tar](https://github.com/decred/decred-binaries/releases/download/v2.0.0/decrediton-linux-amd64-v2.0.0.tar.gz)
+or
+[Decrediton macOS amd64](https://github.com/decred/decred-binaries/releases/download/v2.0.0/decrediton-darwin-amd64-v2.0.0.dmg)
+or
+[Decrediton macOS arm64](https://github.com/decred/decred-binaries/releases/download/v2.0.0/decrediton-darwin-arm64-v2.0.0.dmg)
+or
+[Decrediton Windows](https://github.com/decred/decred-binaries/releases/download/v2.0.0/decrediton-windows-amd64-v2.0.0.exe).
+
+To install the command-line tools, please see
+[dcrinstall](https://github.com/decred/decred-release/tree/master/cmd/dcrinstall).
+
+See decred-v2.0.0-manifest.txt and the other manifest files for SHA-256 hashes
+and the associated .asc signature files to confirm those hashes.
+
+See [README.md](./README.md#verifying-binaries) for more info on verifying the
+files.
+
+## Contents
+* [dcrd](#dcrd-v200)
+* [dcrwallet](#dcrwallet-v200)
+* [Decrediton](#decrediton-v200)
+
+# dcrd v2.0.0
+
+This is a new major release of dcrd.  Some of the key highlights are:
+
+* Decentralized StakeShuffle mixing
+* Higher network throughput
+* Lightweight client sync time reduced by around 50%
+* Improved initial peer discovery
+* Reject protocol message removal
+* Various updates to the RPC server:
+  * Dynamic TLS certificate reload
+  * Proof-of-Work hash in block information
+  * New JSON-RPC API additions related to decentralized StakeShuffle mixing
+* Quality assurance changes
+
+## Upgrade Required To Continue Participating in StakeShuffle Mixing
+
+Although upgrading to this latest release is not absolutely required for
+continued operation of the core network, it is required for anyone who wishes to
+continue participating in StakeShuffle mixing.
+
+## Notable Changes
+
+### Decentralized StakeShuffle Mixing
+
+The StakeShuffle mixing process is now fully decentralized via the peer-to-peer
+network as of this release.  All core software has been upgraded to make use of
+the new decentralized coordination facilities.
+
+This release introduces several new peer-to-peer protocol messages to provide
+the decentralized coordination.  The following is a brief summary of the new
+messages:
+
+|Message      |Overall Purpose                                                |
+|-------------|---------------------------------------------------------------|
+|`mixpairreq` |Request to participate in a mix with relevant data and proofs. |
+|`mixkeyxchg` |Publishes public keys and commitments for blame assignment.    |
+|`mixcphrtxt` |Enables quantum resistant (PQ) blinded key exchange.           |
+|`mixslotres` |Establishes slot reservations used in the blinding process.    |
+|`mixfactpoly`|Encodes solution to the factored slot reservation polynomial.  |
+|`mixdcnet`   |Untraceable multi-party broadcast (dining cryptographers).     |
+|`mixconfirm` |Provides partial signatures to create the mix transaction.     |
+|`mixsecrets` |Reveals secrets of an unsuccessful mix for blame assignment.   |
+
+### Higher Network Throughput
+
+This release now supports concurrent data requests (`getdata`) which allows for
+higher network throughput, particularly when the communications channel is
+experiencing high latency.
+
+A couple of notable benefits are:
+
+* Reduced vote times since it allows blocks and transactions to propagate more
+  quickly throughout the network
+* More responsive during traffic bursts and general network congestion
+
+### Lightweight client sync time reduced by around 50%
+
+Lightweight clients may now request version 2 compact filters in batches as
+opposed to one at a time.  This has the effect of drastically reducing the
+initial sync time for lightweight clients such as Simplified Payment
+Verification (SPV) wallets.
+
+This release introduces a new pair of peer-to-peer protocol messages named
+`getcfsv2` and `cfiltersv2` which provide the aforementioned capability.
+
+### Improved Initial Peer Discovery
+
+Peers will now continue to query unreachable seeders in the background with an
+increasing backoff timeout when they have not already discovered a sufficient
+number of peers on the network to achieve the target connectivity.
+
+This primarily improves the experience for peers joining the network for the
+first time and those that have not been online for a long time since they do not
+have a known list of good peers to use.
+ 
+### Reject Protocol Message Removal (`reject`)
+
+The previously deprecated `reject` peer-to-peer protocol message is no longer
+available.
+
+Consequently, the minimum required network protocol version to
+participate on the network is now version 9.
+
+Note that all nodes on older protocol versions are already not able to
+participate in the network due to consensus changes that have passed.
+
+Recall from previous release notes that this message is being removed because it
+is a holdover from the original codebase where it was required, but it really is
+not a useful message and has several downsides:
+
+* Nodes on the network must be trustless, which means anything relying on such a
+  message is setting itself up for failure because nodes are not obligated to
+  send it at all nor be truthful as to the reason
+* It can be harmful to privacy as it allows additional node fingerprinting
+* It can lead to security issues for implementations that don't handle it with
+  proper sanitization practices
+* It can easily give software implementations the fully incorrect impression
+  that it can be relied on for determining if transactions and blocks are valid
+* The only way it is actually used currently is to show a debug log message,
+  however, all of that information is already available via the peer and/or wire
+  logging anyway
+* It carries a non-trivial amount of development overhead to continue to support
+  it when nothing actually uses it
+
+### RPC Server Changes
+
+The RPC server version as of this release is 8.2.0.
+
+#### Dynamic TLS Certificate Reload
+
+The RPC server now checks for updates to the TLS certificate key pair
+(`rpc.cert` and `rpc.key` by default) on new connections and dynamically reloads
+them if needed.  Similarly, the authorized client certificates (`clients.pem` by
+default) when running with the client certificate authorization type mode
+(`--authtype=clientcert`).
+
+Some key highlights of this change:
+
+* Certificates can now be updated without needing to shutdown and restart the
+  process which enables things such as:
+  * Updating the certificates to change the allowed domain name and/or IP addresses
+  * Dynamically adding or removing authorized clients
+  * Changing the cryptographic primitives used to newer supported variants
+* All existing connections will continue to use the certificates that were
+  loaded at the time the connection was made
+* The existing working certs are retained if any errors are encountered when
+  loading the new ones in order to avoid breaking a working config
+
+#### New Proof-of-Work Hash Field in Block Info RPCs (`getblock` and `getblockheader`)
+
+The verbose results of the `getblock` and `getblockheader` RPCs now include a
+`powhash` field in the JSON object that contains the Proof-of-Work hash for the
+block.  The new field will be exactly the same as the `hash` (block hash) field
+for all blocks prior to the activation of the stakeholder vote to change the PoW
+hashing algorithm
+([DCP0011](https://github.com/decred/dcps/blob/master/dcp-0011/dcp-0011.mediawiki)).
+
+See the following for API details:
+
+* [getblock JSON-RPC API Documentation](https://github.com/decred/dcrd/blob/master/docs/json_rpc_api.mediawiki#getblock)
+* [getblockheader JSON-RPC API Documentation](https://github.com/decred/dcrd/blob/master/docs/json_rpc_api.mediawiki#getblockheader)
+
+#### New StakeShuffle Mixing Pool (mixpool) Message Send RPC (`sendrawmixmessage`)
+
+A new RPC named `sendrawmixmessage` is now available.  This RPC can be used to
+manually submit all mixing messages to the mixpool and broadcast them to the
+network.
+
+See the following for API details:
+
+* [sendrawmixmessage JSON-RPC API Documentation](https://github.com/decred/dcrd/blob/master/docs/json_rpc_api.mediawiki#sendrawmixmessage)
+
+#### New StakeShuffle Mixing Pool (mixpool) Message WebSocket Notification RPCs (`notifymixmessages`)
+
+WebSocket notifications for mixing messages accepted to the mixpool are now
+available.
+
+Use `notifymixmessages` to request `mixmessage` notifications and
+`stopnotifymixmessages` to stop receiving notifications.
+
+See the following for API details:
+
+* [notifymixmessages JSON-RPC API Documentation](https://github.com/decred/dcrd/blob/master/docs/json_rpc_api.mediawiki#notifymixmessages)
+* [stopnotifymixmessages JSON-RPC API Documentation](https://github.com/decred/dcrd/blob/master/docs/json_rpc_api.mediawiki#stopnotifymixmessages)
+* [mixmessage JSON-RPC API Notification Documentation](https://github.com/decred/dcrd/blob/master/docs/json_rpc_api.mediawiki#mixmessage)
+
+## Changelog
+
+This release consists of 168 commits from 11 contributors which total
+to 265 files changed, 18292 additional lines of code, and 2978 deleted
+lines of code.
+
+All commits since the last release may be viewed on GitHub
+[here](https://github.com/decred/dcrd/compare/release-v1.8.1...release-v2.0.0).
+
+### Protocol and network:
+
+- main: Add read header timeout to profile server ([decred/dcrd#3186](https://github.com/decred/dcrd/pull/3186))
+- server: Support concurrent getdata requests ([decred/dcrd#3203](https://github.com/decred/dcrd/pull/3203))
+- server: Update required minimum protocol version ([decred/dcrd#3221](https://github.com/decred/dcrd/pull/3221))
+- wire: add p2p mixing messages ([decred/dcrd#3066](https://github.com/decred/dcrd/pull/3066))
+- server: Retry seeder connections ([decred/dcrd#3228](https://github.com/decred/dcrd/pull/3228))
+- wire: Add epoch field to mix key exchange message ([decred/dcrd#3235](https://github.com/decred/dcrd/pull/3235))
+- wire: Remove PR hashes from (get)initstate ([decred/dcrd#3244](https://github.com/decred/dcrd/pull/3244))
+- wire: add previous revealed secrets hashes to RS message ([decred/dcrd#3239](https://github.com/decred/dcrd/pull/3239))
+- wire: Add Opcode field to MixPairReqUTXO ([decred/dcrd#3243](https://github.com/decred/dcrd/pull/3243))
+- wire: Zero out secrets signature for commitment hash ([decred/dcrd#3248](https://github.com/decred/dcrd/pull/3248))
+- wire: add flag bits to PR message ([decred/dcrd#3246](https://github.com/decred/dcrd/pull/3246))
+- wire: Add MsgMixFactoredPoly ([decred/dcrd#3247](https://github.com/decred/dcrd/pull/3247))
+- server: Require protocol v9 (removed reject msg) ([decred/dcrd#3254](https://github.com/decred/dcrd/pull/3254))
+- wire: Remove deprecated reject message support ([decred/dcrd#3254](https://github.com/decred/dcrd/pull/3254))
+- wire: Include unmixed session position in KE ([decred/dcrd#3257](https://github.com/decred/dcrd/pull/3257))
+- wire: Add msgs to get batch of cfilters ([decred/dcrd#3211](https://github.com/decred/dcrd/pull/3211))
+- multi: Respond to getcfsv2 message ([decred/dcrd#3211](https://github.com/decred/dcrd/pull/3211))
+- chaincfg: Update assume valid for release ([decred/dcrd#3263](https://github.com/decred/dcrd/pull/3263))
+- chaincfg: Update min known chain work for release ([decred/dcrd#3264](https://github.com/decred/dcrd/pull/3264))
+- multi: Integrate mixpool and propagate p2p mixing messages ([decred/dcrd#3208](https://github.com/decred/dcrd/pull/3208))
+
+### Mining:
+
+- mining: Update blk templ diff for too few voters ([decred/dcrd#3241](https://github.com/decred/dcrd/pull/3241))
+- cpuminer: Rework discrete mining vote wait logic ([decred/dcrd#3242](https://github.com/decred/dcrd/pull/3242))
+- cpuminer: Remove unused IsKnownInvalidBlock method ([decred/dcrd#3242](https://github.com/decred/dcrd/pull/3242))
+
+### RPC:
+
+- rpc: Add PoWHash to getblock/getblockheader (verbose) results ([decred/dcrd#3154](https://github.com/decred/dcrd/pull/3154))
+- rpcserver: Support dynamic cert reload ([decred/dcrd#3153](https://github.com/decred/dcrd/pull/3153))
+- rpcserver: Modify getnetworkhashps -1 blocks logic ([decred/dcrd#3181](https://github.com/decred/dcrd/pull/3181))
+- rpcserver: Remove unneeded AddedNodeInfo method ([decred/dcrd#3236](https://github.com/decred/dcrd/pull/3236))
+
+### dcrd command-line flags and configuration:
+
+- config: Support DCRD_APPDATA env variable ([decred/dcrd#3152](https://github.com/decred/dcrd/pull/3152))
+- config: Show usage message on invalid cli flags ([decred/dcrd#3282](https://github.com/decred/dcrd/pull/3282))
+
+### Documentation:
+
+- docs: Add release notes for v1.8.0 ([decred/dcrd#3144](https://github.com/decred/dcrd/pull/3144))
+- docs: Add release notes templates ([decred/dcrd#3148](https://github.com/decred/dcrd/pull/3148))
+- docs: Update for blockchain v5 module ([decred/dcrd#3149](https://github.com/decred/dcrd/pull/3149))
+- docs: Update JSON-RPC API for powhash ([decred/dcrd#3154](https://github.com/decred/dcrd/pull/3154))
+- docs: Update README.md to required Go 1.20/1.21 ([decred/dcrd#3172](https://github.com/decred/dcrd/pull/3172))
+- docs: Add release notes for v1.8.1 ([decred/dcrd#3195](https://github.com/decred/dcrd/pull/3195))
+- docs: Update README.md to required Go 1.21/1.22 ([decred/dcrd#3220](https://github.com/decred/dcrd/pull/3220))
+- docs: Add mixing cmds and ntfn JSON-RPC API ([decred/dcrd#3275](https://github.com/decred/dcrd/pull/3275))
+
+### Contrib changes:
+
+- docker: Update image to golang:1.20.5-alpine3.18 ([decred/dcrd#3146](https://github.com/decred/dcrd/pull/3146))
+- docker: Update image to golang:1.20.6-alpine3.18 ([decred/dcrd#3158](https://github.com/decred/dcrd/pull/3158))
+- docker: Update image to golang:1.20.7-alpine3.18 ([decred/dcrd#3170](https://github.com/decred/dcrd/pull/3170))
+- docker: Update image to golang:1.21.0-alpine3.18 ([decred/dcrd#3171](https://github.com/decred/dcrd/pull/3171))
+- docker: Update image to golang:1.21.1-alpine3.18 ([decred/dcrd#3183](https://github.com/decred/dcrd/pull/3183))
+- docker: Update image to golang:1.21.2-alpine3.18 ([decred/dcrd#3197](https://github.com/decred/dcrd/pull/3197))
+- docker: Update image to golang:1.21.3-alpine3.18 ([decred/dcrd#3198](https://github.com/decred/dcrd/pull/3198))
+- docker: Update image to golang:1.21.4-alpine3.18 ([decred/dcrd#3210](https://github.com/decred/dcrd/pull/3210))
+- docker: Update image to golang:1.21.5-alpine3.18 ([decred/dcrd#3214](https://github.com/decred/dcrd/pull/3214))
+- docker: Update image to golang:1.21.6-alpine3.19 ([decred/dcrd#3215](https://github.com/decred/dcrd/pull/3215))
+- docker: Update image to golang:1.22.0-alpine3.19 ([decred/dcrd#3219](https://github.com/decred/dcrd/pull/3219))
+- docker: Update image to golang:1.22.1-alpine3.19 ([decred/dcrd#3222](https://github.com/decred/dcrd/pull/3222))
+- docker: Update image to golang:1.22.2-alpine3.19 ([decred/dcrd#3231](https://github.com/decred/dcrd/pull/3231))
+- docker: Update image to golang:1.22.3-alpine3.19 ([decred/dcrd#3249](https://github.com/decred/dcrd/pull/3249))
+- contrib: Add mixing to go workspace setup script ([decred/dcrd#3265](https://github.com/decred/dcrd/pull/3265))
+
+### Developer-related package and module changes:
+
+- jsonrpc/types: Add powhash to verbose block output ([decred/dcrd#3154](https://github.com/decred/dcrd/pull/3154))
+- chaingen: More precise ASERT comments ([decred/dcrd#3156](https://github.com/decred/dcrd/pull/3156))
+- rpcclient: Explicitly require TLS >= 1.2 for HTTP ([decred/dcrd#3169](https://github.com/decred/dcrd/pull/3169))
+- multi: Avoid range capture for Go 1.22 changes ([decred/dcrd#3165](https://github.com/decred/dcrd/pull/3165))
+- blockchain: Remove unused progress logger param ([decred/dcrd#3177](https://github.com/decred/dcrd/pull/3177))
+- blockchain: Remove unused trsy enabled param ([decred/dcrd#3177](https://github.com/decred/dcrd/pull/3177))
+- multi: Wrap errors for better errors.Is/As support ([decred/dcrd#3178](https://github.com/decred/dcrd/pull/3178))
+- rpcserver: Improve internal error handling ([decred/dcrd#3182](https://github.com/decred/dcrd/pull/3182))
+- sampleconfig: Use embed with external files ([decred/dcrd#3185](https://github.com/decred/dcrd/pull/3185))
+- secp256k1/ecdsa: Expose r and s value of signature ([decred/dcrd#3188](https://github.com/decred/dcrd/pull/3188))
+- secp256k1/ecdsa: Remove some unnecessary subslices ([decred/dcrd#3189](https://github.com/decred/dcrd/pull/3189))
+- secp256k1/ecdsa: Add tests for new R and S methods ([decred/dcrd#3190](https://github.com/decred/dcrd/pull/3190))
+- secp256k1/ecdsa: Add test for order wraparound ([decred/dcrd#3191](https://github.com/decred/dcrd/pull/3191))
+- dcrutil: Use os.UserHomeDir in appDataDir ([decred/dcrd#3196](https://github.com/decred/dcrd/pull/3196))
+- multi: Reduce done goroutines ([decred/dcrd#3199](https://github.com/decred/dcrd/pull/3199))
+- multi: Consolidate waitgroup logic ([decred/dcrd#3200](https://github.com/decred/dcrd/pull/3200))
+- netsync: Rename NewPeer to PeerConnected ([decred/dcrd#3202](https://github.com/decred/dcrd/pull/3202))
+- netsync: Rename DonePeer to PeerDisconnected ([decred/dcrd#3202](https://github.com/decred/dcrd/pull/3202))
+- netsync: Export opaque peer and require it in API ([decred/dcrd#3202](https://github.com/decred/dcrd/pull/3202))
+- server: Use server peer in log statements ([decred/dcrd#3202](https://github.com/decred/dcrd/pull/3202))
+- server: Don't wait or try to send notfound data ([decred/dcrd#3204](https://github.com/decred/dcrd/pull/3204))
+- peer: select on p.quit during stall control chan writes ([decred/dcrd#3209](https://github.com/decred/dcrd/pull/3209))
+- peer: provide better debug for queued nil messages ([decred/dcrd#3213](https://github.com/decred/dcrd/pull/3213))
+- wire: Mark legacy message types as deprecated ([decred/dcrd#3205](https://github.com/decred/dcrd/pull/3205))
+- secp256k1: Add TinyGo support ([decred/dcrd#3223](https://github.com/decred/dcrd/pull/3223))
+- wire: Fix typo in comment ([decred/dcrd#3226](https://github.com/decred/dcrd/pull/3226))
+- secp256k1: No allocs in slow scalar base mult path ([decred/dcrd#3225](https://github.com/decred/dcrd/pull/3225))
+- dcrutil: Remove Getenv("HOME") fallback for appdata dir ([decred/dcrd#3230](https://github.com/decred/dcrd/pull/3230))
+- server: Do not update addrmgr on simnet/regnet ([decred/dcrd#3240](https://github.com/decred/dcrd/pull/3240))
+- connmgr: Only mark persistent peer reconn pending ([decred/dcrd#3238](https://github.com/decred/dcrd/pull/3238))
+- server: Use atomic types for some svr peer fields ([decred/dcrd#3237](https://github.com/decred/dcrd/pull/3237))
+- peer: Remove deprecated reject message support ([decred/dcrd#3254](https://github.com/decred/dcrd/pull/3254))
+- peer: Close mock connections in tests ([decred/dcrd#3254](https://github.com/decred/dcrd/pull/3254))
+- peer: Require protocol v9 (removed reject msg) ([decred/dcrd#3254](https://github.com/decred/dcrd/pull/3254))
+- gcs: Add func to determine max cfilter size ([decred/dcrd#3211](https://github.com/decred/dcrd/pull/3211))
+- blockchain: Add function to locate multiple cfilters ([decred/dcrd#3211](https://github.com/decred/dcrd/pull/3211))
+- server: Use sync.Mutex since the read lock isn't used ([decred/dcrd#3270](https://github.com/decred/dcrd/pull/3270))
+- mixing: Only validate compressed 33-byte pubkeys ([decred/dcrd#3271](https://github.com/decred/dcrd/pull/3271))
+- mixing: Add mixpool package ([decred/dcrd#3082](https://github.com/decred/dcrd/pull/3082))
+- mixing: Add mixclient package ([decred/dcrd#3256](https://github.com/decred/dcrd/pull/3256))
+- server: Implement separate mutex for peer state ([decred/dcrd#3251](https://github.com/decred/dcrd/pull/3251))
+- server: Make server peer conn req concurrent safe ([decred/dcrd#3251](https://github.com/decred/dcrd/pull/3251))
+- server: Use iterator for connected ip count ([decred/dcrd#3251](https://github.com/decred/dcrd/pull/3251))
+- server: Make add peer logic synchronous ([decred/dcrd#3251](https://github.com/decred/dcrd/pull/3251))
+- server: Make done peer logic synchronous ([decred/dcrd#3251](https://github.com/decred/dcrd/pull/3251))
+- server: Make conn count query synchronous ([decred/dcrd#3251](https://github.com/decred/dcrd/pull/3251))
+- server: Make outbound group query synchronous ([decred/dcrd#3251](https://github.com/decred/dcrd/pull/3251))
+- server: Make manual connect code synchronous ([decred/dcrd#3251](https://github.com/decred/dcrd/pull/3251))
+- server: Make pending conn cancel code synchronous ([decred/dcrd#3251](https://github.com/decred/dcrd/pull/3251))
+- server: Make persistent peer removal synchronous ([decred/dcrd#3251](https://github.com/decred/dcrd/pull/3251))
+- server: Make persistent node query synchronous ([decred/dcrd#3251](https://github.com/decred/dcrd/pull/3251))
+- server: Make manual peer disconnect synchronous ([decred/dcrd#3251](https://github.com/decred/dcrd/pull/3251))
+- server: Remove unused query chan and handler ([decred/dcrd#3251](https://github.com/decred/dcrd/pull/3251))
+
+### Developer-related module management:
+
+- secp256k1: Prepare v4.3.0 ([decred/dcrd#3227](https://github.com/decred/dcrd/pull/3227))
+- main: update dcrdtest module to master ([decred/dcrd#3232](https://github.com/decred/dcrd/pull/3232))
+- main: update dcrdtest module to master ([decred/dcrd#3233](https://github.com/decred/dcrd/pull/3233))
+- wire: go mod tidy ([decred/dcrd#3250](https://github.com/decred/dcrd/pull/3250))
+- multi: Deduplicate external dependencies ([decred/dcrd#3255](https://github.com/decred/dcrd/pull/3255))
+- wire: Prepare v1.7.0 ([decred/dcrd#3258](https://github.com/decred/dcrd/pull/3258))
+- blockchain/standalone: Prepare v2.2.1 ([decred/dcrd#3259](https://github.com/decred/dcrd/pull/3259))
+- addrmgr: Prepare v2.0.3 ([decred/dcrd#3260](https://github.com/decred/dcrd/pull/3260))
+- mixing: Use latest crypto deps ([decred/dcrd#3261](https://github.com/decred/dcrd/pull/3261))
+- connmgr: Prepare v3.1.2 ([decred/dcrd#3262](https://github.com/decred/dcrd/pull/3262))
+- chaincfg: Prepare v3.2.1 ([decred/dcrd#3266](https://github.com/decred/dcrd/pull/3266))
+- txscript: Prepare v4.1.1 ([decred/dcrd#3267](https://github.com/decred/dcrd/pull/3267))
+- hdkeychain: Prepare v3.1.2 ([decred/dcrd#3268](https://github.com/decred/dcrd/pull/3268))
+- rpc/jsonrpc/types: Prepare v4.2.0 ([decred/dcrd#3276](https://github.com/decred/dcrd/pull/3276))
+- peer: Prepare v3.1.0 ([decred/dcrd#3277](https://github.com/decred/dcrd/pull/3277))
+- dcrutil: Prepare v4.0.2 ([decred/dcrd#3278](https://github.com/decred/dcrd/pull/3278))
+- database: Prepare v3.0.2 ([decred/dcrd#3279](https://github.com/decred/dcrd/pull/3279))
+- mixing: Prepare v0.1.0 ([decred/dcrd#3280](https://github.com/decred/dcrd/pull/3280))
+- blockchain/stake: Prepare v5.0.1 ([decred/dcrd#3281](https://github.com/decred/dcrd/pull/3281))
+- gcs: Prepare v4.1.0 ([decred/dcrd#3283](https://github.com/decred/dcrd/pull/3283))
+- blockchain: Prepare v5.0.1 ([decred/dcrd#3284](https://github.com/decred/dcrd/pull/3284))
+- rpcclient: Prepare v8.0.1 ([decred/dcrd#3285](https://github.com/decred/dcrd/pull/3285))
+- main: Update to use all new module versions ([decred/dcrd#3286](https://github.com/decred/dcrd/pull/3286))
+- main: Remove module replacements ([decred/dcrd#3288](https://github.com/decred/dcrd/pull/3288))
+- mixing: Introduce module ([decred/dcrd#3207](https://github.com/decred/dcrd/pull/3207))
+
+### Testing and Quality Assurance:
+
+- main: Use release version of dcrtest framework ([decred/dcrd#3142](https://github.com/decred/dcrd/pull/3142))
+- database: Mark test helpers ([decred/dcrd#3147](https://github.com/decred/dcrd/pull/3147))
+- database: Use TempDir to create temp test dirs ([decred/dcrd#3147](https://github.com/decred/dcrd/pull/3147))
+- build: Add CI support for test and module cache ([decred/dcrd#3145](https://github.com/decred/dcrd/pull/3145))
+- main: improve test flag handling ([decred/dcrd#3151](https://github.com/decred/dcrd/pull/3151))
+- build: Add nilerr linter ([decred/dcrd#3157](https://github.com/decred/dcrd/pull/3157))
+- build: Update to latest action versions ([decred/dcrd#3159](https://github.com/decred/dcrd/pull/3159))
+- build: Move lint logic to its own script ([decred/dcrd#3161](https://github.com/decred/dcrd/pull/3161))
+- build: Use go install for linter and add cache ([decred/dcrd#3162](https://github.com/decred/dcrd/pull/3162))
+- build: Update golangci-lint to v1.53.3 ([decred/dcrd#3163](https://github.com/decred/dcrd/pull/3163))
+- build: Correct missing shebang in lint script ([decred/dcrd#3164](https://github.com/decred/dcrd/pull/3164))
+- build: Checkout source before Go setup ([decred/dcrd#3166](https://github.com/decred/dcrd/pull/3166))
+- build: Use setup-go action cache ([decred/dcrd#3168](https://github.com/decred/dcrd/pull/3168))
+- build: Update to latest action versions ([decred/dcrd#3172](https://github.com/decred/dcrd/pull/3172))
+- build: Update golangci-lint to v1.53.1 ([decred/dcrd#3172](https://github.com/decred/dcrd/pull/3172))
+- build: Test against Go 1.21 ([decred/dcrd#3172](https://github.com/decred/dcrd/pull/3172))
+- build: Test against Go 1.21 ([decred/dcrd#3172](https://github.com/decred/dcrd/pull/3172))
+- standalone: Add decreasing timestamps ASERT test ([decred/dcrd#3173](https://github.com/decred/dcrd/pull/3173))
+- build: Add dupword linter ([decred/dcrd#3175](https://github.com/decred/dcrd/pull/3175))
+- build: Add errorlint linter ([decred/dcrd#3179](https://github.com/decred/dcrd/pull/3179))
+- build: Update to latest action versions ([decred/dcrd#3216](https://github.com/decred/dcrd/pull/3216))
+- build: Update golangci-lint to v1.55.2 ([decred/dcrd#3216](https://github.com/decred/dcrd/pull/3216))
+- build: Update golangci-lint to v1.56.0 ([decred/dcrd#3220](https://github.com/decred/dcrd/pull/3220))
+- build: Test against Go 1.22 ([decred/dcrd#3220](https://github.com/decred/dcrd/pull/3220))
+- secp256k1: Add scalar base mult variant benchmarks ([decred/dcrd#3224](https://github.com/decred/dcrd/pull/3224))
+- run_tests.sh: allow passing of additional test arguments ([decred/dcrd#3229](https://github.com/decred/dcrd/pull/3229))
+- dcrutil: Fix message in test error ([decred/dcrd#3230](https://github.com/decred/dcrd/pull/3230))
+- dcrutil: Use os.UserHomedir for base home directory in tests ([decred/dcrd#3230](https://github.com/decred/dcrd/pull/3230))
+- rpctests: Pass test loggers to dcrdtest package ([decred/dcrd#3232](https://github.com/decred/dcrd/pull/3232))
+- multi: Fix function names in some comments ([decred/dcrd#3245](https://github.com/decred/dcrd/pull/3245))
+- rpc/jsonrpc/types: Add tests for new mix types ([decred/dcrd#3274](https://github.com/decred/dcrd/pull/3274))
+
+### Misc:
+
+- release: Bump for 1.9 release cycle ([decred/dcrd#3141](https://github.com/decred/dcrd/pull/3141))
+- main: Don't include requires in build ([decred/dcrd#3143](https://github.com/decred/dcrd/pull/3143))
+- multi: Address some linter complaints ([decred/dcrd#3155](https://github.com/decred/dcrd/pull/3155))
+- multi: Remove a bunch of dup words in comments ([decred/dcrd#3174](https://github.com/decred/dcrd/pull/3174))
+- multi: Cleanup superfluous trailing newlines ([decred/dcrd#3176](https://github.com/decred/dcrd/pull/3176))
+- main: Update license to 2024 ([decred/dcrd#3217](https://github.com/decred/dcrd/pull/3217))
+- release: Bump for 2.0 release cycle ([decred/dcrd#3269](https://github.com/decred/dcrd/pull/3269))
+- release: Bump for 2.0.0 ([decred/dcrd#3289](https://github.com/decred/dcrd/pull/3289))
+
+### Code Contributors (alphabetical order):
+
+- Billy Zelani Malik
+- Dave Collins
+- David Hill
+- Matheus Degiovani
+- Nicola Larosa
+- peicuiping
+- Peter Zen
+- Jamie Holdstock
+- Jonathan Chappelow
+- Josh Rickmark
+- SeedHammer
+
+
+# dcrwallet v2.0.0
+
+This release is a major release for `dcrwallet`, adding many new features, improvements, and bug fixes.  It is the first release to integrate peer-to-peer StakeShuffle mixing (sometimes also referred to as CoinShuffle++ or CSPP), replacing the previous mixing features that required communicating through a central server as a coordination point.
+
+Configuration for the new mixing protocol requires no changes from previous `dcrwallet` versions, except that the enabling the feature is done with a boolean `--mixing` option instead of setting `--csppserver`.
+
+When mixing, it is recommend, but not required, to build `csppsolver` and either install it to `PATH`, or provide the path to the executable with the `--csppsolver` option.  The solver is a necessary component to complete a mix, but only one participant in the mix is required to provide it.  The solver requires the C library libflint (including its development headers, if your distribution creates separate -dev packages), and once these dependencies are met, `csppsolver` can be built and installed with:
+
+```
+$ go install decred.org/cspp/v2/cmd/csppsolver@latest
+```
+
+Beyond the mixing changes, this release includes major performance and reliability improvements for both JSON-RPC and SPV syncing modes.  Rescan performance has likewise been greatly improved upon over previous releases.  Several issues affecting VSP users have been identified and corrected.
+
+## Downgrade Warning
+
+The database format in v2.0.0 is not compatible with previous versions of the software.  This only affects downgrades as users upgrading from previous versions will see a one time database migration.
+
+## Bug fixes
+
+* The configured mixed split account and branch is now properly used when purchasing mixed tickets using the `purchasetickets` JSON-RPC method ([`7a31751b`](https://github.com/decred/dcrwallet/commit/7a31751b)).
+
+* Unsigned transactions created by the `purchasetickets` JSON-RPC method are no longer published or recorded by the wallet ([`7e5c5f2f`](https://github.com/decred/dcrwallet/commit/7e5c5f2f), [`a021248f`](https://github.com/decred/dcrwallet/commit/a021248f)).
+
+* An invalid usage of a synchronization primitive by the SPV syncer was corrected ([`d5a07ae6`](https://github.com/decred/dcrwallet/commit/d5a07ae6)).
+
+* Additional addresses are no longer fetched from peers in SPV mode when their services are deemed insufficient.  This reduces the number of TCP connections currently open, preventing resource exhaustion if the wallet is using a Tor proxy and hitting the maximum circuit limit ([`ab6da249`](https://github.com/decred/dcrwallet/commit/ab6da249)).
+
+* An issue stalling the SPV syncing during the fetching of compact filters for sidechain blocks was fixed by adding a watchdog timer to the fetch ([`66a3e69d`](https://github.com/decred/dcrwallet/commit/66a3e69d)).
+
+* A logic race that could result in missing relevant transactions in block connected at initial sync was corrected in the JSON-RPC syncing mode ([`9873543d`](https://github.com/decred/dcrwallet/commit/9873543d)).
+
+* An off-by-one error during address discovery was corrected ([`3c1d19e1`](https://github.com/decred/dcrwallet/commit/3c1d19e1)).
+
+* The `redeemmultisigout` JSON-RPC method now returns with the `complete` field of the result set to false when the caller-provided transaction already contained invalid signatures ([`0a63be64`](https://github.com/decred/dcrwallet/commit/0a63be64)).
+
+* VSP fees are now calculated properly depending on the activation of DCP0012 ([`90232ed6`](https://github.com/decred/dcrwallet/commit/90232ed6)).
+
+* Several error-handling issues that could cause some tickets to be skipped over by the VSP client were corrected ([`35c6ac0f`](https://github.com/decred/dcrwallet/commit/35c6ac0f), [`a38abe28`](https://github.com/decred/dcrwallet/commit/a38abe28), [`a87fa843`](https://github.com/decred/dcrwallet/commit/a87fa843)).
+
+* The VSP client now confirms acceptance of fee payment for tickets before removing their internal tracking in the client, instead of simply assuming the fee payment was accepted after six confirmations ([`35c6ac0f`](https://github.com/decred/dcrwallet/commit/35c6ac0f)).
+
+## New features
+
+* The client-server StakeShuffle mixing has been replaced with a peer-to-peer variant of the same protocol ([`bb04b755`](https://github.com/decred/dcrwallet/commit/bb04b755)).
+
+* Wallet creation now prompts if a birthday (as either a block height or date) is known for a restored wallet ([`5e8f1328`](https://github.com/decred/dcrwallet/commit/5e8f1328)).
+
+* Wallet creation now prompts for any extended public keys are available to create additional new xpub accounts ([`25b8ae63`](https://github.com/decred/dcrwallet/commit/25b8ae63)).
+
+* A `--spvdisablerelaytx` option has been added to inform full nodes not to announce transactions ([`eb5b1b72`](https://github.com/decred/dcrwallet/commit/eb5b1b72)).
+
+* It is now possible to configure TLS certificate authentication to authenticate the JSON-RPC connection made to `dcrd` ([`0c735a70`](https://github.com/decred/dcrwallet/commit/0c735a70)).
+
+* A new JSON-RPC method named `spendoutputs` has been introduced, which provides an easier-to-use alternative (over the existing create/sign/sendrawtransaction calls) to create and send transactions in a single RPC call with manual UTXO selection ([`ad140d26`](https://github.com/decred/dcrwallet/commit/ad140d26)).
+
+* The currently-configured VSP URL has been added to the `walletinfo` JSON-RPC result object ([`bed109b0`](https://github.com/decred/dcrwallet/commit/bed109b0)).
+
+* An `--offline` option has been added for air-gapped wallets to disable syncing through a JSON-RPC or SPV network backend ([`3b708125`](https://github.com/decred/dcrwallet/commit/3b708125)).
+
+* The `gettickets` JSON-RPC method is now usable under SPV mode ([`1e6f8917`](https://github.com/decred/dcrwallet/commit/1e6f8917)).
+
+* Any transaction changes that are performed during non-startup rescans (e.g. those manually started by the `rescanwallet` JSON-RPC method) are now logged ([`0be25dbc`](https://github.com/decred/dcrwallet/commit/0be25dbc)).
+
+## Other improvements
+
+* During initial sync in SPV mode, unsynced peers will now be disconnected from if they are overtaken by the wallet as it syncs from its other peers ([`6f510a51`](https://github.com/decred/dcrwallet/commit/6f510a51)).
+
+* Compact filters in SPV mode are now fetched from multiple peers, and will continue to be fetched after the announcing peer has disconnected [`adba0d1c`](https://github.com/decred/dcrwallet/commit/adba0d1c).
+
+* Compact filters in SPV mode are now fetched in batches from peers who support this protocol addition ([`1920377b`](https://github.com/decred/dcrwallet/commit/1920377b)).
+
+* Headers are now requested from peers in SPV mode after initial sync has completed, improving resyncing performance after temporary network loss ([`b9fd1a79`](https://github.com/decred/dcrwallet/commit/b9fd1a79)).
+
+* Headers sync in SPV mode has been modified to request headers and compact filters in batches, improving sync performance ([`ab15d980`](https://github.com/decred/dcrwallet/commit/ab15d980)).
+
+* JSON-RPC sync logic has been improved by waiting for `dcrd` to finish syncing before wallet begins its own syncing logic ([`e4acd44b`](https://github.com/decred/dcrwallet/commit/e4acd44b)).
+
+* Performance of and memory usage during initial sync in both SPV and JSON-RPC modes has been improved by iterating wallet's main chain blocks by height rather than following the previous headers through the hash ([`947fcaf7`](https://github.com/decred/dcrwallet/commit/947fcaf7)).
+
+* Rescan performance is greatly improved due to improved batching of the database updates ([`14c704a1`](https://github.com/decred/dcrwallet/commit/14c704a1)).
+
+* On OpenBSD, `dcrwallet` no longer links to the `syscall` symbol, which has been removed from `libc.so` in OpenBSD 7.5 ([`49941c3d`](https://github.com/decred/dcrwallet/commit/49941c3d)).
+
+## Changelog
+
+The following lists all commits included in dcrwallet v2.0.0 that were not backported to a prior 1.8.x release:
+
+* [`ade2a17b`](https://github.com/decred/dcrwallet/commit/ade2a17b): version: Prepare v2.0.0 release
+* [`4618df87`](https://github.com/decred/dcrwallet/commit/4618df87): Improve error message for initial csppsolver check
+* [`645032b4`](https://github.com/decred/dcrwallet/commit/645032b4): Bump version to 2.0.0-pre
+* [`1920377b`](https://github.com/decred/dcrwallet/commit/1920377b): spv: Add batched cfilter fetching
+* [`bb04b755`](https://github.com/decred/dcrwallet/commit/bb04b755): Replace client-server with peer-to-peer mixing
+* [`475b13a5`](https://github.com/decred/dcrwallet/commit/475b13a5): Update Decred dependencies to latest releases
+* [`5e8f1328`](https://github.com/decred/dcrwallet/commit/5e8f1328): wallet: Add birthday.
+* [`7a31751b`](https://github.com/decred/dcrwallet/commit/7a31751b): assign mixedSplitAccount for rpc tickets
+* [`f314a44c`](https://github.com/decred/dcrwallet/commit/f314a44c): rpc: allow syncing older tips on simnet
+* [`eb5b1b72`](https://github.com/decred/dcrwallet/commit/eb5b1b72): multi: Expose disablerelaytx
+* [`44c0f78d`](https://github.com/decred/dcrwallet/commit/44c0f78d): Introduce VSPTicket struct.
+* [`d2eddb1a`](https://github.com/decred/dcrwallet/commit/d2eddb1a): jsonrpc: Require hash for processUnmanagedTicket
+* [`0c735a70`](https://github.com/decred/dcrwallet/commit/0c735a70): Allow client certificate authentication to dcrd RPC
+* [`ad140d26`](https://github.com/decred/dcrwallet/commit/ad140d26): Implement spendoutputs JSON-RPC method
+* [`7e5c5f2f`](https://github.com/decred/dcrwallet/commit/7e5c5f2f): Do not record unsigned split txs from purchasetickets
+* [`d374979e`](https://github.com/decred/dcrwallet/commit/d374979e): bump jsonrpc semver minor
+* [`bed109b0`](https://github.com/decred/dcrwallet/commit/bed109b0): Add VSP URL to walletinfo result
+* [`14c704a1`](https://github.com/decred/dcrwallet/commit/14c704a1): Batch rescan database updates
+* [`fe3c447d`](https://github.com/decred/dcrwallet/commit/fe3c447d): lru: Implement Map type
+* [`3b708125`](https://github.com/decred/dcrwallet/commit/3b708125): multi: Introduce --offline sync mode
+* [`e4acd44b`](https://github.com/decred/dcrwallet/commit/e4acd44b): chain: Wait for dcrd to sync before starting RPC sync
+* [`25b8ae63`](https://github.com/decred/dcrwallet/commit/25b8ae63): Prompt for account xpub imports at wallet creation
+* [`4fbd29aa`](https://github.com/decred/dcrwallet/commit/4fbd29aa): chain: Fetch missing blocks one by one after initial getheaders
+* [`e2b5adac`](https://github.com/decred/dcrwallet/commit/e2b5adac): Move a variable declaration to the only scope it is used
+* [`a021248f`](https://github.com/decred/dcrwallet/commit/a021248f): Do not attempt publish of unsigned ticket purchases
+* [`d5a07ae6`](https://github.com/decred/dcrwallet/commit/d5a07ae6): spv: fix unsafe waitgroup usage
+* [`0ea06987`](https://github.com/decred/dcrwallet/commit/0ea06987): p2p: avoid strange context timeout wrapping
+* [`88e59357`](https://github.com/decred/dcrwallet/commit/88e59357): rpc: return wrapped error.
+* [`595de3bb`](https://github.com/decred/dcrwallet/commit/595de3bb): rpcserver: add missing error return
+* [`b6295695`](https://github.com/decred/dcrwallet/commit/b6295695): p2p: do not retry failed outbound connections
+* [`92b6b88a`](https://github.com/decred/dcrwallet/commit/92b6b88a): p2p: update the required minimum protocol version
+* [`2e2ce259`](https://github.com/decred/dcrwallet/commit/2e2ce259): Drop Go 1.20 support
+* [`bbb072e1`](https://github.com/decred/dcrwallet/commit/bbb072e1): wallet: Allow coin type upgrades on simnet
+* [`2264d0ff`](https://github.com/decred/dcrwallet/commit/2264d0ff): wallet: Remove mainchain tip check on NeedsAccountsSync
+* [`6cde2cc7`](https://github.com/decred/dcrwallet/commit/6cde2cc7): multi: Refactor wallet.NetworkBackend.
+* [`5a412fb4`](https://github.com/decred/dcrwallet/commit/5a412fb4): Do not send reject messages for bad services
+* [`ab6da249`](https://github.com/decred/dcrwallet/commit/ab6da249): Request more p2p addrs after peer checks
+* [`3f77f1b1`](https://github.com/decred/dcrwallet/commit/3f77f1b1): Remove unused fadded parameter from spv rescan method
+* [`1e6f8917`](https://github.com/decred/dcrwallet/commit/1e6f8917): enabled gettickets for rpc+spv
+* [`3c1d19e1`](https://github.com/decred/dcrwallet/commit/3c1d19e1): wallet: Fix off-by-one in addr discovery
+* [`b9fd1a79`](https://github.com/decred/dcrwallet/commit/b9fd1a79): spv: Request headers from peer after initial sync
+* [`705569f2`](https://github.com/decred/dcrwallet/commit/705569f2): chain: Avoid early getHeaders on sidechains
+* [`ab15d980`](https://github.com/decred/dcrwallet/commit/ab15d980): spv: Process header batches in parallel
+* [`6693162d`](https://github.com/decred/dcrwallet/commit/6693162d): Use Go 1.19 atomic types
+* [`14a2d7b8`](https://github.com/decred/dcrwallet/commit/14a2d7b8): Fix grpc log prefix stripping
+* [`9873543d`](https://github.com/decred/dcrwallet/commit/9873543d): chain: Request block ntfns only after initial sync
+* [`5c83e551`](https://github.com/decred/dcrwallet/commit/5c83e551): wallet: Prune chain instead of rooted tree
+* [`66a3e69d`](https://github.com/decred/dcrwallet/commit/66a3e69d): spv: Add watchdog timer to cfilter fetching
+* [`adba0d1c`](https://github.com/decred/dcrwallet/commit/adba0d1c): spv: Fetch CFilters from multiple peers
+* [`41fc9432`](https://github.com/decred/dcrwallet/commit/41fc9432): p2p: Reduce number of goroutines in CFiltersV2()
+* [`c61d89be`](https://github.com/decred/dcrwallet/commit/c61d89be): spv: Split cfilter fetching in smaller batches
+* [`51c6c577`](https://github.com/decred/dcrwallet/commit/51c6c577): spv: Refactor initialSyncHeaders
+* [`cee37c24`](https://github.com/decred/dcrwallet/commit/cee37c24): spv: Track requested block locator height
+* [`38621ffe`](https://github.com/decred/dcrwallet/commit/38621ffe): spv: Request cfilters only for best chain
+* [`284762f8`](https://github.com/decred/dcrwallet/commit/284762f8): multi: Drop Headers func from Peer interface
+* [`8afcdefd`](https://github.com/decred/dcrwallet/commit/8afcdefd): spv: Move initial rescan to global syncer loop
+* [`a9f0d247`](https://github.com/decred/dcrwallet/commit/a9f0d247): spv: Switch Rescan to use waitForRemote
+* [`16457c76`](https://github.com/decred/dcrwallet/commit/16457c76): spv: Switch Blocks func to wait for peers
+* [`0203f769`](https://github.com/decred/dcrwallet/commit/0203f769): spv: Drop syncer-global block locators
+* [`eaaca07e`](https://github.com/decred/dcrwallet/commit/eaaca07e): spv: Fetch headers in syncer instead of peer startup
+* [`6f510a51`](https://github.com/decred/dcrwallet/commit/6f510a51): spv: Disconnect from straggler peers
+* [`10c7b17c`](https://github.com/decred/dcrwallet/commit/10c7b17c): spv: Remove peer disconnection logic
+* [`5216b452`](https://github.com/decred/dcrwallet/commit/5216b452): p2p: Track last height returned by every peer
+* [`18120068`](https://github.com/decred/dcrwallet/commit/18120068): spv: Move FetchMissingCFilter to syncer startup
+* [`bef0b66f`](https://github.com/decred/dcrwallet/commit/bef0b66f): spv: Switch CFilters backend func to waitForRemote
+* [`090267fa`](https://github.com/decred/dcrwallet/commit/090267fa): spv: Unify connectToPeer and connectToCandidate
+* [`d9d3f17a`](https://github.com/decred/dcrwallet/commit/d9d3f17a): spv: Validate header chain diff earlier
+* [`389bbe20`](https://github.com/decred/dcrwallet/commit/389bbe20): main: Use PEER for p2p logging
+* [`0a63be64`](https://github.com/decred/dcrwallet/commit/0a63be64): Set complete=false in redeemmultisigout on invalid sigs
+* [`de27db47`](https://github.com/decred/dcrwallet/commit/de27db47): wallet: Make validateHeaderChainDifficulties fulfill contract
+* [`2056a303`](https://github.com/decred/dcrwallet/commit/2056a303): Semver unit tests for chain package
+* [`541381ac`](https://github.com/decred/dcrwallet/commit/541381ac): wallet: Avoid recalculating BlockHash
+* [`9603d38d`](https://github.com/decred/dcrwallet/commit/9603d38d): spv: Avoid re-hashing header
+* [`87d237a7`](https://github.com/decred/dcrwallet/commit/87d237a7): p2p: Drop knownheaders cache
+* [`4fb078d1`](https://github.com/decred/dcrwallet/commit/4fb078d1): spv: Move BlockNode init
+* [`dba768a7`](https://github.com/decred/dcrwallet/commit/dba768a7): p2p: Ensure received headers connect to block locators
+* [`947fcaf7`](https://github.com/decred/dcrwallet/commit/947fcaf7): wallet: Traverse by height in calcNextBlake256Diff
+* [`49941c3d`](https://github.com/decred/dcrwallet/commit/49941c3d): Update bbolt to 1.3.8
+* [`46ac6036`](https://github.com/decred/dcrwallet/commit/46ac6036): rpc: Don't use deprecated ioutil.
+* [`09bb3c2c`](https://github.com/decred/dcrwallet/commit/09bb3c2c): vsp: Update to latest types/client.
+* [`90232ed6`](https://github.com/decred/dcrwallet/commit/90232ed6): txrules: Consider DCP0012 in VSP fee calculations.
+* [`44cce5eb`](https://github.com/decred/dcrwallet/commit/44cce5eb): gRPC: Update docker image for protobuf-builder.
+* [`5c31b4b9`](https://github.com/decred/dcrwallet/commit/5c31b4b9): Replace interface{} with 'any' alias
+* [`0faf51fd`](https://github.com/decred/dcrwallet/commit/0faf51fd): Use latest go1.21.x with github workflow
+* [`a87fa843`](https://github.com/decred/dcrwallet/commit/a87fa843): multi: Select managed tickets outside VSP client
+* [`e491c9c1`](https://github.com/decred/dcrwallet/commit/e491c9c1): vsp: Fix managed ticket selection bug.
+* [`4211e567`](https://github.com/decred/dcrwallet/commit/4211e567): main: Log unhandled VSP client error.
+* [`7fbedb9b`](https://github.com/decred/dcrwallet/commit/7fbedb9b): Always check context cancellation before publishing tix
+* [`0be25dbc`](https://github.com/decred/dcrwallet/commit/0be25dbc): Log transaction changes for non-initial rescans
+* [`a38abe28`](https://github.com/decred/dcrwallet/commit/a38abe28): multi: Always iterate over all VSP tickets.
+* [`35c6ac0f`](https://github.com/decred/dcrwallet/commit/35c6ac0f): wallet: Fix VSP ticket iteration bug.
+* [`3e3db0fc`](https://github.com/decred/dcrwallet/commit/3e3db0fc): vsp: Improve unknown FeeTxStatus log message.
+* [`3c8cd477`](https://github.com/decred/dcrwallet/commit/3c8cd477): vsp: Dont remove payments unless confirmed by VSP.
+* [`46ef8b6c`](https://github.com/decred/dcrwallet/commit/46ef8b6c): vsp: Move confirmPayment comment.
+* [`a315791a`](https://github.com/decred/dcrwallet/commit/a315791a): wallet: Remove duplication from testing code.
+* [`2911d856`](https://github.com/decred/dcrwallet/commit/2911d856): Make the LRU cache a generic container
+* [`45fef04c`](https://github.com/decred/dcrwallet/commit/45fef04c): vsp: Calculate blocksUntilLive properly
+* [`a2362ed2`](https://github.com/decred/dcrwallet/commit/a2362ed2): Add errors.Join
+* [`2f646886`](https://github.com/decred/dcrwallet/commit/2f646886): Require Go 1.20, test 1.21 builds
+* [`91c9697b`](https://github.com/decred/dcrwallet/commit/91c9697b): Remove errors.Cause, rely on Is/As instead
+* [`765f2fd8`](https://github.com/decred/dcrwallet/commit/765f2fd8): Remove unused bottom field from errors.Error struct
+* [`bfed19fe`](https://github.com/decred/dcrwallet/commit/bfed19fe): multi: Select unmanaged tickets outside VSP client
+* [`41042e54`](https://github.com/decred/dcrwallet/commit/41042e54): Remove AddressReuse from wallet config
+* [`19f7ed1e`](https://github.com/decred/dcrwallet/commit/19f7ed1e): vsp: Hard-code background context for async code.
+* [`74fdfd04`](https://github.com/decred/dcrwallet/commit/74fdfd04): multi: Remove unnecessary ProcessTicket func.
+* [`f8752a15`](https://github.com/decred/dcrwallet/commit/f8752a15): multi: Rename references to VSP funcs.
+* [`b1ef2251`](https://github.com/decred/dcrwallet/commit/b1ef2251): vsp: Access logger instance through Client.
+* [`01c09cbf`](https://github.com/decred/dcrwallet/commit/01c09cbf): vsp: Don't use a global logger.
+* [`25c7b343`](https://github.com/decred/dcrwallet/commit/25c7b343): udb: Add tests for serializing VSP data.
+* [`d6c3b29d`](https://github.com/decred/dcrwallet/commit/d6c3b29d): udb: Remove v25 upgrade test
+* [`efededa9`](https://github.com/decred/dcrwallet/commit/efededa9): udb: Remove redundant VSP pubkey check.
+* [`30e24f64`](https://github.com/decred/dcrwallet/commit/30e24f64): udb: Remove incorrect comment.
+* [`0218809a`](https://github.com/decred/dcrwallet/commit/0218809a): spv: Drop extraneous tspend logging for txs
+* [`1a098f7c`](https://github.com/decred/dcrwallet/commit/1a098f7c): Fix tests to account for Go 1.21 changes
+* [`2c0284a0`](https://github.com/decred/dcrwallet/commit/2c0284a0): vsp: Reduce dependencies on wallet packages.
+* [`1afe2512`](https://github.com/decred/dcrwallet/commit/1afe2512): multi: Bump major module version to 4
+
+
+## Code Contributors (alphabetical order):
+
+* @buck54321
+* Dave Collins (@davecgh)
+* David Hill (@dajohi)
+* Jamie Holdstock (@jholdstock)
+* @JoeGruffins
+* Josh Rickmar (@jrick)
+* Matheus Degiovani (@matheusd)
+* Philip Obiora (@Philip-21)
+
+
+# Decrediton v2.0.0
+
+This is a minor Decrediton release that updates to use the new dcrwallet p2p 
+mixing service and other various dependecies due to security issues and bugs.  
+There were also large updates to the French and Chinese transalations.
+
+## Changelog
+
+All commits since the last release may be viewed on GitHub
+[here](https://github.com/decred/decrediton/compare/release-v1.8.1...release-v2.0.0).
+
+
 # 2023-10-06
 
 
