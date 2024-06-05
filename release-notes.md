@@ -1,3 +1,97 @@
+# 2024-05-29
+
+
+## Install
+
+To install Decrediton desktop wallet, download, uncompress, and run
+[Decrediton Linux AppImage](https://github.com/decred/decred-binaries/releases/download/v2.0.1/decrediton-linux-amd64-v2.0.1.AppImage)
+or 
+[Decrediton Linux tar](https://github.com/decred/decred-binaries/releases/download/v2.0.1/decrediton-linux-amd64-v2.0.1.tar.gz)
+or
+[Decrediton macOS amd64](https://github.com/decred/decred-binaries/releases/download/v2.0.1/decrediton-darwin-amd64-v2.0.1.dmg)
+or
+[Decrediton macOS arm64](https://github.com/decred/decred-binaries/releases/download/v2.0.1/decrediton-darwin-arm64-v2.0.1.dmg)
+or
+[Decrediton Windows](https://github.com/decred/decred-binaries/releases/download/v2.0.1/decrediton-windows-amd64-v2.0.1.exe).
+
+To install the command-line tools, please see
+[dcrinstall](https://github.com/decred/decred-release/tree/master/cmd/dcrinstall).
+
+See decred-v2.0.1-manifest.txt and the other manifest files for SHA-256 hashes
+and the associated .asc signature files to confirm those hashes.
+
+See [README.md](./README.md#verifying-binaries) for more info on verifying the
+files.
+
+## Contents
+* [dcrd](#dcrd-v201)
+* [dcrwallet](#dcrwallet-v201)
+
+
+# dcrd v2.0.1 
+
+This is a patch release of dcrd which includes the following key changes:
+
+* Provides a new JSON-RPC API method named `getmixmessage` that can be used to query decentralized StakeShuffle mixing messages
+* No longer relays mixing messages when transaction relay is disabled
+* Transaction outputs with one confirmation may now be used as part of a mix
+* Improves best network address candidate selection
+* More consistent logging of banned peers along with the reason they were banned
+
+## Changelog
+
+This patch release consists of 19 commits from 3 contributors which total to 18 files changed, 388 additional lines of code, and 187 deleted lines of code.
+
+All commits since the last release may be viewed on GitHub [here](https://github.com/decred/dcrd/compare/release-v2.0.0...release-v2.0.1).
+
+See [dcrd's own release notes](https://github.com/decred/dcrd/releases/tag/release-v2.0.1) for a categorized breakdown of all commits since the last release.
+
+### Code Contributors (alphabetical order):
+
+- Dave Collins
+- David Hill
+- Josh Rickmar
+
+
+# dcrwallet v2.0.1
+
+This release includes several important bug fixes for mixing users.  All 2.0.0 users are advised to ugrade.
+
+## Bug Fixes
+
+* A panic that could be caused from a reconnecting RPC link to `dcrd` when mixing is enabled was fixed ([`9a954c35`](https://github.com/decred/dcrwallet/commit/9a954c35)).
+
+* The initial mixing pair request sync in RPC syncing mode has been changed to operate more similarly to how it is done in SPV mode, by watching at least a full epoch for peers sending key exchange messages, and fetching their pair requests (only) when they are not known.  This is a better solution than using the `getmixpairrequests` JSON-RPC method, which would return all unremoved pair requests known to `dcrd`, including stale ones ([`d5d5ef76`](https://github.com/decred/dcrwallet/commit/d5d5ef76)).
+
+* An issue where change addresses derived for inclusion in mixing pair requests were not properly persisted to the database was fixed ([`f977db4e`](https://github.com/decred/dcrwallet/commit/f977db4e)).
+
+* This release includes a newer version of the mixpool and mixclient packages from dcrd's mixing module.  Among other improvements, this fixes an issue where pair requests were being improperly removed from the wallet's mixpool during some sessions that did not run to completion.
+
+## Other improvements
+
+* An error log was added to record the failed transaction send of any mixed coinjoin transaction ([`8b47dedb`](https://github.com/decred/dcrwallet/commit/8b47dedb)).
+
+* The VSP client package has been made available as a non-internal package ([`9df1e498`](https://github.com/decred/dcrwallet/commit/9df1e498)).
+
+## Changelog
+
+The following lists all commits since dcrwallet v2.0.0:
+
+* [`3b46b151`](https://github.com/decred/dcrwallet/commit/3b46b151): [release-v2.0] version: Update for v2.0.1
+* [`e0829f0e`](https://github.com/decred/dcrwallet/commit/e0829f0e): [release-v2.0] Update to latest dcrd modules
+* [`8b47dedb`](https://github.com/decred/dcrwallet/commit/8b47dedb): [release-v2.0] Log any errors publishing mix transactions
+* [`f977db4e`](https://github.com/decred/dcrwallet/commit/f977db4e): [release-v2.0] Record derived mixing change addresses
+* [`d5d5ef76`](https://github.com/decred/dcrwallet/commit/d5d5ef76): [release-v2.0] chain: Fetch unknown PRs of notified orphan KEs
+* [`c18f2b0e`](https://github.com/decred/dcrwallet/commit/c18f2b0e): [release-v2.0] Update mixing module for client race fixes
+* [`9a954c35`](https://github.com/decred/dcrwallet/commit/9a954c35): [release-v2.0] chain: Wait for errgroup before returning from sync
+* [`9df1e498`](https://github.com/decred/dcrwallet/commit/9df1e498): externalize vsp client
+
+## Code Contributors (alphabetical order):
+
+* @buck54321
+* Josh Rickmar (@jrick)
+
+
 # 2024-05-21
 
 
