@@ -1,3 +1,82 @@
+# 2024-06-05
+
+
+## Install
+
+To install Decrediton desktop wallet, download, uncompress, and run
+[Decrediton Linux AppImage](https://github.com/decred/decred-binaries/releases/download/v2.0.2/decrediton-linux-amd64-v2.0.2.AppImage)
+or 
+[Decrediton Linux tar](https://github.com/decred/decred-binaries/releases/download/v2.0.2/decrediton-linux-amd64-v2.0.2.tar.gz)
+or
+[Decrediton macOS amd64](https://github.com/decred/decred-binaries/releases/download/v2.0.2/decrediton-darwin-amd64-v2.0.2.dmg)
+or
+[Decrediton macOS arm64](https://github.com/decred/decred-binaries/releases/download/v2.0.2/decrediton-darwin-arm64-v2.0.2.dmg)
+or
+[Decrediton Windows](https://github.com/decred/decred-binaries/releases/download/v2.0.2/decrediton-windows-amd64-v2.0.2.exe).
+
+To install the command-line tools, please see
+[dcrinstall](https://github.com/decred/decred-release/tree/master/cmd/dcrinstall).
+
+See decred-v2.0.2-manifest.txt and the other manifest files for SHA-256 hashes
+and the associated .asc signature files to confirm those hashes.
+
+See [README.md](./README.md#verifying-binaries) for more info on verifying the
+files.
+
+## Contents
+* [dcrd](#dcrd-v202)
+* [dcrwallet](#dcrwallet-v202)
+
+
+# dcrd v2.0.2
+
+This is a patch release of dcrd which includes the following key changes:
+
+- Nodes now prefer to maintain at least one mixing-capable outbound connection
+- Peers will no longer potentially be improperly banned due to missing mix messages
+- Mixing messages that are not available will now be obtained from elsewhere
+- Improves mixing message availability during network propagation
+
+## Changelog
+
+This patch release consists of 26 commits from 3 contributors which total to 18 files changed, 468 additional lines of code, and 451 deleted lines of code.
+
+All commits since the last release may be viewed on GitHub [here](https://github.com/decred/dcrd/compare/release-v2.0.1...release-v2.0.2).
+
+See [dcrd's own release notes](https://github.com/decred/dcrd/releases/tag/release-v2.0.2) for a categorized breakdown of all commits since the last release.
+
+### Code Contributors (alphabetical order):
+
+- Dave Collins
+- David Hill
+
+
+# dcrwallet v2.0.2
+
+This release includes several important bug fixes for mixing users.  All 2.0.1 users are advised to ugrade.
+
+## Bug Fixes
+
+* The mixing client will no longer attempt to create mixes that, when signed, exceed the standardness rules set by dcrd mempool ([dcrd/3338](https://github.com/decred/dcrd/pull/3338)).
+
+* A change was made to how reruns are handled after blame is assigned.  Rather than incrementing the run, a new session is formed.  This reduces unexpected behavior by requiring the stricter message acceptance checks that were only performed during run-0 ([dcrd/3343](https://github.com/decred/dcrd/pull/3343)).
+
+## Other improvements
+
+* Peers who send mix messages when disablerelaytx is enabled (this includes dcrd version 2.0.0, but not 2.0.1 or 2.0.2) will be temporarily banned ([`48c59f55`](https://github.com/decred/dcrwallet/commit/48c59f55)).
+
+* Debug logging of mixing activity has been improved through changes in both the mixpool and mixclient packages ([dcrd/3326](https://github.com/decred/dcrd/pull/3326), [dcrd/3331](https://github.com/decred/dcrd/pull/3331), [dcrd/3333](https://github.com/decred/dcrd/pull/3333), [dcrd/3339](https://github.com/decred/dcrd/pull/3339), [dcrd/3340](https://github.com/decred/dcrd/pull/3340)).
+
+## Changelog
+
+All commits since the last release may be viewed on GitHub [here](https://github.com/decred/dcrwallet/compare/release-v2.0.1...release-v2.0.2).
+
+## Code Contributors (alphabetical order):
+
+* Matheus Degiovani (@matheusd)
+* Josh Rickmar (@jrick)
+
+
 # 2024-05-29
 
 
