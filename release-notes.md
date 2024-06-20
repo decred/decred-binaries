@@ -1,3 +1,128 @@
+# 2024-06-21
+
+
+## Install
+
+To install Decrediton desktop wallet, download, uncompress, and run
+[Decrediton Linux AppImage](https://github.com/decred/decred-binaries/releases/download/v2.0.3/decrediton-linux-amd64-v2.0.3.AppImage)
+or 
+[Decrediton Linux tar](https://github.com/decred/decred-binaries/releases/download/v2.0.3/decrediton-linux-amd64-v2.0.3.tar.gz)
+or
+[Decrediton macOS amd64](https://github.com/decred/decred-binaries/releases/download/v2.0.3/decrediton-darwin-amd64-v2.0.3.dmg)
+or
+[Decrediton macOS arm64](https://github.com/decred/decred-binaries/releases/download/v2.0.3/decrediton-darwin-arm64-v2.0.3.dmg)
+or
+[Decrediton Windows](https://github.com/decred/decred-binaries/releases/download/v2.0.3/decrediton-windows-amd64-v2.0.3.exe).
+
+To install the command-line tools, please see
+[dcrinstall](https://github.com/decred/decred-release/tree/master/cmd/dcrinstall).
+
+See decred-v2.0.3-manifest.txt and the other manifest files for SHA-256 hashes
+and the associated .asc signature files to confirm those hashes.
+
+See [README.md](./README.md#verifying-binaries) for more info on verifying the
+files.
+
+## Contents
+* [dcrd](#dcrd-v203)
+* [dcrwallet](#dcrwallet-v203)
+
+
+# dcrd v2.0.3 Release Notes
+
+This is a patch release of dcrd which includes the following changes:
+
+- Improved sender privacy for transactions and mix messages via randomized
+  announcements
+- Nodes now prefer to maintain at least three mixing-capable outbound connections
+- Recent transactions and mix messages will now be available to serve for longer
+- Reduced memory usage during periods of lower activity
+- Mixing-related performance enhancements
+
+## Changelog
+
+This patch release consists of 26 commits from 2 contributors which total to 37
+files changed, 4527 additional lines of code, and 499 deleted lines of code.
+
+All commits since the last release may be viewed on GitHub
+[here](https://github.com/decred/dcrd/compare/release-v2.0.2...release-v2.0.3).
+
+### Protocol and network:
+
+- [release-v2.0] peer: Randomize inv batching delays ([decred/dcrd#3390](https://github.com/decred/dcrd/pull/3390))
+- [release-v2.0] server: Cache advertised txns ([decred/dcrd#3392](https://github.com/decred/dcrd/pull/3392))
+- [release-v2.0] server: Prefer 3 min mix capable outbound peers ([decred/dcrd#3392](https://github.com/decred/dcrd/pull/3392))
+
+### Mixing message relay (mix pool):
+
+- [release-v2.0] mixpool: Cache recently removed msgs ([decred/dcrd#3391](https://github.com/decred/dcrd/pull/3391))
+- [release-v2.0] mixclient: Introduce random message jitter ([decred/dcrd#3391](https://github.com/decred/dcrd/pull/3391))
+- [release-v2.0] netsync: Remove spent PRs from tip block txns ([decred/dcrd#3392](https://github.com/decred/dcrd/pull/3392))
+
+### Documentation:
+
+- [release-v2.0] docs: Update for container/lru module ([decred/dcrd#3390](https://github.com/decred/dcrd/pull/3390))
+- [release-v2.0] rand: Add README.md ([decred/dcrd#3390](https://github.com/decred/dcrd/pull/3390))
+
+### Developer-related package and module changes:
+
+- [release-v2.0] container/lru: Implement type safe generic LRUs ([decred/dcrd#3390](https://github.com/decred/dcrd/pull/3390))
+- [release-v2.0] peer: Use container/lru module ([decred/dcrd#3390](https://github.com/decred/dcrd/pull/3390))
+- [release-v2.0] crypto/rand: Implement module ([decred/dcrd#3390](https://github.com/decred/dcrd/pull/3390))
+- [release-v2.0] rand: Add BigInt ([decred/dcrd#3390](https://github.com/decred/dcrd/pull/3390))
+- [release-v2.0] rand: Uppercase N in half-open-range funcs ([decred/dcrd#3390](https://github.com/decred/dcrd/pull/3390))
+- [release-v2.0] rand: Add rand.N generic func ([decred/dcrd#3390](https://github.com/decred/dcrd/pull/3390))
+- [release-v2.0] rand: Add ShuffleSlice ([decred/dcrd#3390](https://github.com/decred/dcrd/pull/3390))
+- [release-v2.0] rand: Add benchmarks ([decred/dcrd#3390](https://github.com/decred/dcrd/pull/3390))
+- [release-v2.0] peer: Use new crypto/rand module ([decred/dcrd#3390](https://github.com/decred/dcrd/pull/3390))
+- [release-v2.0] mixing: Prealloc buffers ([decred/dcrd#3391](https://github.com/decred/dcrd/pull/3391))
+- [release-v2.0] mixpool: Remove Receive expectedMessages argument ([decred/dcrd#3391](https://github.com/decred/dcrd/pull/3391))
+- [release-v2.0] mixing: Use new crypto/rand module ([decred/dcrd#3391](https://github.com/decred/dcrd/pull/3391))
+- [release-v2.0] mixpool: Remove run from conflicting msg err ([decred/dcrd#3391](https://github.com/decred/dcrd/pull/3391))
+- [release-v2.0] mixpool: Remove more references to runs ([decred/dcrd#3391](https://github.com/decred/dcrd/pull/3391))
+- [release-v2.0] mixing: Reduce slot reservation mix pads allocs ([decred/dcrd#3391](https://github.com/decred/dcrd/pull/3391))
+
+### Developer-related module management:
+
+- [release-v2.0] main: Use backported peer updates ([decred/dcrd#3390](https://github.com/decred/dcrd/pull/3390))
+- [release-v2.0] main: Use backported mixing updates ([decred/dcrd#3391](https://github.com/decred/dcrd/pull/3391))
+
+### Misc:
+
+- [release-v2.0] release: Bump for 2.0.3 ([decred/dcrd#3393](https://github.com/decred/dcrd/pull/3393))
+
+### Code Contributors (alphabetical order):
+
+- Dave Collins
+- Josh Rickmar
+
+
+# dcrwallet v2.0.3
+
+This release includes several important privacy and performance improvements for mixing users.  All 2.0.2 users are advised to upgrade.
+
+## Bug Fixes
+
+* Ending the initial wallet setup prompts before the birthday prompt has been completed will no longer panic the wallet ([`37e81f87`](https://github.com/decred/dcrwallet/commit/37e81f87)).
+
+## Other Improvements
+
+* The mixing client was modified to space out the publishing of pair request messages throughout the entire duration up until 30s before and after the epoch, and to add a small random delay before the broadcast of all messages.  Together these changes reduce the ability to deanonymize which messages belong to the same wallets depending on when they were seen or received ([dcrd/3388](https://github.com/decred/dcrd/pull/3388)).
+
+* In SPV mode, a uniform random 100-500ms of per-peer delay is added to each inventory broadcast.  This also has the effect of batching recent inventory into fewer `inv` messages ([`fee60562`](https://github.com/decred/dcrwallet/commit/fee60562)).
+
+* In SPV mode, a minimum of 3 (out of 8 total) full node peers which implement the mix message broadcasting protocol version will be targeted.  If too many connected peers do not support this protocol version, they will be disconnected for other peers which do ([`7830dd64`](https://github.com/decred/dcrwallet/commit/7830dd64)).
+
+## Changelog
+
+All commits since the last release may be viewed on GitHub [here](https://github.com/decred/dcrwallet/compare/release-v2.0.2...release-v2.0.3).
+
+## Code Contributors (alphabetical order):
+
+* @JoeGruffins
+* Josh Rickmar (@jrick)
+
+
 # 2024-06-05
 
 
