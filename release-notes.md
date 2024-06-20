@@ -28,7 +28,7 @@ files.
 * [dcrwallet](#dcrwallet-v203)
 
 
-# dcrd v2.0.3 Release Notes
+# dcrd v2.0.3
 
 This is a patch release of dcrd which includes the following changes:
 
