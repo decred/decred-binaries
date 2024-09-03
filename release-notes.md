@@ -81,7 +81,7 @@ All commits since the last release may be viewed on GitHub
 - Josh Rickmar
 
 
-# dcrwallet v2.0.4
+## dcrwallet v2.0.4
 
 This release includes improvements to the mixing session agreement, along with various bug fixes and minor performance improvements.
 
@@ -120,7 +120,7 @@ The following lists all commits since dcrwallet v2.0.3:
 * Josh Rickmar (@jrick)
 
 
-# Decrediton v2.0.4
+## Decrediton v2.0.4
 
 This release of Decrediton includes numerous dependency updates that were flagged as possible vulnerabilities, as well 
 as an update to the DCRDEX infrastructure for the recent v1.0.0 Bison Wallet release. 
