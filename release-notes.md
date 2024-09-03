@@ -1,3 +1,142 @@
+# 2024-09-03
+
+
+## Install
+
+To install Decrediton desktop wallet, download, uncompress, and run
+[Decrediton Linux AppImage](https://github.com/decred/decred-binaries/releases/download/v2.0.4/decrediton-linux-amd64-v2.0.4.AppImage)
+or 
+[Decrediton Linux tar](https://github.com/decred/decred-binaries/releases/download/v2.0.4/decrediton-linux-amd64-v2.0.4.tar.gz)
+or
+[Decrediton macOS amd64](https://github.com/decred/decred-binaries/releases/download/v2.0.4/decrediton-darwin-amd64-v2.0.4.dmg)
+or
+[Decrediton macOS arm64](https://github.com/decred/decred-binaries/releases/download/v2.0.4/decrediton-darwin-arm64-v2.0.4.dmg)
+or
+[Decrediton Windows](https://github.com/decred/decred-binaries/releases/download/v2.0.4/decrediton-windows-amd64-v2.0.4.exe).
+
+To install the command-line tools, please see
+[dcrinstall](https://github.com/decred/decred-release/tree/master/cmd/dcrinstall).
+
+See decred-v2.0.4-manifest.txt and the other manifest files for SHA-256 hashes
+and the associated .asc signature files to confirm those hashes.
+
+See [README.md](./README.md#verifying-binaries) for more info on verifying the
+files.
+
+## Contents
+* [dcrd](#dcrd-v204)
+* [dcrwallet](#dcrwallet-v204)
+* [Decrediton](#decrediton-v204)
+
+
+# dcrd v2.0.4
+
+This is a patch release of dcrd which includes the following changes:
+
+- Improved session formation for StakeShuffle mix transactions
+- Support for Internationalized Domain Names (IDNs) in hostnames
+- StakeShuffle mixing performance enhancements
+
+## Changelog
+
+This patch release consists of 14 commits from 3 contributors which total to 17
+files changed, 201 additional lines of code, and 97 deleted lines of code.
+
+All commits since the last release may be viewed on GitHub
+[here](https://github.com/decred/dcrd/compare/release-v2.0.3...release-v2.0.4).
+
+### Mixing message relay (mix pool):
+
+- [release-v2.0] mixpool: Reject KEs submitted too early ([decred/dcrd#3431](https://github.com/decred/dcrd/pull/3431))
+- [release-v2.0] mixclient: Use newest (fewest-PR) KEs to form alt sessions ([decred/dcrd#3431](https://github.com/decred/dcrd/pull/3431))
+
+### RPC / gencerts utility changes:
+
+- [release-v2.0] certgen,gencerts: Punycode non-ASCII hostnames ([decred/dcrd#3432](https://github.com/decred/dcrd/pull/3432))
+
+### Developer-related package and module changes:
+
+- [release-v2.0] mixclient: Remove completely unused var ([decred/dcrd#3431](https://github.com/decred/dcrd/pull/3431))
+- [release-v2.0] mixpool: Remove error which is always returned nil ([decred/dcrd#3431](https://github.com/decred/dcrd/pull/3431))
+- [release-v2.0] mixclient: Dont append to slice with non-zero length ([decred/dcrd#3431](https://github.com/decred/dcrd/pull/3431))
+- [release-v2.0] mixing: Add missing copyright headers ([decred/dcrd#3431](https://github.com/decred/dcrd/pull/3431))
+- [release-v2.0] mixclient: Add missing copyright headers ([decred/dcrd#3431](https://github.com/decred/dcrd/pull/3431))
+- [release-v2.0] mixclient: Remove submit queue channel ([decred/dcrd#3431](https://github.com/decred/dcrd/pull/3431))
+- [release-v2.0] mixclient: Do not submit PRs holding client mutex ([decred/dcrd#3431](https://github.com/decred/dcrd/pull/3431))
+
+### Developer-related module management:
+
+- [release-v2.0] main: Use backported mixing updates ([decred/dcrd#3431](https://github.com/decred/dcrd/pull/3431))
+- [release-v2.0] main: Use backported certgen updates ([decred/dcrd#3432](https://github.com/decred/dcrd/pull/3432))
+
+### Misc:
+
+- [release-v2.0] mixing: Add missing periods to comments ([decred/dcrd#3431](https://github.com/decred/dcrd/pull/3431))
+- [release-v2.0] release: Bump for 2.0.4 ([decred/dcrd#3433](https://github.com/decred/dcrd/pull/3433))
+
+### Code Contributors (alphabetical order):
+
+- Dave Collins
+- Jamie Holdstock
+- Josh Rickmar
+
+
+# dcrwallet v2.0.4
+
+This release includes improvements to the mixing session agreement, along with various bug fixes and minor performance improvements.
+
+## Bug Fixes
+
+* An issue where SPV wallets would stall block processing the latest block and only resume requesting additional new blocks after the next block is announced was fixed ([`39fd48b8`](https://github.com/decred/dcrwallet/commit/39fd48b8)).
+
+* A potential crash in the VSP client was removed ([`2c7e4dcf`](https://github.com/decred/dcrwallet/commit/2c7e4dcf)).
+
+* A deadlock in the mixing client that could trigger after reconnecting to a restarted dcrd was fixed ([dcrd/3401](https://github.com/decred/dcrd/pull/3401)).
+
+* Automatic RPC TLS certificate generation no longer errors when the local hostname contains non-ASCII Unicode characters ([dcrd#3432](https://github.com/decred/dcrd/pull/3432)).
+
+## Other Improvements
+
+* Mix session agreement was improved by ignoring key exchange messages received too early before the calculated epoch time ([dcrd/3403](https://github.com/decred/dcrd/pull/3403)).
+
+* Mix session agreement was improved by only considering a mixing identity's most recent key exchange messages ([dcrd/3404](https://github.com/decred/dcrd/pull/3404)).
+
+## Changelog
+
+The following lists all commits since dcrwallet v2.0.3:
+
+* [`650a7c01`](https://github.com/decred/dcrwallet/commit/650a7c01): [release-v2.0] version: Update for v2.0.4
+* [`9074d7fd`](https://github.com/decred/dcrwallet/commit/9074d7fd): [release-v2.0] Update to latest dcrd modules
+* [`09ec255d`](https://github.com/decred/dcrwallet/commit/09ec255d): [release-v2.0] Update to latest vspd modules.
+* [`ec74c62a`](https://github.com/decred/dcrwallet/commit/ec74c62a): [release-v2.0] wallet: Remove unused ctx from makeTicketSummary.
+* [`2c7e4dcf`](https://github.com/decred/dcrwallet/commit/2c7e4dcf): [release-v2.0] vsp: Prevent nil pointer dereference.
+* [`dcde8979`](https://github.com/decred/dcrwallet/commit/dcde8979): [release-v2.0] Update to latest mixing module
+* [`39fd48b8`](https://github.com/decred/dcrwallet/commit/39fd48b8): [release-v2.0] spv: Fix request of new blocks after initial sync
+
+## Code Contributors (alphabetical order):
+
+* Matheus Degiovani (@matheusd)
+* Jamie Holdstock (@jholdstock)
+* Josh Rickmar (@jrick)
+
+
+# Decrediton v2.0.4
+
+This release of Decrediton includes numerous dependency updates that were flagged as possible vulnerabilities, as well 
+as an update to the DCRDEX infrastructure for the recent v1.0.0 Bison Wallet release. 
+
+## Changelog
+
+All commits since the last release may be viewed on GitHub
+[here](https://github.com/decred/decrediton/compare/release-v2.0.3...release-v2.0.4).
+
+## Code Contributors (alphabetical order):
+
+* Alex Yocom-Piatt (@alexlyp)
+* @buck54321
+
+
+
 # 2024-06-21
 
 
