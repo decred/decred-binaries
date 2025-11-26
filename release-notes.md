@@ -1,3 +1,311 @@
+# 2024-11-25
+
+
+## Install
+
+To install Decrediton desktop wallet, download, uncompress, and run
+[Decrediton Linux AppImage](https://github.com/decred/decred-binaries/releases/download/v2.1.0/decrediton-linux-amd64-v2.1.0.AppImage)
+or 
+[Decrediton Linux tar](https://github.com/decred/decred-binaries/releases/download/v2.1.0/decrediton-linux-amd64-v2.1.0.tar.gz)
+or
+[Decrediton macOS amd64](https://github.com/decred/decred-binaries/releases/download/v2.1.0/decrediton-darwin-amd64-v2.1.0.dmg)
+or
+[Decrediton macOS arm64](https://github.com/decred/decred-binaries/releases/download/v2.1.0/decrediton-darwin-arm64-v2.1.0.dmg)
+or
+[Decrediton Windows](https://github.com/decred/decred-binaries/releases/download/v2.1.0/decrediton-windows-amd64-v2.1.0.exe).
+
+To install the command-line tools, please see
+[dcrinstall](https://github.com/decred/decred-release/tree/master/cmd/dcrinstall).
+
+See decred-v2.1.0-manifest.txt and the other manifest files for SHA-256 hashes
+and the associated .asc signature files to confirm those hashes.
+
+See [README.md](./README.md#verifying-binaries) for more info on verifying the
+files.
+
+## Contents
+* [dcrd](#dcrd-v210)
+* [dcrwallet](#dcrwallet-v210)
+* [Decrediton](#decrediton-v210)
+# dcrd v2.1.0 Release Notes
+
+This is a new major release of dcrd.  Some of the key highlights are:
+
+* A new consensus vote agenda which allows the stakeholders to decide whether or not to activate a new decentralized treasury maximum expenditure policy
+* Exclusion timeouts for disruptive StakeShuffle mixing participants
+* Less bandwidth usage for StakeShuffle mixing messages
+* Configurable maximum overall memory usage limit
+* Higher network throughput
+* Faster address decoding
+* Hardware optimizations for hashes
+* Various updates to the RPC server
+  * IPv6 zone support
+  * New JSON-RPC API additions for dynamic profiling server control
+  * Discrete mining cancellation support
+* Infrastructure improvements
+* Miscellaneous network and protocol optimizations
+* Quality assurance changes
+
+For those unfamiliar with the [voting process](https://docs.decred.org/governance/consensus-rule-voting/overview/) in Decred, all code needed in order to support each of the aforementioned consensus changes is already included in this release, however it will remain dormant until the stakeholders vote to activate it.
+
+For reference, the consensus change work was originally proposed and approved for initial implementation via the following Politeia proposal:
+- [Treasury Expenditure Policy Consensus Change](https://proposals.decred.org/record/16a93c7751722954)
+
+The following Decred Change Proposal (DCP) describes the proposed changes in detail and provides full technical specifications:
+* [DCP0013: New Max Treasury Expenditure Policy](https://github.com/decred/dcps/blob/master/dcp-0013/dcp-0013.mediawiki)
+
+## Upgrade Required
+
+**It is extremely important for everyone to upgrade their software to this latest release even if you don't intend to vote in favor of the agenda.  This particularly applies to PoW miners as failure to upgrade will result in lost rewards after block height 1035288.  That is estimated to be around December 19th, 2025.**
+
+## Notable Changes
+
+### New Treasury Maximum Expenditure Policy Vote
+
+A consensus change vote with the id `maxtreasuryspend` is now available as of this release.  After upgrading, stakeholders may set their preferences through their wallet.
+
+The primary goals of this change are to:
+
+* Provide a maximum expenditure policy that is stable for the long term while retaining the primary motivations for having a maximum expenditure policy
+* Serve as a preemptive measure to avoid the current overly-restrictive spending limits from potentially resulting in issues with funding ongoing operations
+
+See the following for more details:
+
+* [Politeia proposal](https://proposals.decred.org/record/16a93c7751722954)
+* [DCP0013](https://github.com/decred/dcps/blob/master/dcp-0013/dcp-0013.mediawiki)
+
+### Exclusion Timeouts for Disruptive StakeShuffle Mixing Participants
+
+Coins participating in decentralized StakeShuffle mixing that are excluded from ongoing mixes due to failing to complete the entire protocol too many times are now prohibited from participating in any new mixes for a certain period of time.
+
+The exclusion timeout is a matter of policy that may be refined in the future.  It is currently set to 24 hours.
+
+This change improves the overall robustness of the system and helps ensure smooth operation for all honest participants in the event of misbehavior, intentional or otherwise.
+
+### Less Bandwidth Usage for StakeShuffle Mixing Messages
+
+This release includes various changes to reduce the amount of bandwidth required for decentralized StakeShuffle mixing by approximately 15%.
+
+Aside from generally improving efficiency, it provides the key benefit of lowering the overall resource requirements for full nodes running in bandwidth-constrained environments.
+
+### Configurable Maximum Overall Memory Usage Limit
+
+The server automatically calculates a default target maximum memory limit that is sufficient for almost all users and use cases.
+
+System administrators that are comfortable trading off more memory for performance may now optionally set the `GOMEMLIMIT` environment variable prior to starting drcd in order to increase the target maximum memory limit.
+
+The target limit is logged when the server starts.  For example:
+
+> Soft memory limit: 1.80 GiB
+
+Note that the value may not be configured to be less than the default calculated value and is potentially influenced by the cache-specific CLI options `--sigcachemaxsize` and `--utxocachemaxsize`.
+
+### Higher Network Throughput
+
+The primary network syncing infrastructure now uses a model that makes better use of multiple processor cores provided by all modern hardware.  The net result is better overall throughput that scales equally well across the entire spectrum of low-end to high-end computing hardware.
+
+### Faster Address Decoding
+
+Decoding of Decred payment addresses is now about two times faster on average.
+
+Larger wallets connecting to dcrd via RPC will notice significantly faster load times and mobile wallets using the new code will benefit from less battery usage.
+
+### Hardware Optimizations for Hashes
+
+`BLAKE-256` hashing is now approximately 70% faster on any modern amd64 hardware.
+
+The primary benefits are:
+
+* Notably reduced overall CPU usage for the same amount of work
+* Performance enhancements to nearly all areas such as:
+  * The initial chain sync process
+  * Transaction and block validation
+  * Mixing message validation
+  * Signature verification
+  * Key generation
+  * Lightweight client sync time
+  * Stakeholder voting lottery selection
+  * Internal caches
+  * Payment addresses
+
+### RPC Server Changes
+
+The RPC server version as of this release is 8.3.0
+
+#### IPv6 Zone Support
+
+The RPC server may now be configured to listen on IPv6 addresses with a zone.
+
+This is particularly useful for specifying which scope or interface to bind the listener to in systems with multiple interfaces.  For example, link local IPv6 addresses typically require specifying the zone to avoid routing issues since they are otherwise ambiguous on systems with multiple interfaces.
+
+#### New Dynamic Profiling Server Control RPCs (`startprofiler` and `stopprofiler`)
+
+Two new RPCs named `startprofiler` and `stopprofiler` are now available.  These RPCs can be used to dynamically start and stop the built-in profiling server.
+
+The profiling server is primarily useful for developers working on the software.
+
+See the following for API details:
+
+* [startprofiler JSON-RPC API Documentation](https://github.com/decred/dcrd/blob/master/docs/json_rpc_api.mediawiki#startprofiler)
+* [stopprofilers JSON-RPC API Documentation](https://github.com/decred/dcrd/blob/master/docs/json_rpc_api.mediawiki#stopprofiler)
+
+#### Discrete Mining Cancellation Support (`generate`)
+
+The `generate` RPC used in test environments such as the test and simulation networks to mine a discrete number of blocks now accepts a parameter of 0 to cancel a running active discrete mining instance.
+
+See the following for API details:
+
+* [generate JSON-RPC API Documentation](https://github.com/decred/dcrd/blob/master/docs/json_rpc_api.mediawiki#generate)
+
+## Changelog
+
+This release consists of 355 commits from 8 contributors which total to 294 files changed, 25,567 additional lines of code, and 10,534 deleted lines of code.
+
+All commits since the last release may be viewed on GitHub [here](https://github.com/decred/dcrd/compare/release-v2.0.6...release-v2.1.0).
+
+See [dcrd's own release notes](https://github.com/decred/dcrd/releases/tag/release-v2.1.0) for a categorized breakdown of all commits since the last release.
+
+### Code Contributors (alphabetical order):
+
+- Dave Collins
+- David Hill
+- Jamie Holdstock
+- Josh Rickmar
+- linchizhen
+- Matt Hawkins
+- tongjicoder
+- wanxiangchwng
+
+
+# dcrwallet v2.1.0
+
+This release implements the new stake version for voting on the maxtreasuryspend agenda as defined by [DCP0013](DCP0013https://github.com/decred/dcps/blob/master/dcp-0013/dcp-0013.mediawiki).  As usual, it also includes a wide variety of other performance, reliability and usability improvements.
+
+All users must upgrade due to the vote on new consensus rules.
+
+## Bug fixes
+
+* A long-standing bug which would cause transactions in blocks that get reorged out and back again into the best chain was identified and fixed ([#2527](https://github.com/decred/dcrwallet/pull/2527)).
+
+* Unmined tickets purchased at the end of a ticket price window are no longer incorrectly removed from the wallet due to pruning tickets with the wrong stake difficulty price ([#2528](https://github.com/decred/dcrwallet/pull/2528)).
+
+* In RPC sync mode, repeated blockconnected notifications from dcrd for the same block during multiple reorgs are no longer processed.  This fixes the wallet's internal sidechain management and prevents identical blocks from being removed and reattached unnecessarily ([#2526](https://github.com/decred/dcrwallet/pull/2526)).
+
+* Several lock ordering bugs which would deadlock the process were corrected ([#2508](https://github.com/decred/dcrwallet/pull/2508), [#2560](https://github.com/decred/dcrwallet/pull/2560)).
+
+* A check that mixing is enabled was moved earlier into the ticket purchasing codepath, preventing the mixed purchase from being attempted ([#2484](https://github.com/decred/dcrwallet/pull/2484)).
+
+* A check that mixing is enabled was added early to the `mixoutput` JSON-RPC method, preventing the mixing attempt when disabled ([#2473](https://github.com/decred/dcrwallet/pull/2473)).
+
+* The mixing client received the following fixes:
+  * Errors during address generation are properly handled by aborting out of the mix session ([decred/dcrd#3484](https://github.com/decred/dcrd/pull/3484)).
+  * A nil dereference panic caused by the logger trying to include relevant session information was fixed by always returning the current run state on unactionable errors ([decred/dcrd#3505](https://github.com/decred/dcrd/pull/3505)).
+  * Local mixing peers that have canceled their request are no longer served by the client, avoiding a slew of "context canceled" error messages being logged ([decred/dcrd#3507](https://github.com/decred/dcrd/pull/3507)).
+  * A busy loop causing 100% CPU usage when all local peer requests in a session had been canceled was avoided with improved error management ([decred/dcrd#3511](https://github.com/decred/dcrd/pull/3511)).
+
+* Interaction with VSPs has been improved:
+  * Unmined tickets which are pruned by the wallet no longer remain handled by the VSP client ([#2525](https://github.com/decred/dcrwallet/pull/2525)).
+  * Failed database updates changing the status of VSP tickets are retried later ([#2524](https://github.com/decred/dcrwallet/pull/2524)).
+  * Actively managed tickets are only removed from the VSP client after a successful removal from the database ([#2524](https://github.com/decred/dcrwallet/pull/2524)).
+  * Batched ticket processing no longer fails to process all tickets when one ticket in the batch already has a confirmed fee payment ([#2519](https://github.com/decred/dcrwallet/pull/2519)).
+  * Fee payments which must split an existing output no longer overestimate the required payment amount by failing to consider change amounts that would otherwise be dust ([#2494](https://github.com/decred/dcrwallet/pull/2494)).
+  * Hardcoded VSP fee rates have been removed, and the config option is used instead ([#2439](https://github.com/decred/dcrwallet/pull/2439)).
+
+* The `consolidate` JSON-RPC method now respects the max transaction size limit ([#2513](https://github.com/decred/dcrwallet/pull/2513)).
+
+* The `consolidate` JSON-RPC method now refuses to continue if the output it would create is also a dust output ([#2490](https://github.com/decred/dcrwallet/pull/2490)).
+
+* Under RPC sync mode, the `existsaddresses` calls performed at startup sync are now batched to prevent exceeded the maximum request size ([#2504](https://github.com/decred/dcrwallet/pull/2504)).
+
+* A data race starting gRPC services was corrected ([#2532](https://github.com/decred/dcrwallet/pull/2532)).
+
+* A data race counting the number of addresses processed at sync startup was corrected ([#2517](https://github.com/decred/dcrwallet/pull/2517)).
+
+* A variety of instances of incorrect error handling were corrected by returning the proper error to the caller ([#2474](https://github.com/decred/dcrwallet/pull/2474), [#2577](https://github.com/decred/dcrwallet/pull/2577)).
+
+## Other improvements
+
+* The mixing client received the following improvements:
+  * Slot reservation and DC-net secret messages, and the addresses to mix, are now generated at peer creation rather than generating these lazily after the mixing epoch occurs and the session starts.  This improves the publish time for initial KE messages, leading to improved peer agreement ([decred/dcrd#3533](https://github.com/decred/dcrd/pull/3533)).
+  * Mix session are now allowed to continue longer and concurrently with later sessions started at later epochs ([decred/dcrd#3553](https://github.com/decred/dcrd/pull/3553)).
+  * Mixing peers who repeatedly disrupt mixes, either by timeout or discovered during blame assignment, are now excluded from client session forming for a period ([decred/dcrd#3554](https://github.com/decred/dcrd/pull/3554)).
+
+* The `getstakeinfo` JSON-RPC method now provides an estimate of the live ticket pool size when operating in SPV mode ([#2523](https://github.com/decred/dcrwallet/pull/2523)).
+
+* Requesting transaction notifications for the wallet's seed-derived addresses has been sped up by fixing the code concurrency ([#2516](https://github.com/decred/dcrwallet/pull/2516)).
+
+* Background rescans started by the JSON-RPC server are now cleanly stopped on server shutdown ([#2434](https://github.com/decred/dcrwallet/pull/2434)).
+
+* Config option descriptions have removed references to the no-longer-used CoinShuffle++ server ([#2548](https://github.com/decred/dcrwallet/pull/2548)).
+
+* A new wallet method has been added to set the birthday block or date on existing wallets ([#2385](https://github.com/decred/dcrwallet/pull/2385)).
+
+## API changes
+
+The module has been bumped to major version 5.  Some users will need to make changes for the following API changes:
+
+* The `wallet.OutputSelectionPolicy` type has been removed and `(*Wallet).SelectInputs` method no longer takes it as an argument.  The `(*Wallet).UnspentOutputs` method and the types it returned were not observed to be used by anything, and were removed ([#2535](https://github.com/decred/dcrwallet/pull/2535)).
+
+* The `UseVotingAccount` field of the ticket purchase request was removed.  The `VotingAccount` field will always be used and callers always set this value to the intended voting account ([#2483](https://github.com/decred/dcrwallet/pull/2483)).
+
+* All manual ticket revoking functionality has been removed.  Tickets are automatically revoked by consensus rules now.
+
+* All legacy stakepool code has been removed ([#2403](https://github.com/decred/dcrwallet/pull/2403)).
+
+In addition the following changes have been made to the RPC servers:
+
+* The spend limit parameters have been removed from both the `purchasetickets` JSON-RPC and `WalletService.PurchaseTicket` gRPC requests ([#2542](https://github.com/decred/dcrwallet/pull/2542)).
+
+## Changelog
+
+All commits to the v2.1.0 release since the v2.0.6 release may be viewed on GitHub
+[here](https://github.com/decred/dcrwallet/compare/d3e2a053d50ba56d2b5a3b65f65f9741823cca3e...release-v2.1.0).
+
+All commits to the v2.1.0 release since the v2.0.0 release may be viewed on GitHub
+[here](https://github.com/decred/dcrwallet/compare/4618df87e27923feb8130ad9f2b66efbaef6de84...release-v2.1.0).
+Most of these commits were previously backported to 2.0.x patch releases.
+
+## Code Contributors (alphabetical order):
+
+* Anna Smith (@socialsister)
+* @careworry
+* @chengehe
+* Dave Collins (@davecgh)
+* @efcking
+* @fengyuchuanshen
+* @findnature
+* @huochexizhan
+* @hustrust
+* Jamie Holdstock (@jholdstock)
+* @JoeGruffins
+* Josh Rickmar (@jrick)
+* @kaifulee
+* @kindknow
+* @letreturn
+* @quantpoet
+* @riskrose
+* @spuradage
+* @tgolang
+* @todaymoon
+* @tongjicoder
+* Wisdom Arerosuoghene (@itswisdomagain)
+* @withtimezone
+* @yajianggroup
+* @yingshanghuangqiao
+* @youzichuan
+
+
+# Decrediton v2.1.0
+
+Decrediton was updated to accommodate the major version dcrwallet API changes described above. 
+
+## Changelog
+
+All commits to the v2.1.0 release since the v2.0.6 release may be viewed on GitHub
+[here](https://github.com/decred/dcrwallet/compare/release-v2.0.6...release-v2.1.0).
+
+
+
 # 2024-03-03
 
 
