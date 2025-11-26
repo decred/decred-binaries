@@ -27,6 +27,155 @@ files.
 * [dcrd](#dcrd-v210)
 * [dcrwallet](#dcrwallet-v210)
 * [Decrediton](#decrediton-v210)
+# dcrd v2.1.0 Release Notes
+
+This is a new major release of dcrd.  Some of the key highlights are:
+
+* A new consensus vote agenda which allows the stakeholders to decide whether or not to activate a new decentralized treasury maximum expenditure policy
+* Exclusion timeouts for disruptive StakeShuffle mixing participants
+* Less bandwidth usage for StakeShuffle mixing messages
+* Configurable maximum overall memory usage limit
+* Higher network throughput
+* Faster address decoding
+* Hardware optimizations for hashes
+* Various updates to the RPC server
+  * IPv6 zone support
+  * New JSON-RPC API additions for dynamic profiling server control
+  * Discrete mining cancellation support
+* Infrastructure improvements
+* Miscellaneous network and protocol optimizations
+* Quality assurance changes
+
+For those unfamiliar with the [voting process](https://docs.decred.org/governance/consensus-rule-voting/overview/) in Decred, all code needed in order to support each of the aforementioned consensus changes is already included in this release, however it will remain dormant until the stakeholders vote to activate it.
+
+For reference, the consensus change work was originally proposed and approved for initial implementation via the following Politeia proposal:
+- [Treasury Expenditure Policy Consensus Change](https://proposals.decred.org/record/16a93c7751722954)
+
+The following Decred Change Proposal (DCP) describes the proposed changes in detail and provides full technical specifications:
+* [DCP0013: New Max Treasury Expenditure Policy](https://github.com/decred/dcps/blob/master/dcp-0013/dcp-0013.mediawiki)
+
+## Upgrade Required
+
+**It is extremely important for everyone to upgrade their software to this latest release even if you don't intend to vote in favor of the agenda.  This particularly applies to PoW miners as failure to upgrade will result in lost rewards after block height 1035288.  That is estimated to be around December 19th, 2025.**
+
+## Notable Changes
+
+### New Treasury Maximum Expenditure Policy Vote
+
+A consensus change vote with the id `maxtreasuryspend` is now available as of this release.  After upgrading, stakeholders may set their preferences through their wallet.
+
+The primary goals of this change are to:
+
+* Provide a maximum expenditure policy that is stable for the long term while retaining the primary motivations for having a maximum expenditure policy
+* Serve as a preemptive measure to avoid the current overly-restrictive spending limits from potentially resulting in issues with funding ongoing operations
+
+See the following for more details:
+
+* [Politeia proposal](https://proposals.decred.org/record/16a93c7751722954)
+* [DCP0013](https://github.com/decred/dcps/blob/master/dcp-0013/dcp-0013.mediawiki)
+
+### Exclusion Timeouts for Disruptive StakeShuffle Mixing Participants
+
+Coins participating in decentralized StakeShuffle mixing that are excluded from ongoing mixes due to failing to complete the entire protocol too many times are now prohibited from participating in any new mixes for a certain period of time.
+
+The exclusion timeout is a matter of policy that may be refined in the future.  It is currently set to 24 hours.
+
+This change improves the overall robustness of the system and helps ensure smooth operation for all honest participants in the event of misbehavior, intentional or otherwise.
+
+### Less Bandwidth Usage for StakeShuffle Mixing Messages
+
+This release includes various changes to reduce the amount of bandwidth required for decentralized StakeShuffle mixing by approximately 15%.
+
+Aside from generally improving efficiency, it provides the key benefit of lowering the overall resource requirements for full nodes running in bandwidth-constrained environments.
+
+### Configurable Maximum Overall Memory Usage Limit
+
+The server automatically calculates a default target maximum memory limit that is sufficient for almost all users and use cases.
+
+System administrators that are comfortable trading off more memory for performance may now optionally set the `GOMEMLIMIT` environment variable prior to starting drcd in order to increase the target maximum memory limit.
+
+The target limit is logged when the server starts.  For example:
+
+> Soft memory limit: 1.80 GiB
+
+Note that the value may not be configured to be less than the default calculated value and is potentially influenced by the cache-specific CLI options `--sigcachemaxsize` and `--utxocachemaxsize`.
+
+### Higher Network Throughput
+
+The primary network syncing infrastructure now uses a model that makes better use of multiple processor cores provided by all modern hardware.  The net result is better overall throughput that scales equally well across the entire spectrum of low-end to high-end computing hardware.
+
+### Faster Address Decoding
+
+Decoding of Decred payment addresses is now about two times faster on average.
+
+Larger wallets connecting to dcrd via RPC will notice significantly faster load times and mobile wallets using the new code will benefit from less battery usage.
+
+### Hardware Optimizations for Hashes
+
+`BLAKE-256` hashing is now approximately 70% faster on any modern amd64 hardware.
+
+The primary benefits are:
+
+* Notably reduced overall CPU usage for the same amount of work
+* Performance enhancements to nearly all areas such as:
+  * The initial chain sync process
+  * Transaction and block validation
+  * Mixing message validation
+  * Signature verification
+  * Key generation
+  * Lightweight client sync time
+  * Stakeholder voting lottery selection
+  * Internal caches
+  * Payment addresses
+
+### RPC Server Changes
+
+The RPC server version as of this release is 8.3.0
+
+#### IPv6 Zone Support
+
+The RPC server may now be configured to listen on IPv6 addresses with a zone.
+
+This is particularly useful for specifying which scope or interface to bind the listener to in systems with multiple interfaces.  For example, link local IPv6 addresses typically require specifying the zone to avoid routing issues since they are otherwise ambiguous on systems with multiple interfaces.
+
+#### New Dynamic Profiling Server Control RPCs (`startprofiler` and `stopprofiler`)
+
+Two new RPCs named `startprofiler` and `stopprofiler` are now available.  These RPCs can be used to dynamically start and stop the built-in profiling server.
+
+The profiling server is primarily useful for developers working on the software.
+
+See the following for API details:
+
+* [startprofiler JSON-RPC API Documentation](https://github.com/decred/dcrd/blob/master/docs/json_rpc_api.mediawiki#startprofiler)
+* [stopprofilers JSON-RPC API Documentation](https://github.com/decred/dcrd/blob/master/docs/json_rpc_api.mediawiki#stopprofiler)
+
+#### Discrete Mining Cancellation Support (`generate`)
+
+The `generate` RPC used in test environments such as the test and simulation networks to mine a discrete number of blocks now accepts a parameter of 0 to cancel a running active discrete mining instance.
+
+See the following for API details:
+
+* [generate JSON-RPC API Documentation](https://github.com/decred/dcrd/blob/master/docs/json_rpc_api.mediawiki#generate)
+
+## Changelog
+
+This release consists of 355 commits from 8 contributors which total to 294 files changed, 25,567 additional lines of code, and 10,534 deleted lines of code.
+
+All commits since the last release may be viewed on GitHub [here](https://github.com/decred/dcrd/compare/release-v2.0.6...release-v2.1.0).
+
+See [dcrd's own release notes](https://github.com/decred/dcrd/releases/tag/release-v2.1.0) for a categorized breakdown of all commits since the last release.
+
+### Code Contributors (alphabetical order):
+
+- Dave Collins
+- David Hill
+- Jamie Holdstock
+- Josh Rickmar
+- linchizhen
+- Matt Hawkins
+- tongjicoder
+- wanxiangchwng
+
 
 # dcrwallet v2.1.0
 
