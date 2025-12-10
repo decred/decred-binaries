@@ -1,4 +1,110 @@
-# 2024-11-25
+# 2024-12-10
+
+
+## Install
+
+To install Decrediton desktop wallet, download, uncompress, and run 
+[Decrediton Linux AppImage](https://github.com/decred/decred-binaries/releases/download/v2.1.2/decrediton-linux-amd64-v2.1.2.AppImage) 
+or 
+[Decrediton Linux tar](https://github.com/decred/decred-binaries/releases/download/v2.1.2/decrediton-linux-amd64-v2.1.2.tar.gz) 
+or 
+[Decrediton macOS arm64](https://github.com/decred/decred-binaries/releases/download/v2.1.2/decrediton-darwin-arm64-v2.1.2.dmg) 
+or 
+[Decrediton Windows](https://github.com/decred/decred-binaries/releases/download/v2.1.2/decrediton-windows-amd64-v2.1.2.exe).
+
+
+To install the command-line tools, please see [dcrinstall](https://github.com/decred/decred-release/tree/master/cmd/dcrinstall).
+
+See decred-v2.1.2-manifest.txt and the other manifest files for SHA-256 hashes and the associated .asc signature files to confirm those hashes.
+
+See [README.md](./README.md#verifying-binaries) for more info on verifying the files.
+
+## Contents
+* [dcrd](#dcrd-v212)
+* [dcrwallet](#dcrwallet-v212)
+* [decrediton](#decrediton-v212)
+
+# dcrd v2.1.2
+
+This is a patch release of dcrd which includes the following changes:
+
+- Reduced memory allocations for peer-to-peer network operations
+
+## Changelog
+
+This patch release consists of 3 commits from 2 contributors which total to 28 files changed, 176 additional lines of code, and 106 deleted lines of code.
+
+All commits since the last release may be viewed on GitHub [here](https://github.com/decred/dcrd/compare/release-v2.1.0...release-v2.1.2).
+
+See  [dcrd's own release notes](https://github.com/decred/dcrd/releases/tag/release-v2.1.2) for a categorized breakdown of all commits since the last release.
+
+### Code Contributors (alphabetical order):
+
+- Dave Collins
+- Josh Rickmar
+
+
+# Decrediton v2.1.2
+
+This release just included a small bug fix to properly decode vote scripts for the new agenda that was added in 2.1.0.  The DCRDEX version was also bumped to
+v1.0.5.
+
+## Changelog
+
+All commits since the last release may be viewed on GitHub [here](https://github.com/decred/decrediton/compare/release-v2.1.1...release-v2.1.2).
+
+### Code Contributors (alphabetical order):
+
+- Alex Yocom-Piatt
+
+
+# 2024-11-27
+
+## Install
+
+To install Decrediton desktop wallet, download, uncompress, and run 
+[Decrediton Linux AppImage](https://github.com/decred/decred-binaries/releases/download/v2.1.1/decrediton-linux-amd64-v2.1.1.AppImage) 
+or 
+[Decrediton Linux tar](https://github.com/decred/decred-binaries/releases/download/v2.1.1/decrediton-linux-amd64-v2.1.1.tar.gz) 
+or 
+[Decrediton macOS arm64](https://github.com/decred/decred-binaries/releases/download/v2.1.1/decrediton-darwin-arm64-v2.1.1.dmg) 
+or 
+[Decrediton Windows](https://github.com/decred/decred-binaries/releases/download/v2.1.1/decrediton-windows-amd64-v2.1.1.exe).
+
+
+To install the command-line tools, please see [dcrinstall](https://github.com/decred/decred-release/tree/master/cmd/dcrinstall).
+
+See decred-v2.1.1-manifest.txt and the other manifest files for SHA-256 hashes and the associated .asc signature files to confirm those hashes.
+
+See [README.md](./README.md#verifying-binaries) for more info on verifying the files.
+
+## Contents
+* [dcrwallet](#dcrwallet-v211)
+
+# dcrwallet v2.1.1
+
+This is an emergency release fixing broken SPV mode in the 2.1.0 release.
+
+## Bug fixes
+
+* An error which broke all SPV usage caused by an incorrect update to the addrmgr/v3 module was corrected.
+
+* An unintended change in behavior created by a bug in a Go source code analyzer, causing "message count must be positive" errors being logged by the mixing client, was reverted.
+
+## Changelog
+
+The following lists all commits since dcrwallet v2.1.0:
+
+* [`4d70680c`](https://github.com/decred/dcrwallet/commit/4d70680c): [release-v2.1] Bump version to 2.1.1+release.local.
+* [`8ad61d35`](https://github.com/decred/dcrwallet/commit/8ad61d35): [release-v2.1] Call the addrmgr.NetAddress ctor
+* [`9e43765e`](https://github.com/decred/dcrwallet/commit/9e43765e): [release-v2.1] Fix loop iteration broken by modernize linter
+
+## Code Contributors (alphabetical order):
+
+* Josh Rickmar (@jrick)
+
+
+# 2024-11-26
 
 
 ## Install
@@ -27,6 +133,7 @@ files.
 * [dcrd](#dcrd-v210)
 * [dcrwallet](#dcrwallet-v210)
 * [Decrediton](#decrediton-v210)
+
 # dcrd v2.1.0 Release Notes
 
 This is a new major release of dcrd.  Some of the key highlights are:
