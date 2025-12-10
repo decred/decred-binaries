@@ -1,0 +1,6 @@
+83635cdab4df0fda08664c3ce6ee54a9271545c6ada729e9ead4dd1acbd5d4ba *decrediton-darwin-amd64-v2.1.2.dmg
+682f8037fd582b57bfec1954a8df150e1b955cdcabd9aea398c038fb22b9ae33 *decrediton-darwin-arm64-v2.1.2.dmg
+f2de28c73984eb4f519e7815409ab4f6522a27f70a92883dd3fccae98367f942 *decrediton-linux-amd64-v2.1.2.AppImage
+459127b1c8b909e3d6a4be7829ec24143626b367b470c45f29bc499d6c31c219 *decrediton-linux-amd64-v2.1.2.tar.gz
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 *decrediton-v2.1.2-manifest.txt
+5abd7983e8fd38975597c7f339654090d8c49a446294911a15ab57cdbb314882 *decrediton-windows-amd64-v2.1.2.exe

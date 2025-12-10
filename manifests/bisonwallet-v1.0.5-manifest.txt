@@ -1,0 +1,13 @@
+466d824ee4c17b877165d1948ffad4cf8843b251cba414fa185f04e0b18a2b6a  bisonwallet-darwin-amd64-v1.0.5.tar.gz
+6ae692035566222f4119a869170f60e59863b2670ca51283cccd74129fef01ed  bisonwallet-darwin-arm64-v1.0.5.tar.gz
+268cd092b457d617a02a00e48f697980a9b84e4fcd9d951e97f3c7fc282ce32f  bisonwallet-freebsd-amd64-v1.0.5.tar.gz
+adb57123c9cedead9e8262b2970fbda9250f97179885bebfedf5a3605a1c782d  bisonwallet-linux-386-v1.0.5.tar.gz
+bc843c54ab409865d1ab2a487bc17defab70af2ae7e055fbc24914115c3b94b7  bisonwallet-linux-amd64-v1.0.5.tar.gz
+69c451fb1b3ce67043baa10a02dc7ef13af72fe539a568d21a0edb799e61b224  bisonwallet-linux-arm-v1.0.5.tar.gz
+a4765cba2548e2a5007e541b170b812d3dc19de8ce5521fe75ec9986092b37d5  bisonwallet-linux-arm64-v1.0.5.tar.gz
+b5c5729f80d843c094fe4aa387af74643d55394d8bbd018568719d61613a6936  bisonwallet-linux-riscv64-v1.0.5.tar.gz
+8a71e98d2bff62acd12125989f06646fb4e96cbe916aa8f8631f4ef9993c5b3d  bisonwallet-openbsd-amd64-v1.0.5.tar.gz
+92c345422fb098b6d171827b2ff6d5196aa588be20345de2c83c8ebc914103b7  bisonwallet-openbsd-arm64-v1.0.5.tar.gz
+9ee1dd42b422a03d0ef790bec8b1392fa4c787b40619c2ff60dd7b08b6c14299  bisonwallet-windows-386-v1.0.5.zip
+f1ec7809aeabc89459f1a5836d5ea0943566e1769bc644ee6bcce9645611bdf4  bisonwallet-windows-amd64-v1.0.5.zip
+8cd387dec032194f3c8fd3416c85691faa1da301946a1ed9a641f96e7f157e3a  bisonwallet-windows-arm64-v1.0.5.zip
