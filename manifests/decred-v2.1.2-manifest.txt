@@ -1,0 +1,13 @@
+71aa0545340a0d4b0c414bd283ed12d9ec511ae32b9dcf3e03b3468f15577f22  decred-darwin-amd64-v2.1.2.tar.gz
+5f2ce6579589deda8b1afe57a60e5cca2d703619b3d7fcd5451907a5c705d71f  decred-darwin-arm64-v2.1.2.tar.gz
+632467e3ab971e2b186a0dcfcba4f09e8703bb80527245a63897886a872e344e  decred-freebsd-amd64-v2.1.2.tar.gz
+9ac88f1286794337286bd54db114aa2aec594f07bdcb0daa8e0d4b70dcd913dc  decred-linux-386-v2.1.2.tar.gz
+4a77d7ce0b856e4d4d99611e20446db621e7f0db5f98cb15cc976c2880e82d30  decred-linux-amd64-v2.1.2.tar.gz
+c878af6df94e66173ede578b1315973dca2316b5ff077ab6f1992c771fd15ff1  decred-linux-arm-v2.1.2.tar.gz
+1fe08839a0898d40fa4e26b8850c16a5b6af7b7dda4c0eb3cef4fe2d27efeb5a  decred-linux-arm64-v2.1.2.tar.gz
+16d209caa0ec70b720e28e62b5bb4b75e10b8683c216e1b46d4474ce306a0fea  decred-linux-riscv64-v2.1.2.tar.gz
+694fc6d55a00be438f62bd9447fd51fc11d216f770290078b31b61d36a2e8e8f  decred-openbsd-amd64-v2.1.2.tar.gz
+9d79aa787e72bb89ef9468f2ab5de1fecc7169f5738d5c2e515c0ce8510dc642  decred-openbsd-arm64-v2.1.2.tar.gz
+11cf2cc8ac5c90aac9c66d58b62336f261d2a224ee9f4b81be845e7ae9ed4559  decred-windows-386-v2.1.2.zip
+ffcb0aed0efd4b88dbfc85e860bae4f9ab8bb0982fb5ea0507300b48a27ba97b  decred-windows-amd64-v2.1.2.zip
+a7a79cf4d45e583ef3961c6a51ac0bec11b18c9426ba0be79014600f114d3aaa  decred-windows-arm64-v2.1.2.zip
