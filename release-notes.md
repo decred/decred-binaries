@@ -44,6 +44,32 @@ See  [dcrd's own release notes](https://github.com/decred/dcrd/releases/tag/rele
 - Josh Rickmar
 
 
+# dcrwallet v2.1.2
+
+This is a bug fix release addressing regressions in mixing and VSP interaction.
+
+## Bug fixes
+
+* Mixing no longer ceases to function after network syncers are recreated following the lost of the network connection.
+
+* The VSP client no longer creates invalid requests when updating the treasury policy through the `settreasurypolicy` and `settspendpolicy` JSON-RPC methods.
+
+## Changelog
+
+The following lists all commits since dcrwallet v2.1.1:
+
+* [`a40f3cdb`](https://github.com/decred/dcrwallet/commit/a40f3cdb): [release-v2.1] Bump version to 2.1.2+release.local.
+* [`49d978d7`](https://github.com/decred/dcrwallet/commit/49d978d7): [release-v2.1] Bump wire to v1.7.2
+* [`f5f862db`](https://github.com/decred/dcrwallet/commit/f5f862db): [release-v2.1] Bump vspd client to 4.0.2
+* [`0da1ec6f`](https://github.com/decred/dcrwallet/commit/0da1ec6f): [release-v2.1] Create new mix clients in Wallet.Run.
+* [`5586c2d0`](https://github.com/decred/dcrwallet/commit/5586c2d0): [release-v2.1] Print nice address string not raw struct.
+
+## Code Contributors (alphabetical order):
+
+* Jamie Holdstock (@jholdstock)
+* Josh Rickmar (@jrick)
+
+
 # Decrediton v2.1.2
 
 This release just included a small bug fix to properly decode vote scripts for the new agenda that was added in 2.1.0.  The DCRDEX version was also bumped to
