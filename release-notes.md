@@ -1,4 +1,48 @@
-# 2024-12-10
+# 2025-12-31
+
+
+## Install
+
+To install Decrediton desktop wallet, download, uncompress, and run 
+[Decrediton Linux AppImage](https://github.com/decred/decred-binaries/releases/download/v2.1.3/decrediton-linux-amd64-v2.1.3.AppImage) 
+or 
+[Decrediton Linux tar](https://github.com/decred/decred-binaries/releases/download/v2.1.3/decrediton-linux-amd64-v2.1.3.tar.gz) 
+or 
+[Decrediton macOS arm64](https://github.com/decred/decred-binaries/releases/download/v2.1.3/decrediton-darwin-arm64-v2.1.3.dmg) 
+or 
+[Decrediton Windows](https://github.com/decred/decred-binaries/releases/download/v2.1.3/decrediton-windows-amd64-v2.1.3.exe).
+
+
+To install the command-line tools, please see [dcrinstall](https://github.com/decred/decred-release/tree/master/cmd/dcrinstall).
+
+See decred-v2.1.3-manifest.txt and the other manifest files for SHA-256 hashes and the associated .asc signature files to confirm those hashes.
+
+See [README.md](./README.md#verifying-binaries) for more info on verifying the files.
+
+## Contents
+* [dcrwallet](#dcrwallet-v213)
+
+# dcrwallet v2.1.3
+
+This is a bug fix release addressing a mixing reliability issue.
+
+## Bug fixes
+
+* Mixing wallets now validate all SR and DC mixing vector dimensions and blame peers who submit messages with incorrect dimensions ([decred/dcrd#3593](https://github.com/decred/dcrd/pull/3593)).
+
+## Changelog
+
+The following lists all commits since dcrwallet v2.1.2:
+
+* [`99ca1779`](https://github.com/decred/dcrwallet/commit/99ca1779): [release-v2.1] Bump version to 2.1.3+release.local.
+* [`3f669a36`](https://github.com/decred/dcrwallet/commit/3f669a36): [release-v2.1] Bump mixing to v6.0.1
+
+## Code Contributors (alphabetical order):
+
+* Josh Rickmar (@jrick)
+
+
+# 2025-12-10
 
 
 ## Install
@@ -84,7 +128,7 @@ All commits since the last release may be viewed on GitHub [here](https://github
 - Alex Yocom-Piatt
 
 
-# 2024-11-27
+# 2025-11-27
 
 ## Install
 
@@ -130,7 +174,7 @@ The following lists all commits since dcrwallet v2.1.0:
 * Josh Rickmar (@jrick)
 
 
-# 2024-11-26
+# 2025-11-26
 
 
 ## Install
