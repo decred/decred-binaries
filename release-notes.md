@@ -1,3 +1,97 @@
+# 2026-08-18
+
+
+## Install
+
+To install Decrediton desktop wallet, download, uncompress, and run 
+[Decrediton Linux AppImage](https://github.com/decred/decred-binaries/releases/download/v2.1.6/decrediton-linux-amd64-v2.1.6.AppImage) 
+or 
+[Decrediton Linux tar](https://github.com/decred/decred-binaries/releases/download/v2.1.6/decrediton-linux-amd64-v2.1.6.tar.gz) 
+or 
+[Decrediton macOS arm64](https://github.com/decred/decred-binaries/releases/download/v2.1.6/decrediton-darwin-arm64-v2.1.6.dmg) 
+or 
+[Decrediton Windows](https://github.com/decred/decred-binaries/releases/download/v2.1.6/decrediton-windows-amd64-v2.1.6.exe).
+
+
+To install the command-line tools, please see [dcrinstall](https://github.com/decred/decred-release/tree/master/cmd/dcrinstall).
+
+See decred-v2.1.6-manifest.txt and the other manifest files for SHA-256 hashes and the associated .asc signature files to confirm those hashes.
+
+See [README.md](./README.md#verifying-binaries) for more info on verifying the files.
+
+## Contents
+* [dcrd](#dcrd-v216)
+* [dcrwallet](#dcrwallet-v216)
+
+# dcrd v2.1.6 Release Notes
+
+This is a patch release of dcrd which includes the following changes:
+
+- Critical consensus-related security fix
+- Prevents a potential periodic deanonymization mixing attack
+- Several fixes for potential network-related denial-of-service (DoS) attacks
+- Improved mixing session expiry
+
+## Upgrade Mandatory
+
+This release contains a fix for a critical consensus-related security vulnerability.  Everyone is required to upgrade or risk being forked from the network.  This is particularly  important for individual stakeholders, Voting Service Providers, PoW miners, and exchanges.
+
+## Changelog
+
+This patch release consists of 23 commits from 3 contributors which total to 20 files changed, 795 additional lines of code, and 392 deleted lines of code.
+
+All commits since the last release may be viewed on GitHub [here](https://github.com/decred/dcrd/compare/release-v2.1.5...release-v2.1.6).
+
+See  [dcrd's own release notes](https://github.com/decred/dcrd/releases/tag/release-v2.1.6) for a categorized breakdown of all commits since the last release.
+
+### Code Contributors (alphabetical order):
+
+- Dave Collins
+- Jamie Holdstock
+- Josh Rickmar
+
+
+# dcrwallet v2.1.6
+
+This is a bug fix release addressing a mixing deanonymization attack.
+
+The pairing version to specify compatibility with other mixing peers has been increased in this release ([decred/dcrd#3765](https://github.com/decred/dcrd/pull/3765)).  Wallets running this release will not mix with older wallets, or vice versa.
+
+All users must upgrade from prior releases.
+
+## Bug fixes
+
+* A mixing deanonymization attack was prevented with a mixclient protocol update ([decred/dcrd#3765](https://github.com/decred/dcrd/pull/3765)).
+
+* A failure to blame mixing peers who wrongly initiated blame assignment was fixed ([decred/dcrd#3760](https://github.com/decred/dcrd/pull/3760)).
+
+* Mixpool message removal on session expiry was fixed ([decred/dcrd#3683](https://github.com/decred/dcrd/pull/3683)).
+
+* The wallet now refuses to record transactions seen from the network when signature verification of spent wallet outputs fails ([`c362bea7`](https://github.com/decred/dcrwallet/commit/c362bea7)).
+
+* SPV peers who announce transactions containing inputs spending wallet outputs with failing signature scripts are now disconnected ([`a46848a5`](https://github.com/decred/dcrwallet/commit/a46848a5)).
+
+* Missing merkle root checks of blocks processed in SPV mode were added ([`745996b6`](https://github.com/decred/dcrwallet/commit/745996b6)).
+
+## Changelog
+
+The following lists all commits since dcrwallet v2.1.5:
+
+* [`a6bbb524`](https://github.com/decred/dcrwallet/commit/a6bbb524): [release-v2.1] Bump version to 2.1.6+release.local.
+* [`d5e32660`](https://github.com/decred/dcrwallet/commit/d5e32660): [release-v2.1] Updating mixing module to v0.7.4.
+* [`1da19fba`](https://github.com/decred/dcrwallet/commit/1da19fba): [release-v2.1] wallet: Don't validate already validated blocks.
+* [`745996b6`](https://github.com/decred/dcrwallet/commit/745996b6): [release-v2.1] spv: Validate merkle root for all fetched blocks
+* [`a46848a5`](https://github.com/decred/dcrwallet/commit/a46848a5): [release-v2.1] spv: Disconnect peer falsely spending owned UTXOs
+* [`c362bea7`](https://github.com/decred/dcrwallet/commit/c362bea7): [release-v2.1] Validate tx signature before adding to wallet.
+
+## Code Contributors (alphabetical order):
+
+* Jamie Holdstock (@jholdstock)
+* Josh Rickmar (@jrick)
+
+
+
+
 # 2026-04-10
 
 
